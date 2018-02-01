@@ -46,7 +46,5 @@
                 </telerik:RadRibbonGroup>
             </telerik:RadRibbonTab>
         </telerik:RadRibbonView>
-
-
     </Grid>
 </Window>
