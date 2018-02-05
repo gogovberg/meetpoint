@@ -36,7 +36,7 @@
                 <Image OpacityMask="Black" Source="/Images/login-logo.png" Margin="0,0,10,10" Height="111.25" Width="152.3" Cursor="Hand"/>
             </WrapPanel>
         </GroupBox>
-        <GroupBox Grid.Row="0"  Header="General"  Grid.Column="1" Foreground="#FF2190EE" Name="Settings" Margin="10">
+        <GroupBox Grid.Row="0"  Header="General"  Grid.Column="1" Foreground="#FF2190EE" Name="SettingsGroup" Margin="10">
 
         </GroupBox>
         <Button Grid.Row="1" Grid.Column="1"  x:Name="btnSave" Content="Save" Background="#FF379ADB" BorderBrush="#FF45A2F1" Foreground="White" Margin="60,16.1,200,16.1" Click="btnSave_Click" />
