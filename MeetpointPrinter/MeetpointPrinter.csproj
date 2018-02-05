@@ -35,14 +35,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Com.SharpZebra">
-      <HintPath>..\Refs\Com.SharpZebra.dll</HintPath>
+      <HintPath>..\..\..\..\..\MeetPoint\printApp\Meetpt\sharpzebra\Com.SharpZebra\bin\Debug\Com.SharpZebra.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp">
-      <HintPath>..\Refs\RestSharp.dll</HintPath>
+      <HintPath>..\..\..\..\..\MeetPoint\Refs\RestSharp.dll</HintPath>
     </Reference>
-    <Reference Include="RibbonControlsLibrary">
-      <HintPath>..\Refs\RibbonControlsLibrary.dll</HintPath>
-    </Reference>
+    <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -57,19 +55,16 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="Telerik.Windows.Controls">
-      <HintPath>..\Refs\Telerik.Windows.Controls.dll</HintPath>
+      <HintPath>..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R1 2018\Binaries\WPF45\Telerik.Windows.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.Input">
-      <HintPath>..\Refs\Telerik.Windows.Controls.Input.dll</HintPath>
+      <HintPath>..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R1 2018\Binaries\WPF45\Telerik.Windows.Controls.Input.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.Navigation">
-      <HintPath>..\Refs\Telerik.Windows.Controls.Navigation.dll</HintPath>
+      <HintPath>..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R1 2018\Binaries\WPF45\Telerik.Windows.Controls.Navigation.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.RibbonView">
-      <HintPath>..\Refs\Telerik.Windows.Controls.RibbonView.dll</HintPath>
-    </Reference>
-    <Reference Include="Telerik.Windows.Data">
-      <HintPath>..\Refs\Telerik.Windows.Data.dll</HintPath>
+      <HintPath>..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R1 2018\Binaries\WPF45\Telerik.Windows.Controls.RibbonView.dll</HintPath>
     </Reference>
     <Reference Include="UIAutomationProvider" />
     <Reference Include="UIAutomationTypes" />
@@ -139,6 +134,5 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
