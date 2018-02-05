@@ -22,6 +22,17 @@ namespace MeetpointPrinter.Pages
         public SettingsPage()
         {
             InitializeComponent();
+            (Application.Current as App).CurrentPage = "Settings page";
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            //save logic
         }
     }
 }

@@ -32,6 +32,6 @@
         <TextBox x:Name="tbPassword"  Grid.Column="3" Grid.Row="3" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="141" RenderTransformOrigin="0.503,0.089" Background="#FF4D525E" BorderBrush="{x:Null}" Foreground="#FFB3B3B3" />
         <Button x:Name="btnLogin" Content="Login" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="4" VerticalAlignment="Top" Width="293" Background="#FF379ADB" Foreground="White" Click="btnLogin_Click" RenderTransformOrigin="0.5,0.5" Grid.Column="2" Grid.ColumnSpan="2" />
         <Label x:Name="lblError" Content="" HorizontalAlignment="Left" Height="28" Margin="10,12,0,0" Grid.Row="5" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="293" Foreground="Red" Background="{x:Null}" Grid.Column="2"/>
-        <Image x:Name="imgLogo"  Grid.Column="2" HorizontalAlignment="Left" Height="231" Margin="10,10,0,0" VerticalAlignment="Top" Width="293" Grid.ColumnSpan="2" Source="http://app.meetpt.com/images/login-logo.png" IsEnabled="False" Grid.Row="1"/>
+        <Image x:Name="imgLogo"  Grid.Column="2" HorizontalAlignment="Left" Height="231" Margin="10,10,0,0" VerticalAlignment="Top" Width="293" Grid.ColumnSpan="2" Source="/Images/login-logo.png" IsEnabled="False" Grid.Row="1"/>
     </Grid>
 </Window>

@@ -2,8 +2,87 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:MeetpointPrinter"
-             StartupUri="MainWindow.xaml">
+             StartupUri="Pages/LoginPage.xaml">
     <Application.Resources>
-         
+        <Style x:Key="HeaderFooterWindowStyle" TargetType="Window">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="90*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20*"></ColumnDefinition>
+                                <ColumnDefinition Width="90*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <!-- Header -->
+                            <Border Grid.Row="0" Grid.Column="0" Background="#FF434752">
+                                <Image Source="/Images/meetpoint-admin-logo.png"></Image>
+                            </Border>
+                            <Border Grid.Row="0" Grid.Column="1" Background="#FF45A2F1">
+                                <Label x:Name="LblCurrentPage" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White">
+                                    <Label.Content>
+                                        <Binding Path="CurrentPage" Source="{x:Static Application.Current}"/>
+                                    </Label.Content>
+                                </Label>
+                            </Border>
+
+
+                            <!-- Body -->
+                            <ContentPresenter Grid.Row="1"/>
+
+                       
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Image Source="/Images/login-logo.png" Stretch="Fill"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ImageBorderStyle" TargetType="{x:Type Border}">
+            <Setter Property="BorderThickness"  Value="2" />
+            <Setter Property="Background"  Value="Transparent" />
+            <Setter Property="CornerRadius"  Value="0" />
+            <Setter Property="Margin"  Value="10" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#FF434752" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--<Border BorderThickness="2" Background="Transparent" 
+        CornerRadius="0" Margin="10,10,10,10" >
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="LightBlue" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <Image OpacityMask="Black" Source="/Images/test.jpg" Height="111.25" Width="152.3" Cursor="Hand" Stretch="Fill"/>
+        </Border>-->
     </Application.Resources>
 </Application>

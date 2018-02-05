@@ -5,8 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MeetpointPrinter.Pages"
         mc:Ignorable="d"
-        Title="SettingsPage" Height="300" Width="300">
-    <Grid>
-        
+        Title="SettingsPage" Height="734" Width="948"
+        ResizeMode="NoResize"
+        Style="{StaticResource HeaderFooterWindowStyle}" >
+    <Grid Margin="0,0,-766.8,0.4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60*" ></ColumnDefinition>
+            <ColumnDefinition Width="40*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" Margin="10" Header="Print templates" Grid.Column="0" Foreground="#FF2190EE" Name="PrintTemplates">
+            <WrapPanel Margin="10">
+                <Border  Style="{StaticResource ImageBorderStyle}">
+                    <Image OpacityMask="Black" Source="/Images/test.jpg" Height="111.25" Width="152.3" Cursor="Hand" Stretch="Fill"/>
+                </Border>
+               
+                <Image OpacityMask="Black" Source="/Images/test.jpg" Margin="0,10,10,10" Height="111.25" Width="152.3" Cursor="Hand" Stretch="Fill" />
+                <Image OpacityMask="Black" Source="/Images/test.jpg" Margin="0,10,10,10" Height="111.25" Width="152.3" Cursor="Hand" Stretch="Fill"/>
+                <Image OpacityMask="Black" Source="/Images/login-logo.png" Margin="10,0,10,10" Height="111.25" Width="152.3" Cursor="Hand"/>
+                <Image OpacityMask="Black" Source="/Images/login-logo.png" Margin="0,0,10,10" Height="111.25" Width="152.3" Cursor="Hand"/>
+                <Image OpacityMask="Black" Source="/Images/login-logo.png" Margin="0,0,10,10" Height="111.25" Width="152.3" Cursor="Hand"/>
+                <Image OpacityMask="Black" Source="/Images/login-logo.png" Margin="10,0,10,10" Height="111.25" Width="152.3" Cursor="Hand"/>
+                <Image OpacityMask="Black" Source="/Images/login-logo.png" Margin="0,0,10,10" Height="111.25" Width="152.3" Cursor="Hand"/>
+                <Image OpacityMask="Black" Source="/Images/login-logo.png" Margin="0,0,10,10" Height="111.25" Width="152.3" Cursor="Hand"/>
+                <Image OpacityMask="Black" Source="/Images/login-logo.png" Margin="10,0,10,10" Height="111.25" Width="152.3" Cursor="Hand"/>
+                <Image OpacityMask="Black" Source="/Images/login-logo.png" Margin="0,0,10,10" Height="111.25" Width="152.3" Cursor="Hand"/>
+                <Image OpacityMask="Black" Source="/Images/login-logo.png" Margin="0,0,10,10" Height="111.25" Width="152.3" Cursor="Hand"/>
+            </WrapPanel>
+        </GroupBox>
+        <GroupBox Grid.Row="0"  Header="General"  Grid.Column="1" Foreground="#FF2190EE" Name="Settings" Margin="10">
+
+        </GroupBox>
+        <Button Grid.Row="1" Grid.Column="1"  x:Name="btnSave" Content="Save" Background="#FF379ADB" BorderBrush="#FF45A2F1" Foreground="White" Margin="60,16.1,200,16.1" Click="btnSave_Click" />
+        <Button Grid.Row="1" Grid.Column="1" x:Name="btnCancel" Content="Cancel" Background="#FF379ADB" BorderBrush="#FF45A2F1" Foreground="White" Margin="200,16.1,60,16.1" Click="btnCancel_Click"/>
     </Grid>
 </Window>
