@@ -79,8 +79,8 @@ namespace MeetpointPrinter.Pages
 
         private void LoginControl_LoginSuccessful(object sender, string token)
         {
-            // MainWindow objMain = new MainWindow(token);
-            MainWindow objMain = new MainWindow();
+            MainWindow objMain = new MainWindow(token);
+            //MainWindow objMain = new MainWindow();
             objMain.Show();
             this.Close();
             
