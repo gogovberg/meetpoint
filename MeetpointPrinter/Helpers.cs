@@ -29,6 +29,7 @@ namespace MeetpointPrinter
         }
 
         public static PrintQueue GetPrintQueue(string AuthToken)
+
         {
             var client = new RestClient("http://data.meetpoint.si/rest/v1/DataAPI/GetLabelPrintQueue/json");
             var request = new RestRequest(Method.POST);

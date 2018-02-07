@@ -19,7 +19,7 @@
                             </Grid.ColumnDefinitions>
                             <!-- Header -->
                             <Border Grid.Row="0" Grid.Column="0" Background="#FF434752">
-                                <Image Source="/Images/meetpoint-admin-logo.png"></Image>
+                                <Image Margin="10" Source="/Images/meetpoint-admin-logo.png"></Image>
                             </Border>
                             <Border Grid.Row="0" Grid.Column="1" Background="#FF45A2F1">
                                 <Label x:Name="LblCurrentPage" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White">
