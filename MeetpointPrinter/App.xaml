@@ -71,18 +71,6 @@
             </Style.Triggers>
         </Style>
 
-        <!--<Border BorderThickness="2" Background="Transparent" 
-        CornerRadius="0" Margin="10,10,10,10" >
-            <Border.Style>
-                <Style TargetType="Border">
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="BorderBrush" Value="LightBlue" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Border.Style>
-            <Image OpacityMask="Black" Source="/Images/test.jpg" Height="111.25" Width="152.3" Cursor="Hand" Stretch="Fill"/>
-        </Border>-->
+  
     </Application.Resources>
 </Application>

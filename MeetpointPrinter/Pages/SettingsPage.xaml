@@ -10,56 +10,48 @@
         Style="{StaticResource HeaderFooterWindowStyle}"  >
     <Grid Margin="0,0,-766.8,0.4">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="60*" ></ColumnDefinition>
-            <ColumnDefinition Width="40*"></ColumnDefinition>
+            <ColumnDefinition Width="50*" ></ColumnDefinition>
+            <ColumnDefinition Width="50*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="90*"></RowDefinition>
             <RowDefinition Height="10*"></RowDefinition>
         </Grid.RowDefinitions>
         <GroupBox Grid.Row="0" Margin="10" Header="Print templates" Grid.Column="0" Foreground="#FF2190EE" Name="PrintTemplates">
-            <WrapPanel Margin="10">
-                <Border  Margin="10" Style="{StaticResource ImageBorderStyle}">
-                    <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="111.25" Width="152.3" Cursor="Hand"/>
-                </Border>
-                <Border Margin="0,10,10,10"  Style="{StaticResource ImageBorderStyle}">
-                    <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="111.25" Width="152.3" Cursor="Hand" />
-                </Border>
-                <Border Margin="0,10,10,10"  Style="{StaticResource ImageBorderStyle}">
-                    <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="111.25" Width="152.3" Cursor="Hand"  />
-                </Border>
-                <Border Margin="10,0,10,10" Style="{StaticResource ImageBorderStyle}">
-                    <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="111.25" Width="152.3" Cursor="Hand"  />
-                </Border>
-                <Border Margin="0,0,10,10" Style="{StaticResource ImageBorderStyle}">
-                    <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="111.25" Width="152.3" Cursor="Hand"  />
-                </Border>
-                <Border Margin="0,0,10,10" Style="{StaticResource ImageBorderStyle}">
-                    <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="111.25" Width="152.3" Cursor="Hand"  />
-                </Border>
-                <Border Margin="10,0,10,10" Style="{StaticResource ImageBorderStyle}">
-                    <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="111.25" Width="152.3" Cursor="Hand"  />
-                </Border>
-                <Border Margin="0,0,10,10" Style="{StaticResource ImageBorderStyle}">
-                    <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="111.25" Width="152.3" Cursor="Hand"  />
-                </Border>
-                <Border Margin="0,0,10,10" Style="{StaticResource ImageBorderStyle}">
-                    <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="111.25" Width="152.3" Cursor="Hand"  />
-                </Border>
-                <Border Margin="10,0,10,10" Style="{StaticResource ImageBorderStyle}">
-                    <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="111.25" Width="152.3" Cursor="Hand"  />
-                </Border>
-                <Border Margin="0,0,10,10" Style="{StaticResource ImageBorderStyle}">
-                    <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="111.25" Width="152.3" Cursor="Hand"  />
-                </Border>
-                <Border Margin="0,0,10,10" Style="{StaticResource ImageBorderStyle}">
-                    <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="111.25" Width="152.3" Cursor="Hand"  />
-                </Border>
-            </WrapPanel>
+            <StackPanel>
+                <WrapPanel Margin="10">
+                    <Border  Margin="10" Style="{StaticResource ImageBorderStyle}">
+                        <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="114.225" Width="114.225" Cursor="Hand"/>
+                    </Border>
+                    <Border Margin="10,10,10,10"  Style="{StaticResource ImageBorderStyle}">
+                        <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="114.225" Width="114.225" Cursor="Hand" />
+                    </Border>
+                    <Border Margin="10,0,10,10"  Style="{StaticResource ImageBorderStyle}">
+                        <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="114.225" Width="114.225" Cursor="Hand"  />
+                    </Border>
+                    <Border Margin="10,0,10,10" Style="{StaticResource ImageBorderStyle}">
+                        <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="114.225" Width="114.225" Cursor="Hand"  />
+                    </Border>
+                    <Border Margin="10,0,10,10" Style="{StaticResource ImageBorderStyle}">
+                        <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="114.225" Width="114.225" Cursor="Hand"  />
+                    </Border>
+                    <Border Margin="10,0,10,10" Style="{StaticResource ImageBorderStyle}">
+                        <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="114.225" Width="114.225" Cursor="Hand"  />
+                    </Border>
+                </WrapPanel >
+                <WrapPanel Margin="10,0,10,10" Height="236" >
+                    <Label Margin="10"  Width="114.225" Content="Choose your size"></Label>
+                    <ComboBox Name="cbTemplateSize" Margin="10,10,10,10" Width="245" SelectionChanged="cbTemplateSize_SelectionChanged"></ComboBox>
+                    <Border Margin="10" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Height="174" Width="398">
+                        <Image Name="imgPriview" OpacityMask="Black" Source="/Images/qr.jpg" Height="114.225" Width="114.225" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </WrapPanel>
+            </StackPanel>
+
         </GroupBox>
         <GroupBox Grid.Row="0"  Header="General"  Grid.Column="1" Foreground="#FF2190EE" Name="SettingsGroup" Margin="10">
         </GroupBox>
-        <Button Grid.Row="1" Grid.Column="1"  x:Name="btnSave" Content="Save" Background="#FF379ADB" BorderBrush="#FF45A2F1" Foreground="White" Margin="60,16.1,200,16.1" Click="btnSave_Click" />
-        <Button Grid.Row="1" Grid.Column="1" x:Name="btnCancel" Content="Cancel" Background="#FF379ADB" BorderBrush="#FF45A2F1" Foreground="White" Margin="200,16.1,60,16.1" Click="btnCancel_Click"/>
+        <Button Grid.Row="1" Grid.Column="1"  x:Name="btnSave" Content="Save" Background="#FF379ADB" BorderBrush="#FF45A2F1" Foreground="White" Margin="60,16,263,16" Click="btnSave_Click" />
+        <Button Grid.Row="1" Grid.Column="1" x:Name="btnCancel" Content="Cancel" Background="#FF379ADB" BorderBrush="#FF45A2F1" Foreground="White" Margin="263,16,60,16" Click="btnCancel_Click"/>
     </Grid>
 </Window>
