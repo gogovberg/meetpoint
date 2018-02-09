@@ -14,8 +14,6 @@
             <Grid HorizontalAlignment="Left"  Margin="10,10,0,-12" VerticalAlignment="Top" Height="594" >
                 <DataGrid x:Name="dataGridView" HorizontalAlignment="Left" Margin="10,90,0,44" Width="870" Background="White"/>
                 <Button x:Name="btnStartTimer" Content="Start printing" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" Width="75" Click="btnStartTimer_Click" Background="#FF379ADB" Foreground="White" BorderBrush="#FF45A2F1"/>
-                <Label x:Name="lblAvailablePrinters" Content="Available printers:" HorizontalAlignment="Left" Margin="251,12,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.618,-1.442" Width="110"/>
-                <ComboBox x:Name="ddAvailablePrinters" HorizontalAlignment="Left" Margin="382,16,0,0" VerticalAlignment="Top" Width="120" Background="{x:Null}" BorderBrush="{x:Null}"/>
                 <Button x:Name="btnPrint" Content="Print" HorizontalAlignment="Left" Margin="566,18,0,0" VerticalAlignment="Top" Width="76" Background="#FF379ADB" BorderBrush="#FF45A2F1" Foreground="White"/>
                 <Button x:Name="btnSettings" Content="Settings" HorizontalAlignment="Left" Margin="805,18,0,0" VerticalAlignment="Top" Width="75" Background="#FF379ADB" BorderBrush="#FF45A2F1" Foreground="White" Click="btnSettings_Click"/>
                 <TextBlock x:Name="lblRefresh"  HorizontalAlignment="Left" Margin="10,43,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.618,-1.442" Width="110" Foreground="Black"/>

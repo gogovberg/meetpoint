@@ -28,8 +28,6 @@
                                     </Label.Content>
                                 </Label>
                             </Border>
-
-
                             <!-- Body -->
                             <ContentPresenter Grid.Row="1"/>
 

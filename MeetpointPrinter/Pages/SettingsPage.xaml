@@ -1,55 +1,62 @@
-﻿<Window x:Class="MeetpointPrinter.Pages.SettingsPage"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MeetpointPrinter.Pages"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="MeetpointPrinter.Pages.SettingsPage"
         mc:Ignorable="d"
         Title="Settings" Height="734" Width="948"  
         ResizeMode="NoResize"
         Style="{StaticResource HeaderFooterWindowStyle}"  >
     <Grid Margin="0,0,-766.8,0.4">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50*" ></ColumnDefinition>
-            <ColumnDefinition Width="50*"></ColumnDefinition>
+            <ColumnDefinition Width="50*" />
+            <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="90*"></RowDefinition>
-            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-        <GroupBox Grid.Row="0" Margin="10" Header="Print templates" Grid.Column="0" Foreground="#FF2190EE" Name="PrintTemplates">
+        <GroupBox Grid.Row="0" Margin="10" Header="Print templates" Grid.Column="0" Foreground="#FF2190EE" x:Name="PrintTemplates">
             <StackPanel>
                 <WrapPanel Margin="10">
-                    <Border  Margin="10" Style="{StaticResource ImageBorderStyle}">
-                        <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="114.225" Width="114.225" Cursor="Hand"/>
+                    <Border  Name="tmp_1" Margin="10" Style="{StaticResource ImageBorderStyle}" MouseUp="Border_MouseUp" MouseDown="Border_MouseDown" >
+                        <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="114.225" Width="114.225" Cursor="Hand"  />
                     </Border>
-                    <Border Margin="10,10,10,10"  Style="{StaticResource ImageBorderStyle}">
+                    <Border Name="tmp_2" Margin="10,10,10,10"  Style="{StaticResource ImageBorderStyle}" MouseUp="Border_MouseUp" MouseDown="Border_MouseDown"  >
                         <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="114.225" Width="114.225" Cursor="Hand" />
                     </Border>
-                    <Border Margin="10,0,10,10"  Style="{StaticResource ImageBorderStyle}">
+                    <Border  Name="tmp_3" Margin="10,0,10,10"  Style="{StaticResource ImageBorderStyle}" MouseUp="Border_MouseUp" MouseDown="Border_MouseDown" >
                         <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="114.225" Width="114.225" Cursor="Hand"  />
                     </Border>
-                    <Border Margin="10,0,10,10" Style="{StaticResource ImageBorderStyle}">
+                    <Border Name="tmp_4" Margin="10,0,10,10" Style="{StaticResource ImageBorderStyle}" MouseUp="Border_MouseUp" MouseDown="Border_MouseDown" >
                         <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="114.225" Width="114.225" Cursor="Hand"  />
                     </Border>
-                    <Border Margin="10,0,10,10" Style="{StaticResource ImageBorderStyle}">
+                    <Border Name="tmp_5" Margin="10,0,10,10" Style="{StaticResource ImageBorderStyle}" MouseUp="Border_MouseUp" MouseDown="Border_MouseDown" >
                         <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="114.225" Width="114.225" Cursor="Hand"  />
                     </Border>
-                    <Border Margin="10,0,10,10" Style="{StaticResource ImageBorderStyle}">
+                    <Border Name="tmp_6" Margin="10,0,10,10" Style="{StaticResource ImageBorderStyle}" MouseUp="Border_MouseUp" MouseDown="Border_MouseDown" >
                         <Image OpacityMask="Black" Source="/Images/qr.jpg" Height="114.225" Width="114.225" Cursor="Hand"  />
                     </Border>
-                </WrapPanel >
+                </WrapPanel>
                 <WrapPanel Margin="10,0,10,10" Height="236" >
-                    <Label Margin="10"  Width="114.225" Content="Choose your size"></Label>
-                    <ComboBox Name="cbTemplateSize" Margin="10,10,10,10" Width="245" SelectionChanged="cbTemplateSize_SelectionChanged"></ComboBox>
+                    <Label Margin="10"  Width="114.225" Content="Choose your size"/>
+                    <ComboBox x:Name="cbTemplateSize" Margin="10,10,10,10" Width="245" SelectionChanged="cbTemplateSize_SelectionChanged"/>
                     <Border Margin="10" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Height="174" Width="398">
-                        <Image Name="imgPriview" OpacityMask="Black" Source="/Images/qr.jpg" Height="114.225" Width="114.225" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Image x:Name="imgPriview" OpacityMask="Black" Source="/Images/qr.jpg" Height="114.225" Width="114.225" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </WrapPanel>
             </StackPanel>
 
         </GroupBox>
-        <GroupBox Grid.Row="0"  Header="General"  Grid.Column="1" Foreground="#FF2190EE" Name="SettingsGroup" Margin="10">
+        <GroupBox Grid.Row="0"  Header="General"  Grid.Column="1" Foreground="#FF2190EE" x:Name="SettingsGroup" Margin="10">
+            <WrapPanel  Margin="10">
+                <Label Margin="10" Content="Choose your users" Width="171.3375"></Label>
+                <xctk:CheckComboBox Name="cbUsers" Margin="10" Width="171.3375"/>
+                <Label Margin="10"  x:Name="lblAvailablePrinters" Content="Avaiable printers" Width="171.3375" />
+                <ComboBox  Margin="10"  x:Name="ddAvailablePrinters" Width="171.3375" />
+            </WrapPanel>
         </GroupBox>
         <Button Grid.Row="1" Grid.Column="1"  x:Name="btnSave" Content="Save" Background="#FF379ADB" BorderBrush="#FF45A2F1" Foreground="White" Margin="60,16,263,16" Click="btnSave_Click" />
         <Button Grid.Row="1" Grid.Column="1" x:Name="btnCancel" Content="Cancel" Background="#FF379ADB" BorderBrush="#FF45A2F1" Foreground="White" Margin="263,16,60,16" Click="btnCancel_Click"/>

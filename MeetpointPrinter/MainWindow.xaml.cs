@@ -32,6 +32,7 @@ namespace MeetpointPrinter
         private DataTable dtList;
         private Timer printTimer;
         private bool isEventHandler = false;
+        private string _printerName = "";
         public MainWindow(string accessToken)
         {
             InitializeComponent();
@@ -43,10 +44,9 @@ namespace MeetpointPrinter
             printTimer.Enabled = true;
 
             lblRefresh.Text = "";
-            this.ddAvailablePrinters.ItemsSource = Helpers.GetConnectedPrinters();
+           
             this.timerStarted = false;
-            LoadCustomerUsers();
-
+          
             dtList = new DataTable();
             dtList.Columns.Add("Name");
             dtList.Columns.Add("LastName");
@@ -57,15 +57,7 @@ namespace MeetpointPrinter
             (Application.Current as App).CurrentPage = "Main windown";
         }
 
-        private void LoadCustomerUsers()
-        {
-            var usrList = Helpers.GetCustomerUsers(this.accessToken);
-
-            foreach (User u in usrList.Rows)
-            {
-                //checkedListBox1.Items.Add(u.value);
-            }
-        }
+      
 
         private void PrintTimer_Tick(object sender, EventArgs e)
         {
@@ -78,7 +70,7 @@ namespace MeetpointPrinter
 
                 PrinterSettings ps = new PrinterSettings();
 
-                ddAvailablePrinters.Dispatcher.Invoke(() => { ps.PrinterName = ddAvailablePrinters.SelectedValue as string; });
+                ps.PrinterName = _printerName;
                 ps.Width = (int)(203 * 3);
                 ps.Length = (int)(203 * 1);
                 ps.Darkness = 30;
@@ -158,7 +150,7 @@ namespace MeetpointPrinter
         private void btnPrint_Click(object sender, EventArgs e)
         {
             PrinterSettings ps = new PrinterSettings();
-            ps.PrinterName = this.ddAvailablePrinters.SelectedValue as string;
+            ps.PrinterName = _printerName;
             ps.Width = (int)(203 * 3);
             ps.Length = (int)(203 * 1);
             ps.Darkness = 30;
@@ -190,7 +182,7 @@ namespace MeetpointPrinter
   
         private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
-            SettingsPage objSettings = new SettingsPage();
+            SettingsPage objSettings = new SettingsPage(this.accessToken);
             objSettings.Show();
             
         }
