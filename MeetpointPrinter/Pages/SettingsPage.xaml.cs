@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace MeetpointPrinter.Pages
 {
@@ -29,6 +31,7 @@ namespace MeetpointPrinter.Pages
         private int _templateWidth = 0;
         private string _printDevice = "";
         private  System.Collections.Specialized.StringCollection _users;
+        private List<string> _userlist;
         private char _delimiter = ';';
         private char _sizeDelimiter = 'x';
 
@@ -58,6 +61,7 @@ namespace MeetpointPrinter.Pages
             _borderList.Add(tmp_6);
 
             RetrieveSettings();
+            ReadUserSettings();
 
         }
 
@@ -70,6 +74,7 @@ namespace MeetpointPrinter.Pages
         {
             //save logic
             _users = new System.Collections.Specialized.StringCollection();
+            _userlist = new List<string>();
 
             _printTemplate = "tmp_5";
 
@@ -91,10 +96,13 @@ namespace MeetpointPrinter.Pages
                 foreach(KeyValuePair<int,string> item in cbUsers.SelectedItems)
                 {
                     _users.Add(item.Key.ToString() + _delimiter + item.Value.ToString());
+                    _userlist.Add(item.Key.ToString() + _delimiter + item.Value.ToString());
                 }
                 
             }
-         
+            SaveUserSettings();
+
+
             Properties.Settings.Default.PrintDevice = _printDevice;
             Properties.Settings.Default.PrintTemplateHeight = _templateHeight;
             Properties.Settings.Default.PrintTemplateWidth = _templateWidth;
@@ -240,6 +248,40 @@ namespace MeetpointPrinter.Pages
                     bor.BorderBrush = new SolidColorBrush();
                 }
             }
+        }
+
+        private void SaveUserSettings()
+        {
+            UserSettings up = new UserSettings();
+
+            up.PrintDevice = _printDevice;
+            up.TemplateHeight = _templateHeight;
+            up.TemplateWidth = _templateWidth;
+            up.PrintUsers = _userlist;
+            up.PrintTemplate = _printTemplate;
+          
+
+            XmlSerializer mySerializer = new XmlSerializer(typeof(UserSettings));
+            StreamWriter myWriter = new StreamWriter("c:/prefs.xml");
+            mySerializer.Serialize(myWriter, up);
+            myWriter.Close();
+        }
+        private void ReadUserSettings()
+        {
+            try
+            {
+                UserSettings up;
+
+                XmlSerializer mySerializer = new XmlSerializer(typeof(UserSettings));
+                FileStream myFileStream = new FileStream("c:/prefs.xml", FileMode.Open);
+
+                up = (UserSettings)mySerializer.Deserialize(myFileStream);
+            }
+            catch
+            {
+
+            }
+           
         }
     }
 }
