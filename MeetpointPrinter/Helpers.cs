@@ -57,13 +57,10 @@ namespace MeetpointPrinter
                 return null;
         }
 
-
         public static string ToTitleCase(this string s)
         {
             return System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(s.ToLower());
         }
-
-
 
         public static UserData GetCustomerUsers(string AuthToken)
         {
@@ -150,6 +147,18 @@ namespace MeetpointPrinter
     {
         public string serviceStatus { get; set; }
         public UserData data { get; set; }
+    }
+
+
+    public class UserSettings
+    {
+        public string Username { set; get; }
+        public string PrintTemplate { set; get; }
+        public int TemplateHeight { set; get; }
+        public int TemplateWidth { set; get; }
+        public string PrintDevice { set; get; }
+        public List<string> PrintUsers { set; get; }
+       
     }
 
 }

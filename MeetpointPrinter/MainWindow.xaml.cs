@@ -32,7 +32,15 @@ namespace MeetpointPrinter
         private DataTable dtList;
         private Timer printTimer;
         private bool isEventHandler = false;
-        private string _printerName = "";
+       
+        private int _templateHeight = 0;
+        private int _templateWidth = 0;
+        private string _printDevice = "";
+        private System.Collections.Specialized.StringCollection _users;
+        private string _printTemplate;
+        private char _delimiter = ';';
+        private char _sizeDelimiter = 'x';
+
         public MainWindow(string accessToken)
         {
             InitializeComponent();
@@ -55,6 +63,13 @@ namespace MeetpointPrinter
 
             dataGridView.DataContext = dtList;
             (Application.Current as App).CurrentPage = "Main windown";
+
+            _users = new System.Collections.Specialized.StringCollection();
+            _users = Properties.Settings.Default.PrintUsers;
+            _printDevice = Properties.Settings.Default.PrintDevice;
+            _printTemplate = Properties.Settings.Default.PrintTemplate;
+            _templateHeight = Properties.Settings.Default.PrintTemplateHeight;
+            _templateWidth = Properties.Settings.Default.PrintTemplateWidth;
         }
 
       
@@ -70,7 +85,7 @@ namespace MeetpointPrinter
 
                 PrinterSettings ps = new PrinterSettings();
 
-                ps.PrinterName = _printerName;
+                ps.PrinterName = _printDevice;
                 ps.Width = (int)(203 * 3);
                 ps.Length = (int)(203 * 1);
                 ps.Darkness = 30;
@@ -150,7 +165,7 @@ namespace MeetpointPrinter
         private void btnPrint_Click(object sender, EventArgs e)
         {
             PrinterSettings ps = new PrinterSettings();
-            ps.PrinterName = _printerName;
+            ps.PrinterName = _printDevice;
             ps.Width = (int)(203 * 3);
             ps.Length = (int)(203 * 1);
             ps.Darkness = 30;

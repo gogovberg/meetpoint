@@ -25,6 +25,13 @@ namespace MeetpointPrinter.Pages
         private string _accessToken;
         private string _printTemplate;
         private List<Border> _borderList;
+        private  int _templateHeight = 0;
+        private int _templateWidth = 0;
+        private string _printDevice = "";
+        private  System.Collections.Specialized.StringCollection _users;
+        private char _delimiter = ';';
+        private char _sizeDelimiter = 'x';
+
         public SettingsPage(string accessToken)
         {
            
@@ -36,11 +43,11 @@ namespace MeetpointPrinter.Pages
 
             (Application.Current as App).CurrentPage = "Settings page";
 
-            cbTemplateSize.Items.Add("150x150");
-            cbTemplateSize.Items.Add("170x170");
-            cbTemplateSize.Items.Add("150x170");
-            cbTemplateSize.Items.Add("170x200");
-            cbTemplateSize.Items.Add("150x200");
+            cbTemplateSize.Items.Add("150"+ _sizeDelimiter + "150");
+            cbTemplateSize.Items.Add("170" + _sizeDelimiter + "170");
+            cbTemplateSize.Items.Add("150" + _sizeDelimiter + "170");
+            cbTemplateSize.Items.Add("170" + _sizeDelimiter + "200");
+            cbTemplateSize.Items.Add("150" + _sizeDelimiter + "200");
 
             _borderList = new List<Border>();
             _borderList.Add(tmp_1);
@@ -49,6 +56,8 @@ namespace MeetpointPrinter.Pages
             _borderList.Add(tmp_4);
             _borderList.Add(tmp_5);
             _borderList.Add(tmp_6);
+
+            RetrieveSettings();
 
         }
 
@@ -60,34 +69,36 @@ namespace MeetpointPrinter.Pages
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             //save logic
-           
-            int templateHeight = 0;
-            int templateWidth = 0;
-            string printDevice = "";
-            System.Collections.Specialized.StringCollection users = new System.Collections.Specialized.StringCollection();
-            if(cbTemplateSize.SelectedIndex>-1)
+            _users = new System.Collections.Specialized.StringCollection();
+
+            _printTemplate = "tmp_5";
+
+            if (cbTemplateSize.SelectedIndex>-1)
             {
                 string text = (cbTemplateSize as ComboBox).SelectedItem as string;
                 string[] size = text.Split('x');
-                templateHeight = int.Parse(size[0]);
-                templateWidth = int.Parse(size[1]);
+                _templateHeight = int.Parse(size[0]);
+                _templateWidth = int.Parse(size[1]);
             }
+
             if(ddAvailablePrinters.SelectedIndex>-1)
             {
-                printDevice = (ddAvailablePrinters as ComboBox).SelectedItem as string;
+                _printDevice = (ddAvailablePrinters as ComboBox).SelectedItem as string;
             }
+
             if(cbUsers.SelectedItems.Count > 0)
             {
-                foreach(var item in cbUsers.SelectedItems)
+                foreach(KeyValuePair<int,string> item in cbUsers.SelectedItems)
                 {
-                    users.Add(item.ToString());
+                    _users.Add(item.Key.ToString() + _delimiter + item.Value.ToString());
                 }
                 
             }
-            Properties.Settings.Default.PrintDevice = printDevice;
-            Properties.Settings.Default.PrintTemplateHeight = templateHeight;
-            Properties.Settings.Default.PrintTemplateWidth = templateWidth;
-            Properties.Settings.Default.PrintUsers = users;
+         
+            Properties.Settings.Default.PrintDevice = _printDevice;
+            Properties.Settings.Default.PrintTemplateHeight = _templateHeight;
+            Properties.Settings.Default.PrintTemplateWidth = _templateWidth;
+            Properties.Settings.Default.PrintUsers = _users;
             Properties.Settings.Default.PrintTemplate = _printTemplate;
             Properties.Settings.Default.Save();
         }
@@ -152,6 +163,65 @@ namespace MeetpointPrinter.Pages
 
         private void RetrieveSettings()
         {
+            _users = new System.Collections.Specialized.StringCollection();
+            _users = Properties.Settings.Default.PrintUsers;
+            _printDevice = Properties.Settings.Default.PrintDevice;
+            _printTemplate = Properties.Settings.Default.PrintTemplate;
+            _templateHeight = Properties.Settings.Default.PrintTemplateHeight;
+            _templateWidth = Properties.Settings.Default.PrintTemplateWidth;
+
+            //privew image
+            Border tempBorder= (Border)this.FindName(_printTemplate);
+
+            if(tempBorder != null)
+            {
+                imgPriview.Height = _templateHeight;
+                imgPriview.Width = _templateWidth;
+                imgPriview.Source = ((Image)tempBorder.Child).Source;
+            }
+           
+
+            //print device
+            if(!string.IsNullOrEmpty(_printDevice))
+            {
+                foreach (String item in ddAvailablePrinters.Items)
+                {
+                    if (item.ToString().Equals(_printDevice))
+                    {
+                        ddAvailablePrinters.SelectedItem = item;
+                    }
+                }
+            }
+          
+            if(_users!=null)
+            {
+                foreach (string users in _users)
+                {
+                    string[] pair = users.Split(_delimiter);
+
+                    if (pair.Length > 1)
+                    {
+                        KeyValuePair<int, string> pairD = new KeyValuePair<int, string>(int.Parse(pair[0]),pair[1]);
+                        cbUsers.SelectedItems.Add(pairD);                       
+                    }
+                }
+            }
+         
+
+            if(_templateHeight!=0 && _templateWidth!=0)
+            {
+                string size = _templateHeight.ToString() + _sizeDelimiter +  _templateWidth.ToString();
+                foreach (String item in cbTemplateSize.Items)
+                {
+                    if (item.ToString().Equals(size))
+                    {
+                        cbTemplateSize.SelectedItem = item;
+                    }
+                }
+            }
+         
+
+
 
         }
 
