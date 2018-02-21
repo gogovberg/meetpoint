@@ -2,9 +2,11 @@
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace MeetpointPrinter
 {
@@ -89,6 +91,57 @@ namespace MeetpointPrinter
 
                 return null;
         }
+
+        public static void SaveUserSettings(string Username, string PrintDevice,int TemplteHeight, int TemplateWidth, List<User> UserList, string PrintTemplate)
+        {
+            try
+            {
+                string path = @"UserSettings/" + Username + "_settings.config";
+                UserSettings up = new UserSettings();
+
+                up.PrintDevice = PrintDevice;
+                up.TemplateHeight = TemplteHeight;
+                up.TemplateWidth = TemplateWidth;
+                up.PrintUsers = UserList;
+                up.PrintTemplate = PrintTemplate;
+
+
+                XmlSerializer mySerializer = new XmlSerializer(typeof(UserSettings));
+                StreamWriter myWriter = new StreamWriter(path);
+                mySerializer.Serialize(myWriter, up);
+                myWriter.Close();
+            }
+            catch(Exception ex)
+            {
+                hgi.Environment.Debug.Log("MeetpointPrinter", ex.ToString());
+
+            }
+          
+        }
+        public static UserSettings ReadUserSettings(string Username)
+        {
+            UserSettings up = new UserSettings();
+            try
+            {
+                string path = @"UserSettings/" + Username + "_settings.config";
+                if(File.Exists(path))
+                {
+                    XmlSerializer mySerializer = new XmlSerializer(typeof(UserSettings));
+                    FileStream myFileStream = new FileStream(path, FileMode.Open);
+
+                    up = (UserSettings)mySerializer.Deserialize(myFileStream);
+                }
+               
+            }
+            catch
+            {
+
+            }
+
+            return up;
+
+        }
+
     }
     public class Data
     {
@@ -157,9 +210,10 @@ namespace MeetpointPrinter
         public int TemplateHeight { set; get; }
         public int TemplateWidth { set; get; }
         public string PrintDevice { set; get; }
-        public List<string> PrintUsers { set; get; }
+        public List<User> PrintUsers { set; get; }
        
     }
+   
 
 
 

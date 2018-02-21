@@ -36,16 +36,19 @@ namespace MeetpointPrinter
         private int _templateHeight = 0;
         private int _templateWidth = 0;
         private string _printDevice = "";
-        private System.Collections.Specialized.StringCollection _users;
+        private List<User> _users;
         private string _printTemplate;
         private char _delimiter = ';';
         private char _sizeDelimiter = 'x';
-
-        public MainWindow(string accessToken)
+        private string _userName="";
+        private SettingsPage _objSettings;
+        private bool _settingsOpened = false;
+        public MainWindow(string username, string accessToken)
         {
             InitializeComponent();
 
             this.accessToken = accessToken;
+            this._userName = username;
             printTimer = new System.Timers.Timer();
             printTimer.Elapsed += new ElapsedEventHandler(PrintTimer_Tick);
             printTimer.Interval = 2000; // 1000 ms => 1 second
@@ -63,13 +66,15 @@ namespace MeetpointPrinter
 
             dataGridView.DataContext = dtList;
             (Application.Current as App).CurrentPage = "Main windown";
+            (Application.Current as App).CurrentUser = username;
 
-            _users = new System.Collections.Specialized.StringCollection();
-            _users = Properties.Settings.Default.PrintUsers;
-            _printDevice = Properties.Settings.Default.PrintDevice;
-            _printTemplate = Properties.Settings.Default.PrintTemplate;
-            _templateHeight = Properties.Settings.Default.PrintTemplateHeight;
-            _templateWidth = Properties.Settings.Default.PrintTemplateWidth;
+            UserSettings up = Helpers.ReadUserSettings(_userName);
+            _users = new List<User>();
+            _users = up.PrintUsers;
+            _printDevice = up.PrintDevice;
+            _printTemplate = up.PrintTemplate;
+            _templateHeight = up.TemplateHeight;
+            _templateWidth = up.TemplateWidth;
         }
 
       
@@ -79,38 +84,42 @@ namespace MeetpointPrinter
             if (!isEventHandler)
             {
                 isEventHandler = true;
-                this.Dispatcher.Invoke(DispatcherPriority.Normal, new Action<TextBlock>(SetValue), lblRefresh);
-
-                PrintQueue a = Helpers.GetPrintQueue(this.accessToken);
-
-                PrinterSettings ps = new PrinterSettings();
-
-                ps.PrinterName = _printDevice;
-                ps.Width = (int)(203 * 3);
-                ps.Length = (int)(203 * 1);
-                ps.Darkness = 30;
-
-                if (a != null)
+                if(!string.IsNullOrEmpty(_printDevice))
                 {
-                    foreach (var b in a.Item)
-                    {
-                        DataRow r = dtList.NewRow();
-                        r["Name"] = b.FirstName;
-                        r["LastName"] = b.LastName;
-                        r["Company"] = b.Company;
-                        r["ActionUID"] = b.ActionUID;
-                        dtList.Rows.Add(r);
+                    this.Dispatcher.Invoke(DispatcherPriority.Normal, new Action<TextBlock>(SetValue), lblRefresh);
 
-                        List<byte> page = new List<byte>();
-                        page.AddRange(ZPLCommands.ClearPrinter(ps));
-                        page.AddRange(ZPLCommands.TextWrite(20, 25, ElementDrawRotation.NO_ROTATION, ZebraFont.CUSTOM_U, 15, 15, Helpers.ToTitleCase(b.FirstName)));
-                        page.AddRange(ZPLCommands.TextWrite(20, 100, ElementDrawRotation.NO_ROTATION, ZebraFont.CUSTOM_U, 30, 30, Helpers.ToTitleCase(b.LastName)));
-                        page.AddRange(ZPLCommands.TextWrite(20, 200, ElementDrawRotation.NO_ROTATION, ZebraFont.CUSTOM_S, 20, 15, string.Concat(b.Company)));
-                        page.AddRange(ZPLCommands.TextWrite(20, 250, ElementDrawRotation.NO_ROTATION, ZebraFont.CUSTOM_S, 20, 15, string.Concat(b.EventPosition)));
-                        page.AddRange(ZPLCommands.PrintBuffer(1));
-                        new SpoolPrinter(ps).Print(page.ToArray());
+                    PrintQueue a = Helpers.GetPrintQueue(this.accessToken);
+
+                    PrinterSettings ps = new PrinterSettings();
+
+                    ps.PrinterName = _printDevice;
+                    ps.Width = (int)(203 * 3);
+                    ps.Length = (int)(203 * 1);
+                    ps.Darkness = 30;
+
+                    if (a != null)
+                    {
+                        foreach (var b in a.Item)
+                        {
+                            DataRow r = dtList.NewRow();
+                            r["Name"] = b.FirstName;
+                            r["LastName"] = b.LastName;
+                            r["Company"] = b.Company;
+                            r["ActionUID"] = b.ActionUID;
+                            dtList.Rows.Add(r);
+
+                            List<byte> page = new List<byte>();
+                            page.AddRange(ZPLCommands.ClearPrinter(ps));
+                            page.AddRange(ZPLCommands.TextWrite(20, 25, ElementDrawRotation.NO_ROTATION, ZebraFont.CUSTOM_U, 15, 15, Helpers.ToTitleCase(b.FirstName)));
+                            page.AddRange(ZPLCommands.TextWrite(20, 100, ElementDrawRotation.NO_ROTATION, ZebraFont.CUSTOM_U, 30, 30, Helpers.ToTitleCase(b.LastName)));
+                            page.AddRange(ZPLCommands.TextWrite(20, 200, ElementDrawRotation.NO_ROTATION, ZebraFont.CUSTOM_S, 20, 15, string.Concat(b.Company)));
+                            page.AddRange(ZPLCommands.TextWrite(20, 250, ElementDrawRotation.NO_ROTATION, ZebraFont.CUSTOM_S, 20, 15, string.Concat(b.EventPosition)));
+                            page.AddRange(ZPLCommands.PrintBuffer(1));
+                            new SpoolPrinter(ps).Print(page.ToArray());
+                        }
                     }
                 }
+               
                 isEventHandler = false;
             }
         }
@@ -194,13 +203,16 @@ namespace MeetpointPrinter
             }
         }
 
-  
         private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
-            SettingsPage objSettings = new SettingsPage(this.accessToken);
-            objSettings.Show();
-            
+            _objSettings = new SettingsPage(this._userName, this.accessToken);
+            _objSettings.ShowDialog();
+            _objSettings.Activate();
+            _objSettings.Focus();
+
         }
+
+     
     }
     
 

@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         Title="Settings" Height="734" Width="948"  
         ResizeMode="NoResize"
-        Style="{StaticResource HeaderFooterWindowStyle}"  >
+        Style="{StaticResource HeaderFooterWindowStyle}"  
+    >
     <Grid Margin="0,0,-766.8,0.4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50*" />

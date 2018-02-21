@@ -22,11 +22,23 @@
                                 <Image Margin="10" Source="/Images/meetpoint-admin-logo.png"></Image>
                             </Border>
                             <Border Grid.Row="0" Grid.Column="1" Background="#FF45A2F1">
-                                <Label x:Name="LblCurrentPage" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White">
-                                    <Label.Content>
-                                        <Binding Path="CurrentPage" Source="{x:Static Application.Current}"/>
-                                    </Label.Content>
-                                </Label>
+                                <Grid>
+                                    <Label x:Name="LblCurrentPage" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Grid.Column="0" >
+                                        <Label.Content>
+                                            <Binding Path="CurrentPage" Source="{x:Static Application.Current}"/>
+                                        </Label.Content>
+                                    </Label>
+                                    
+                                    <Label x:Name="LblCurrentUser" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" Grid.Column="1" >
+                                        <Label.Content>
+                                            <Binding Path="CurrentUser" Source="{x:Static Application.Current}"/>
+                                        </Label.Content>
+                                    </Label>
+
+
+                                </Grid>
+                               
+                               
                             </Border>
                             <!-- Body -->
                             <ContentPresenter Grid.Row="1"/>

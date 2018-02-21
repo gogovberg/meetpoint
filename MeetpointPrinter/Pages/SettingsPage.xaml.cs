@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Serialization;
-
+using MeetpointPrinter;
 namespace MeetpointPrinter.Pages
 {
 
@@ -31,13 +31,13 @@ namespace MeetpointPrinter.Pages
         private int _templateWidth = 0;
         private string _printDevice = "";
         private  System.Collections.Specialized.StringCollection _users;
-        private List<string> _userlist;
+        private List<User> _userlist;
         private char _delimiter = ';';
         private char _sizeDelimiter = 'x';
-
-        public SettingsPage(string accessToken)
+        private string _username = "";
+        public SettingsPage(string username,string accessToken)
         {
-           
+            this._username = username;
             this._accessToken = accessToken;
             InitializeComponent();
             LoadCustomerUsers();
@@ -45,7 +45,7 @@ namespace MeetpointPrinter.Pages
             this.ddAvailablePrinters.ItemsSource = Helpers.GetConnectedPrinters();
 
             (Application.Current as App).CurrentPage = "Settings page";
-
+            (Application.Current as App).CurrentUser = username;
             cbTemplateSize.Items.Add("150"+ _sizeDelimiter + "150");
             cbTemplateSize.Items.Add("170" + _sizeDelimiter + "170");
             cbTemplateSize.Items.Add("150" + _sizeDelimiter + "170");
@@ -60,8 +60,9 @@ namespace MeetpointPrinter.Pages
             _borderList.Add(tmp_5);
             _borderList.Add(tmp_6);
 
+            
             RetrieveSettings();
-            ReadUserSettings();
+        
 
         }
 
@@ -73,8 +74,8 @@ namespace MeetpointPrinter.Pages
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             //save logic
-            _users = new System.Collections.Specialized.StringCollection();
-            _userlist = new List<string>();
+            
+            _userlist = new List<User>();
 
             _printTemplate = "tmp_5";
 
@@ -93,22 +94,19 @@ namespace MeetpointPrinter.Pages
 
             if(cbUsers.SelectedItems.Count > 0)
             {
+                User u;
                 foreach(KeyValuePair<int,string> item in cbUsers.SelectedItems)
                 {
-                    _users.Add(item.Key.ToString() + _delimiter + item.Value.ToString());
-                    _userlist.Add(item.Key.ToString() + _delimiter + item.Value.ToString());
+                    u = new User();
+                    u.key = item.Key;
+                    u.value = item.Value.ToString();
+                    _userlist.Add(u);
                 }
                 
             }
-            SaveUserSettings();
+            Helpers.SaveUserSettings(_username, _printDevice, _templateHeight, _templateWidth, _userlist, _printTemplate);
+            this.Close();
 
-
-            Properties.Settings.Default.PrintDevice = _printDevice;
-            Properties.Settings.Default.PrintTemplateHeight = _templateHeight;
-            Properties.Settings.Default.PrintTemplateWidth = _templateWidth;
-            Properties.Settings.Default.PrintUsers = _users;
-            Properties.Settings.Default.PrintTemplate = _printTemplate;
-            Properties.Settings.Default.Save();
         }
 
         private void cbTemplateSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -171,62 +169,67 @@ namespace MeetpointPrinter.Pages
 
         private void RetrieveSettings()
         {
-            _users = new System.Collections.Specialized.StringCollection();
-            _users = Properties.Settings.Default.PrintUsers;
-            _printDevice = Properties.Settings.Default.PrintDevice;
-            _printTemplate = Properties.Settings.Default.PrintTemplate;
-            _templateHeight = Properties.Settings.Default.PrintTemplateHeight;
-            _templateWidth = Properties.Settings.Default.PrintTemplateWidth;
-
-            //privew image
-            Border tempBorder= (Border)this.FindName(_printTemplate);
-
-            if(tempBorder != null)
+            try
             {
-                imgPriview.Height = _templateHeight;
-                imgPriview.Width = _templateWidth;
-                imgPriview.Source = ((Image)tempBorder.Child).Source;
-            }
-           
 
-            //print device
-            if(!string.IsNullOrEmpty(_printDevice))
-            {
-                foreach (String item in ddAvailablePrinters.Items)
-                {
-                    if (item.ToString().Equals(_printDevice))
-                    {
-                        ddAvailablePrinters.SelectedItem = item;
-                    }
-                }
-            }
+                UserSettings up = Helpers.ReadUserSettings(_username);
+                _userlist = up.PrintUsers;
           
-            if(_users!=null)
-            {
-                foreach (string users in _users)
-                {
-                    string[] pair = users.Split(_delimiter);
+                _printDevice = up.PrintDevice;
+                _printTemplate = up.PrintTemplate;
+                _templateHeight = up.TemplateHeight;
+                _templateWidth = up.TemplateWidth;
 
-                    if (pair.Length > 1)
+                //privew image
+                Border tempBorder = (Border)this.FindName(_printTemplate);
+
+                if (tempBorder != null)
+                {
+                    imgPriview.Height = _templateHeight;
+                    imgPriview.Width = _templateWidth;
+                    imgPriview.Source = ((Image)tempBorder.Child).Source;
+                }
+
+
+                //print device
+                if (!string.IsNullOrEmpty(_printDevice))
+                {
+                    foreach (String item in ddAvailablePrinters.Items)
                     {
-                        KeyValuePair<int, string> pairD = new KeyValuePair<int, string>(int.Parse(pair[0]),pair[1]);
-                        cbUsers.SelectedItems.Add(pairD);                       
+                        if (item.ToString().Equals(_printDevice))
+                        {
+                            ddAvailablePrinters.SelectedItem = item;
+                        }
+                    }
+                }
+
+                if (_userlist != null)
+                {
+                    foreach (User us in _userlist)
+                    {
+                        KeyValuePair<int, string> pairD = new KeyValuePair<int, string>(us.key,us.value);
+                        cbUsers.SelectedItems.Add(pairD);
+                    }
+                }
+
+
+                if (_templateHeight != 0 && _templateWidth != 0)
+                {
+                    string size = _templateHeight.ToString() + _sizeDelimiter + _templateWidth.ToString();
+                    foreach (String item in cbTemplateSize.Items)
+                    {
+                        if (item.ToString().Equals(size))
+                        {
+                            cbTemplateSize.SelectedItem = item;
+                        }
                     }
                 }
             }
-         
-
-            if(_templateHeight!=0 && _templateWidth!=0)
+            catch
             {
-                string size = _templateHeight.ToString() + _sizeDelimiter +  _templateWidth.ToString();
-                foreach (String item in cbTemplateSize.Items)
-                {
-                    if (item.ToString().Equals(size))
-                    {
-                        cbTemplateSize.SelectedItem = item;
-                    }
-                }
+
             }
+            
          
 
 
@@ -250,38 +253,6 @@ namespace MeetpointPrinter.Pages
             }
         }
 
-        private void SaveUserSettings()
-        {
-            UserSettings up = new UserSettings();
-
-            up.PrintDevice = _printDevice;
-            up.TemplateHeight = _templateHeight;
-            up.TemplateWidth = _templateWidth;
-            up.PrintUsers = _userlist;
-            up.PrintTemplate = _printTemplate;
-          
-
-            XmlSerializer mySerializer = new XmlSerializer(typeof(UserSettings));
-            StreamWriter myWriter = new StreamWriter("c:/prefs.xml");
-            mySerializer.Serialize(myWriter, up);
-            myWriter.Close();
-        }
-        private void ReadUserSettings()
-        {
-            try
-            {
-                UserSettings up;
-
-                XmlSerializer mySerializer = new XmlSerializer(typeof(UserSettings));
-                FileStream myFileStream = new FileStream("c:/prefs.xml", FileMode.Open);
-
-                up = (UserSettings)mySerializer.Deserialize(myFileStream);
-            }
-            catch
-            {
-
-            }
-           
-        }
+      
     }
 }

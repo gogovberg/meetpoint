@@ -24,10 +24,6 @@ namespace MeetpointPrinter.Pages
         {
             InitializeComponent();
             this.userLoginValidation = new MockUserLoginValidation();
-          
-
-         
-
             LoginSuccessful += LoginControl_LoginSuccessful;
             LoginFailed += LoginControl_LoginFailed;
         }
@@ -47,7 +43,9 @@ namespace MeetpointPrinter.Pages
             if (!string.IsNullOrEmpty(token))
             {
                 this.ShowErrorMsg(false);
-                if (LoginSuccessful != null) { LoginSuccessful(this, token); }
+                if (LoginSuccessful != null) {
+                    LoginSuccessful(this, token);
+                }
 
             }
             else
@@ -79,7 +77,7 @@ namespace MeetpointPrinter.Pages
 
         private void LoginControl_LoginSuccessful(object sender, string token)
         {
-            MainWindow objMain = new MainWindow(token);
+            MainWindow objMain = new MainWindow(this.tbUsername.Text.Trim(), token);
             //MainWindow objMain = new MainWindow();
             objMain.Show();
             this.Close();

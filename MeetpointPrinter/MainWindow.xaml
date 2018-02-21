@@ -7,7 +7,8 @@
         xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon"  xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"  x:Class="MeetpointPrinter.MainWindow"
         mc:Ignorable="d"
         Title="Meetpoint print" Height="734" Width="948" Background="White" ResizeMode="NoResize"  
-        Style="{StaticResource HeaderFooterWindowStyle}">
+        Style="{StaticResource HeaderFooterWindowStyle}"
+        >
     <Grid>
 
         <GroupBox Header="Print your stuff" HorizontalAlignment="Left" Height="614"  Margin="10,10,-758.8,0" VerticalAlignment="Top" Width="920" Foreground="#FF2190EE">

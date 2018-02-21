@@ -14,6 +14,6 @@ namespace MeetpointPrinter
     public partial class App : Application
     {
         public string CurrentPage { set; get; }
-
+        public string CurrentUser { set; get; }
     }
 }
