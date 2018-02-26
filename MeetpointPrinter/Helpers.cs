@@ -118,6 +118,7 @@ namespace MeetpointPrinter
             }
           
         }
+
         public static UserSettings ReadUserSettings(string Username)
         {
             UserSettings up = new UserSettings();

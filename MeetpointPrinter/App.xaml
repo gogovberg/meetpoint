@@ -28,17 +28,23 @@
                                             <Binding Path="CurrentPage" Source="{x:Static Application.Current}"/>
                                         </Label.Content>
                                     </Label>
-                                    
-                                    <Label x:Name="LblCurrentUser" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" Grid.Column="1" >
-                                        <Label.Content>
-                                            <Binding Path="CurrentUser" Source="{x:Static Application.Current}"/>
-                                        </Label.Content>
-                                    </Label>
+
+                                    <Grid Margin="10"  HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50*"></ColumnDefinition>
+                                            <ColumnDefinition Width="50*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Label x:Name="LblCurrentUser"    VerticalAlignment="Center"  Foreground="White" Grid.Column="0" >
+                                            <Label.Content>
+                                                <Binding Path="CurrentUser" Source="{x:Static Application.Current}"/>
+                                            </Label.Content>
+                                        </Label>
+                                        <Button x:Name="btnLogout"  VerticalAlignment="Center"  Content="Logout" Grid.Column="1" Margin="10"  Background="#00000000" BorderBrush="White" Foreground="White" Click="btnLogout_Click"></Button>
+                                    </Grid>
+                                   
 
 
                                 </Grid>
-                               
-                               
                             </Border>
                             <!-- Body -->
                             <ContentPresenter Grid.Row="1"/>

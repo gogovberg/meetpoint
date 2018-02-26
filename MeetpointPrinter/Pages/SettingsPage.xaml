@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MeetpointPrinter.Pages"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="MeetpointPrinter.Pages.SettingsPage"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Name="Settings" x:Class="MeetpointPrinter.Pages.SettingsPage"
         mc:Ignorable="d"
         Title="Settings" Height="734" Width="948"  
         ResizeMode="NoResize"
