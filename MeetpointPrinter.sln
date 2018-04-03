@@ -1,20 +1,34 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2026
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetpointPrinter", "MeetpointPrinter\MeetpointPrinter.csproj", "{51F9C554-6452-467D-8636-61544A7B8DA1}"
+EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "MeetpointPrinterSetup", "MeetpointPrinterSetup\MeetpointPrinterSetup.wixproj", "{F91B89E0-E1F9-44FF-856F-AAD66716B3D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{51F9C554-6452-467D-8636-61544A7B8DA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{51F9C554-6452-467D-8636-61544A7B8DA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51F9C554-6452-467D-8636-61544A7B8DA1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{51F9C554-6452-467D-8636-61544A7B8DA1}.Debug|x86.Build.0 = Debug|Any CPU
 		{51F9C554-6452-467D-8636-61544A7B8DA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51F9C554-6452-467D-8636-61544A7B8DA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51F9C554-6452-467D-8636-61544A7B8DA1}.Release|x86.ActiveCfg = Release|Any CPU
+		{51F9C554-6452-467D-8636-61544A7B8DA1}.Release|x86.Build.0 = Release|Any CPU
+		{F91B89E0-E1F9-44FF-856F-AAD66716B3D9}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{F91B89E0-E1F9-44FF-856F-AAD66716B3D9}.Debug|x86.ActiveCfg = Debug|x86
+		{F91B89E0-E1F9-44FF-856F-AAD66716B3D9}.Debug|x86.Build.0 = Debug|x86
+		{F91B89E0-E1F9-44FF-856F-AAD66716B3D9}.Release|Any CPU.ActiveCfg = Release|x86
+		{F91B89E0-E1F9-44FF-856F-AAD66716B3D9}.Release|x86.ActiveCfg = Release|x86
+		{F91B89E0-E1F9-44FF-856F-AAD66716B3D9}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

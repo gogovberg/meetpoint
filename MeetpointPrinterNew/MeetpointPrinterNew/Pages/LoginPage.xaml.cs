@@ -79,9 +79,9 @@ namespace MeetpointPrinterNew.Pages
         private void LoginControl_LoginSuccessful(object sender, string token)
         {
             EventPage objEvent= new EventPage(this.tbUsername.Text.Trim(), token);
-
             objEvent.Show();
             this.Close();
+          
 
         }
     }

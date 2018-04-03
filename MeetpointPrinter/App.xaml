@@ -41,15 +41,10 @@
                                         </Label>
                                         <Button x:Name="btnLogout"  VerticalAlignment="Center"  Content="Logout" Grid.Column="1" Margin="10"  Background="#00000000" BorderBrush="White" Foreground="White" Click="btnLogout_Click"></Button>
                                     </Grid>
-                                   
-
-
                                 </Grid>
                             </Border>
                             <!-- Body -->
                             <ContentPresenter Grid.Row="1"/>
-
-                       
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -86,7 +81,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-
+        
   
     </Application.Resources>
 </Application>

@@ -19,14 +19,21 @@ namespace MeetpointPrinter
         private LoginPage _objLogin;
         public string CurrentPage { set; get; }
         public string CurrentUser { set; get; }
-
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
+
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to logout?", "Logout", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    _objLogin = new LoginPage();
+                    _objLogin.Show();
+                    _objLogin.Activate();
+                    CloseAllWindows();
+                    break;
+            }
           
-           _objLogin = new LoginPage();
-           _objLogin.Show();
-           _objLogin.Activate();
-            CloseAllWindows();
 
         }
         private void CloseAllWindows()
