@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MeetpointPrinterNew.CustomControls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="600">
+             Height="150" Width="250">
     <Grid>
         <Border Style="{StaticResource EventBorderStyle}" Background="White" CornerRadius="8">
             <Grid>
@@ -18,23 +18,23 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image x:Name="imgEventLogo" Grid.Column="0" Grid.Row="0" Margin="10" Source="/Images/calendar.png"></Image>
-                <TextBlock x:Name="tblEventName" Grid.Column="1" Grid.Row="0" Margin="10" VerticalAlignment="Center" Foreground="#FF2489FF"  FontSize="30" Text="Event name Lorem ipsum"></TextBlock>
+                <Image x:Name="imgEventLogo" Grid.Column="0" Grid.Row="0" Margin="5" Stretch="Fill" ></Image>
+                <TextBlock x:Name="tblEventName" Grid.Column="1" Grid.Row="0" Margin="5" VerticalAlignment="Center" Foreground="#FF2489FF"  FontSize="15" ></TextBlock>
                 <Grid Grid.Column="1" Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock x:Name="tblEventDate"  Grid.Row="0" Margin="10,5"   FontSize="20"  VerticalAlignment="Bottom"  Text="23. 3. - 25. 2. 2018" ></TextBlock>
-                    <TextBlock x:Name="tblEventCrate" Grid.Row="1" Margin="10,5"  FontSize="20"  VerticalAlignment="Top"  Text="Gospodarsko razstavišče, Ljubljana" ></TextBlock>
+                    <TextBlock x:Name="tblEventDate"  Grid.Row="0" Margin="5,2.5"   FontSize="10"  VerticalAlignment="Bottom"  ></TextBlock>
+                    <TextBlock x:Name="tblEventLocation" Grid.Row="1" Margin="5,2.5"  FontSize="10"  VerticalAlignment="Top"  ></TextBlock>
                 </Grid>
                 <Grid Grid.Column="1" Grid.Row="2">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock x:Name="tblCreated"  Grid.Row="0" Margin="10,5"  FontSize="20"  VerticalAlignment="Bottom"  Text="CREATED ON" Foreground="#FF8A8A8A" ></TextBlock>
-                    <TextBlock x:Name="tblCreatedDate" Grid.Row="1" Margin="10,5" FontSize="20"  VerticalAlignment="Top"  Text="21. 3. 2018" Foreground="#FF8A8A8A" ></TextBlock>
+                    <TextBlock x:Name="tblCreatedLabel"  Grid.Row="0" Margin="5,2.5"  FontSize="10"  VerticalAlignment="Bottom"  Foreground="#FF8A8A8A" ></TextBlock>
+                    <TextBlock x:Name="tblCreatedDate" Grid.Row="1" Margin="5,2.5" FontSize="10"  VerticalAlignment="Top"   Foreground="#FF8A8A8A" ></TextBlock>
                 </Grid>
             </Grid>
         </Border>

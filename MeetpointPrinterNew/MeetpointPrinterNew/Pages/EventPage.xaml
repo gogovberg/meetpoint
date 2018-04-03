@@ -23,8 +23,13 @@
                 <TextBlock  Grid.Column="1" FontSize="20" VerticalAlignment="Center" Margin="10" Text="Welcome Bostjan, please select the event you want to print labels for." ></TextBlock>
             </Grid>
         </Border>
-        <WrapPanel Grid.Row="1" Margin="30">
-            <customcontrols:EventControl/>
-        </WrapPanel>
+
+        <ItemsControl x:Name="icEventItems" Grid.Row="1" Margin="30" ItemsSource="{Binding EventItems}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
     </Grid>
 </Window>

@@ -24,5 +24,36 @@ namespace MeetpointPrinterNew.CustomControls
         {
             InitializeComponent();
         }
+        public ImageSource EventLogoSource
+        {
+            get { return imgEventLogo.Source; }
+            set { imgEventLogo.Source = value; }
+        }
+        public string EventName
+        {
+            get { return tblEventName.Text; }
+            set { tblEventName.Text = value; }
+        }
+        public string EventDate
+        {
+            get { return tblEventDate.Text; }
+            set { tblEventDate.Text = value; }
+        }
+        public string EventLocation
+        {
+            get { return tblEventLocation.Text; }
+            set { tblEventLocation.Text = value; }
+        }
+        public string EventCreatedLabel
+        {
+            get { return tblCreatedLabel.Text; }
+            set { tblCreatedLabel.Text = value; }
+        }
+        public string EventCreatedDate
+        {
+            get { return tblCreatedDate.Text; }
+            set { tblCreatedDate.Text = value; }
+        }
+
     }
 }
