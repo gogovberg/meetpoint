@@ -54,7 +54,7 @@
         <GroupBox Grid.Row="0"  Header="General"  Grid.Column="1" Foreground="#FF2190EE" x:Name="SettingsGroup" Margin="10">
             <WrapPanel  Margin="10">
                 <Label Margin="10" Content="Choose your users" Width="171.3375"></Label>
-                <xctk:CheckComboBox Name="cbUsers" Margin="10" Width="171.3375"/>
+                
                 <Label Margin="10"  x:Name="lblAvailablePrinters" Content="Avaiable printers" Width="171.3375" />
                 <ComboBox  Margin="10"  x:Name="ddAvailablePrinters" Width="171.3375" />
             </WrapPanel>
