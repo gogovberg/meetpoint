@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              Height="150" Width="300">
     <Grid>
-        <Border Style="{StaticResource EventBorderStyle}" Background="White" CornerRadius="8">
+        <Border MouseUp="EventBorder_MouseUp" MouseDown="EventBorder_MouseDown"   Style="{StaticResource EventBorderStyle}" Background="White" CornerRadius="8">
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="1" Direction="315" />
             </Border.Effect>
@@ -41,5 +41,6 @@
                 </Grid>
             </Grid>
         </Border>
+
     </Grid>
 </UserControl>

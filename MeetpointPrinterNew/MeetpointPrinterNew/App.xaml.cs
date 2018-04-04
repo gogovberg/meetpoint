@@ -15,7 +15,7 @@ namespace MeetpointPrinterNew
        
         public string CurrentPage { set; get; }
         public string CurrentUser { set; get; }
-
+        
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
 

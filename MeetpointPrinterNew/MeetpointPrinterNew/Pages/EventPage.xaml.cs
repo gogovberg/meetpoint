@@ -21,6 +21,9 @@ namespace MeetpointPrinterNew.Pages
     /// </summary>
     public partial class EventPage : Page
     {
+        private DateTime downTime;
+        private object downSender;
+
         public EventPage(string username, string accessToken)
         {
             InitializeComponent();
@@ -36,7 +39,10 @@ namespace MeetpointPrinterNew.Pages
             ec1.EventCreatedDate = "01.03.2018";
             ec1.EventLogoSource = imgsrc;
             ec1.EventCreatedLabel = "CREATED ON";
-
+            ec1.EventID = 1;
+            ec1.Control_Click += new EventHandler(Control_click);
+         
+         
             EventControl ec2 = new EventControl();
             ec2.EventName = "Test event 2";
             ec2.EventDate = "02.03.2018 - 03.03.2018";
@@ -44,6 +50,8 @@ namespace MeetpointPrinterNew.Pages
             ec2.EventCreatedDate = "02.03.2018";
             ec2.EventLogoSource = imgsrc;
             ec2.EventCreatedLabel = "CREATED ON";
+            ec2.EventID = 2;
+            ec2.Control_Click += new EventHandler(Control_click);
 
             EventControl ec3 = new EventControl();
             ec3.EventName = "Test event 3";
@@ -52,6 +60,8 @@ namespace MeetpointPrinterNew.Pages
             ec3.EventCreatedDate = "03.03.2018";
             ec3.EventLogoSource = imgsrc;
             ec3.EventCreatedLabel = "CREATED ON";
+            ec3.EventID = 3;
+            ec3.Control_Click += new EventHandler(Control_click);
 
             EventControl ec4 = new EventControl();
             ec4.EventName = "Test event 4";
@@ -60,6 +70,8 @@ namespace MeetpointPrinterNew.Pages
             ec4.EventCreatedDate = "044.03.2018";
             ec4.EventLogoSource = imgsrc;
             ec4.EventCreatedLabel = "CREATED ON";
+            ec4.EventID = 4;
+            ec4.Control_Click += new EventHandler(Control_click);
 
             EventControl ec5 = new EventControl();
             ec5.EventName = "Test event 5";
@@ -68,15 +80,22 @@ namespace MeetpointPrinterNew.Pages
             ec5.EventCreatedDate = "05.03.2018";
             ec5.EventLogoSource = imgsrc;
             ec5.EventCreatedLabel = "CREATED ON";
+            ec5.EventID = 5;
+            ec5.Control_Click += new EventHandler(Control_click);
 
             icEventItems.Items.Add(ec1);
             icEventItems.Items.Add(ec2);
             icEventItems.Items.Add(ec3);
             icEventItems.Items.Add(ec4);
             icEventItems.Items.Add(ec5);
-
-
-
         }
+
+        protected void Control_click(object sender, EventArgs e)
+        {
+            var b = 9;
+        }
+
+       
+      
     }
 }
