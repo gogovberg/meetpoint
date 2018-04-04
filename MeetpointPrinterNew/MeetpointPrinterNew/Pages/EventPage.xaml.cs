@@ -11,6 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace MeetpointPrinterNew.Pages
@@ -18,7 +19,7 @@ namespace MeetpointPrinterNew.Pages
     /// <summary>
     /// Interaction logic for EventPage.xaml
     /// </summary>
-    public partial class EventPage : Window
+    public partial class EventPage : Page
     {
         public EventPage(string username, string accessToken)
         {

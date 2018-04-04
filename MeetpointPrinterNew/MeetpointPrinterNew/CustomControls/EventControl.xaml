@@ -5,9 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MeetpointPrinterNew.CustomControls"
              mc:Ignorable="d" 
-             Height="150" Width="250">
+             Height="150" Width="300">
     <Grid>
         <Border Style="{StaticResource EventBorderStyle}" Background="White" CornerRadius="8">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="1" Direction="315" />
+            </Border.Effect>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"></ColumnDefinition>

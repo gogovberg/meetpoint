@@ -11,6 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace MeetpointPrinterNew.Pages
@@ -18,7 +19,7 @@ namespace MeetpointPrinterNew.Pages
     /// <summary>
     /// Interaction logic for LoginPage.xaml
     /// </summary>
-    public partial class LoginPage : Window
+    public partial class LoginPage : Page
     {
         public LoginPage()
         {
@@ -78,10 +79,8 @@ namespace MeetpointPrinterNew.Pages
 
         private void LoginControl_LoginSuccessful(object sender, string token)
         {
-            EventPage objEvent= new EventPage(this.tbUsername.Text.Trim(), token);
-            objEvent.Show();
-            this.Close();
-          
+
+            Application.Current.MainWindow.Content = new EventPage(this.tbUsername.Text.Trim(), token);
 
         }
     }
