@@ -111,8 +111,9 @@
                             </Grid>
                             <Grid Grid.Row="1">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="10*"/>
+                                    <RowDefinition Height="20*"/>
                                     <RowDefinition Height="110*"/>
+                                    <RowDefinition Height="20*"/>
                                 </Grid.RowDefinitions>
                                 <Border Grid.Row="0" Background="White" >
                                     <Grid>
@@ -121,17 +122,29 @@
                                             <RowDefinition></RowDefinition>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                                            <ColumnDefinition Width="15*"></ColumnDefinition>
                                             <ColumnDefinition Width="90*"></ColumnDefinition>
-                                            <ColumnDefinition Width="60*"></ColumnDefinition>
+                                            <ColumnDefinition Width="15*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
 
-                                        <Image Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="40,10,10,10" Source="/Images/calendar.png"></Image>
-                                        
-
+                                        <Image x:Name="imgEventLogo" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="40,20,0,0" Source="/Images/calendar.png" Stretch="Uniform" StretchDirection="Both"></Image>
+                                        <Label x:Name="lblEventName" Grid.Row="0" Grid.Column="1"  VerticalAlignment="Bottom"  HorizontalAlignment="Left" Content="Event name Lorem ispum"  Foreground="#FF2489FF"  FontSize="15" ></Label>
+                                        <Label x:Name="lblEventDateLocation" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Gospodarsko rastavišče, Ljubljana"  FontSize="10" Foreground="#FF8A8A8A" ></Label>
+                                       
                                     </Grid>
                                 </Border>
                                 <ContentPresenter Grid.Row="1"  />
+                                <Grid Grid.Row="2"  HorizontalAlignment="Right">
+                                    <WrapPanel Margin="30">
+                                        <Button x:Name="btnCancel" Content="CANCEL" Margin="10"  HorizontalAlignment="Right" VerticalAlignment="Center"  Foreground="White"  BorderBrush="{x:Null}"  Background="#FFD3D4D6"  ></Button>
+                                        <Button x:Name="btnNext"  Content="NEXT"   Margin="10"  HorizontalAlignment="Right" VerticalAlignment="Center" Background="#FF50A2FF" BorderBrush="{x:Null}" Foreground="White" >
+                                             <Button.BitmapEffect>
+                                                <DropShadowBitmapEffect ShadowDepth="1" Direction="315" />
+                                            </Button.BitmapEffect>
+                                        </Button>
+                                    </WrapPanel>
+                                   
+                                </Grid>
                             </Grid>
                             <!-- Body -->
 
@@ -155,6 +168,28 @@
                     <Setter Property="BorderBrush" Value="#FF1FE6A5" />
                 </Trigger>
             </Style.Triggers>
+        </Style>
+        
+        <Style x:Key="ChecBoxPrinterStyle" TargetType="{x:Type CheckBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#FF8A8A8A" CornerRadius="8" Margin="0" BorderThickness="2">
+                            <StackPanel Orientation="Horizontal">
+                                <Image x:Name="imageCheckBox" Source="/Images/printer.png" Width="30" Height="30" Margin="10" />
+                                <ContentPresenter VerticalAlignment="Center" Margin="10"  />
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Margin" Value="10"/>
         </Style>
         
         

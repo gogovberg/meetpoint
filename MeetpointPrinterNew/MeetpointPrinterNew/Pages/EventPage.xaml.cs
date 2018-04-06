@@ -92,7 +92,7 @@ namespace MeetpointPrinterNew.Pages
 
         protected void Control_click(object sender, EventArgs e)
         {
-            var b = 9;
+            Application.Current.MainWindow.Content = new SettingsPage();
         }
 
        

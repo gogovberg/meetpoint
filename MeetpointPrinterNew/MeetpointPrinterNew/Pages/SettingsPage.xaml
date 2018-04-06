@@ -1,4 +1,4 @@
-﻿<Page x:Class="MeetpointPrinterNew.Pages.PrintSettingsPage"
+﻿<Page x:Class="MeetpointPrinterNew.Pages.SettingsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,8 +7,37 @@
       mc:Ignorable="d" 
       d:DesignHeight="900" d:DesignWidth="1200"  Style="{StaticResource HeaderFooterSettingsPageStyle}"
       Title="PrintSettingsPage">
-
     <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30*" ></ColumnDefinition>
+                <ColumnDefinition Width="60*" ></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+           
+            <Grid Grid.Column="0" >
+                
+            </Grid>
+            <Border Margin="40,20,40,40" Grid.Column="1"  Background="White" >
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="1" Direction="315" />
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*"></RowDefinition>
+                        <RowDefinition Height="70*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Margin="40,0,0,0" x:Name="lblPrintingDevice" Content="SELECT PRINTING DEVICE" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                    <ItemsControl x:Name="icPrinterItems" Grid.Row="1" Margin="30" ItemsSource="{Binding PrinterItems}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                    
+                </Grid>
+            </Border>
         
+        </Grid>
     </Grid>
 </Page>
