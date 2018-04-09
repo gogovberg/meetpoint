@@ -22,8 +22,8 @@ namespace MeetpointPrinter.Pages
     /// </summary>
     public partial class SettingsPage : Window
     {
-        private DateTime downTime;
-        private object downSender;
+            private DateTime downTime;
+            private object downSender;
         private string _accessToken;
         private string _printTemplate;
         private List<Border> _borderList;
