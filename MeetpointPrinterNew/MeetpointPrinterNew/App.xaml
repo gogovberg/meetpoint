@@ -133,11 +133,25 @@
                                        
                                     </Grid>
                                 </Border>
-                                <ContentPresenter Grid.Row="1"  />
+                                <Grid Grid.Row="1" x:Name="gdrContent">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30*"></ColumnDefinition>
+                                        <ColumnDefinition Width="60*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Margin="40,20,40,40" Grid.Column="1"  Background="White" >
+                                        <Border.Effect>
+                                            <DropShadowEffect ShadowDepth="1" Direction="315" />
+                                        </Border.Effect>
+                                        <ContentPresenter Grid.Column="1"  />
+                                    </Border>
+                                </Grid>
+                         
+                                
                                 <Grid Grid.Row="2"  HorizontalAlignment="Right">
                                     <WrapPanel Margin="30">
-                                        <Button x:Name="btnCancel" Content="CANCEL" Margin="10"  HorizontalAlignment="Right" VerticalAlignment="Center"  Foreground="White"  BorderBrush="{x:Null}"  Background="#FFD3D4D6"  ></Button>
-                                        <Button x:Name="btnNext"  Content="NEXT"   Margin="10"  HorizontalAlignment="Right" VerticalAlignment="Center" Background="#FF50A2FF" BorderBrush="{x:Null}" Foreground="White" >
+                                        <Button x:Name="btnCancel" Content="CANCEL" Margin="10"  HorizontalAlignment="Right" VerticalAlignment="Center"  Foreground="White"  BorderBrush="{x:Null}"  Background="#FFD3D4D6" Click="btnCancel_Click"  ></Button>
+                                        <Button x:Name="btnNext"  Content="NEXT"   Margin="10"  HorizontalAlignment="Right" VerticalAlignment="Center" Background="#FF50A2FF" BorderBrush="{x:Null}" Foreground="White" Click="btnNext_Click" >
                                              <Button.BitmapEffect>
                                                 <DropShadowBitmapEffect ShadowDepth="1" Direction="315" />
                                             </Button.BitmapEffect>

@@ -132,7 +132,6 @@ namespace MeetpointPrinterNew
 
                     up = (UserSettings)mySerializer.Deserialize(myFileStream);
                 }
-
             }
             catch
             {
@@ -206,15 +205,18 @@ namespace MeetpointPrinterNew
 
     public class UserSettings
     {
+        public string AuthToken { set; get; }
         public string Username { set; get; }
         public string PrintTemplate { set; get; }
         public int TemplateHeight { set; get; }
         public int TemplateWidth { set; get; }
         public string PrintDevice { set; get; }
         public List<User> PrintUsers { set; get; }
+        public int EventId { set; get; }
+        public string EventName { set; get; }
+
 
     }
-
 
 
 

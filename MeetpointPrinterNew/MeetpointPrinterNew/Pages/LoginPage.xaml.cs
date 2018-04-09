@@ -79,7 +79,10 @@ namespace MeetpointPrinterNew.Pages
 
         private void LoginControl_LoginSuccessful(object sender, string token)
         {
-
+            UserSettings us = new UserSettings();
+            us.Username = this.tbUsername.Text.Trim();
+            us.AuthToken = token;
+            (Application.Current as App).ApplicationSettings = us;
             Application.Current.MainWindow.Content = new EventPage(this.tbUsername.Text.Trim(), token);
 
         }

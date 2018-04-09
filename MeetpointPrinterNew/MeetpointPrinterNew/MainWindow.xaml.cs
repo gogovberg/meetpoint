@@ -24,6 +24,9 @@ namespace MeetpointPrinterNew
         {
             InitializeComponent();
             this.Content = new LoginPage();
+         
+
+
         }
     }
 }
