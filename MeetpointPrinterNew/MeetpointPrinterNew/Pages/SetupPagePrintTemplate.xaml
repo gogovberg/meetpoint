@@ -19,10 +19,54 @@
                 <RowDefinition Height="50*"></RowDefinition>
                 <RowDefinition Height="50*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Margin="40,0,0,0" x:Name="lblPrintingDevice"  VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-        </Grid>
-        <Grid x:Name="gdrPreview" Grid.Column="1" Background="#E5E5E5">
+            <Label Grid.Row="0" Margin="40,0,0,0" x:Name="lblPrintingDevice" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+            <StackPanel Grid.Row="1" Orientation="Vertical">
+                <Label Margin="40,0,0,0" FontSize="16" Content="Label size" ></Label>
+                <Label Margin="40,0,0,0" FontSize="12" Foreground="#FF8A8A8A" Content="Size in nm." ></Label>
+                <WrapPanel Margin="30,0,0,0" >
+                    <CheckBox Margin="10" Content="500 x 100" Style="{StaticResource CheckBoxTemplateSizeStyle}"></CheckBox>
+                    <CheckBox Margin="10" Content="500 x 200" Style="{StaticResource CheckBoxTemplateSizeStyle}"></CheckBox>
+                    <CheckBox Margin="10" Content="500 x 300" Style="{StaticResource CheckBoxTemplateSizeStyle}"></CheckBox>
+                </WrapPanel>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Orientation="Vertical">
+                <Label Margin="40,0,0,0" FontSize="16" Content="Data" ></Label>
+                <Label Margin="40,0,0,0" FontSize="12" Foreground="#FF8A8A8A" Content="You can select 3 options." ></Label>
+                <Grid  Margin="40,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <CheckBox Content="Ime" FontSize="14"></CheckBox>
+                        <CheckBox Content="Priimek" FontSize="14"></CheckBox>
+                        <CheckBox Content="Podjetje" FontSize="14"></CheckBox>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <CheckBox Content="Funkcija" FontSize="14"></CheckBox>
+                        <CheckBox Content="Drzava"  FontSize="14"></CheckBox>
+                        <CheckBox Content="Skupina" FontSize="14"></CheckBox>
+                    </StackPanel>
+                </Grid>
+             </StackPanel>
            
+        </Grid>
+        <Grid x:Name="gdrPreview" Grid.Column="1" Background="#E5E5E5" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"></RowDefinition>
+                <RowDefinition Height="130*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Margin="40,0,0,0" Content="PRIVEW" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+            <Border Grid.Row="1" Margin="40,0,40,400" Background="#28434752">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0"></Image>
+                    <TextBlock Grid.Column="1" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Please select some options on the left for preview to start forming."></TextBlock>
+                </Grid>
+            </Border>
         </Grid>
         
     </Grid>
