@@ -205,8 +205,29 @@
             <Setter Property="FontSize" Value="15" />
             <Setter Property="Margin" Value="10"/>
         </Style>
-        
-        
+
+        <Style x:Key="ChecBoxAccountStyle" TargetType="{x:Type CheckBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#FF8A8A8A" CornerRadius="8" Margin="0" BorderThickness="2">
+                            <StackPanel Orientation="Horizontal">
+                                <Image x:Name="imageCheckBox" Source="/Images/printer.png" Width="30" Height="30" Margin="10" />
+                                <ContentPresenter VerticalAlignment="Center" Margin="10"  />
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+
     </Application.Resources>
 </Application>
 

@@ -28,15 +28,25 @@ namespace MeetpointPrinterNew
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-            PrintSetupPage sp = (PrintSetupPage)Application.Current.MainWindow.Content;
+            int SetupPageType = -1;
+            if (Application.Current.MainWindow.Content.GetType().Name.Equals("SetupPage"))
+            {
+                SetupPage sp = (SetupPage)Application.Current.MainWindow.Content;
+                SetupPageType = sp.SetupPageType;
+            }
+            else if(Application.Current.MainWindow.Content.GetType().Name.Equals("SetupPagePrintTemplate"))
+            {
+                SetupPagePrintTemplate sp = (SetupPagePrintTemplate)Application.Current.MainWindow.Content;
+                SetupPageType = sp.SetupPageType;
+            }
             
-            switch(sp.SetupPageType)
+            switch (SetupPageType)
             {
                 case 0:
-                    Application.Current.MainWindow.Content = new PrintSetupPage(1);
+                    Application.Current.MainWindow.Content = new SetupPage(1);
                     break;
                 case 1:
-                    Application.Current.MainWindow.Content = new PrintSetupPage(2);
+                    Application.Current.MainWindow.Content = new SetupPagePrintTemplate();
                     break;
                 case 2:
                     Application.Current.MainWindow.Content = new SettingsPage();
@@ -46,20 +56,31 @@ namespace MeetpointPrinterNew
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            PrintSetupPage sp = (PrintSetupPage)Application.Current.MainWindow.Content;
-
-            switch (sp.SetupPageType)
+            int SetupPageType = -1;
+            if (Application.Current.MainWindow.Content.GetType().Name.Equals("SetupPage"))
+            {
+                SetupPage sp = (SetupPage)Application.Current.MainWindow.Content;
+                SetupPageType = sp.SetupPageType;
+            }
+            else if (Application.Current.MainWindow.Content.GetType().Name.Equals("SetupPagePrintTemplate"))
+            {
+                SetupPagePrintTemplate sp = (SetupPagePrintTemplate)Application.Current.MainWindow.Content;
+                SetupPageType = sp.SetupPageType;
+            }
+           
+            switch (SetupPageType)
             {
                 case 0:
                     Application.Current.MainWindow.Content = new EventPage(this.ApplicationSettings.Username, this.ApplicationSettings.AuthToken);
                     break;
                 case 1:
-                    Application.Current.MainWindow.Content = new PrintSetupPage(0);
+                    Application.Current.MainWindow.Content = new SetupPage(0);
                     break;
                 case 2:
-                    Application.Current.MainWindow.Content = new PrintSetupPage(1);
+                    Application.Current.MainWindow.Content = new SetupPage(1);
                     break;
-            }
+               
+                }
         }
     }
 }
