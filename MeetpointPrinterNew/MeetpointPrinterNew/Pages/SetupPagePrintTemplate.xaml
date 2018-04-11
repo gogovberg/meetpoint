@@ -29,6 +29,17 @@
                     <CheckBox Margin="10" Content="500 x 300" Style="{StaticResource CheckBoxTemplateSizeStyle}"></CheckBox>
                 </WrapPanel>
             </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Vertical">
+                <Label Margin="40,0,0,0" FontSize="16" Content="Layout" ></Label>
+                <WrapPanel Margin="30,0,0,0" >
+                    <CheckBox Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleHL}"></CheckBox>
+                    <CheckBox Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleHL}"></CheckBox>
+                    <CheckBox Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleHL}"></CheckBox>
+                    <CheckBox Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleHR}"></CheckBox>
+                    <CheckBox Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleHL}"></CheckBox>
+                    <CheckBox Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleHL}"></CheckBox>
+                </WrapPanel>
+            </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Vertical">
                 <Label Margin="40,0,0,0" FontSize="16" Content="Data" ></Label>
                 <Label Margin="40,0,0,0" FontSize="12" Foreground="#FF8A8A8A" Content="You can select 3 options." ></Label>
