@@ -5,10 +5,27 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MeetpointPrinterNew.Pages"
       mc:Ignorable="d" 
-       d:DesignHeight="900" d:DesignWidth="1200"  Style="{StaticResource HeaderFooterSettingsPageStyle}"
+       d:DesignHeight="900" d:DesignWidth="1200"  Style="{StaticResource HeaderFooterPageStyle}"
       Title="LogPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="6*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Margin="40,0,0,0" Content="PRINT LOG"  VerticalAlignment="Center" FontSize="16" HorizontalAlignment="Left" ></Label>
+        <Button Grid.Row="0" Margin="0,0,40,0" VerticalAlignment="Center" HorizontalAlignment="Right"  Content="BACK" FontSize="16" Padding="5" Click="Button_Click" ></Button>
+        <Border Grid.Row="1"  Margin="40" Background="#FFFFFFFF" >
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="1" Direction="315" />
+            </Border.Effect>
+            <ItemsControl x:Name="icEventItems" Grid.Row="1" Margin="30">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </Border>
     </Grid>
 </Page>

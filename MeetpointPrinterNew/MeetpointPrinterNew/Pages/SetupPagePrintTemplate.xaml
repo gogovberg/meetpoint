@@ -21,23 +21,23 @@
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Margin="40,0,0,0" x:Name="lblPrintingDevice" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
             <StackPanel Grid.Row="1" Orientation="Vertical">
-                <Label Margin="40,0,0,0" FontSize="16" Content="Label size" ></Label>
-                <Label Margin="40,0,0,0" FontSize="12" Foreground="#FF8A8A8A" Content="Size in nm." ></Label>
-                <WrapPanel Margin="30,0,0,0" >
-                    <CheckBox Margin="10" Content="500 x 100" Style="{StaticResource CheckBoxTemplateSizeStyle}"></CheckBox>
-                    <CheckBox Margin="10" Content="500 x 200" Style="{StaticResource CheckBoxTemplateSizeStyle}"></CheckBox>
-                    <CheckBox Margin="10" Content="500 x 300" Style="{StaticResource CheckBoxTemplateSizeStyle}"></CheckBox>
+                <Label Margin="40,0,40,0" FontSize="16" Content="Label size" ></Label>
+                <Label Margin="40,0,40,0" FontSize="12" Foreground="#FF8A8A8A" Content="Size in nm." ></Label>
+                <WrapPanel Margin="30,0,30,0" >
+                    <CheckBox x:Name="cbHunderd" Margin="10" Content="500 x 100" Style="{StaticResource CheckBoxTemplateSizeStyle}"></CheckBox>
+                    <CheckBox x:Name="cbOneHunderd" Margin="10" Content="500 x 200" Style="{StaticResource CheckBoxTemplateSizeStyle}"></CheckBox>
+                    <CheckBox x:Name="cbTwoHunderd" Margin="10" Content="500 x 300" Style="{StaticResource CheckBoxTemplateSizeStyle}"></CheckBox>
                 </WrapPanel>
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Vertical">
-                <Label Margin="40,0,0,0" FontSize="16" Content="Layout" ></Label>
-                <WrapPanel Margin="30,0,0,0" >
-                    <CheckBox Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleHL}"></CheckBox>
-                    <CheckBox Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleHL}"></CheckBox>
-                    <CheckBox Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleHL}"></CheckBox>
-                    <CheckBox Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleHR}"></CheckBox>
-                    <CheckBox Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleHL}"></CheckBox>
-                    <CheckBox Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleHL}"></CheckBox>
+                <Label Margin="40,0,40,0" FontSize="16" Content="Layout" ></Label>
+                <WrapPanel Margin="30,0,30,0" >
+                    <CheckBox x:Name="cbLayoutHL" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleHL}"></CheckBox>
+                    <CheckBox x:Name="cbLayoutQRT" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleQRT}"></CheckBox>
+                    <CheckBox x:Name="cbLayoutQRB" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleQRB}"></CheckBox>
+                    <CheckBox x:Name="cbLayoutHR" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleHR}"></CheckBox>
+                    <CheckBox x:Name="cbLayoutQLT" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleQLT}"></CheckBox>
+                    <CheckBox x:Name="cbLayoutQLB" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleQLB}"></CheckBox>
                 </WrapPanel>
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Vertical">
@@ -65,10 +65,11 @@
         <Grid x:Name="gdrPreview" Grid.Column="1" Background="#E5E5E5" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="20*"></RowDefinition>
-                <RowDefinition Height="130*"></RowDefinition>
+                <RowDefinition Height="30*"></RowDefinition>
+                <RowDefinition Height="100*"></RowDefinition>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Margin="40,0,0,0" Content="PRIVEW" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-            <Border Grid.Row="1" Margin="40,0,40,400" Background="#28434752">
+            <Border Grid.Row="1" Margin="40,0,40,0" Background="#28434752">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -78,6 +79,10 @@
                     <TextBlock Grid.Column="1" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Please select some options on the left for preview to start forming."></TextBlock>
                 </Grid>
             </Border>
+            <Border x:Name="bdrPrivew" Grid.Row="2" Margin="40,40,40,40" Background="#FFFFFFFF">
+                
+            </Border>
+            
         </Grid>
         
     </Grid>
