@@ -28,8 +28,6 @@ namespace MeetpointPrinterNew.Pages
         {
             InitializeComponent();
 
-            var binding = new Binding("EventItems");
-
             BitmapImage imgsrc = new BitmapImage(new Uri("/Images/calendar.png", UriKind.Relative));
 
             EventControl ec1 = new EventControl();

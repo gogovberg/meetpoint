@@ -69,6 +69,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CustomControls\LogControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -101,6 +105,9 @@
   <ItemGroup>
     <Compile Include="CustomControls\EventControl.xaml.cs">
       <DependentUpon>EventControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\LogControl.xaml.cs">
+      <DependentUpon>LogControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helper.cs" />
     <Compile Include="MainWindow.xaml.cs">

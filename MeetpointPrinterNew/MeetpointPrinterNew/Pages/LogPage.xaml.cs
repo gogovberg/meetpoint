@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MeetpointPrinterNew.CustomControls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,17 @@ namespace MeetpointPrinterNew.Pages
         public LogPage()
         {
             InitializeComponent();
+            LogControl lc1 = new LogControl();
+            LogControl lc2 = new LogControl();
+            LogControl lc3 = new LogControl();
+            LogControl lc4 = new LogControl();
+            LogControl lc5 = new LogControl();
+
+            icEventItems.Items.Add(lc1);
+            icEventItems.Items.Add(lc2);
+            icEventItems.Items.Add(lc3);
+            icEventItems.Items.Add(lc4);
+            icEventItems.Items.Add(lc5);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
