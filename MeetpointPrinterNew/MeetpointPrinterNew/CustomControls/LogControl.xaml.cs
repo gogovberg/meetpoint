@@ -20,9 +20,54 @@ namespace MeetpointPrinterNew.CustomControls
     /// </summary>
     public partial class LogControl : UserControl
     {
+        public event EventHandler Preview_Click;
+        public event EventHandler PrintAgain_Click;
+
+        public ImageSource UsernameLogoSource
+        {
+            get { return imgName.Source; }
+            set { imgName.Source = value; }
+        }
+        public ImageSource StatusLogoSource
+        {
+            get { return imgStatus.Source; }
+            set { imgStatus.Source = value; }
+        }
+        public string ButtonPrivewContent
+        {
+            get { return (string)btnPreview.Content; }
+            set { btnPreview.Content = value; }
+        }
+        public string ButtonPrintAgainContent
+        {
+            get { return (string)btnPrintAgain.Content; }
+            set { btnPrintAgain.Content = value; }
+        }
+        public string LogUsername
+        {
+            get { return tbName.Text; }
+            set { tbName.Text = value; }
+        }
+
+        public string LogStatus
+        {
+            get { return tbStatus.Text; }
+            set { tbStatus.Text = value; }
+        }
+
         public LogControl()
         {
             InitializeComponent();
+        }
+
+        private void btnPreview_Click(object sender, RoutedEventArgs e)
+        {
+            this.Preview_Click(this, e);
+        }
+
+        private void btnPrintAgain_Click(object sender, RoutedEventArgs e)
+        {
+            this.PrintAgain_Click(this, e);
         }
     }
 }

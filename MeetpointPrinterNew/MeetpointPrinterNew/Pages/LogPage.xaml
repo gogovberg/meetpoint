@@ -19,13 +19,16 @@
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="1" Direction="315" />
             </Border.Effect>
-            <ItemsControl x:Name="icEventItems" Grid.Row="1" Margin="30">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
+            <ScrollViewer  Grid.Row="1" Margin="30" VerticalScrollBarVisibility="Auto" >
+                <ItemsControl x:Name="icEventItems">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
+           
         </Border>
     </Grid>
 </Page>

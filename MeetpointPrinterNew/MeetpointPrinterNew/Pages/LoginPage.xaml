@@ -24,7 +24,7 @@
                 <DropShadowEffect ShadowDepth="1" Direction="315" />
             </Border.Effect>
             <StackPanel>
-                <Image x:Name="imgLogo" HorizontalAlignment="Left" Height="200" Margin="40,40,40,0" VerticalAlignment="Top"  Source="/Images/login-logo.png" IsEnabled="False" Stretch="Fill"/>
+                <Image x:Name="imgLogo" HorizontalAlignment="Left"  Margin="40,40,40,0" VerticalAlignment="Top"  Source="/Images/logo_mp.png"  Stretch="Fill"/>
                 <Label x:Name="lblLogin" FontSize="15" Content="LOGIN" Margin="40,20,40,0" />
                 <Label x:Name="lblLoginDesc" FontSize="10" Content="Use your MeetPoint application credentials to login." Margin="40,0" />
                 <Label x:Name="lblUsername" FontSize="12" Content="Username" Margin="40,20,40,0" />

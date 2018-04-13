@@ -23,18 +23,23 @@ namespace MeetpointPrinterNew.Pages
     {
         public LogPage()
         {
-            InitializeComponent();
-            LogControl lc1 = new LogControl();
-            LogControl lc2 = new LogControl();
-            LogControl lc3 = new LogControl();
-            LogControl lc4 = new LogControl();
-            LogControl lc5 = new LogControl();
 
-            icEventItems.Items.Add(lc1);
-            icEventItems.Items.Add(lc2);
-            icEventItems.Items.Add(lc3);
-            icEventItems.Items.Add(lc4);
-            icEventItems.Items.Add(lc5);
+            BitmapImage imgNameSrc = new BitmapImage(new Uri("/Images/icon_badge.png", UriKind.Relative));
+            BitmapImage imgStatusSrc = new BitmapImage(new Uri("/Images/icon_more.png", UriKind.Relative));
+
+            InitializeComponent();
+
+            for(int i=1; i<=10; i++)
+            {
+                LogControl lc = new LogControl();
+                lc.LogUsername = "username "+i;
+                lc.LogStatus = "status " + i;
+                lc.UsernameLogoSource = imgNameSrc;
+                lc.StatusLogoSource = imgStatusSrc;
+                lc.ButtonPrintAgainContent = "PRINT AGAIN";
+                lc.ButtonPrivewContent = "PREVIEW CONTENT";
+                icEventItems.Items.Add(lc);
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

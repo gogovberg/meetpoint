@@ -27,7 +27,7 @@
                                             <ColumnDefinition Width="90*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0">
-                                            <Image HorizontalAlignment="Left" Margin="40,10,10,10" Source="/Images/meetpoint-admin-logo.png"></Image>
+                                            <Image HorizontalAlignment="Left" Margin="40,10,10,10" Source="/Images/logo_mp_white.png"></Image>
                                             <Label x:Name="LblCurrentPage" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" Grid.Column="0" >
                                                 <Label.Content>
                                                     <Binding Path="CurrentPage" Source="{x:Static Application.Current}"/>
@@ -85,7 +85,7 @@
                                             <ColumnDefinition Width="90*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0">
-                                            <Image HorizontalAlignment="Left" Margin="40,10,10,10" Source="/Images/meetpoint-admin-logo.png"></Image>
+                                            <Image HorizontalAlignment="Left" Margin="40,10,10,10" Source="/Images/logo_mp_white.png"></Image>
                                             <Label x:Name="LblCurrentPage" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" Grid.Column="0" >
                                                 <Label.Content>
                                                     <Binding Path="CurrentPage" Source="{x:Static Application.Current}"/>
@@ -184,13 +184,26 @@
             </Style.Triggers>
         </Style>
         
+
+        <Style x:Key="LogBorderStyle" TargetType="{x:Type Border}">
+            <Setter Property="BorderThickness"  Value="2" />
+            <Setter Property="Background"  Value="Transparent" />
+            <Setter Property="CornerRadius"  Value="0" />
+            <Setter Property="Margin"  Value="10" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#FF50A2FF" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
         <Style x:Key="ChecBoxPrinterStyle" TargetType="{x:Type CheckBox}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
                         <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#FF8A8A8A" CornerRadius="8" Margin="0" BorderThickness="2">
                             <StackPanel Orientation="Horizontal">
-                                <Image x:Name="imageCheckBox" Source="/Images/printer.png" Width="30" Height="30" Margin="10" />
+                                <Image x:Name="imageCheckBox" Source="/Images/icon_printer_primary.png" Width="30" Height="30" Margin="10" />
                                 <ContentPresenter VerticalAlignment="Center" Margin="10"  />
                             </StackPanel>
                         </Border>
@@ -212,7 +225,7 @@
                     <ControlTemplate TargetType="{x:Type CheckBox}">
                         <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#FF8A8A8A" CornerRadius="8" Margin="0" BorderThickness="2">
                             <StackPanel Orientation="Horizontal">
-                                <Image x:Name="imageCheckBox" Source="/Images/printer.png" Width="30" Height="30" Margin="10" />
+                                <Image x:Name="imageCheckBox" Source="/Images/icon_printer_primary.png" Width="30" Height="30" Margin="10" />
                                 <ContentPresenter VerticalAlignment="Center" Margin="10"  />
                             </StackPanel>
                         </Border>

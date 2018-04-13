@@ -157,22 +157,32 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\calendar.png" />
+    <Resource Include="Images\cloud.png" />
     <Resource Include="Images\login-logo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\meetpoint-admin-logo.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="Images\printer.png" />
     <Resource Include="Images\qr.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\cloud.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\calendar.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\printer.png" />
+    <Resource Include="Images\icon_badge.png" />
+    <Resource Include="Images\icon_danger.png" />
+    <Resource Include="Images\icon_event_primary.png" />
+    <Resource Include="Images\icon_failed.png" />
+    <Resource Include="Images\icon_hello.png" />
+    <Resource Include="Images\icon_more.png" />
+    <Resource Include="Images\icon_pencil_white.png" />
+    <Resource Include="Images\icon_printer.png" />
+    <Resource Include="Images\icon_printer_primary.png" />
+    <Resource Include="Images\icon_qr_code.png" />
+    <Resource Include="Images\icon_qr_code_big.png" />
+    <Resource Include="Images\icon_search.png" />
+    <Resource Include="Images\icon_tick.png" />
+    <Resource Include="Images\icon_users.png" />
+    <Resource Include="Images\icon_users_primary.png" />
+    <Resource Include="Images\icon_user_primary.png" />
+    <Resource Include="Images\logo_mp.png" />
+    <Resource Include="Images\logo_mp_white.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

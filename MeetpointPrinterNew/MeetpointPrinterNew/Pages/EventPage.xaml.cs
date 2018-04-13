@@ -28,7 +28,7 @@ namespace MeetpointPrinterNew.Pages
         {
             InitializeComponent();
 
-            BitmapImage imgsrc = new BitmapImage(new Uri("/Images/calendar.png", UriKind.Relative));
+            BitmapImage imgsrc = new BitmapImage(new Uri("/Images/icon_event_primary.png", UriKind.Relative));
 
             EventControl ec1 = new EventControl();
             ec1.EventName = "Test event 1";
