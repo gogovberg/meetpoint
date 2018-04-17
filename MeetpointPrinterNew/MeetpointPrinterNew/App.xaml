@@ -46,7 +46,7 @@
                                                     <Binding Path="CurrentUser" Source="{x:Static Application.Current}"/>
                                                 </Label.Content>
                                             </Label>
-                                            <Button x:Name="btnLogout"  VerticalAlignment="Center"  Content="Logout" FontSize="20" Grid.Column="1" Margin="10,10,30,10"  Background="#FF50A2FF" BorderBrush="{x:Null}" Foreground="White" Click="btnLogout_Click"></Button>
+                                            <Button x:Name="btnLogout"  VerticalAlignment="Center"  Content="Logout"  Grid.Column="1"  Margin="10,10,30,10"  FontSize="20" Padding="15,5,15,5" Background="#FF50A2FF" BorderBrush="{x:Null}" Foreground="White" Click="btnLogout_Click"></Button>
                                         </Grid>
                                     </Grid>
                                 </Border>
@@ -104,16 +104,16 @@
                                                     <Binding Path="CurrentUser" Source="{x:Static Application.Current}"/>
                                                 </Label.Content>
                                             </Label>
-                                            <Button x:Name="btnLogout"  VerticalAlignment="Center"  Content="Logout" FontSize="20" Grid.Column="1" Margin="10,10,30,10"  Background="#FF50A2FF" BorderBrush="{x:Null}" Foreground="White" Click="btnLogout_Click"></Button>
+                                            <Button x:Name="btnLogout"  VerticalAlignment="Center"  Content="Logout" FontSize="20" Grid.Column="1" Margin="10,10,30,10" Padding="15,5,15,5" Background="#FF50A2FF" BorderBrush="{x:Null}" Foreground="White" Click="btnLogout_Click"></Button>
                                         </Grid>
                                     </Grid>
                                 </Border>
                             </Grid>
                             <Grid Grid.Row="1">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="20*"/>
+                                    <RowDefinition Height="15*"/>
                                     <RowDefinition Height="110*"/>
-                                    <RowDefinition Height="20*"/>
+                                    <RowDefinition Height="25*"/>
                                 </Grid.RowDefinitions>
                                 <Border Grid.Row="0" Background="White" >
                                     <Grid>
@@ -122,12 +122,12 @@
                                             <RowDefinition></RowDefinition>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="15*"></ColumnDefinition>
+                                            <ColumnDefinition Width="10*"></ColumnDefinition>
                                             <ColumnDefinition Width="90*"></ColumnDefinition>
-                                            <ColumnDefinition Width="15*"></ColumnDefinition>
+                                            <ColumnDefinition Width="10*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
 
-                                        <Image x:Name="imgEventLogo" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="40,20,0,0" Source="/Images/calendar.png" Stretch="Uniform" StretchDirection="Both"></Image>
+                                        <Image x:Name="imgEventLogo" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="40,20,0,0" Source="/Images/icon_event_primary.png" Stretch="Uniform" StretchDirection="Both"></Image>
                                         <Label x:Name="lblEventName" Grid.Row="0" Grid.Column="1"  VerticalAlignment="Bottom"  HorizontalAlignment="Left" Content="Event name Lorem ispum"  Foreground="#FF2489FF"  FontSize="15" ></Label>
                                         <Label x:Name="lblEventDateLocation" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Gospodarsko rastavišče, Ljubljana"  FontSize="10" Foreground="#FF8A8A8A" ></Label>
                                        
@@ -150,8 +150,8 @@
                                 
                                 <Grid Grid.Row="2"  HorizontalAlignment="Right">
                                     <WrapPanel Margin="30">
-                                        <Button x:Name="btnCancel" Content="CANCEL" Margin="10"  HorizontalAlignment="Right" VerticalAlignment="Center"  Foreground="White"  BorderBrush="{x:Null}"  Background="#FFD3D4D6" Click="btnCancel_Click"  ></Button>
-                                        <Button x:Name="btnNext"  Content="NEXT"   Margin="10"  HorizontalAlignment="Right" VerticalAlignment="Center" Background="#FF50A2FF" BorderBrush="{x:Null}" Foreground="White" Click="btnNext_Click" >
+                                        <Button x:Name="btnCancel" Content="CANCEL" FontSize="20" Padding="15,5,15,5" Margin="10,10,30,10"   HorizontalAlignment="Right" VerticalAlignment="Center"  Foreground="White"  BorderBrush="{x:Null}"  Background="#FFD3D4D6" Click="btnCancel_Click"  ></Button>
+                                        <Button x:Name="btnNext"  Content="NEXT"   FontSize="20" Padding="15,5,15,5" Margin="10,10,30,10"   HorizontalAlignment="Right" VerticalAlignment="Center" Background="#FF50A2FF" BorderBrush="{x:Null}" Foreground="White" Click="btnNext_Click" >
                                              <Button.BitmapEffect>
                                                 <DropShadowBitmapEffect ShadowDepth="1" Direction="315" />
                                             </Button.BitmapEffect>

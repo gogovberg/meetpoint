@@ -29,5 +29,82 @@ namespace MeetpointPrinterNew.Pages
 
             lblPrintingDevice.Content = "SET LABEL TEMPLATE";
         }
+
+
+
+        private void cbTwoHunderd_Checked(object sender, RoutedEventArgs e)
+        {
+            cbHunderd.IsChecked = false;
+            cbOneHunderd.IsChecked = false;
+        }
+
+        private void cbOneHunderd_Checked(object sender, RoutedEventArgs e)
+        {
+            cbHunderd.IsChecked = false;
+            cbTwoHunderd.IsChecked = false;
+        }
+
+        private void cbHunderd_Checked(object sender, RoutedEventArgs e)
+        {
+            cbOneHunderd.IsChecked = false;
+            cbTwoHunderd.IsChecked = false;
+        }
+
+        private void cbLayoutHL_Checked(object sender, RoutedEventArgs e)
+        {
+          
+            cbLayoutHR.IsChecked = false;
+            cbLayoutQLB.IsChecked = false;
+            cbLayoutQLT.IsChecked = false;
+            cbLayoutQRB.IsChecked = false;
+            cbLayoutQRT.IsChecked = false;
+           
+        }
+
+        private void cbLayoutQRT_Checked(object sender, RoutedEventArgs e)
+        {
+            cbLayoutHL.IsChecked = false;
+            cbLayoutHR.IsChecked = false;
+            cbLayoutQLB.IsChecked = false;
+            cbLayoutQLT.IsChecked = false;
+            cbLayoutQRB.IsChecked = false;
+            
+        }
+
+        private void cbLayoutQRB_Checked(object sender, RoutedEventArgs e)
+        {
+            cbLayoutHL.IsChecked = false;
+            cbLayoutHR.IsChecked = false;
+            cbLayoutQLB.IsChecked = false;
+            cbLayoutQLT.IsChecked = false;
+            cbLayoutQRT.IsChecked = false;
+        }
+
+        private void cbLayoutHR_Checked(object sender, RoutedEventArgs e)
+        {
+            cbLayoutHL.IsChecked = false;
+            cbLayoutQLB.IsChecked = false;
+            cbLayoutQLT.IsChecked = false;
+            cbLayoutQRB.IsChecked = false;
+            cbLayoutQRT.IsChecked = false;
+        }
+
+        private void cbLayoutQLT_Checked(object sender, RoutedEventArgs e)
+        {
+            cbLayoutHL.IsChecked = false;
+            cbLayoutHR.IsChecked = false;
+            cbLayoutQLB.IsChecked = false;
+            cbLayoutQRB.IsChecked = false;
+            cbLayoutQRT.IsChecked = false;
+        }
+
+        private void cbLayoutQLB_Checked(object sender, RoutedEventArgs e)
+        {
+            cbLayoutHL.IsChecked = false;
+            cbLayoutHR.IsChecked = false;
+            cbLayoutQLT.IsChecked = false;
+            cbLayoutQRB.IsChecked = false;
+            cbLayoutQRT.IsChecked = false;
+        }
     }
 }

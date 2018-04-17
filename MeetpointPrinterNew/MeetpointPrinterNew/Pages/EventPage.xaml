@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Margin="40,30,30,30" Background="#FFD3D4D6" CornerRadius="8" >
             <WrapPanel>
-                <Image  HorizontalAlignment="Left" Grid.Column="0" Margin="10" Source="/Images/cloud.png"></Image>
+                <Image  HorizontalAlignment="Left" Grid.Column="0" Margin="10" Source="/Images/icon_hello.png"></Image>
                 <TextBlock HorizontalAlignment="Left"  Grid.Column="1" VerticalAlignment="Center" Margin="10"  TextWrapping="Wrap"  FontStretch="Normal"  FontStyle="Normal" Text="Welcome Bostjan, please select the event you want to print labels for." ></TextBlock>
             </WrapPanel>
         </Border>

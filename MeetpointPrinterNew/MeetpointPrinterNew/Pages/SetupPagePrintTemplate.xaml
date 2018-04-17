@@ -24,20 +24,20 @@
                 <Label Margin="40,0,40,0" FontSize="16" Content="Label size" ></Label>
                 <Label Margin="40,0,40,0" FontSize="12" Foreground="#FF8A8A8A" Content="Size in nm." ></Label>
                 <WrapPanel Margin="30,0,30,0" >
-                    <CheckBox x:Name="cbHunderd" Margin="10" Content="500 x 100" Style="{StaticResource CheckBoxTemplateSizeStyle}"></CheckBox>
-                    <CheckBox x:Name="cbOneHunderd" Margin="10" Content="500 x 200" Style="{StaticResource CheckBoxTemplateSizeStyle}"></CheckBox>
-                    <CheckBox x:Name="cbTwoHunderd" Margin="10" Content="500 x 300" Style="{StaticResource CheckBoxTemplateSizeStyle}"></CheckBox>
+                    <CheckBox x:Name="cbHunderd"    Margin="10" Content="500 x 100" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbHunderd_Checked" ></CheckBox>
+                    <CheckBox x:Name="cbOneHunderd" Margin="10" Content="500 x 200" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbOneHunderd_Checked" ></CheckBox>
+                    <CheckBox x:Name="cbTwoHunderd" Margin="10" Content="500 x 300" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbTwoHunderd_Checked" ></CheckBox>
                 </WrapPanel>
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Vertical">
                 <Label Margin="40,0,40,0" FontSize="16" Content="Layout" ></Label>
                 <WrapPanel Margin="30,0,30,0" >
-                    <CheckBox x:Name="cbLayoutHL" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleHL}"></CheckBox>
-                    <CheckBox x:Name="cbLayoutQRT" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleQRT}"></CheckBox>
-                    <CheckBox x:Name="cbLayoutQRB" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleQRB}"></CheckBox>
-                    <CheckBox x:Name="cbLayoutHR" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleHR}"></CheckBox>
-                    <CheckBox x:Name="cbLayoutQLT" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleQLT}"></CheckBox>
-                    <CheckBox x:Name="cbLayoutQLB" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleQLB}"></CheckBox>
+                    <CheckBox x:Name="cbLayoutHL" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleHL}" Checked="cbLayoutHL_Checked"></CheckBox>
+                    <CheckBox x:Name="cbLayoutQRT" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleQRT}" Checked="cbLayoutQRT_Checked"></CheckBox>
+                    <CheckBox x:Name="cbLayoutQRB" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleQRB}" Checked="cbLayoutQRB_Checked"></CheckBox>
+                    <CheckBox x:Name="cbLayoutHR" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleHR}" Checked="cbLayoutHR_Checked"></CheckBox>
+                    <CheckBox x:Name="cbLayoutQLT" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleQLT}" Checked="cbLayoutQLT_Checked"></CheckBox>
+                    <CheckBox x:Name="cbLayoutQLB" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleQLB}" Checked="cbLayoutQLB_Checked"></CheckBox>
                 </WrapPanel>
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Vertical">
@@ -75,12 +75,36 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="4*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Image VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0"></Image>
+                    <Image VerticalAlignment="Center" Margin="10" Source="/Images/icon_search.png" HorizontalAlignment="Center" Grid.Column="0"></Image>
                     <TextBlock Grid.Column="1" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Please select some options on the left for preview to start forming."></TextBlock>
-                </Grid>
+                </Grid> 
             </Border>
-            <Border x:Name="bdrPrivew" Grid.Row="2" Margin="40,40,40,40" Background="#FFFFFFFF">
-                
+            <Border x:Name="bdrPreview" Grid.Row="2" Margin="40,40,40,40" Background="#FFFFFFFF">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid x:Name="gdrContentPreview"  Grid.Row="1" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                         
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image x:Name="imgPrvQRCode"></Image>
+                        <StackPanel>
+                            <TextBlock x:Name="tbOption1"></TextBlock>
+                            <TextBlock x:Name="tbOption2"></TextBlock>
+                            <TextBlock x:Name="tbOption3"></TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+               
             </Border>
             
         </Grid>

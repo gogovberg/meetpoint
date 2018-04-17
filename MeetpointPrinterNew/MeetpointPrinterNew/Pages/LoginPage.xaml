@@ -28,9 +28,9 @@
                 <Label x:Name="lblLogin" FontSize="15" Content="LOGIN" Margin="40,20,40,0" />
                 <Label x:Name="lblLoginDesc" FontSize="10" Content="Use your MeetPoint application credentials to login." Margin="40,0" />
                 <Label x:Name="lblUsername" FontSize="12" Content="Username" Margin="40,20,40,0" />
-                <TextBox x:Name="tbUsername" Margin="40,0" Height="30"></TextBox>
+                <TextBox x:Name="tbUsername" Margin="40,0" Height="30" VerticalContentAlignment="Center" ></TextBox>
                 <Label x:Name="lblPassword" FontSize="12" Content="Password" Margin="40,20,40,0" />
-                <PasswordBox x:Name="tbPassword" Margin="40,0" Height="30" ></PasswordBox>
+                <PasswordBox x:Name="tbPassword" Margin="40,0" Height="30" VerticalContentAlignment="Center"></PasswordBox>
                 <Button x:Name="btnLogin" Margin="40,20,40,0" Height="30" Content="LOGIN" Background="#FF50A2E1" Foreground="White" BorderBrush="{x:Null}" Click="btnLogin_Click"></Button>
             </StackPanel>
         </Border>
