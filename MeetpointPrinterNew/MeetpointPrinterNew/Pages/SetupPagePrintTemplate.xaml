@@ -15,9 +15,9 @@
         <Grid x:Name="gdrLabelTemplate" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20*"></RowDefinition>
-                <RowDefinition Height="30*"></RowDefinition>
+                <RowDefinition Height="40*"></RowDefinition>
                 <RowDefinition Height="50*"></RowDefinition>
-                <RowDefinition Height="50*"></RowDefinition>
+                <RowDefinition Height="40*"></RowDefinition>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Margin="40,0,0,0" x:Name="lblPrintingDevice" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
             <StackPanel Grid.Row="1" Orientation="Vertical">
@@ -32,12 +32,12 @@
             <StackPanel Grid.Row="2" Orientation="Vertical">
                 <Label Margin="40,0,40,0" FontSize="16" Content="Layout" ></Label>
                 <WrapPanel Margin="30,0,30,0" >
-                    <CheckBox x:Name="cbLayoutHL" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleHL}" Checked="cbLayoutHL_Checked"></CheckBox>
-                    <CheckBox x:Name="cbLayoutQRT" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleQRT}" Checked="cbLayoutQRT_Checked"></CheckBox>
-                    <CheckBox x:Name="cbLayoutQRB" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleQRB}" Checked="cbLayoutQRB_Checked"></CheckBox>
-                    <CheckBox x:Name="cbLayoutHR" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleHR}" Checked="cbLayoutHR_Checked"></CheckBox>
-                    <CheckBox x:Name="cbLayoutQLT" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleQLT}" Checked="cbLayoutQLT_Checked"></CheckBox>
-                    <CheckBox x:Name="cbLayoutQLB" Margin="10" Style="{StaticResource CheckBoxTemplateLayoutStyleQLB}" Checked="cbLayoutQLB_Checked"></CheckBox>
+                    <CheckBox x:Name="cbLayoutHL"  Margin="10"  Style="{StaticResource CheckBoxTemplateLayoutStyleHL}"   Checked="cbLayoutHL_Checked"></CheckBox>
+                    <CheckBox x:Name="cbLayoutQLT" Margin="10"  Style="{StaticResource CheckBoxTemplateLayoutStyleQLT}"  Checked="cbLayoutQLT_Checked"></CheckBox>
+                    <CheckBox x:Name="cbLayoutQLB" Margin="10"  Style="{StaticResource CheckBoxTemplateLayoutStyleQLB}"  Checked="cbLayoutQLB_Checked"></CheckBox>
+                    <CheckBox x:Name="cbLayoutHR"  Margin="10"  Style="{StaticResource CheckBoxTemplateLayoutStyleHR}"   Checked="cbLayoutHR_Checked"></CheckBox>
+                    <CheckBox x:Name="cbLayoutQRT" Margin="10"  Style="{StaticResource CheckBoxTemplateLayoutStyleQRT}"  Checked="cbLayoutQRT_Checked"></CheckBox>
+                    <CheckBox x:Name="cbLayoutQRB" Margin="10"  Style="{StaticResource CheckBoxTemplateLayoutStyleQRB}"  Checked="cbLayoutQRB_Checked"></CheckBox>
                 </WrapPanel>
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Vertical">
@@ -49,14 +49,14 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
-                        <CheckBox Content="Ime" FontSize="14"></CheckBox>
-                        <CheckBox Content="Priimek" FontSize="14"></CheckBox>
-                        <CheckBox Content="Podjetje" FontSize="14"></CheckBox>
+                        <CheckBox x:Name="cbName" Content="Ime"      FontSize="14" Checked="cbName_Checked"></CheckBox>
+                        <CheckBox x:Name="cbSurName" Content="Priimek"  FontSize="14" Checked="cbSurName_Checked"></CheckBox>
+                        <CheckBox x:Name="cbCompanyName" Content="Podjetje" FontSize="14" Checked="cbCompanyName_Checked"></CheckBox>
                     </StackPanel>
                     <StackPanel Grid.Column="1">
-                        <CheckBox Content="Funkcija" FontSize="14"></CheckBox>
-                        <CheckBox Content="Drzava"  FontSize="14"></CheckBox>
-                        <CheckBox Content="Skupina" FontSize="14"></CheckBox>
+                        <CheckBox x:Name="cbFunctionName" Content="Funkcija" FontSize="14" Checked="cbFunctionName_Checked"></CheckBox>
+                        <CheckBox x:Name="cbCountryName" Content="Drzava"   FontSize="14" Checked="cbCountryName_Checked"></CheckBox>
+                        <CheckBox x:Name="cbGroupName" Content="Skupina"  FontSize="14" Checked="cbGroupName_Checked"></CheckBox>
                     </StackPanel>
                 </Grid>
              </StackPanel>
@@ -86,23 +86,26 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Grid x:Name="gdrContentPreview"  Grid.Row="1" >
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                         
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Image x:Name="imgPrvQRCode"></Image>
-                        <StackPanel>
-                            <TextBlock x:Name="tbOption1"></TextBlock>
-                            <TextBlock x:Name="tbOption2"></TextBlock>
-                            <TextBlock x:Name="tbOption3"></TextBlock>
-                        </StackPanel>
-                    </Grid>
+                    <Border Margin="5" Grid.Row="1" BorderBrush="Black" BorderThickness="1" >
+                        <Grid x:Name="gdrContentPreview"   >
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Grid.RowSpan="2" x:Name="imgPrvQRCode" Source="/Images/icon_qr_code_big.png" Margin="10" ></Image>
+                            <StackPanel x:Name="spDataOptions" Grid.Column="1" Grid.RowSpan="2" Margin="10">
+                                <TextBlock x:Name="tbOption1" Text="option 1"></TextBlock>
+                                <TextBlock x:Name="tbOption2" Text="option 1"></TextBlock>
+                                <TextBlock x:Name="tbOption3" Text="option 1"></TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    
                 </Grid>
                
             </Border>
