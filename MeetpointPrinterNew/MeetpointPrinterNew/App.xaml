@@ -61,8 +61,6 @@
             </Setter>
         </Style>
 
-
-
         <Style x:Key="HeaderFooterSettingsPageStyle" TargetType="Page">
             <Setter Property="Template">
                 <Setter.Value>
@@ -99,7 +97,7 @@
                                                 <ColumnDefinition Width="30*"></ColumnDefinition>
                                                 <ColumnDefinition Width="90*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                            <Label x:Name="LblCurrentUser"  VerticalAlignment="Center"   Foreground="White" Grid.Column="0" >
+                                            <Label x:Name="LblCurrentUser"  VerticalAlignment="Center"  FontSize="16"  Foreground="White" Grid.Column="0" >
                                                 <Label.Content>
                                                     <Binding Path="CurrentUser" Source="{x:Static Application.Current}"/>
                                                 </Label.Content>
@@ -128,9 +126,17 @@
                                         </Grid.ColumnDefinitions>
 
                                         <Image x:Name="imgEventLogo" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="40,20,0,0" Source="/Images/icon_event_primary.png" Stretch="Uniform" StretchDirection="Both"></Image>
-                                        <Label x:Name="lblEventName" Grid.Row="0" Grid.Column="1"  VerticalAlignment="Bottom"  HorizontalAlignment="Left" Content="Event name Lorem ispum"  Foreground="#FF2489FF"  FontSize="15" ></Label>
-                                        <Label x:Name="lblEventDateLocation" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Gospodarsko rastavišče, Ljubljana"  FontSize="10" Foreground="#FF8A8A8A" ></Label>
-                                       
+                                        <Label x:Name="lblEventName" Grid.Row="0" Grid.Column="1"  VerticalAlignment="Bottom"  HorizontalAlignment="Left"   Foreground="#FF2489FF"  FontSize="15" >
+                                            <Label.Content>
+                                                <Binding Path="CurrentEvent" Source="{x:Static Application.Current}"/>
+                                            </Label.Content>
+                                        </Label>
+                                        <Label x:Name="lblEventDateLocation" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left"  FontSize="10" Foreground="#FF8A8A8A" >
+                                            <Label.Content>
+                                                <Binding Path="CurrentEventLocation" Source="{x:Static Application.Current}"/>
+                                            </Label.Content>
+                                        </Label>
+
                                     </Grid>
                                 </Border>
                                 <Grid Grid.Row="1" x:Name="gdrContent">
@@ -146,31 +152,26 @@
                                         <ContentPresenter Grid.Column="1"  />
                                     </Border>
                                 </Grid>
-                         
-                                
+
+
                                 <Grid Grid.Row="2"  HorizontalAlignment="Right">
                                     <WrapPanel Margin="30">
                                         <Button x:Name="btnCancel" Content="CANCEL" FontSize="20" Padding="15,5,15,5" Margin="10,10,30,10"   HorizontalAlignment="Right" VerticalAlignment="Center"  Foreground="White"  BorderBrush="{x:Null}"  Background="#FFD3D4D6" Click="btnCancel_Click"  ></Button>
                                         <Button x:Name="btnNext"  Content="NEXT"   FontSize="20" Padding="15,5,15,5" Margin="10,10,30,10"   HorizontalAlignment="Right" VerticalAlignment="Center" Background="#FF50A2FF" BorderBrush="{x:Null}" Foreground="White" Click="btnNext_Click" >
-                                             <Button.BitmapEffect>
+                                            <Button.BitmapEffect>
                                                 <DropShadowBitmapEffect ShadowDepth="1" Direction="315" />
                                             </Button.BitmapEffect>
                                         </Button>
                                     </WrapPanel>
-                                   
+
                                 </Grid>
                             </Grid>
                             <!-- Body -->
-
-
-
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-
-
 
         <Style x:Key="EventBorderStyle" TargetType="{x:Type Border}">
             <Setter Property="BorderThickness"  Value="2" />
@@ -184,7 +185,6 @@
             </Style.Triggers>
         </Style>
         
-
         <Style x:Key="LogBorderStyle" TargetType="{x:Type Border}">
             <Setter Property="BorderThickness"  Value="2" />
             <Setter Property="Background"  Value="Transparent" />
@@ -341,6 +341,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+     
         <Style x:Key="CheckBoxTemplateLayoutStyleQRB" TargetType="{x:Type CheckBox}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -368,6 +369,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+     
         <Style x:Key="CheckBoxTemplateLayoutStyleQLT" TargetType="{x:Type CheckBox}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -396,6 +398,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+    
         <Style x:Key="CheckBoxTemplateLayoutStyleQLB" TargetType="{x:Type CheckBox}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -423,6 +426,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+    
     </Application.Resources>
 </Application>
 

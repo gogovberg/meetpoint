@@ -24,9 +24,9 @@
                 <Label Margin="40,0,40,0" FontSize="16" Content="Label size" ></Label>
                 <Label Margin="40,0,40,0" FontSize="12" Foreground="#FF8A8A8A" Content="Size in nm." ></Label>
                 <WrapPanel Margin="30,0,30,0" >
-                    <CheckBox x:Name="cbHunderd"    Margin="10" Content="500 x 100" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbHunderd_Checked" ></CheckBox>
-                    <CheckBox x:Name="cbOneHunderd" Margin="10" Content="500 x 200" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbOneHunderd_Checked" ></CheckBox>
-                    <CheckBox x:Name="cbTwoHunderd" Margin="10" Content="500 x 300" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbTwoHunderd_Checked" ></CheckBox>
+                    <CheckBox x:Name="cbSizeOne"    Margin="10" Content="500 x 100" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeOne_Checked" ></CheckBox>
+                    <CheckBox x:Name="cbSizeTwo" Margin="10" Content="500 x 200" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeTwo_Checked" ></CheckBox>
+                    <CheckBox x:Name="cbSizeThree" Margin="10" Content="500 x 300" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeThree_Checked" ></CheckBox>
                 </WrapPanel>
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Vertical">
@@ -49,14 +49,14 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
-                        <CheckBox x:Name="cbName" Content="Ime"      FontSize="14" Checked="cbName_Checked"></CheckBox>
-                        <CheckBox x:Name="cbSurName" Content="Priimek"  FontSize="14" Checked="cbSurName_Checked"></CheckBox>
-                        <CheckBox x:Name="cbCompanyName" Content="Podjetje" FontSize="14" Checked="cbCompanyName_Checked"></CheckBox>
+                        <CheckBox x:Name="cbName" Content="Ime"      FontSize="14" Checked="cbOption_Checked" Unchecked="cbOption_Unchecked"></CheckBox>
+                        <CheckBox x:Name="cbSurName" Content="Priimek"  FontSize="14" Checked="cbOption_Checked" Unchecked="cbOption_Unchecked"></CheckBox>
+                        <CheckBox x:Name="cbCompanyName" Content="Podjetje" FontSize="14" Checked="cbOption_Checked" Unchecked="cbOption_Unchecked"></CheckBox>
                     </StackPanel>
                     <StackPanel Grid.Column="1">
-                        <CheckBox x:Name="cbFunctionName" Content="Funkcija" FontSize="14" Checked="cbFunctionName_Checked"></CheckBox>
-                        <CheckBox x:Name="cbCountryName" Content="Drzava"   FontSize="14" Checked="cbCountryName_Checked"></CheckBox>
-                        <CheckBox x:Name="cbGroupName" Content="Skupina"  FontSize="14" Checked="cbGroupName_Checked"></CheckBox>
+                        <CheckBox x:Name="cbFunctionName" Content="Funkcija" FontSize="14" Checked="cbOption_Checked" Unchecked="cbOption_Unchecked"></CheckBox>
+                        <CheckBox x:Name="cbCountryName" Content="Drzava"   FontSize="14" Checked="cbOption_Checked" Unchecked="cbOption_Unchecked"></CheckBox>
+                        <CheckBox x:Name="cbGroupName" Content="Skupina"  FontSize="14" Checked="cbOption_Checked" Unchecked="cbOption_Unchecked"></CheckBox>
                     </StackPanel>
                 </Grid>
              </StackPanel>
@@ -66,9 +66,12 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="20*"></RowDefinition>
                 <RowDefinition Height="30*"></RowDefinition>
-                <RowDefinition Height="100*"></RowDefinition>
+                <RowDefinition Height="30*"></RowDefinition>
+                <RowDefinition Height="30*"></RowDefinition>
+                <RowDefinition Height="40*"></RowDefinition>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Margin="40,0,0,0" Content="PRIVEW" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+         
             <Border Grid.Row="1" Margin="40,0,40,0" Background="#28434752">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -79,37 +82,20 @@
                     <TextBlock Grid.Column="1" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Please select some options on the left for preview to start forming."></TextBlock>
                 </Grid> 
             </Border>
-            <Border x:Name="bdrPreview" Grid.Row="2" Margin="40,40,40,40" Background="#FFFFFFFF">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Border Margin="5" Grid.Row="1" BorderBrush="Black" BorderThickness="1" >
-                        <Grid x:Name="gdrContentPreview"   >
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
 
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Grid.RowSpan="2" x:Name="imgPrvQRCode" Source="/Images/icon_qr_code_big.png" Margin="10" ></Image>
-                            <StackPanel x:Name="spDataOptions" Grid.Column="1" Grid.RowSpan="2" Margin="10">
-                                <TextBlock x:Name="tbOption1" Text="option 1"></TextBlock>
-                                <TextBlock x:Name="tbOption2" Text="option 1"></TextBlock>
-                                <TextBlock x:Name="tbOption3" Text="option 1"></TextBlock>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                    
-                </Grid>
-               
+            <Border x:Name="bdrPreview" Grid.Row="3" Margin="40,0,40,0"   Background="#FFFFFFFF">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="1" Direction="315" />
+                </Border.Effect>
+                <Canvas x:Name="cnvPrivew">
+                    <Image  x:Name="imgQrPreview" Margin="10"  ></Image>
+                    <StackPanel  x:Name="spDataOptions" Margin="10">
+                        <TextBlock  x:Name="tbOptOne" FontSize="16"  Margin="5,0,0,0"></TextBlock>
+                        <TextBlock  x:Name="tbOptTwo" FontSize="14"  Margin="5,0,0,0"></TextBlock>
+                        <TextBlock  x:Name="tbOptThree" FontSize="14"  Margin="5"></TextBlock>
+                    </StackPanel>
+                </Canvas>
             </Border>
-            
         </Grid>
         
     </Grid>

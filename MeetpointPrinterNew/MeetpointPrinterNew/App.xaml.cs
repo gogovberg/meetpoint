@@ -15,6 +15,8 @@ namespace MeetpointPrinterNew
        
         public string CurrentPage { set; get; }
         public string CurrentUser { set; get; }
+        public string CurrentEvent { set; get; }
+        public string CurrentEventLocation { set; get; }
 
         public UserSettings ApplicationSettings { set; get; }
 

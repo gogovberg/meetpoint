@@ -74,8 +74,7 @@ namespace MeetpointPrinterNew.CustomControls
         protected void EventBorder_MouseUp(object sender, MouseButtonEventArgs e)
         {
           
-            if (e.LeftButton == MouseButtonState.Released &&
-                sender == this.downSender)
+            if (e.LeftButton == MouseButtonState.Released && sender == this.downSender)
             {
                 TimeSpan timeSinceDown = DateTime.Now - this.downTime;
                 if (timeSinceDown.TotalMilliseconds < 500)

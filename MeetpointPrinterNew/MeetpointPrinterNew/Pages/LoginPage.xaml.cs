@@ -83,6 +83,7 @@ namespace MeetpointPrinterNew.Pages
             us.Username = this.tbUsername.Text.Trim();
             us.AuthToken = token;
             (Application.Current as App).ApplicationSettings = us;
+
             Application.Current.MainWindow.Content = new EventPage(this.tbUsername.Text.Trim(), token);
 
         }

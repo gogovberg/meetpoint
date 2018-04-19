@@ -13,7 +13,7 @@
             <RowDefinition Height="20*"></RowDefinition>
             <RowDefinition Height="130*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Margin="40,0,0,0" x:Name="lblPrintingDevice"  VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+        <Label Grid.Row="0" Margin="40,0,0,0" x:Name="lblPrintingDevice" FontSize="16"  VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
         
         <ItemsControl x:Name="icPrinterItems" Grid.Row="1" Margin="30"  ItemsSource="{Binding PrinterItems}">
             <ItemsControl.ItemsPanel>

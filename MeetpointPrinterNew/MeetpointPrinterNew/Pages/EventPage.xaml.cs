@@ -21,12 +21,12 @@ namespace MeetpointPrinterNew.Pages
     /// </summary>
     public partial class EventPage : Page
     {
-        private DateTime downTime;
-        private object downSender;
-
         public EventPage(string username, string accessToken)
         {
             InitializeComponent();
+
+
+            (Application.Current as App).CurrentUser = username;
 
             BitmapImage imgsrc = new BitmapImage(new Uri("/Images/icon_event_primary.png", UriKind.Relative));
 
@@ -90,7 +90,9 @@ namespace MeetpointPrinterNew.Pages
 
         protected void Control_click(object sender, EventArgs e)
         {
-            
+            EventControl ec = (EventControl)sender;
+            (Application.Current as App).CurrentEvent = ec.EventName;
+            (Application.Current as App).CurrentEventLocation = ec.EventDate +" " + ec.EventLocation;
             Application.Current.MainWindow.Content = new SetupPage(0);
            
         }

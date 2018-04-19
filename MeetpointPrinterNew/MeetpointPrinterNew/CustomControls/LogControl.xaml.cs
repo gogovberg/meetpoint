@@ -62,12 +62,20 @@ namespace MeetpointPrinterNew.CustomControls
 
         private void btnPreview_Click(object sender, RoutedEventArgs e)
         {
-            this.Preview_Click(this, e);
+            if (this.Preview_Click != null)
+            {
+                this.Preview_Click(this, e);
+            }
+           
         }
 
         private void btnPrintAgain_Click(object sender, RoutedEventArgs e)
         {
-            this.PrintAgain_Click(this, e);
+            if (this.PrintAgain_Click != null)
+            {
+                this.PrintAgain_Click(this, e);
+            }
+            
         }
     }
 }
