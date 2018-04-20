@@ -91,6 +91,17 @@ namespace MeetpointPrinterNew.Pages
         protected void Control_click(object sender, EventArgs e)
         {
             EventControl ec = (EventControl)sender;
+
+            Event eve = new Event();
+            eve.EventName = ec.EventName;
+            eve.EventID = ec.EventID;
+            eve.EventStartDate = DateTime.MinValue;
+            eve.EventEndDate = DateTime.MaxValue;
+            eve.EventCreatedOn = DateTime.Parse(ec.EventCreatedDate);
+            eve.EventLocation = ec.EventLocation;
+
+            (Application.Current as App).ApplicationSettings.EventData = eve;
+
             (Application.Current as App).CurrentEvent = ec.EventName;
             (Application.Current as App).CurrentEventLocation = ec.EventDate +" " + ec.EventLocation;
             Application.Current.MainWindow.Content = new SetupPage(0);

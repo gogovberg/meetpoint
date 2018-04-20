@@ -41,7 +41,7 @@
                                                 <ColumnDefinition Width="30*"></ColumnDefinition>
                                                 <ColumnDefinition Width="90*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                            <Label x:Name="LblCurrentUser"  VerticalAlignment="Center"   Foreground="White" Grid.Column="0" >
+                                            <Label x:Name="LblCurrentUser"  VerticalAlignment="Center"  FontSize="16"  Foreground="White" Grid.Column="0" >
                                                 <Label.Content>
                                                     <Binding Path="CurrentUser" Source="{x:Static Application.Current}"/>
                                                 </Label.Content>

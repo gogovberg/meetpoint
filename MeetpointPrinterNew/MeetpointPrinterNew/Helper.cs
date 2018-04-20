@@ -99,11 +99,11 @@ namespace MeetpointPrinterNew
                 string path = @"UserSettings/" + Username + "_settings.config";
                 UserSettings up = new UserSettings();
 
-                up.PrintDevice = PrintDevice;
-                up.TemplateHeight = TemplteHeight;
-                up.TemplateWidth = TemplateWidth;
-                up.PrintUsers = UserList;
-                up.PrintTemplate = PrintTemplate;
+                //up.PrintDevice = PrintDevice;
+                //up.TemplateHeight = TemplteHeight;
+                //up.TemplateWidth = TemplateWidth;
+                //up.PrintUsers = UserList;
+                //up.PrintTemplate = PrintTemplate;
 
 
                 XmlSerializer mySerializer = new XmlSerializer(typeof(UserSettings));
@@ -183,8 +183,6 @@ namespace MeetpointPrinterNew
         public PrintQueue data { get; set; }
     }
 
-
-
     public class User
     {
         public int key { get; set; }
@@ -202,22 +200,44 @@ namespace MeetpointPrinterNew
         public UserData data { get; set; }
     }
 
-
     public class UserSettings
     {
         public string AuthToken { set; get; }
         public string Username { set; get; }
-        public string PrintTemplate { set; get; }
-        public int TemplateHeight { set; get; }
-        public int TemplateWidth { set; get; }
-        public string PrintDevice { set; get; }
-        public List<User> PrintUsers { set; get; }
-        public int EventId { set; get; }
-        public string EventName { set; get; }
 
+        public Event EventData { set; get; }
+        public List<Acccount> Accounts { set; get; }
+        public List<Printer> Printers { set; get; }
+        public PrinterSetup PrinterSetup { set; get; }
 
     }
-
+    public class Event
+    {
+        public int EventID { set; get; }
+        public string EventName { set; get; }
+        public string EventLocation { set; get; }
+        public DateTime EventStartDate { set; get; }
+        public DateTime EventEndDate { set; get; }
+        public DateTime EventCreatedOn { set; get; }
+       
+    }
+    public class Acccount
+    {
+        public int AccountID { set; get; }
+        public string AccountName { set; get; }
+    }
+    public class Printer
+    {
+        public int PrinterID { set; get; }
+        public string PrinetrName { set; get; }
+    }
+    public class PrinterSetup
+    {
+        public double LayoutWidth { set; get; }
+        public double LayoutHeight { set; get; }
+        public string LayoutTemplate { set; get; }
+        public List<string> DataOptions { set; get; }
+    }
 
 
 }
