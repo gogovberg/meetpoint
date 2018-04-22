@@ -21,6 +21,7 @@ namespace MeetpointPrinterNew.Pages
     /// </summary>
     public partial class LoginPage : Page
     {
+        private App _currentApp = (Application.Current as App);
         public LoginPage()
         {
             InitializeComponent();
@@ -79,10 +80,27 @@ namespace MeetpointPrinterNew.Pages
 
         private void LoginControl_LoginSuccessful(object sender, string token)
         {
-            UserSettings us = new UserSettings();
+
+            UserSettings us = Helpers.ReadUserSettings(this.tbUsername.Text.Trim());
+            if (us == null)
+            {
+                us = new UserSettings();
+                us.Event = new Event();
+                us.Printers = new Printers();
+                us.Printers.Printer = new List<string>();
+                us.Accounts = new Accounts();
+                us.Accounts.Account = new List<string>();
+                us.PrinterSetup = new PrinterSetup();
+                us.PrinterSetup.DataOptions = new DataOptions();
+                us.PrinterSetup.DataOptions.DataOption = new List<string>();
+            }
             us.Username = this.tbUsername.Text.Trim();
             us.AuthToken = token;
-            (Application.Current as App).ApplicationSettings = us;
+
+            Helpers.SaveUserSettings(us);
+            _currentApp.ApplicationSettings = us;
+
+
 
             Application.Current.MainWindow.Content = new EventPage(this.tbUsername.Text.Trim(), token);
 

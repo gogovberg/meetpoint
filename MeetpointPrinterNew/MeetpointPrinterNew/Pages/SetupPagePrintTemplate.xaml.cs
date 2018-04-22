@@ -20,8 +20,10 @@ namespace MeetpointPrinterNew.Pages
     /// </summary>
     public partial class SetupPagePrintTemplate : Page
     {
+        private App _currentApp = (Application.Current as App);
+
         private int _pageType = -1;
-        private List<CheckBox> _dataOptions;
+        private List<string> _dataOptions;
 
         BitmapImage imgBigSrc = new BitmapImage(new Uri("/Images/icon_qr_code_big.png", UriKind.Relative));
         BitmapImage imgSmallSrc = new BitmapImage(new Uri("/Images/icon_qr_code.png", UriKind.Relative));
@@ -30,49 +32,127 @@ namespace MeetpointPrinterNew.Pages
         private double _borderHeight = 0;
 
         public int SetupPageType { get { return this._pageType; } }
+
+        private bool _isOnLoadChecked;
         
         public SetupPagePrintTemplate()
         {
+            _isOnLoadChecked = false;
             _pageType = 2;
             InitializeComponent();
             lblPrintingDevice.Content = "SET LABEL TEMPLATE";
 
-            _dataOptions = new List<CheckBox>();
+            _dataOptions = new List<string>();
 
             CanvasControlClearPosition(imgQrPreview);
             CanvasControlClearPosition(spDataOptions);
-
             _borderWidth = 279;
             _borderHeight = 108;
+         
+            switch(_currentApp.ApplicationSettings.PrinterSetup.LayoutSizeID)
+            {
+                case "cbSizeOne":
+                    cbSizeTwo.IsChecked = true;
+                    break;
+                case "cbSizeTwo":
+                    cbSizeTwo.IsChecked = true;
+                    break;
+                case "cbSizeThree":
+                    cbSizeThree.IsChecked = true;
+                    break;
+                default:
+                    cbSizeOne.IsChecked = false;
+                    cbSizeTwo.IsChecked = false;
+                    cbSizeThree.IsChecked = false;
+                    break;
+            }
+
+
+            switch(_currentApp.ApplicationSettings.PrinterSetup.LayoutTemplate)
+            {
+                case "cbLayoutQRT":
+                    cbLayoutQRT.IsChecked = true;
+                    break;
+                case "cbLayoutQRB":
+                    cbLayoutQRB.IsChecked = true;
+                    break;
+                case "cbLayoutHR":
+                    cbLayoutHR.IsChecked = true;
+                    break;
+                case "cbLayoutQLT":
+                    cbLayoutQLT.IsChecked = true;
+                    break;
+                case "cbLayoutQLB":
+                    cbLayoutQLB.IsChecked = true;
+                    break;
+                case "cbLayoutHL":
+                    cbLayoutHL.IsChecked = true;
+                    break;
+                default:
+                    cbLayoutQRT.IsChecked = false;
+                    cbLayoutQRB.IsChecked = false;
+                    cbLayoutHR.IsChecked = false;
+                    cbLayoutQLT.IsChecked = false;
+                    cbLayoutQLB.IsChecked = false;
+                    cbLayoutHL.IsChecked = false;
+                    break;
+            }
+            _dataOptions = _currentApp.ApplicationSettings.PrinterSetup.DataOptions.DataOption;
+            _isOnLoadChecked = true;
+            foreach (string cb in _dataOptions)
+            {
+                ((CheckBox)this.FindName(cb)).IsChecked = true;
+            }
+            SwitchDataOptions();
+            _isOnLoadChecked = false;
+
+
+
         }
 
         private void cbSizeOne_Checked(object sender, RoutedEventArgs e)
         {
+            CheckBox cb = (CheckBox)sender;
             cbSizeTwo.IsChecked = false;
             cbSizeThree.IsChecked = false;
 
             bdrPreview.Width = _borderWidth * 0.6;
             bdrPreview.Height = _borderHeight * 0.6;
+
+            _currentApp.ApplicationSettings.PrinterSetup.LayoutSizeID = cb.Name;
+            _currentApp.ApplicationSettings.PrinterSetup.LayoutWidth = bdrPreview.Width;
+            _currentApp.ApplicationSettings.PrinterSetup.LayoutHeight = bdrPreview.Height;
         }
 
         private void cbSizeTwo_Checked(object sender, RoutedEventArgs e)
         {
+            CheckBox cb = (CheckBox)sender;
             cbSizeOne.IsChecked = false;
             cbSizeThree.IsChecked = false;
             bdrPreview.Width = _borderWidth * 0.8;
             bdrPreview.Height = _borderHeight * 0.8;
+
+            _currentApp.ApplicationSettings.PrinterSetup.LayoutSizeID = cb.Name;
+            _currentApp.ApplicationSettings.PrinterSetup.LayoutWidth = bdrPreview.Width;
+            _currentApp.ApplicationSettings.PrinterSetup.LayoutHeight = bdrPreview.Height;
         }
 
         private void cbSizeThree_Checked(object sender, RoutedEventArgs e)
         {
+            CheckBox cb = (CheckBox)sender;
             cbSizeOne.IsChecked = false;
             cbSizeTwo.IsChecked = false;
             bdrPreview.Width = _borderWidth * 1.0;
             bdrPreview.Height = _borderHeight * 1.0;
+
+            _currentApp.ApplicationSettings.PrinterSetup.LayoutSizeID = cb.Name;
+            _currentApp.ApplicationSettings.PrinterSetup.LayoutWidth = bdrPreview.Width;
+            _currentApp.ApplicationSettings.PrinterSetup.LayoutHeight = bdrPreview.Height;
         }
 
         private void cbLayoutQRT_Checked(object sender, RoutedEventArgs e)
         {
+         
             cbLayoutHL.IsChecked = false;
             cbLayoutHR.IsChecked = false;
             cbLayoutQLB.IsChecked = false;
@@ -82,6 +162,8 @@ namespace MeetpointPrinterNew.Pages
             imgQrPreview.Source = imgSmallSrc;
             SetControlCanvasPosition(imgQrPreview, double.NaN, 10, 10, double.NaN);
             SetControlCanvasPosition(spDataOptions, 10, double.NaN, double.NaN, double.NaN);
+            CheckBox cb = (CheckBox)sender;
+            _currentApp.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
         }
 
         private void cbLayoutQRB_Checked(object sender, RoutedEventArgs e)
@@ -96,6 +178,9 @@ namespace MeetpointPrinterNew.Pages
             SetControlCanvasPosition(imgQrPreview, double.NaN, double.NaN, 10, 10);
             SetControlCanvasPosition(spDataOptions, 10, double.NaN, double.NaN, double.NaN);
 
+            CheckBox cb = (CheckBox)sender;
+            _currentApp.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
+
         }
 
         private void cbLayoutHR_Checked(object sender, RoutedEventArgs e)
@@ -109,6 +194,9 @@ namespace MeetpointPrinterNew.Pages
             imgQrPreview.Source = imgBigSrc;
             SetControlCanvasPosition(imgQrPreview, double.NaN, double.NaN, 10, double.NaN);
             SetControlCanvasPosition(spDataOptions, 10, double.NaN, double.NaN, double.NaN);
+
+            CheckBox cb = (CheckBox)sender;
+            _currentApp.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
         }
 
         private void cbLayoutQLT_Checked(object sender, RoutedEventArgs e)
@@ -122,6 +210,9 @@ namespace MeetpointPrinterNew.Pages
             imgQrPreview.Source = imgSmallSrc;
             SetControlCanvasPosition(imgQrPreview, 10, 10, double.NaN, double.NaN);
             SetControlCanvasPosition(spDataOptions, double.NaN, double.NaN, 10, double.NaN);
+
+            CheckBox cb = (CheckBox)sender;
+            _currentApp.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
         }
 
         private void cbLayoutQLB_Checked(object sender, RoutedEventArgs e)
@@ -135,6 +226,9 @@ namespace MeetpointPrinterNew.Pages
             imgQrPreview.Source = imgSmallSrc;
             SetControlCanvasPosition(imgQrPreview, 10, double.NaN, double.NaN, 10);
             SetControlCanvasPosition(spDataOptions, double.NaN, double.NaN, 10, double.NaN);
+
+            CheckBox cb = (CheckBox)sender;
+            _currentApp.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
 
         }
 
@@ -150,30 +244,43 @@ namespace MeetpointPrinterNew.Pages
             imgQrPreview.Source = imgBigSrc;
             SetControlCanvasPosition(imgQrPreview, 10, double.NaN, double.NaN, double.NaN);
             SetControlCanvasPosition(spDataOptions, double.NaN, double.NaN, 10, double.NaN);
+
+            CheckBox cb = (CheckBox)sender;
+            _currentApp.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
         }
 
         private void cbOption_Checked(object sender, RoutedEventArgs e)
         {
-            DataOptionsLogic(sender);
+            if(!_isOnLoadChecked)
+            {
+                DataOptionsLogic(sender);
+                _currentApp.ApplicationSettings.PrinterSetup.DataOptions.DataOption = _dataOptions;
+            }
         }
 
         private void cbOption_Unchecked(object sender, RoutedEventArgs e)
         {
-            CheckBox cb = (CheckBox)sender;
-            int removeIndex = -1;
-           
-            for(int i=0; i<_dataOptions.Count; i++)
+            if(!_isOnLoadChecked)
             {
-                if(_dataOptions[i].Name.Equals(cb.Name))
+                CheckBox cb = (CheckBox)sender;
+                int removeIndex = -1;
+
+                for (int i = 0; i < _dataOptions.Count; i++)
                 {
-                    removeIndex = i;
+                    if (_dataOptions[i].Equals(cb.Name))
+                    {
+                        removeIndex = i;
+                    }
                 }
+                if (removeIndex >= 0)
+                {
+                    _dataOptions.RemoveAt(removeIndex);
+                }
+                SwitchDataOptions();
+
+                _currentApp.ApplicationSettings.PrinterSetup.DataOptions.DataOption = _dataOptions;
             }
-            if(removeIndex>=0)
-            {
-                _dataOptions.RemoveAt(removeIndex);
-            }
-            SwitchDataOptions();
+          
         }
 
         private void DataOptionsLogic(Object sender)
@@ -183,24 +290,27 @@ namespace MeetpointPrinterNew.Pages
             {
                 if (_dataOptions.Count < 3)
                 {
-                    _dataOptions.Insert(0, cb);
+                    _dataOptions.Insert(0, cb.Name);
                     SwitchDataOptions();
                 }
                 else
                 {
-                    CheckBox tempCb = _dataOptions[2];
-                    _dataOptions.RemoveAt(2);
-                    _dataOptions.Insert(0, cb);
-                    tempCb.IsChecked = false;
+                    CheckBox tempCb = (CheckBox)this.FindName(_dataOptions[2]);
+                    if(tempCb!=null)
+                    {
+                        _dataOptions.RemoveAt(2);
+                        _dataOptions.Insert(0, cb.Name);
+                        tempCb.IsChecked = false;
+                    }
+                 
                 }
             }
         }
-
         private bool OptionExists(string cbName)
         {
-           foreach(CheckBox cb in _dataOptions)
+           foreach(string cb in _dataOptions)
             {
-                if(cb.Name.Equals(cbName))
+                if(cb.Equals(cbName))
                 {
                     return true;
                 }
@@ -214,19 +324,19 @@ namespace MeetpointPrinterNew.Pages
             switch (_dataOptions.Count)
             {
                 case 1:
-                    tbOptOne.Text = _dataOptions[0].Content.ToString();
+                    tbOptOne.Text = ((CheckBox)this.FindName(_dataOptions[0])).Content.ToString();
                     tbOptTwo.Text = "Option two";
                     tbOptThree.Text = "Option three";
                     break;
                 case 2:
-                    tbOptOne.Text = _dataOptions[1].Content.ToString();
-                    tbOptTwo.Text = _dataOptions[0].Content.ToString();
+                    tbOptOne.Text = ((CheckBox)this.FindName(_dataOptions[1])).Content.ToString();
+                    tbOptTwo.Text = ((CheckBox)this.FindName(_dataOptions[0])).Content.ToString();
                     tbOptThree.Text = "Option three";
                     break;
                 case 3:
-                    tbOptOne.Text = _dataOptions[2].Content.ToString();
-                    tbOptTwo.Text = _dataOptions[1].Content.ToString();
-                    tbOptThree.Text = _dataOptions[0].Content.ToString();
+                    tbOptOne.Text = ((CheckBox)this.FindName(_dataOptions[2])).Content.ToString();
+                    tbOptTwo.Text = ((CheckBox)this.FindName(_dataOptions[1])).Content.ToString();
+                    tbOptThree.Text = ((CheckBox)this.FindName(_dataOptions[0])).Content.ToString();
                     break;
                 default:
                     tbOptOne.Text = "Option one";
@@ -235,6 +345,7 @@ namespace MeetpointPrinterNew.Pages
                     break;
             }
         }
+
         private void CanvasControlClearPosition(UIElement control)
         {
 

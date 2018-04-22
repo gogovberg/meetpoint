@@ -1,4 +1,5 @@
 ﻿using Com.SharpZebra.Printing;
+using hgi.Environment;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml.Serialization;
 
 namespace MeetpointPrinterNew
@@ -92,28 +94,25 @@ namespace MeetpointPrinterNew
                 return null;
         }
 
-        public static void SaveUserSettings(string Username, string PrintDevice, int TemplteHeight, int TemplateWidth, List<User> UserList, string PrintTemplate)
+        public static void SaveUserSettings(UserSettings up)
         {
             try
             {
-                string path = @"UserSettings/" + Username + "_settings.config";
-                UserSettings up = new UserSettings();
+                Debug.Log("MeetpointPrinter", "Save user settings");
+                if (up != null)
+                {
+                    string path = @"UserSettings/" + up.Username + "_settings.config";
+                    XmlSerializer mySerializer = new XmlSerializer(typeof(UserSettings));
+                    StreamWriter myWriter = new StreamWriter(path);
+                    mySerializer.Serialize(myWriter, up);
+                    myWriter.Close();
 
-                //up.PrintDevice = PrintDevice;
-                //up.TemplateHeight = TemplteHeight;
-                //up.TemplateWidth = TemplateWidth;
-                //up.PrintUsers = UserList;
-                //up.PrintTemplate = PrintTemplate;
-
-
-                XmlSerializer mySerializer = new XmlSerializer(typeof(UserSettings));
-                StreamWriter myWriter = new StreamWriter(path);
-                mySerializer.Serialize(myWriter, up);
-                myWriter.Close();
+                }
+            
             }
             catch (Exception ex)
             {
-                //hgi.Environment.Debug.Log("MeetpointPrinter", ex.ToString());
+                Debug.Log("MeetpointPrinter", ex.ToString());
 
             }
 
@@ -121,9 +120,11 @@ namespace MeetpointPrinterNew
 
         public static UserSettings ReadUserSettings(string Username)
         {
-            UserSettings up = new UserSettings();
+            UserSettings up = null;
             try
             {
+                Debug.Log("MeetpointPrinter", "Read user settings");
+
                 string path = @"UserSettings/" + Username + "_settings.config";
                 if (File.Exists(path))
                 {
@@ -133,8 +134,9 @@ namespace MeetpointPrinterNew
                     up = (UserSettings)mySerializer.Deserialize(myFileStream);
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.Log("MeetpointPrinter", ex.ToString());
 
             }
 
@@ -142,6 +144,34 @@ namespace MeetpointPrinterNew
 
         }
 
+        public static void RemoveListItem(List<string> items, string cbName)
+        {
+            try
+            {
+                int removeindex = -1;
+                if (items != null && !string.IsNullOrEmpty(cbName))
+                {
+                    for (int i = 0; i < items.Count; i++)
+                    {
+                        if (items[i].Equals(cbName))
+                        {
+                            removeindex = i;
+                            break;
+                        }
+                    }
+
+                    if (removeindex > -1)
+                    {
+                        items.RemoveAt(removeindex);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Debug.Log("MeetpointPrinter", ex.ToString());
+            }
+           
+        }
     }
     public class Data
     {
@@ -200,44 +230,94 @@ namespace MeetpointPrinterNew
         public UserData data { get; set; }
     }
 
-    public class UserSettings
-    {
-        public string AuthToken { set; get; }
-        public string Username { set; get; }
 
-        public Event EventData { set; get; }
-        public List<Acccount> Accounts { set; get; }
-        public List<Printer> Printers { set; get; }
-        public PrinterSetup PrinterSetup { set; get; }
-
-    }
+    [XmlRoot(ElementName = "Event")]
     public class Event
     {
-        public int EventID { set; get; }
-        public string EventName { set; get; }
-        public string EventLocation { set; get; }
-        public DateTime EventStartDate { set; get; }
-        public DateTime EventEndDate { set; get; }
-        public DateTime EventCreatedOn { set; get; }
-       
-    }
-    public class Acccount
-    {
-        public int AccountID { set; get; }
-        public string AccountName { set; get; }
-    }
-    public class Printer
-    {
-        public int PrinterID { set; get; }
-        public string PrinetrName { set; get; }
-    }
-    public class PrinterSetup
-    {
-        public double LayoutWidth { set; get; }
-        public double LayoutHeight { set; get; }
-        public string LayoutTemplate { set; get; }
-        public List<string> DataOptions { set; get; }
+        [XmlElement(ElementName = "EventID")]
+        public int EventID { get; set; }
+        [XmlElement(ElementName = "EventName")]
+        public string EventName { get; set; }
+        [XmlElement(ElementName ="EventLocation")]
+        public string EventLocation { get; set; }
+        [XmlElement(ElementName = "EventStartDate")]
+        public DateTime EventStartDate { get; set; }
+        [XmlElement(ElementName = "EventEndDate")]
+        public DateTime EventEndDate { get; set; }
+        [XmlElement(ElementName = "EventCreatedOn")]
+        public DateTime EventCreatedOn { get; set; }
     }
 
+    [XmlRoot(ElementName = "Account")]
+    public class Account
+    {
+        [XmlElement(ElementName = "AccountID")]
+        public string AccountID { get; set; }
+        [XmlElement(ElementName = "AccountName")]
+        public string AccountName { get; set; }
+    }
+
+    [XmlRoot(ElementName = "Accounts")]
+    public class Accounts
+    {
+        [XmlElement(ElementName = "Account")]
+        public List<string> Account { get; set; }
+    }
+
+    [XmlRoot(ElementName = "Printer")]
+    public class Printer
+    { 
+        [XmlElement(ElementName = "PrinterID")]
+        public string PrinterID { get; set; }
+        [XmlElement(ElementName = "PrinetrName")]
+        public string PrinetrName { get; set; }
+    }
+
+    [XmlRoot(ElementName = "Printers")]
+    public class Printers
+    {
+        [XmlElement(ElementName = "Printer")]
+        public List<string> Printer { get; set; }
+    }
+
+    [XmlRoot(ElementName = "DataOptions")]
+    public class DataOptions
+    {
+        [XmlElement(ElementName = "DataOption")]
+        public List<string> DataOption { get; set; }
+    }
+
+    [XmlRoot(ElementName = "PrinterSetup")]
+    public class PrinterSetup
+    {
+        [XmlElement(ElementName = "LayoutSizeID")]
+        public string LayoutSizeID{ get; set; }
+        [XmlElement(ElementName = "LayoutWidth")]
+        public double LayoutWidth { get; set; }
+        [XmlElement(ElementName = "LayoutHeight")]
+        public double LayoutHeight { get; set; }
+
+        [XmlElement(ElementName = "LayoutTemplate")]
+        public string LayoutTemplate { get; set; }
+        [XmlElement(ElementName = "DataOptions")]
+        public DataOptions DataOptions { get; set; }
+    }
+
+    [XmlRoot(ElementName = "UserSettings")]
+    public class UserSettings
+    {
+        [XmlElement(ElementName = "AuthToken")]
+        public string AuthToken { get; set; }
+        [XmlElement(ElementName = "Username")]
+        public string Username { get; set; }
+        [XmlElement(ElementName = "Event")]
+        public Event Event { get; set; }
+        [XmlElement(ElementName = "Accounts")]
+        public Accounts Accounts { get; set; }
+        [XmlElement(ElementName = "Printers")]
+        public Printers Printers { get; set; }
+        [XmlElement(ElementName = "PrinterSetup")]
+        public PrinterSetup PrinterSetup { get; set; }
+    }
 
 }

@@ -20,16 +20,16 @@ namespace MeetpointPrinterNew
 
         public UserSettings ApplicationSettings { set; get; }
 
-        
+      
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
-
            Application.Current.MainWindow.Content = new LoginPage(); 
-
         }
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
+            Helpers.SaveUserSettings(ApplicationSettings);
+
             int SetupPageType = -1;
             if (Application.Current.MainWindow.Content.GetType().Name.Equals("SetupPage"))
             {

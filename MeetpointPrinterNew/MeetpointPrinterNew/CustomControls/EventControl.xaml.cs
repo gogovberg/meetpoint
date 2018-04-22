@@ -23,12 +23,7 @@ namespace MeetpointPrinterNew.CustomControls
         private DateTime downTime;
         private object downSender;
         public event EventHandler Control_Click;
-       
 
-        public EventControl()
-        {
-            InitializeComponent();
-        }
         public int EventID { set; get; }
 
         public ImageSource EventLogoSource
@@ -61,7 +56,19 @@ namespace MeetpointPrinterNew.CustomControls
             get { return tblCreatedDate.Text; }
             set { tblCreatedDate.Text = value; }
         }
+        public bool IsSelected
+        {
+            get { return (bool)this.GetValue(IsSelectedProperty); }
+            set { this.SetValue(IsSelectedProperty, value); }
+        }
+        public static readonly DependencyProperty IsSelectedProperty = DependencyProperty.RegisterAttached("IsSelected", typeof(bool), typeof(EventControl), new PropertyMetadata(false));
 
+
+        public EventControl()
+        {
+            InitializeComponent();
+        }
+      
         protected void EventBorder_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)

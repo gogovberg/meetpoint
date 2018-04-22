@@ -23,10 +23,19 @@ namespace MeetpointPrinterNew.Pages
 
         private int pageType = -1;
         public int SetupPageType { get { return this.pageType; } }
+
+        private List<string> _printers;
+        private List<string> _accounts;
+
+        private App _currentApp = (Application.Current as App);
+
         public SetupPage(int setupPageType)
         {
          
             InitializeComponent();
+
+            _printers = _currentApp.ApplicationSettings.Printers.Printer;
+            _accounts = _currentApp.ApplicationSettings.Accounts.Account;
 
             this.pageType = setupPageType;
 
@@ -36,81 +45,36 @@ namespace MeetpointPrinterNew.Pages
 
                     Style cbPrinterStyle = (Style)FindResource("ChecBoxPrinterStyle");
                     lblPrintingDevice.Content = "SELECT PRINTING DEVICE";
-                    CheckBox cbp1 = new CheckBox();
-                    cbp1.Style = cbPrinterStyle;
-                    cbp1.Content = "Printer name 1";
-                    cbp1.Checked += cbPrinter_Checked;
-                    cbp1.Unchecked += cbPrinter_Unchecked;
 
-                    CheckBox cbp2 = new CheckBox();
-                    cbp2.Style = cbPrinterStyle;
-                    cbp2.Content = "Printer name 2";
-                    cbp2.Checked += cbPrinter_Checked;
-                    cbp2.Unchecked += cbPrinter_Unchecked;
+                    for(int i=1; i<=5; i++)
+                    {
+                        CheckBox cbp = new CheckBox();
+                        cbp.Style = cbPrinterStyle;
+                        cbp.Content = "Printer name "+i;
+                        cbp.Name = "cbp" + i;
+                        cbp.IsChecked = _printers.Contains(cbp.Name);
+                        cbp.Checked += cbPrinter_Checked;
+                        cbp.Unchecked += cbPrinter_Unchecked;
+                        icPrinterItems.Items.Add(cbp);
+                    }
 
-                    CheckBox cbp3 = new CheckBox();
-                    cbp3.Style = cbPrinterStyle;
-                    cbp3.Content = "Printer name 3";
-                    cbp3.Checked += cbPrinter_Checked;
-                    cbp3.Unchecked += cbPrinter_Unchecked;
-
-                    CheckBox cbp4 = new CheckBox();
-                    cbp4.Style = cbPrinterStyle;
-                    cbp4.Content = "Printer name 4";
-                    cbp4.Checked += cbPrinter_Checked;
-                    cbp4.Unchecked += cbPrinter_Unchecked;
-
-                    CheckBox cbp5 = new CheckBox();
-                    cbp5.Style = cbPrinterStyle;
-                    cbp5.Content = "Printer name 5";
-                    cbp5.Checked += cbPrinter_Checked;
-                    cbp5.Unchecked += cbPrinter_Unchecked;
-
-                    icPrinterItems.Items.Add(cbp1);
-                    icPrinterItems.Items.Add(cbp2);
-                    icPrinterItems.Items.Add(cbp3);
-                    icPrinterItems.Items.Add(cbp4);
-                    icPrinterItems.Items.Add(cbp5);
                     break;
                 case 1:
+
                     Style cbAccountStyle = (Style)FindResource("ChecBoxAccountStyle");
                     lblPrintingDevice.Content = "SELECT ACCOUNTS";
 
-                    CheckBox cba1 = new CheckBox();
-                    cba1.Style = cbAccountStyle;
-                    cba1.Content = "Account name 1";
-                    cba1.Checked += cbAccount_Checked;
-                    cba1.Unchecked += cbAccount_Unchecked;
-
-                    CheckBox cba2 = new CheckBox();
-                    cba2.Style = cbAccountStyle;
-                    cba2.Content = "Account name 2";
-                    cba2.Checked += cbAccount_Checked;
-                    cba2.Unchecked += cbAccount_Unchecked;
-
-                    CheckBox cba3 = new CheckBox();
-                    cba3.Style = cbAccountStyle;
-                    cba3.Content = "Account name 3";
-                    cba3.Checked += cbAccount_Checked;
-                    cba3.Unchecked += cbAccount_Unchecked;
-
-                    CheckBox cba4 = new CheckBox();
-                    cba4.Style = cbAccountStyle;
-                    cba4.Content = "Account name 4";
-                    cba4.Checked += cbAccount_Checked;
-                    cba4.Unchecked += cbAccount_Unchecked;
-
-                    CheckBox cba5 = new CheckBox();
-                    cba5.Style = cbAccountStyle;
-                    cba5.Content = "Account name 5";
-                    cba5.Checked += cbAccount_Checked;
-                    cba5.Unchecked += cbAccount_Unchecked;
-
-                    icPrinterItems.Items.Add(cba1);
-                    icPrinterItems.Items.Add(cba2);
-                    icPrinterItems.Items.Add(cba3);
-                    icPrinterItems.Items.Add(cba4);
-                    icPrinterItems.Items.Add(cba5);
+                    for (int i = 1; i <= 5; i++)
+                    {
+                        CheckBox cbp = new CheckBox();
+                        cbp.Style = cbAccountStyle;
+                        cbp.Content = "Account name " + i;
+                        cbp.Name = "cba" + i;
+                        cbp.IsChecked = _accounts.Contains(cbp.Name);
+                        cbp.Checked += cbAccount_Checked;
+                        cbp.Unchecked += cbAccount_Unchecked;
+                        icPrinterItems.Items.Add(cbp);
+                    }
                     break;
                 case 2:
                     lblPrintingDevice.Content = "SELECT LABEL TEMPLATE";
@@ -121,20 +85,26 @@ namespace MeetpointPrinterNew.Pages
         private void cbPrinter_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox cb = (CheckBox)sender;
+            _printers.Add(cb.Name);
         }
 
         private void cbPrinter_Unchecked(object sender, RoutedEventArgs e)
         {
             CheckBox cb = (CheckBox)sender;
+            Helpers.RemoveListItem(_printers, cb.Name);
         }
         private void cbAccount_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox cb = (CheckBox)sender;
+            _accounts.Add(cb.Name);
         }
 
         private void cbAccount_Unchecked(object sender, RoutedEventArgs e)
         {
             CheckBox cb = (CheckBox)sender;
+            Helpers.RemoveListItem(_accounts, cb.Name);
         }
+
+       
     }
 }

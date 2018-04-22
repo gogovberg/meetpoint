@@ -37,12 +37,16 @@
     <Reference Include="Com.SharpZebra">
       <HintPath>..\..\Refs\Com.SharpZebra.dll</HintPath>
     </Reference>
+    <Reference Include="hgi.Base">
+      <HintPath>..\..\..\Refs\hgi.Base.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp">
       <HintPath>..\..\Refs\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
