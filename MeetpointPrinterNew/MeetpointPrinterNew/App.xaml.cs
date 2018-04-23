@@ -58,6 +58,8 @@ namespace MeetpointPrinterNew
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            ApplicationSettings = Helpers.ReadUserSettings(ApplicationSettings.Username);
+
             int SetupPageType = -1;
             if (Application.Current.MainWindow.Content.GetType().Name.Equals("SetupPage"))
             {

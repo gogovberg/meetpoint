@@ -120,9 +120,10 @@ namespace MeetpointPrinterNew
 
         public static UserSettings ReadUserSettings(string Username)
         {
-            UserSettings up = null;
+            UserSettings us = null;
             try
             {
+
                 Debug.Log("MeetpointPrinter", "Read user settings");
 
                 string path = @"UserSettings/" + Username + "_settings.config";
@@ -131,7 +132,7 @@ namespace MeetpointPrinterNew
                     XmlSerializer mySerializer = new XmlSerializer(typeof(UserSettings));
                     FileStream myFileStream = new FileStream(path, FileMode.Open);
 
-                    up = (UserSettings)mySerializer.Deserialize(myFileStream);
+                    us = (UserSettings)mySerializer.Deserialize(myFileStream);
                 }
             }
             catch (Exception ex)
@@ -140,7 +141,20 @@ namespace MeetpointPrinterNew
 
             }
 
-            return up;
+            if (us == null)
+            {
+                us = new UserSettings();
+                us.Event = new Event();
+                us.Printers = new Printers();
+                us.Printers.Printer = new List<string>();
+                us.Accounts = new Accounts();
+                us.Accounts.Account = new List<string>();
+                us.PrinterSetup = new PrinterSetup();
+                us.PrinterSetup.DataOptions = new DataOptions();
+                us.PrinterSetup.DataOptions.DataOption = new List<string>();
+            }
+
+            return us;
 
         }
 
