@@ -21,15 +21,19 @@ namespace MeetpointPrinterNew.Pages
     /// </summary>
     public partial class LogPage : Page
     {
-        public LogPage()
+        private App _currentApp = ((App)Application.Current);
+        private UserSettings _settings;
+        public LogPage(UserSettings settings)
         {
-
-            BitmapImage imgNameSrc = new BitmapImage(new Uri("/Images/icon_badge.png", UriKind.Relative));
-            BitmapImage imgStatusSrc = new BitmapImage(new Uri("/Images/icon_more.png", UriKind.Relative));
+    
 
             InitializeComponent();
 
-            for(int i=1; i<=10; i++)
+            _settings = settings;
+            BitmapImage imgNameSrc = new BitmapImage(new Uri("/Images/icon_badge.png", UriKind.Relative));
+            BitmapImage imgStatusSrc = new BitmapImage(new Uri("/Images/icon_more.png", UriKind.Relative));
+
+            for (int i=1; i<=10; i++)
             {
                 LogControl lc = new LogControl();
                 lc.LogUsername = "username "+i;

@@ -25,19 +25,23 @@ namespace MeetpointPrinterNew.Pages
         private int pageType = -1;
         public int SetupPageType { get { return this.pageType; } }
 
+        private App _currentApp = ((App)Application.Current);
+
         private List<string> _printers;
         private List<string> _accounts;
+        private UserSettings _settings;
 
-        private App _currentApp = (Application.Current as App);
         private char[] _charsToTrim = { ' ', '\t' };
       
-        public SetupPage(int setupPageType)
+        public SetupPage(UserSettings settings, int setupPageType)
         {
          
             InitializeComponent();
+            _settings = settings;
+            _printers = _settings.Printers.Printer;
+            _accounts = _settings.Accounts.Account;
 
-            _printers = _currentApp.ApplicationSettings.Printers.Printer;
-            _accounts = _currentApp.ApplicationSettings.Accounts.Account;
+            _currentApp.ApplicationSettings = settings;
 
             this.pageType = setupPageType;
 
@@ -57,7 +61,7 @@ namespace MeetpointPrinterNew.Pages
                         CheckBox cbp = new CheckBox();
                         cbp.Style = cbPrinterStyle;
                         cbp.Content = pq.Name;
-                        //cbp.Name = pq.Name.Replace(" ", String.Empty);
+                        cbp.Tag = pq;
                         cbp.IsChecked = _printers.Contains(pq.Name);
                         cbp.Checked += cbPrinter_Checked;
                         cbp.Unchecked += cbPrinter_Unchecked;
@@ -66,16 +70,18 @@ namespace MeetpointPrinterNew.Pages
                     break;
                 case 1:
 
+                    List<User> users = Helpers.GetCustomerUsers(_settings.AuthToken);
+
                     Style cbAccountStyle = (Style)FindResource("ChecBoxAccountStyle");
                     lblPrintingDevice.Content = "SELECT ACCOUNTS";
 
-                    for (int i = 1; i <= 5; i++)
+                   foreach(User item in users)
                     {
                         CheckBox cbp = new CheckBox();
                         cbp.Style = cbAccountStyle;
-                        cbp.Content = "Account name " + i;
-                        cbp.Name = "cba" + i;
-                        cbp.IsChecked = _accounts.Contains(cbp.Name);
+                        cbp.Content = item.value;
+                        cbp.Tag = item.key.ToString();
+                        cbp.IsChecked = _accounts.Contains(cbp.Tag.ToString());
                         cbp.Checked += cbAccount_Checked;
                         cbp.Unchecked += cbAccount_Unchecked;
                         icPrinterItems.Items.Add(cbp);
@@ -101,12 +107,12 @@ namespace MeetpointPrinterNew.Pages
         private void cbAccount_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox cb = (CheckBox)sender;
-            _accounts.Add(cb.Name);
+            _accounts.Add(cb.Tag.ToString());
         }
         private void cbAccount_Unchecked(object sender, RoutedEventArgs e)
         {
             CheckBox cb = (CheckBox)sender;
-            Helpers.RemoveListItem(_accounts, cb.Name);
+            Helpers.RemoveListItem(_accounts, cb.Tag.ToString());
         }
 
        

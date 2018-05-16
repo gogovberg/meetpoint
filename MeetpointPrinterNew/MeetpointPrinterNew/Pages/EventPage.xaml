@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MeetpointPrinterNew.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="900" d:DesignWidth="1200"  Style="{StaticResource HeaderFooterPageStyle}"
+      d:DesignHeight="787" d:DesignWidth="1315"   Style="{StaticResource HeaderFooterPageStyle}"
       Title="EventPage" >
     <Grid>
         <Grid.RowDefinitions>
@@ -25,6 +25,13 @@
                     <WrapPanel/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+            <ItemsControl.Template>
+                <ControlTemplate>
+                    <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}">
+                        <ItemsPresenter />
+                    </ScrollViewer>
+                </ControlTemplate>
+            </ItemsControl.Template>
         </ItemsControl>
     </Grid>
 </Page>

@@ -18,12 +18,20 @@ namespace MeetpointPrinterNew.Pages
     /// <summary>
     /// Interaction logic for PrintSettingsPage.xaml
     /// </summary>
+    /// 
+
     public partial class SettingsPage : Page
     {
+        private App _currentApp = ((App)Application.Current);
+        private UserSettings _settings;
         public SettingsPage()
         {
             InitializeComponent();
 
+        }
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Content = new LoginPage();
         }
     }
 }

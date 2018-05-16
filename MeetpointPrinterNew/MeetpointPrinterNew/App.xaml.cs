@@ -13,7 +13,7 @@ namespace MeetpointPrinterNew
     public partial class App : Application
     {
        
-        public string CurrentPage { set; get; }
+   
         public string CurrentUser { set; get; }
         public string CurrentEvent { set; get; }
         public string CurrentEventLocation { set; get; }
@@ -23,7 +23,8 @@ namespace MeetpointPrinterNew
       
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
-           Application.Current.MainWindow.Content = new LoginPage(); 
+            Helpers.SaveUserSettings(ApplicationSettings);
+            Application.Current.MainWindow.Content = new LoginPage(); 
         }
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
@@ -45,21 +46,24 @@ namespace MeetpointPrinterNew
             switch (SetupPageType)
             {
                 case 0:
-                    Application.Current.MainWindow.Content = new SetupPage(1);
+                    Application.Current.MainWindow.Content = new SetupPage(ApplicationSettings,1);
                     break;
                 case 1:
                     Application.Current.MainWindow.Content = new SetupPagePrintTemplate();
                     break;
                 case 2:
-                    Application.Current.MainWindow.Content = new LogPage();
+                    Application.Current.MainWindow.Content = new LogPage(ApplicationSettings);
                     break;
             }
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            ApplicationSettings = Helpers.ReadUserSettings(ApplicationSettings.Username);
-
+            ApplicationSettings = Helpers.ReadUserSettings(CurrentUser);
+            CurrentUser = ApplicationSettings.Username;
+            CurrentEvent = ApplicationSettings.Event.EventName;
+            CurrentEventLocation = ApplicationSettings.Event.EventLocation;
+           
             int SetupPageType = -1;
             if (Application.Current.MainWindow.Content.GetType().Name.Equals("SetupPage"))
             {
@@ -75,13 +79,13 @@ namespace MeetpointPrinterNew
             switch (SetupPageType)
             {
                 case 0:
-                    Application.Current.MainWindow.Content = new EventPage(this.ApplicationSettings.Username, this.ApplicationSettings.AuthToken);
+                    Application.Current.MainWindow.Content = new EventPage(ApplicationSettings.Username, ApplicationSettings.AuthToken);
                     break;
                 case 1:
-                    Application.Current.MainWindow.Content = new SetupPage(0);
+                    Application.Current.MainWindow.Content = new SetupPage(ApplicationSettings,0);
                     break;
                 case 2:
-                    Application.Current.MainWindow.Content = new SetupPage(1);
+                    Application.Current.MainWindow.Content = new SetupPage(ApplicationSettings,1);
                     break;
                
                 }
