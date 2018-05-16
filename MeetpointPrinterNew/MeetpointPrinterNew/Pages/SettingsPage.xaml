@@ -98,7 +98,70 @@
                     <TextBlock x:Name="tblPrintSettings" Text="PRINT SETTINGS"  Margin="40,10,10,10" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockTitle}"></TextBlock>
                     <TextBlock x:Name="tblPrintActivation" Text="PRINT ACTIVATION" Margin="40,10,10,10"  Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBlockTitle}"></TextBlock>
                     <Border Margin="40,10,10,10" Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderSettings}" >
-                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40*"></ColumnDefinition>
+                                <ColumnDefinition Width="10*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock x:Name="tblPrintingDevice" Margin="40,0,0,0" VerticalAlignment="Center" Text="SELECTED PRINTING DEVICE" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockSubtitle}"></TextBlock>
+                            <StackPanel Margin="40,0,0,10"  Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                                <Image HorizontalAlignment="Left" Source="/Images/icon_printer.png"  Grid.Row="1" Grid.Column="0"/>
+                                <TextBlock x:Name="tblPrinterName" Margin="20,10,10,10" Text="Printer name 1" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBlockSubtitle}"/>
+                            </StackPanel>
+                            <Button x:Name="btnEditPrinter" Grid.Row="0" Grid.Column="1" Click="btneditPrinter_Click"  ></Button>
+                        </Grid>
+                    </Border>
+                    <Border Margin="40,10,10,10" Grid.Row="2" Grid.Column="0" Style="{StaticResource BorderSettings}" >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40*"></ColumnDefinition>
+                                <ColumnDefinition Width="10*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock x:Name="tblAccountsTitle" Margin="40,0,0,0" VerticalAlignment="Center" Text="SELECTED PRINTING DEVICE" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockSubtitle}"></TextBlock>
+                            <ItemsControl x:Name="icAccountItem" Grid.Row="1" Grid.RowSpan="2" Margin="30" >
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.Template>
+                                    <ControlTemplate>
+                                        <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}">
+                                            <ItemsPresenter />
+                                        </ScrollViewer>
+                                    </ControlTemplate>
+                                </ItemsControl.Template>
+                            </ItemsControl>
+                            <Button x:Name="btnEditAccount" Grid.Row="0" Grid.Column="1" Click="btnEditAccount_Click"   ></Button>
+                        </Grid>
+                    </Border>
+                    <Border Margin="40,10,10,10" Grid.Row="3" Grid.Column="0" Style="{StaticResource BorderSettings}" >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40*"></ColumnDefinition>
+                                <ColumnDefinition Width="10*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock x:Name="tblTemplateTitle" Margin="40,0,0,0" VerticalAlignment="Center" Text="SET TEMPLATE" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockSubtitle}"></TextBlock>
+                            <Button x:Name="btnEditTemplate" Grid.Row="0" Grid.Column="1" Click="btnEditTemplate_Click"  ></Button>
+                        </Grid>
+                    </Border>
+                    <Border Margin="40,10,10,10" Grid.Row="1" Grid.Column="1" Style="{StaticResource BorderSettings}" >
+
                     </Border>
                 </Grid>
             </Grid>

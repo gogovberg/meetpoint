@@ -24,14 +24,40 @@ namespace MeetpointPrinterNew.Pages
     {
         private App _currentApp = ((App)Application.Current);
         private UserSettings _settings;
-        public SettingsPage()
+        public SettingsPage(UserSettings settings)
         {
+            _settings = settings;
             InitializeComponent();
 
+            _currentApp.ApplicationSettings.Event = settings.Event;
+            _currentApp.CurrentEvent = settings.Event.EventName;
+            _currentApp.CurrentEventLocation =  settings.Event.EventStartDate.ToShortDateString()+" "+
+                                                settings.Event.EventEndDate.ToShortDateString()+" "+
+                                                settings.Event.EventLocation;
+            foreach (var item in _settings.Accounts.Account)
+            {
+                icAccountItem.Items.Add(item);
+            }
+            
         }
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow.Content = new LoginPage();
+        }
+
+        private void btneditPrinter_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnEditAccount_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnEditTemplate_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

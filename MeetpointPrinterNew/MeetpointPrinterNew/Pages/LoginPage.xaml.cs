@@ -93,6 +93,11 @@ namespace MeetpointPrinterNew.Pages
                 us.PrinterSetup = new PrinterSetup();
                 us.PrinterSetup.DataOptions = new DataOptions();
                 us.PrinterSetup.DataOptions.DataOption = new List<string>();
+                us.Username = this.tbUsername.Text.Trim();
+                us.AuthToken = token;
+                Helpers.SaveUserSettings(us);
+                _currentApp.ApplicationSettings = us;
+                Application.Current.MainWindow.Content = new EventPage(this.tbUsername.Text.Trim(), token);
             }
             us.Username = this.tbUsername.Text.Trim();
             us.AuthToken = token;
@@ -102,7 +107,7 @@ namespace MeetpointPrinterNew.Pages
 
 
 
-            Application.Current.MainWindow.Content = new EventPage(this.tbUsername.Text.Trim(), token);
+            Application.Current.MainWindow.Content = new SettingsPage(us);
 
         }
     }

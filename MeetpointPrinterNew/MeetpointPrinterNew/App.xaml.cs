@@ -52,7 +52,7 @@ namespace MeetpointPrinterNew
                     Application.Current.MainWindow.Content = new SetupPagePrintTemplate();
                     break;
                 case 2:
-                    Application.Current.MainWindow.Content = new LogPage(ApplicationSettings);
+                    Application.Current.MainWindow.Content = new SettingsPage(ApplicationSettings);
                     break;
             }
         }
