@@ -33,34 +33,7 @@ namespace MeetpointPrinterNew
             return s.PrinterName;
         }
 
-        public static PrintQueue GetPrintQueue(string AuthToken)
-
-        {
-            var client = new RestClient("http://data.meetpoint.si/rest/v1/DataAPI/GetLabelPrintQueue/json");
-            var request = new RestRequest(Method.POST);
-
-            request.AddHeader("content-type", "multipart/form-data;");
-            //request.AddParameter("multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW", "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\""+username+"\"\r\n\r\nrok\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"Password\"\r\n\r\nrok\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--", ParameterType.RequestBody);
-            request.AddParameter("AuthToken", AuthToken);
-
-            IRestResponse response = client.Execute(request);
-
-            var res = SimpleJson.DeserializeObject<PrintQueueResponse>(response.Content);
-            if (res.serviceStatus == "OK")
-            {
-                //if (res.data.authStatus == "OK")
-                //    return Task.FromResult(res.data.authToken);
-                //else
-                //    return Task.FromResult(default(string));
-
-
-                return res.data;
-
-            }
-            else
-
-                return null;
-        }
+       
 
         public static List<EventDataEvent> GetEvents(string AuthToken)
         {
@@ -121,6 +94,32 @@ namespace MeetpointPrinterNew
             return users;
         }
 
+        public static List<PrintQueueItem> GetPrintQueue(string AuthToken)
+        {
+            List<PrintQueueItem> queue = new List<PrintQueueItem>();
+            try
+            {
+                var client = new RestClient("http://data.meetpoint.si/rest/v1/DataAPI/GetLabelPrintQueue/json");
+                var request = new RestRequest(Method.POST);
+
+                request.AddHeader("content-type", "multipart/form-data;");
+                request.AddParameter("AuthToken", AuthToken);
+                IRestResponse response = client.Execute(request);
+
+                var res = SimpleJson.DeserializeObject<PrintQueueResponse>(response.Content);
+                if (res != null && res.serviceStatus == "OK" && res.data != null)
+                {
+                    queue = res.data.Item;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                Debug.Log("MeetpointPrinter", ex.ToString());
+            }
+            return queue;
+        }
         public static string ToTitleCase(this string s)
         {
             return System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(s.ToLower());

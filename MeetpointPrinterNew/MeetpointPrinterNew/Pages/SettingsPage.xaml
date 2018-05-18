@@ -161,8 +161,36 @@
                         </Grid>
                     </Border>
                     <Border Margin="40,10,10,10" Grid.Row="1" Grid.Column="1" Style="{StaticResource BorderSettings}" >
-
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30*"></ColumnDefinition>
+                                <ColumnDefinition Width="60*"></ColumnDefinition>
+                                <ColumnDefinition Width="30*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="tblLivePrint" FontSize="16" Text="Live print" Grid.Column="0" Foreground="Black"   HorizontalAlignment="Center" VerticalAlignment="Center"  ></TextBlock>
+                            <Border  Grid.Column="1" Background="#FFF8F8F8" Margin="20" >
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox x:Name="cbInactive" FontSize="16" HorizontalAlignment="Center" Foreground="Black" VerticalAlignment="Center" Content="Inactive" Checked="cbInactive_Checked"></CheckBox>
+                                    <CheckBox x:Name="cbActive" FontSize="16" HorizontalAlignment="Center" Foreground="Black" VerticalAlignment="Center" Content="Active" Checked="cbActive_Checked"></CheckBox>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
                     </Border>
+                    <Grid Grid.Column="1" Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Button x:Name="btnPrintEmpty" Content="PRINT EMPTY LABEL" FontSize="16" Grid.Column="0" Grid.Row="0"  Margin="40,10,10,10" Background="#FF50A2FF" Foreground="white" Click="btnPrintEmpty_Click" ></Button>
+                        <Button x:Name="btnPrintTest" Content="PRINT TEST TEMPLATE" FontSize="16" Grid.Column="1" Grid.Row="0"  Margin="10,10,10,10" Background="#FF50A2FF" Foreground="white" Click="btnPrintTest_Click" ></Button>
+                        <Button x:Name="btnViewLog" Content="View print log" FontSize="16" Grid.Column="2" Grid.Row="0"  Margin="10,10,10,10" Background="#FFAFAFAF" Foreground="white" Click="btnViewLog_Click" ></Button>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>

@@ -21,7 +21,7 @@ namespace MeetpointPrinterNew.Pages
     public partial class SetupPagePrintTemplate : Page
     {
         private App _currentApp = (Application.Current as App);
-
+        private UserSettings _settings;
         private int _pageType = -1;
         private List<string> _dataOptions;
 
@@ -35,8 +35,9 @@ namespace MeetpointPrinterNew.Pages
 
         private bool _isOnLoadChecked;
         
-        public SetupPagePrintTemplate()
+        public SetupPagePrintTemplate(UserSettings settings)
         {
+            _settings = settings;
             _isOnLoadChecked = false;
             _pageType = 2;
             InitializeComponent();

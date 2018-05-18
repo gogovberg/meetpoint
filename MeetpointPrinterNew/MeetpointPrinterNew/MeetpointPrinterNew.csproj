@@ -34,8 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Com.SharpZebra">
-      <HintPath>..\..\Refs\Com.SharpZebra.dll</HintPath>
+    <Reference Include="Com.SharpZebra, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\MeetPoint\printApp\Meetpt\sharpzebra\Com.SharpZebra\bin\Debug\Com.SharpZebra.dll</HintPath>
     </Reference>
     <Reference Include="hgi.Base">
       <HintPath>..\..\..\Refs\hgi.Base.dll</HintPath>

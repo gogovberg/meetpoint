@@ -48,7 +48,7 @@ namespace MeetpointPrinterNew.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Content = new SetupPagePrintTemplate();
+            Application.Current.MainWindow.Content = new SettingsPage(_settings);
         }
     }
 }
