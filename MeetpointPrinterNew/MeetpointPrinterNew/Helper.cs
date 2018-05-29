@@ -15,6 +15,8 @@ namespace MeetpointPrinterNew
 {
     public static class Helpers
     {
+        //private static string _host = "http://data.meetpoint.si";
+        private static string _host = "http://localhost/MeetPointRest/";
         public static List<string> GetConnectedPrinters()
         {
             List<string> printers = new List<string>();
@@ -40,7 +42,7 @@ namespace MeetpointPrinterNew
             List<EventDataEvent> edv = new List<EventDataEvent>();
             try
             {
-                var client = new RestClient("http://data.meetpoint.si/rest/v1/DataAPI/GetEventProgram/xml");
+                var client = new RestClient(_host+"rest/v1/DataAPI/GetEventProgram/xml");
                 var request = new RestRequest(Method.POST);
 
                 request.AddHeader("content-type", "multipart/form-data;");
@@ -72,7 +74,7 @@ namespace MeetpointPrinterNew
             List<User> users = new List<User>();
             try
             {
-                var client = new RestClient("http://data.meetpoint.si/rest/v1/DataAPI/GetCustomerUsers/json");
+                var client = new RestClient(_host + "rest/v1/DataAPI/GetCustomerUsers/json");
                 var request = new RestRequest(Method.POST);
 
                 request.AddHeader("content-type", "multipart/form-data;");
@@ -94,16 +96,16 @@ namespace MeetpointPrinterNew
             return users;
         }
 
-        public static List<PrintQueueItem> GetPrintQueue(string AuthToken)
+        public static List<PrintQueueItem> GetPrintQueue(string AuthToken,string Users)
         {
             List<PrintQueueItem> queue = new List<PrintQueueItem>();
             try
             {
-                var client = new RestClient("http://data.meetpoint.si/rest/v1/DataAPI/GetLabelPrintQueue/json");
+                var client = new RestClient(_host + "rest/v1/DataAPI/GetLabelPrintQueueForUsers/json");
                 var request = new RestRequest(Method.POST);
-
                 request.AddHeader("content-type", "multipart/form-data;");
                 request.AddParameter("AuthToken", AuthToken);
+                request.AddParameter("UserIDs", Users);
                 IRestResponse response = client.Execute(request);
 
                 var res = SimpleJson.DeserializeObject<PrintQueueResponse>(response.Content);

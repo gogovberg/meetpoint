@@ -1,20 +1,14 @@
 ﻿using Com.SharpZebra;
 using Com.SharpZebra.Commands;
 using Com.SharpZebra.Printing;
+using hgi.Environment;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Printing;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace MeetpointPrinterNew.Pages
 {
@@ -27,19 +21,45 @@ namespace MeetpointPrinterNew.Pages
     {
         private App _currentApp = ((App)Application.Current);
         private UserSettings _settings;
+
+        private Timer _timerPrint;
+        private object _printObject = new object();
+        private double _printTimer;
+        private System.Printing.PrintQueue _printQueue;
+
         public SettingsPage(UserSettings settings)
         {
             _settings = settings;
             InitializeComponent();
-
+            _printTimer = 10000;
             _currentApp.ApplicationSettings.Event = settings.Event;
             _currentApp.CurrentEvent = settings.Event.EventName;
             _currentApp.CurrentEventLocation =  settings.Event.EventStartDate.ToShortDateString()+" "+
                                                 settings.Event.EventEndDate.ToShortDateString()+" "+
                                                 settings.Event.EventLocation;
+            string _tempPrintName = _settings.Printers.Printer[0];
             foreach (var item in _settings.Accounts.Account)
             {
                 icAccountItem.Items.Add(item);
+            }
+
+            _timerPrint = new Timer();
+            _timerPrint.Elapsed += new ElapsedEventHandler(PrintQueueLabels);
+            _timerPrint.Interval = _printTimer; // 1000 ms => 1 second
+            _timerPrint.Enabled = false;
+
+            lock(_printObject)
+            {
+                var server = new LocalPrintServer();
+                PrintQueueCollection myPrintQueues = server.GetPrintQueues();
+                foreach (System.Printing.PrintQueue queue in myPrintQueues)
+                {
+                    if (queue.Name.Equals(_tempPrintName))
+                    {
+                        _printQueue = queue;
+                        break;
+                    }
+                }
             }
             
         }
@@ -87,7 +107,7 @@ namespace MeetpointPrinterNew.Pages
 
         private void btnPrintTest_Click(object sender, RoutedEventArgs e)
         {
-            List<PrintQueueItem> items = Helpers.GetPrintQueue(_settings.AuthToken);
+            
         }
 
         private void btnViewLog_Click(object sender, RoutedEventArgs e)
@@ -98,11 +118,63 @@ namespace MeetpointPrinterNew.Pages
         private void cbInactive_Checked(object sender, RoutedEventArgs e)
         {
             cbActive.IsChecked = false;
+            _timerPrint.Enabled = false;
         }
 
         private void cbActive_Checked(object sender, RoutedEventArgs e)
         {
             cbInactive.IsChecked = false;
+            _timerPrint.Enabled = true;
+        }
+
+        private void PrintQueueLabels(object source, ElapsedEventArgs e)
+        {
+
+            lock (_printObject)
+            {
+                try
+                {
+                    string users = "";
+                    foreach (string user in _settings.Accounts.Account)
+                    {
+                        users = users + user + ",";
+                    }
+                    List<PrintQueueItem> items = Helpers.GetPrintQueue(_settings.AuthToken, users);
+
+                    foreach(PrintQueueItem item in items)
+                    {
+                        PrintLabelStickers(_settings.PrinterSetup.LayoutTemplate,item.FirstName,item.Company,item.PrintUserID.ToString());
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                  
+                    Debug.Log("WatchForReaders", ex.ToString());
+                }
+            }
+
+        }
+
+        private void PrintLabelStickers(string templateType, string fieldOne, string fieldTwo, string fieldThree)
+        {
+            PrinterSettings ps = new PrinterSettings();
+            ps.PrinterName = _settings.Printers.Printer[0];
+            ps.Width = (int)(203 * 3);
+            ps.Length = (int)(203 * 1);
+            ps.Darkness = 30;
+
+            List<byte> page = new List<byte>();
+            page.AddRange(ZPLCommands.ClearPrinter(ps));
+
+
+            page.AddRange(ZPLCommands.TextWrite(15, 75, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_LARGEST, 45, 30, fieldOne));
+            page.AddRange(ZPLCommands.TextWrite(15, 150, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_NORMAL, 30, 20, fieldTwo));
+            page.AddRange(ZPLCommands.TextWrite(15, 225, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_NORMAL, 20, 15, fieldThree));
+
+            page.AddRange(ZPLCommands.PrintBuffer(1));
+
+            new SpoolPrinter(ps).Print(page.ToArray());
         }
     }
 }

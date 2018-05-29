@@ -37,61 +37,70 @@ namespace MeetpointPrinterNew.Pages
         {
          
             InitializeComponent();
-            _settings = settings;
-            _printers = _settings.Printers.Printer;
-            _accounts = _settings.Accounts.Account;
 
-            _currentApp.ApplicationSettings = settings;
-
-            this.pageType = setupPageType;
-
-            switch (pageType)
+            try
             {
-                case 0:
+                _settings = settings;
+                _printers = _settings.Printers.Printer;
+                _accounts = _settings.Accounts.Account;
 
-                    Style cbPrinterStyle = (Style)FindResource("ChecBoxPrinterStyle");
-                    lblPrintingDevice.Content = "SELECT PRINTING DEVICE";
+                _currentApp.ApplicationSettings = settings;
 
-                    var server = new LocalPrintServer();
-                    PrintQueueCollection myPrintQueues = server.GetPrintQueues();
+                this.pageType = setupPageType;
 
-                    foreach (System.Printing.PrintQueue pq in myPrintQueues)
-                    {
-                        pq.Refresh();
-                        CheckBox cbp = new CheckBox();
-                        cbp.Style = cbPrinterStyle;
-                        cbp.Content = pq.Name;
-                        cbp.Tag = pq;
-                        cbp.IsChecked = _printers.Contains(pq.Name);
-                        cbp.Checked += cbPrinter_Checked;
-                        cbp.Unchecked += cbPrinter_Unchecked;
-                        icPrinterItems.Items.Add(cbp);
-                    }
-                    break;
-                case 1:
+                switch (pageType)
+                {
+                    case 0:
 
-                    List<User> users = Helpers.GetCustomerUsers(_settings.AuthToken);
+                        Style cbPrinterStyle = (Style)FindResource("ChecBoxPrinterStyle");
+                        lblPrintingDevice.Content = "SELECT PRINTING DEVICE";
 
-                    Style cbAccountStyle = (Style)FindResource("ChecBoxAccountStyle");
-                    lblPrintingDevice.Content = "SELECT ACCOUNTS";
+                        var server = new LocalPrintServer();
+                        PrintQueueCollection myPrintQueues = server.GetPrintQueues();
 
-                   foreach(User item in users)
-                    {
-                        CheckBox cbp = new CheckBox();
-                        cbp.Style = cbAccountStyle;
-                        cbp.Content = item.value;
-                        cbp.Tag = item.key.ToString();
-                        cbp.IsChecked = _accounts.Contains(cbp.Tag.ToString());
-                        cbp.Checked += cbAccount_Checked;
-                        cbp.Unchecked += cbAccount_Unchecked;
-                        icPrinterItems.Items.Add(cbp);
-                    }
-                    break;
-                case 2:
-                    lblPrintingDevice.Content = "SELECT LABEL TEMPLATE";
+                        foreach (System.Printing.PrintQueue pq in myPrintQueues)
+                        {
+                            pq.Refresh();
+                            CheckBox cbp = new CheckBox();
+                            cbp.Style = cbPrinterStyle;
+                            cbp.Content = pq.Name;
+                            cbp.Tag = pq;
+                            cbp.IsChecked = _printers.Contains(pq.Name);
+                            cbp.Checked += cbPrinter_Checked;
+                            cbp.Unchecked += cbPrinter_Unchecked;
+                            icPrinterItems.Items.Add(cbp);
+                        }
+                        break;
+                    case 1:
 
-                    break;
+                        List<User> users = Helpers.GetCustomerUsers(_settings.AuthToken);
+
+                        Style cbAccountStyle = (Style)FindResource("ChecBoxAccountStyle");
+                        lblPrintingDevice.Content = "SELECT ACCOUNTS";
+
+                        foreach (User item in users)
+                        {
+                            CheckBox cbp = new CheckBox();
+                            cbp.Style = cbAccountStyle;
+                            cbp.Content = item.value;
+                            cbp.Tag = item.key.ToString();
+                            cbp.IsChecked = _accounts.Contains(cbp.Tag.ToString());
+                            cbp.Checked += cbAccount_Checked;
+                            cbp.Unchecked += cbAccount_Unchecked;
+                            icPrinterItems.Items.Add(cbp);
+                        }
+                        break;
+                    case 2:
+                        lblPrintingDevice.Content = "SELECT LABEL TEMPLATE";
+
+                        break;
+                }
             }
+            catch(Exception ex)
+            {
+                //DebugLog("")
+            }
+            
         }
         private void cbPrinter_Checked(object sender, RoutedEventArgs e)
         {
