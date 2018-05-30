@@ -21,7 +21,7 @@ namespace MeetpointPrinterNew.Pages
     /// </summary>
     public partial class LogPage : Page
     {
-        private App _currentApp = ((App)Application.Current);
+       
         private UserSettings _settings;
       
 

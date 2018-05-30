@@ -20,7 +20,7 @@ namespace MeetpointPrinterNew.Pages
     /// </summary>
     public partial class SetupPagePrintTemplate : Page
     {
-        private App _currentApp = (Application.Current as App);
+       
         private UserSettings _settings;
         private int _pageType = -1;
         private List<string> _dataOptions;

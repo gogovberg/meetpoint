@@ -64,10 +64,8 @@ namespace MeetpointPrinterNew
                     case 4:
                         Application.Current.MainWindow.Content = new SetupPage(GlobalSettings.ApplicationSettings, 1);
                         break;
-
                 }
             }
-            
         }
 
         private void btnEvents_Click(object sender, RoutedEventArgs e)

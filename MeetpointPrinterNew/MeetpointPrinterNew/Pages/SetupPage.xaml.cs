@@ -25,12 +25,11 @@ namespace MeetpointPrinterNew.Pages
         private int pageType = -1;
         public int SetupPageType { get { return this.pageType; } }
 
-        private App _currentApp = ((App)Application.Current);
+        
 
         private List<Account> _accounts;
         private UserSettings _settings;
 
-        private char[] _charsToTrim = { ' ', '\t' };
 
         private bool _isUnchecked;
       

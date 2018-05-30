@@ -21,7 +21,7 @@ namespace MeetpointPrinterNew.Pages
     /// </summary>
     public partial class LoginPage : Page
     {
-        private App _currentApp = (Application.Current as App);
+        
         public LoginPage()
         {
             InitializeComponent();
@@ -79,7 +79,6 @@ namespace MeetpointPrinterNew.Pages
         {
             ShowErrorMsg(true, "Username or password is invalid!");
         }
-
         private void LoginControl_LoginSuccessful(object sender, string token)
         {
 
