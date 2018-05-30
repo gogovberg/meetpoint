@@ -15,8 +15,9 @@ namespace MeetpointPrinterNew
 {
     public static class Helpers
     {
-        //private static string _host = "http://data.meetpoint.si";
-        private static string _host = "http://localhost/MeetPointRest/";
+        private static string _host = "http://data.meetpoint.si/";
+        
+        //private static string _host = "http://localhost/MeetPointRest/";
         public static List<string> GetConnectedPrinters()
         {
             List<string> printers = new List<string>();
@@ -173,25 +174,11 @@ namespace MeetpointPrinterNew
                 Debug.Log("MeetpointPrinter", ex.ToString());
 
             }
-
-            if (us == null)
-            {
-                us = new UserSettings();
-                us.Event = new Event();
-                us.Printers = new Printers();
-                us.Printers.Printer = new List<string>();
-                us.Accounts = new Accounts();
-                us.Accounts.Account = new List<string>();
-                us.PrinterSetup = new PrinterSetup();
-                us.PrinterSetup.DataOptions = new DataOptions();
-                us.PrinterSetup.DataOptions.DataOption = new List<string>();
-            }
-
             return us;
 
         }
 
-        public static void RemoveListItem(List<string> items, string cbTag)
+        public static void RemoveListItem<T>(List<T> items, string cbTag)
         {
             try
             {
@@ -217,7 +204,6 @@ namespace MeetpointPrinterNew
             {
                 Debug.Log("MeetpointPrinter", ex.ToString());
             }
-           
         }
 
         public static string ObjectToXml(object o)
@@ -232,7 +218,7 @@ namespace MeetpointPrinterNew
             }
             catch (Exception e)
             {
-                Debug.Log("SoloPlan", e.ToString());
+                Debug.Log("MeetpointPrinter", e.ToString());
             }
             finally
             {
@@ -260,7 +246,7 @@ namespace MeetpointPrinterNew
             }
             catch (Exception e)
             {
-                Debug.Log("SoloPlan", e.ToString());
+                Debug.Log("MeetpointPrinter", e.ToString());
             }
             finally
             {

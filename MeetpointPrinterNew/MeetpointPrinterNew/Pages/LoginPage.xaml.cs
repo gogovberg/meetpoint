@@ -25,6 +25,9 @@ namespace MeetpointPrinterNew.Pages
         public LoginPage()
         {
             InitializeComponent();
+            GlobalSettings.PreviousPageID = -1;
+            GlobalSettings.CurrentPageID = 0;
+
             this.userLoginValidation = new MockUserLoginValidation();
             LoginSuccessful += LoginControl_LoginSuccessful;
             LoginFailed += LoginControl_LoginFailed;
@@ -68,7 +71,6 @@ namespace MeetpointPrinterNew.Pages
         {
             this.ShowErrorMsg(false);
         }
-
         private void tbPassword_TextChanged(object sender, EventArgs e)
         {
             this.ShowErrorMsg(false);
@@ -81,34 +83,32 @@ namespace MeetpointPrinterNew.Pages
         private void LoginControl_LoginSuccessful(object sender, string token)
         {
 
+           
             UserSettings us = Helpers.ReadUserSettings(this.tbUsername.Text.Trim());
             if (us == null)
             {
                 us = new UserSettings();
                 us.Event = new Event();
-                us.Printers = new Printers();
-                us.Printers.Printer = new List<string>();
                 us.Accounts = new Accounts();
-                us.Accounts.Account = new List<string>();
+                us.Accounts.Account = new List<Account>();
                 us.PrinterSetup = new PrinterSetup();
                 us.PrinterSetup.DataOptions = new DataOptions();
                 us.PrinterSetup.DataOptions.DataOption = new List<string>();
                 us.Username = this.tbUsername.Text.Trim();
                 us.AuthToken = token;
                 Helpers.SaveUserSettings(us);
-                _currentApp.ApplicationSettings = us;
-                Application.Current.MainWindow.Content = new EventPage(this.tbUsername.Text.Trim(), token);
+                GlobalSettings.ApplicationSettings = us;
+           
             }
-            us.Username = this.tbUsername.Text.Trim();
-            us.AuthToken = token;
-
-            Helpers.SaveUserSettings(us);
-            _currentApp.ApplicationSettings = us;
-
-
-
-            Application.Current.MainWindow.Content = new SettingsPage(us);
-
+            else
+            {
+                us.Username = this.tbUsername.Text.Trim();
+                us.AuthToken = token;
+                Helpers.SaveUserSettings(us);
+                GlobalSettings.ApplicationSettings = us;
+            }
+            GlobalSettings.PreviousPageID = GlobalSettings.CurrentPageID;
+            Application.Current.MainWindow.Content = new EventPage(this.tbUsername.Text.Trim(), token);
         }
     }
     public interface IUserLoginValidation

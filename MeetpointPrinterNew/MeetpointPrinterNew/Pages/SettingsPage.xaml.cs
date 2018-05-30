@@ -29,18 +29,21 @@ namespace MeetpointPrinterNew.Pages
 
         public SettingsPage(UserSettings settings)
         {
-            _settings = settings;
+          
             InitializeComponent();
+            GlobalSettings.CurrentPageID = 5;
+
+            _settings = settings;
             _printTimer = 10000;
-            _currentApp.ApplicationSettings.Event = settings.Event;
+            GlobalSettings.ApplicationSettings.Event = settings.Event;
             _currentApp.CurrentEvent = settings.Event.EventName;
             _currentApp.CurrentEventLocation =  settings.Event.EventStartDate.ToShortDateString()+" "+
                                                 settings.Event.EventEndDate.ToShortDateString()+" "+
                                                 settings.Event.EventLocation;
-            string _tempPrintName = _settings.Printers.Printer[0];
+            string _tempPrintName = _settings.Printer;
             foreach (var item in _settings.Accounts.Account)
             {
-                icAccountItem.Items.Add(item);
+                icAccountItem.Items.Add(item.AccountName);
             }
 
             _timerPrint = new Timer();
@@ -87,7 +90,7 @@ namespace MeetpointPrinterNew.Pages
         {
 
             PrinterSettings ps = new PrinterSettings();
-            ps.PrinterName = _settings.Printers.Printer[0];
+            ps.PrinterName = _settings.Printer;
             ps.Width = (int)(203 * 3);
             ps.Length = (int)(203 * 1);
             ps.Darkness = 30;
@@ -135,9 +138,9 @@ namespace MeetpointPrinterNew.Pages
                 try
                 {
                     string users = "";
-                    foreach (string user in _settings.Accounts.Account)
+                    foreach (Account user in _settings.Accounts.Account)
                     {
-                        users = users + user + ",";
+                        users = users + user.AccountID + ",";
                     }
                     List<PrintQueueItem> items = Helpers.GetPrintQueue(_settings.AuthToken, users);
 
@@ -159,7 +162,7 @@ namespace MeetpointPrinterNew.Pages
         private void PrintLabelStickers(string templateType, string fieldOne, string fieldTwo, string fieldThree)
         {
             PrinterSettings ps = new PrinterSettings();
-            ps.PrinterName = _settings.Printers.Printer[0];
+            ps.PrinterName = _settings.Printer;
             ps.Width = (int)(203 * 3);
             ps.Length = (int)(203 * 1);
             ps.Darkness = 30;
@@ -175,6 +178,13 @@ namespace MeetpointPrinterNew.Pages
             page.AddRange(ZPLCommands.PrintBuffer(1));
 
             new SpoolPrinter(ps).Print(page.ToArray());
+        }
+
+        private void btnEvents_Click(object sender, RoutedEventArgs e)
+        {
+            Helpers.SaveUserSettings(GlobalSettings.ApplicationSettings);
+            GlobalSettings.PreviousPageID = GlobalSettings.CurrentPageID;
+            Application.Current.MainWindow.Content = new EventPage(GlobalSettings.ApplicationSettings.Username, GlobalSettings.ApplicationSettings.AuthToken);
         }
     }
 }

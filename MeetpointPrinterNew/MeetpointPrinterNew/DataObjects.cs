@@ -179,23 +179,7 @@ namespace MeetpointPrinterNew
     public class Accounts
     {
         [XmlElement(ElementName = "Account")]
-        public List<string> Account { get; set; }
-    }
-
-    [XmlRoot(ElementName = "Printer")]
-    public class Printer
-    {
-        [XmlElement(ElementName = "PrinterID")]
-        public string PrinterID { get; set; }
-        [XmlElement(ElementName = "PrinetrName")]
-        public string PrinetrName { get; set; }
-    }
-
-    [XmlRoot(ElementName = "Printers")]
-    public class Printers
-    {
-        [XmlElement(ElementName = "Printer")]
-        public List<string> Printer { get; set; }
+        public List<Account> Account { get; set; }
     }
 
     [XmlRoot(ElementName = "DataOptions")]
@@ -226,14 +210,18 @@ namespace MeetpointPrinterNew
     {
         [XmlElement(ElementName = "AuthToken")]
         public string AuthToken { get; set; }
+
         [XmlElement(ElementName = "Username")]
         public string Username { get; set; }
+
+        [XmlElement(ElementName = "Printer")]
+        public string Printer { get; set; }
+
         [XmlElement(ElementName = "Event")]
         public Event Event { get; set; }
         [XmlElement(ElementName = "Accounts")]
         public Accounts Accounts { get; set; }
-        [XmlElement(ElementName = "Printers")]
-        public Printers Printers { get; set; }
+      
         [XmlElement(ElementName = "PrinterSetup")]
         public PrinterSetup PrinterSetup { get; set; }
     }

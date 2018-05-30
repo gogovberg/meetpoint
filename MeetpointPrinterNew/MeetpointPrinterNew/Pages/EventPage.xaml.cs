@@ -22,16 +22,16 @@ namespace MeetpointPrinterNew.Pages
     public partial class EventPage : Page
     {
         private App _currentApp = ((App)Application.Current);
+       
 
         public EventPage(string username, string accessToken)
         {
             InitializeComponent();
+            GlobalSettings.CurrentPageID = 1;
+
             _currentApp.CurrentUser = username;
-
             BitmapImage imgsrc = new BitmapImage(new Uri("/Images/icon_event_primary.png", UriKind.Relative));
-
             Style eventStyle = (Style)FindResource("EventBorderStyle");
-
             List<EventDataEvent> edv = Helpers.GetEvents(accessToken);
 
             foreach(EventDataEvent item in edv)
@@ -51,7 +51,7 @@ namespace MeetpointPrinterNew.Pages
 
             foreach(EventControl ec in icEventItems.Items)
             {
-                if(_currentApp.ApplicationSettings.Event.EventID == ec.EventID)
+                if(GlobalSettings.ApplicationSettings.Event.EventID == ec.EventID)
                 {
                     ec.IsSelected = true;
                 }
@@ -72,13 +72,24 @@ namespace MeetpointPrinterNew.Pages
             eve.EventCreatedOn = DateTime.Parse(ec.EventCreatedDate);
             eve.EventLocation = ec.EventLocation;
 
-            _currentApp.ApplicationSettings.Event = eve;
+            GlobalSettings.ApplicationSettings.Event = eve;
             _currentApp.CurrentEvent = ec.EventName;
             _currentApp.CurrentEventLocation = ec.EventDate +" " + ec.EventLocation;
 
-            Helpers.SaveUserSettings(_currentApp.ApplicationSettings);
+            Helpers.SaveUserSettings(GlobalSettings.ApplicationSettings);
 
-            Application.Current.MainWindow.Content = new SetupPage(_currentApp.ApplicationSettings,0);
+            GlobalSettings.PreviousPageID = GlobalSettings.PreviousPageID;
+
+            if (!string.IsNullOrWhiteSpace(GlobalSettings.ApplicationSettings.Printer) && GlobalSettings.ApplicationSettings.Accounts!=null && GlobalSettings.ApplicationSettings.Accounts.Account.Count>0)
+            {
+                Application.Current.MainWindow.Content = new SettingsPage(GlobalSettings.ApplicationSettings);
+            }
+            else
+            {
+                
+                Application.Current.MainWindow.Content = new SetupPage(GlobalSettings.ApplicationSettings, 0);
+            }
+            
            
         }
 

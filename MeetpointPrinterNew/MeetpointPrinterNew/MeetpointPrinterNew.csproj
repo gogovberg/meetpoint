@@ -34,15 +34,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Com.SharpZebra, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\MeetPoint\printApp\Meetpt\sharpzebra\Com.SharpZebra\bin\Debug\Com.SharpZebra.dll</HintPath>
-    </Reference>
     <Reference Include="hgi.Base">
-      <HintPath>..\..\..\Refs\hgi.Base.dll</HintPath>
+      <HintPath>..\..\..\..\Refs\hgi.Base.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp">
-      <HintPath>..\..\Refs\RestSharp.dll</HintPath>
+      <HintPath>..\..\..\..\Refs\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -115,6 +111,7 @@
       <DependentUpon>LogControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataObjects.cs" />
+    <Compile Include="GlobalSettings.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -189,6 +186,12 @@
     <Resource Include="Images\icon_user_primary.png" />
     <Resource Include="Images\logo_mp.png" />
     <Resource Include="Images\logo_mp_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\printApp\Meetpt\sharpzebra\Com.SharpZebra\Com.SharpZebra.csproj">
+      <Project>{91e883c8-c218-42cf-a6ab-09861f1a3660}</Project>
+      <Name>Com.SharpZebra</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -37,12 +37,13 @@ namespace MeetpointPrinterNew.Pages
         
         public SetupPagePrintTemplate(UserSettings settings)
         {
+      
+            InitializeComponent();
+            GlobalSettings.CurrentPageID = 4;
+            lblPrintingDevice.Content = "SET LABEL TEMPLATE";
             _settings = settings;
             _isOnLoadChecked = false;
             _pageType = 2;
-            InitializeComponent();
-            lblPrintingDevice.Content = "SET LABEL TEMPLATE";
-
             _dataOptions = new List<string>();
 
             CanvasControlClearPosition(imgQrPreview);
@@ -50,7 +51,7 @@ namespace MeetpointPrinterNew.Pages
             _borderWidth = 279;
             _borderHeight = 108;
          
-            switch(_currentApp.ApplicationSettings.PrinterSetup.LayoutSizeID)
+            switch(GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID)
             {
                 case "cbSizeOne":
                     cbSizeTwo.IsChecked = true;
@@ -69,7 +70,7 @@ namespace MeetpointPrinterNew.Pages
             }
 
 
-            switch(_currentApp.ApplicationSettings.PrinterSetup.LayoutTemplate)
+            switch(GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate)
             {
                 case "cbLayoutQRT":
                     cbLayoutQRT.IsChecked = true;
@@ -98,7 +99,7 @@ namespace MeetpointPrinterNew.Pages
                     cbLayoutHL.IsChecked = false;
                     break;
             }
-            _dataOptions = _currentApp.ApplicationSettings.PrinterSetup.DataOptions.DataOption;
+            _dataOptions = GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption;
             _isOnLoadChecked = true;
             foreach (string cb in _dataOptions)
             {
@@ -120,9 +121,9 @@ namespace MeetpointPrinterNew.Pages
             bdrPreview.Width = _borderWidth * 0.6;
             bdrPreview.Height = _borderHeight * 0.6;
 
-            _currentApp.ApplicationSettings.PrinterSetup.LayoutSizeID = cb.Name;
-            _currentApp.ApplicationSettings.PrinterSetup.LayoutWidth = bdrPreview.Width;
-            _currentApp.ApplicationSettings.PrinterSetup.LayoutHeight = bdrPreview.Height;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID = cb.Name;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutWidth = bdrPreview.Width;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutHeight = bdrPreview.Height;
         }
 
         private void cbSizeTwo_Checked(object sender, RoutedEventArgs e)
@@ -133,9 +134,9 @@ namespace MeetpointPrinterNew.Pages
             bdrPreview.Width = _borderWidth * 0.8;
             bdrPreview.Height = _borderHeight * 0.8;
 
-            _currentApp.ApplicationSettings.PrinterSetup.LayoutSizeID = cb.Name;
-            _currentApp.ApplicationSettings.PrinterSetup.LayoutWidth = bdrPreview.Width;
-            _currentApp.ApplicationSettings.PrinterSetup.LayoutHeight = bdrPreview.Height;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID = cb.Name;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutWidth = bdrPreview.Width;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutHeight = bdrPreview.Height;
         }
 
         private void cbSizeThree_Checked(object sender, RoutedEventArgs e)
@@ -146,9 +147,9 @@ namespace MeetpointPrinterNew.Pages
             bdrPreview.Width = _borderWidth * 1.0;
             bdrPreview.Height = _borderHeight * 1.0;
 
-            _currentApp.ApplicationSettings.PrinterSetup.LayoutSizeID = cb.Name;
-            _currentApp.ApplicationSettings.PrinterSetup.LayoutWidth = bdrPreview.Width;
-            _currentApp.ApplicationSettings.PrinterSetup.LayoutHeight = bdrPreview.Height;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID = cb.Name;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutWidth = bdrPreview.Width;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutHeight = bdrPreview.Height;
         }
 
         private void cbLayoutQRT_Checked(object sender, RoutedEventArgs e)
@@ -164,7 +165,7 @@ namespace MeetpointPrinterNew.Pages
             SetControlCanvasPosition(imgQrPreview, double.NaN, 10, 10, double.NaN);
             SetControlCanvasPosition(spDataOptions, 10, double.NaN, double.NaN, double.NaN);
             CheckBox cb = (CheckBox)sender;
-            _currentApp.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
         }
 
         private void cbLayoutQRB_Checked(object sender, RoutedEventArgs e)
@@ -180,7 +181,7 @@ namespace MeetpointPrinterNew.Pages
             SetControlCanvasPosition(spDataOptions, 10, double.NaN, double.NaN, double.NaN);
 
             CheckBox cb = (CheckBox)sender;
-            _currentApp.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
 
         }
 
@@ -197,7 +198,7 @@ namespace MeetpointPrinterNew.Pages
             SetControlCanvasPosition(spDataOptions, 10, double.NaN, double.NaN, double.NaN);
 
             CheckBox cb = (CheckBox)sender;
-            _currentApp.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
         }
 
         private void cbLayoutQLT_Checked(object sender, RoutedEventArgs e)
@@ -213,7 +214,7 @@ namespace MeetpointPrinterNew.Pages
             SetControlCanvasPosition(spDataOptions, double.NaN, double.NaN, 10, double.NaN);
 
             CheckBox cb = (CheckBox)sender;
-            _currentApp.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
         }
 
         private void cbLayoutQLB_Checked(object sender, RoutedEventArgs e)
@@ -229,7 +230,7 @@ namespace MeetpointPrinterNew.Pages
             SetControlCanvasPosition(spDataOptions, double.NaN, double.NaN, 10, double.NaN);
 
             CheckBox cb = (CheckBox)sender;
-            _currentApp.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
 
         }
 
@@ -247,7 +248,7 @@ namespace MeetpointPrinterNew.Pages
             SetControlCanvasPosition(spDataOptions, double.NaN, double.NaN, 10, double.NaN);
 
             CheckBox cb = (CheckBox)sender;
-            _currentApp.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
         }
 
         private void cbOption_Checked(object sender, RoutedEventArgs e)
@@ -255,7 +256,7 @@ namespace MeetpointPrinterNew.Pages
             if(!_isOnLoadChecked)
             {
                 DataOptionsLogic(sender);
-                _currentApp.ApplicationSettings.PrinterSetup.DataOptions.DataOption = _dataOptions;
+                GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption = _dataOptions;
             }
         }
 
@@ -279,7 +280,7 @@ namespace MeetpointPrinterNew.Pages
                 }
                 SwitchDataOptions();
 
-                _currentApp.ApplicationSettings.PrinterSetup.DataOptions.DataOption = _dataOptions;
+                GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption = _dataOptions;
             }
           
         }

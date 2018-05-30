@@ -23,11 +23,12 @@ namespace MeetpointPrinterNew.Pages
     {
         private App _currentApp = ((App)Application.Current);
         private UserSettings _settings;
+      
+
         public LogPage(UserSettings settings)
         {
-    
-
             InitializeComponent();
+            GlobalSettings.CurrentPageID = 6;
 
             _settings = settings;
             BitmapImage imgNameSrc = new BitmapImage(new Uri("/Images/icon_badge.png", UriKind.Relative));
