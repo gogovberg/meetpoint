@@ -25,9 +25,9 @@
                     <Label FontSize="16" Content="Label size" Padding="0"></Label>
                     <TextBlock Style="{StaticResource TextBlockHelperText}" Text="Size in mm." Margin="0,0,0,10"></TextBlock>
                     <WrapPanel >
-                        <CheckBox x:Name="cbSizeOne" Content="500 x 100" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeOne_Checked" ></CheckBox>
-                        <CheckBox x:Name="cbSizeTwo" Content="500 x 200" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeTwo_Checked" ></CheckBox>
-                        <CheckBox x:Name="cbSizeThree" Content="500 x 300" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeThree_Checked" ></CheckBox>
+                        <CheckBox x:Name="cbSizeOne" Content="80 x 40" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeOne_Checked" ></CheckBox>
+                        <CheckBox x:Name="cbSizeTwo" Content="70 x 50" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeTwo_Checked" ></CheckBox>
+                     
                     </WrapPanel>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Orientation="Vertical">

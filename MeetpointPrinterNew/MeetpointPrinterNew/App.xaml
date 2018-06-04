@@ -40,6 +40,28 @@
             <Setter Property="Foreground"  Value="#8A8A8A"/>
         </Style>
 
+        <!-- TextBlockImage panel style -->
+        <Style x:Key="TextBlockImagePanel" TargetType="{x:Type Border}">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            
+        </Style>
+
+        <!-- TextBlockImage control  style -->
+        <Style x:Key="TextBlockImageStyle" TargetType="{x:Type custom:TextBlockImageControl}">
+            <Setter Property="Margin" Value="0,0,25,25"/> 
+            <Setter Property="BorderBrush" Value="#FFCBCBCB"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#FF1FE6A5" />
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="BorderBrush" Value="#FF1FE6A5" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
         <!-- White panel style -->
         <Style x:Key="Panel" TargetType="{x:Type Border}">
             <Setter Property="Background" Value="White"/>
@@ -408,25 +430,40 @@
                                         <TextBlock Style="{StaticResource TextBlockTitle}" Text="PRINT SETUP" Margin="0,0,0,25"></TextBlock>
                                         
                                         <DockPanel LastChildFill="False">
-                                            <CheckBox Style="{StaticResource SetupStep}" DockPanel.Dock="Left" Margin="0,0,25,0"></CheckBox>
+                                            <CheckBox x:Name="cbSelectPrinter" Style="{StaticResource SetupStep}" DockPanel.Dock="Left" Margin="0,0,25,0" >
+                                                <CheckBox.IsChecked>
+                                                    <Binding Path="IsPrinter" Source="{x:Static Application.Current}"/>
+                                                </CheckBox.IsChecked>
+                                                <Image x:Name="imgSelectPrinter"  Source="/Images/icon_printer.png" Margin="15"></Image>
+                                            </CheckBox>
                                             <TextBlock Text="" Foreground="#434752" FontSize="16" FontWeight="SemiBold" Margin="0,10,0,0">
                                                 STEP 1
                                                 <LineBreak />
                                                 Select printing device
                                             </TextBlock>
                                         </DockPanel>
-                                            <Line StrokeThickness="8" Stroke="#D3D4D6" X1="35" Y1="0" X2="35" Y2="60"></Line>
+                                            <Line x:Name="linePrintAccount" StrokeThickness="8" Stroke="#D3D4D6" X1="35" Y1="0" X2="35" Y2="60"></Line>
                                         <DockPanel LastChildFill="False">
-                                            <CheckBox Style="{StaticResource SetupStep}" HorizontalAlignment="Left" Margin="0,0,25,0"></CheckBox>
+                                            <CheckBox x:Name="cbSelectAccounts"  Style="{StaticResource SetupStep}" HorizontalAlignment="Left" Margin="0,0,25,0">
+                                                <CheckBox.IsChecked>
+                                                    <Binding Path="IsAccount" Source="{x:Static Application.Current}"/>
+                                                </CheckBox.IsChecked>
+                                                <Image x:Name="imgSelectAccounts"  Source="/Images/icon_users.png" Margin="15"></Image>
+                                            </CheckBox>
                                             <TextBlock Text="" Foreground="#434752" FontSize="16" FontWeight="SemiBold" Margin="0,10,0,0">
                                                 STEP 2
                                                 <LineBreak />
                                                 Select accounts
                                             </TextBlock>
                                         </DockPanel>
-                                            <Line StrokeThickness="8" Stroke="#D3D4D6" X1="35" Y1="0" X2="35" Y2="60"></Line>
+                                        <Line  x:Name="lineAccountTemplate"  StrokeThickness="8" Stroke="#D3D4D6" X1="35" Y1="0" X2="35" Y2="60"></Line>
                                         <DockPanel LastChildFill="False">
-                                            <CheckBox Style="{StaticResource SetupStep}" HorizontalAlignment="Left" Margin="0,0,25,0"></CheckBox>
+                                            <CheckBox  x:Name="cbSelectTemplate" Style="{StaticResource SetupStep}" HorizontalAlignment="Left" Margin="0,0,25,0">
+                                                <CheckBox.IsChecked>
+                                                    <Binding Path="IsTemplate" Source="{x:Static Application.Current}"/>
+                                                </CheckBox.IsChecked>
+                                                <Image x:Name="imgSelectTemplate"  Source="/Images/qr.jpg" Margin="15"></Image>
+                                            </CheckBox>
                                             <TextBlock Text="" Foreground="#434752" FontSize="16" FontWeight="SemiBold" Margin="0,10,0,0">
                                                 STEP 3
                                                 <LineBreak />

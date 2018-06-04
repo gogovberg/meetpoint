@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -31,6 +32,7 @@ namespace MeetpointPrinterNew.Pages
             this.userLoginValidation = new MockUserLoginValidation();
             LoginSuccessful += LoginControl_LoginSuccessful;
             LoginFailed += LoginControl_LoginFailed;
+            bdrError.Visibility = Visibility.Collapsed;
         }
 
         public event LoginSuccessfulHandler LoginSuccessful;
@@ -52,19 +54,21 @@ namespace MeetpointPrinterNew.Pages
                 {
                     LoginSuccessful(this, token);
                 }
-
             }
             else
             {
 
-                if (LoginFailed != null) { LoginFailed(this, new EventArgs()); }
+                if (LoginFailed != null) {
+                    LoginFailed(this, new EventArgs());
+                }
             }
-            //if (LoginSuccessful != null) { LoginSuccessful(this, ""); }
         }
         public void ShowErrorMsg(bool show, string msg = null)
         {
-            //this.lblError.Visibility = show ? Visibility.Visible : Visibility.Hidden;
-            //this.lblError.Content = msg == null ? "" : msg;
+           if(show)
+            {
+                bdrError.Visibility = Visibility.Visible;
+            }
         }
 
         private void tbUserName_TextChanged(object sender, EventArgs e)
@@ -82,33 +86,16 @@ namespace MeetpointPrinterNew.Pages
         private void LoginControl_LoginSuccessful(object sender, string token)
         {
 
-           
-            UserSettings us = Helpers.ReadUserSettings(this.tbUsername.Text.Trim());
-            if (us == null)
-            {
-                us = new UserSettings();
-                us.Event = new Event();
-                us.Accounts = new Accounts();
-                us.Accounts.Account = new List<Account>();
-                us.PrinterSetup = new PrinterSetup();
-                us.PrinterSetup.DataOptions = new DataOptions();
-                us.PrinterSetup.DataOptions.DataOption = new List<string>();
-                us.Username = this.tbUsername.Text.Trim();
-                us.AuthToken = token;
-                Helpers.SaveUserSettings(us);
-                GlobalSettings.ApplicationSettings = us;
-           
-            }
-            else
-            {
-                us.Username = this.tbUsername.Text.Trim();
-                us.AuthToken = token;
-                Helpers.SaveUserSettings(us);
-                GlobalSettings.ApplicationSettings = us;
-            }
             GlobalSettings.PreviousPageID = GlobalSettings.CurrentPageID;
-            Application.Current.MainWindow.Content = new EventPage(this.tbUsername.Text.Trim(), token);
+            Application.Current.MainWindow.Content = new EventPage(this.tbUsername.Text.Trim(), token,"");
         }
+
+        private void tbCridentials_IsMouseCapturedChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            bdrError.Visibility = Visibility.Collapsed;
+        }
+
+
     }
     public interface IUserLoginValidation
     {

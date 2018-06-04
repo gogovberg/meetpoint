@@ -14,7 +14,9 @@
             <RowDefinition Height="85"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-
+        <Popup x:Name="pupWarning" IsOpen="False">
+            <TextBlock Text="BLALALAL"/>
+        </Popup>
         <!-- Header row -->
         <Grid Grid.Row="0">
 

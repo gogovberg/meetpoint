@@ -8,7 +8,7 @@ using System.Printing;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-
+using MeetpointPrinterNew.Windows;
 
 namespace MeetpointPrinterNew.Pages
 {
@@ -50,7 +50,7 @@ namespace MeetpointPrinterNew.Pages
             _timerPrint.Elapsed += new ElapsedEventHandler(PrintQueueLabels);
             _timerPrint.Interval = _printTimer; // 1000 ms => 1 second
             _timerPrint.Enabled = false;
-
+            
             lock(_printObject)
             {
                 var server = new LocalPrintServer();
@@ -113,7 +113,9 @@ namespace MeetpointPrinterNew.Pages
 
         private void btnPrintTest_Click(object sender, RoutedEventArgs e)
         {
-            
+            Windows.MessageBox mb = new Windows.MessageBox();
+            mb.Show();
+            mb.Activate();
         }
 
         private void btnViewLog_Click(object sender, RoutedEventArgs e)
@@ -187,7 +189,7 @@ namespace MeetpointPrinterNew.Pages
         {
             Helpers.SaveUserSettings(GlobalSettings.ApplicationSettings);
             GlobalSettings.PreviousPageID = GlobalSettings.CurrentPageID;
-            Application.Current.MainWindow.Content = new EventPage(GlobalSettings.ApplicationSettings.Username, GlobalSettings.ApplicationSettings.AuthToken);
+            Application.Current.MainWindow.Content = new EventPage(GlobalSettings.ApplicationSettings.Username, GlobalSettings.ApplicationSettings.AuthToken, GlobalSettings.ApplicationSettings.Event.EventID.ToString());
         }
     }
 }

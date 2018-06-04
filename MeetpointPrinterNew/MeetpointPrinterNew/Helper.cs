@@ -134,7 +134,7 @@ namespace MeetpointPrinterNew
                 Debug.Log("MeetpointPrinter", "Save user settings");
                 if (up != null)
                 {
-                    string path = @"UserSettings/" + up.Username + "_settings.config";
+                    string path = @"UserSettings/" + up.Username + "_"+up.Event.EventID+"_settings.config";
                     XmlSerializer mySerializer = new XmlSerializer(typeof(UserSettings));
                     StreamWriter myWriter = new StreamWriter(path);
                     mySerializer.Serialize(myWriter, up);
@@ -151,7 +151,7 @@ namespace MeetpointPrinterNew
 
         }
 
-        public static UserSettings ReadUserSettings(string Username)
+        public static UserSettings ReadUserSettings(string Username,string EventID)
         {
             UserSettings us = null;
             try
@@ -159,7 +159,7 @@ namespace MeetpointPrinterNew
 
                 Debug.Log("MeetpointPrinter", "Read user settings");
 
-                string path = @"UserSettings/" + Username + "_settings.config";
+                string path = @"UserSettings/" + Username + "_" + EventID + "_settings.config";
                 if (File.Exists(path))
                 {
                     XmlSerializer mySerializer = new XmlSerializer(typeof(UserSettings));
@@ -177,7 +177,7 @@ namespace MeetpointPrinterNew
 
         }
 
-        public static void RemoveListItem<T>(List<T> items, string cbTag)
+        public static void RemoveAccountItem(List<Account> items, string cbTag)
         {
             try
             {
@@ -186,7 +186,7 @@ namespace MeetpointPrinterNew
                 {
                     for (int i = 0; i < items.Count; i++)
                     {
-                        if (items[i].Equals(cbTag))
+                        if (items[i].AccountID.Equals(cbTag))
                         {
                             removeindex = i;
                             break;

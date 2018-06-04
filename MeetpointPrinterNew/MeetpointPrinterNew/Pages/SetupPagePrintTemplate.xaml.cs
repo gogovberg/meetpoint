@@ -1,17 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MeetpointPrinterNew.Pages
 {
@@ -54,18 +45,16 @@ namespace MeetpointPrinterNew.Pages
             switch(GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID)
             {
                 case "cbSizeOne":
-                    cbSizeTwo.IsChecked = true;
+                    cbSizeOne.IsChecked = true;
                     break;
                 case "cbSizeTwo":
                     cbSizeTwo.IsChecked = true;
                     break;
-                case "cbSizeThree":
-                    cbSizeThree.IsChecked = true;
-                    break;
+
                 default:
                     cbSizeOne.IsChecked = false;
                     cbSizeTwo.IsChecked = false;
-                    cbSizeThree.IsChecked = false;
+               
                     break;
             }
 
@@ -116,7 +105,7 @@ namespace MeetpointPrinterNew.Pages
         {
             CheckBox cb = (CheckBox)sender;
             cbSizeTwo.IsChecked = false;
-            cbSizeThree.IsChecked = false;
+          
 
             bdrPreview.Width = _borderWidth * 0.6;
             bdrPreview.Height = _borderHeight * 0.6;
@@ -130,7 +119,7 @@ namespace MeetpointPrinterNew.Pages
         {
             CheckBox cb = (CheckBox)sender;
             cbSizeOne.IsChecked = false;
-            cbSizeThree.IsChecked = false;
+          
             bdrPreview.Width = _borderWidth * 0.8;
             bdrPreview.Height = _borderHeight * 0.8;
 
@@ -139,19 +128,7 @@ namespace MeetpointPrinterNew.Pages
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutHeight = bdrPreview.Height;
         }
 
-        private void cbSizeThree_Checked(object sender, RoutedEventArgs e)
-        {
-            CheckBox cb = (CheckBox)sender;
-            cbSizeOne.IsChecked = false;
-            cbSizeTwo.IsChecked = false;
-            bdrPreview.Width = _borderWidth * 1.0;
-            bdrPreview.Height = _borderHeight * 1.0;
-
-            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID = cb.Name;
-            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutWidth = bdrPreview.Width;
-            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutHeight = bdrPreview.Height;
-        }
-
+     
         private void cbLayoutQRT_Checked(object sender, RoutedEventArgs e)
         {
          

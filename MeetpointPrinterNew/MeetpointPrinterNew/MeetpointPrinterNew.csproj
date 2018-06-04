@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Com.SharpZebra, Version=0.9.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Refs\Com.SharpZebra.dll</HintPath>
+    </Reference>
     <Reference Include="hgi.Base">
       <HintPath>..\..\..\..\Refs\hgi.Base.dll</HintPath>
     </Reference>
@@ -66,11 +70,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Windows\MessageBox.xaml.cs">
+      <DependentUpon>MessageBox.xaml</DependentUpon>
+    </Compile>
     <Page Include="CustomControls\EventControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomControls\LogControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\TextBlockImageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -102,6 +113,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\MessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomControls\EventControl.xaml.cs">
@@ -109,6 +124,9 @@
     </Compile>
     <Compile Include="CustomControls\LogControl.xaml.cs">
       <DependentUpon>LogControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\TextBlockImageControl.xaml.cs">
+      <DependentUpon>TextBlockImageControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataObjects.cs" />
     <Compile Include="GlobalSettings.cs" />
@@ -186,12 +204,6 @@
     <Resource Include="Images\icon_user_primary.png" />
     <Resource Include="Images\logo_mp.png" />
     <Resource Include="Images\logo_mp_white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\printApp\Meetpt\sharpzebra\Com.SharpZebra\Com.SharpZebra.csproj">
-      <Project>{91e883c8-c218-42cf-a6ab-09861f1a3660}</Project>
-      <Name>Com.SharpZebra</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\bg.jpg" />

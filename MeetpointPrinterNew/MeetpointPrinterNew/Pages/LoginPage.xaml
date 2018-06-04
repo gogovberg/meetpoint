@@ -19,18 +19,29 @@
         </Rectangle>
         
         <!-- Login panel -->
-        <Border Background="#fff" HorizontalAlignment="Center" Width="410" Height="580" Padding="60" CornerRadius="4">
+        <Border Background="#fff" HorizontalAlignment="Center" Width="410" Height="634" Padding="60" CornerRadius="4">
             <StackPanel FocusManager.FocusedElement="{Binding ElementName=tbUsername}">
                 <Image x:Name="imgLogo" VerticalAlignment="Top" HorizontalAlignment="Center" Source="/Images/logo_mp.png" Width="200"/>
 
                 <TextBlock x:Name="lblLogin" Style="{StaticResource TextBlockTitle}" Text="LOGIN" Margin="0,40,0,0"/>
                 <TextBlock x:Name="lblLoginDesc" Text="Use your MeetPoint application credentials to login." Style="{StaticResource TextBlockHelperText}" Margin="0,0,0,30"/>
 
+                <Border x:Name="bdrError"  CornerRadius="4" Margin="0,0,0,10" Background="#FFFFEEEE" Padding="15">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10*"></ColumnDefinition>
+                            <ColumnDefinition Width="90*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image x:Name="imgError" Grid.Column="0" Source="/Images/icon_danger.png" ></Image>
+                        <TextBlock x:Name="tblError" FontWeight="SemiBold" FontFamily="Open Sans" Margin="15,0,0,0" Grid.Column="1" Text="Incorrect username or password. Please, try again." FontSize="14" Foreground="#FFFE0023" TextWrapping="Wrap"></TextBlock>
+                    </Grid>
+                </Border>
+                    
                 <Label x:Name="lblUsername" Content="Username" />
-                <TextBox x:Name="tbUsername"  Height="40" VerticalContentAlignment="Center"  Margin="0,0,0,20"></TextBox>
+                <TextBox x:Name="tbUsername"  Height="40" VerticalContentAlignment="Center"  Margin="0,0,0,20" IsMouseCapturedChanged="tbCridentials_IsMouseCapturedChanged"></TextBox>
                 
                 <Label x:Name="lblPassword" Content="Password" />
-                <PasswordBox x:Name="tbPassword" Height="40" VerticalContentAlignment="Center" Margin="0,0,0,30"></PasswordBox>
+                <PasswordBox x:Name="tbPassword" Height="40" VerticalContentAlignment="Center" Margin="0,0,0,30" IsMouseCapturedChanged="tbCridentials_IsMouseCapturedChanged"></PasswordBox>
 
                 <Button x:Name="btnLogin" IsDefault="True" Content="LOG IN" Click="btnLogin_Click" Style="{StaticResource ButtonPrimary}" FontSize="16" Height="40">
                 </Button>
