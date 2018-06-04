@@ -7,195 +7,192 @@
       mc:Ignorable="d" 
       d:DesignHeight="787" d:DesignWidth="1315"  
       Title="PrintSettingsPage">
+
     <Grid>
-        <Grid Background="#FFEFEFEF" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="110*"/>
-            </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="85"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!-- Header row -->
+        <Grid Grid.Row="0">
+
+            <!-- Rectangle hack to put shadow on header (in a way that it won't affect text rendering) -->
+            <Rectangle Fill="#434752" RadiusX="4" RadiusY="4" HorizontalAlignment="Stretch" >
+                <Rectangle.Effect>
+                    <DropShadowEffect ShadowDepth="2" Direction="315" Color="#ccc"/>
+                </Rectangle.Effect>
+            </Rectangle>
+
             <!-- Header -->
-            <Grid Grid.Row="0">
-                <Border Background="#FF434752">
-                    <Border.Effect>
-                        <DropShadowEffect ShadowDepth="1" Direction="315" />
-                    </Border.Effect>
+            <Border Background="#434752">
+                <DockPanel LastChildFill="False">
+                    <Image DockPanel.Dock="Left" Margin="20,0,0,0" Source="/Images/logo_mp_white.png" Width="170"></Image>
+                    <Button x:Name="btnEvents" 
+                            Margin="50,0,0,0" 
+                            DockPanel.Dock="Left"
+                            Foreground="White" 
+                            Background="Transparent" 
+                            BorderThickness="0" 
+                            Content="EVENTS" 
+                            FontWeight="SemiBold"
+                            FontSize="13"
+                            Cursor="Hand"
+                            Click="btnEvents_Click">
+                    </Button>
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="30*"></ColumnDefinition>
-                            <ColumnDefinition Width="20*"></ColumnDefinition>
-                            <ColumnDefinition Width="70*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0">
-                            <Image HorizontalAlignment="Left" Margin="40,10,10,10" Source="/Images/logo_mp_white.png"></Image>
-                        </Grid>
+                    <Button x:Name="btnLogout" DockPanel.Dock="Right" Content="LOG OUT" FontSize="12" Margin="20,0,20,0" Height="30" Width="80" Padding="10, 40, 40, 10" Style="{StaticResource ButtonPrimary}" Click="btnLogout_Click"></Button>
+                    <Label x:Name="LblCurrentUser" DockPanel.Dock="Right" VerticalAlignment="Center" FontSize="14" FontWeight="Regular" Foreground="White">
+                        <Label.Content>
+                            <Binding Path="CurrentUser" Source="{x:Static Application.Current}"/>
+                        </Label.Content>
+                    </Label>
+                </DockPanel>
+            </Border>
 
-                        <Button  x:Name="btnEvents" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" Grid.Column="1"  Content="Events" Click="btnEvents_Click" ></Button>
+        </Grid>
 
-                        <Grid HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30*"></ColumnDefinition>
-                                <ColumnDefinition Width="90*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Label x:Name="LblCurrentUser"  VerticalAlignment="Center"  FontSize="16"  Foreground="White" Grid.Column="0" >
+        <!-- Subheader row -->
+        <Grid Grid.Row="1">
+            <Border Grid.Row="0" Background="#fff" >
+                <DockPanel VerticalAlignment="Center">
+                    <Grid DockPanel.Dock="Left">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <DockPanel Grid.Row="0">
+                            <Image x:Name="imgEventLogo" Width="30" Source="/Images/icon_event_primary.png" DockPanel.Dock="Left" Margin="50,0,10,0"></Image>
+                            <Label x:Name="lblEventName" Foreground="#FF2489FF" FontSize="18" DockPanel.Dock="Left" Margin="0,5,0,0" >
                                 <Label.Content>
-                                    <Binding Path="CurrentUser" Source="{x:Static Application.Current}"/>
+                                    <Binding Path="CurrentEvent" Source="{x:Static Application.Current}"/>
                                 </Label.Content>
                             </Label>
-                            <Button x:Name="btnLogout"  VerticalAlignment="Center"  Content="Logout" Padding="4" FontSize="20" Grid.Column="1" Margin="10,10,30,10" Background="#FF50A2FF" BorderBrush="{x:Null}" Foreground="White" Click="btnLogout_Click">
-                                
-                            </Button>
-                        </Grid>
-                    </Grid>
-                </Border>
-            </Grid>
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="7*"/>
-                    <ColumnDefinition Width="23*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="15*"/>
-                    <RowDefinition Height="135*"/>
-                </Grid.RowDefinitions>
-      
-                <Border Grid.Row="0" Background="White" Grid.ColumnSpan="2" >
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="10*"></ColumnDefinition>
-                            <ColumnDefinition Width="90*"></ColumnDefinition>
-                            <ColumnDefinition Width="10*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                        </DockPanel>
 
-                        <Image x:Name="imgEventLogo" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="40,20,0,0" Source="/Images/icon_event_primary.png" Stretch="Uniform" StretchDirection="Both"></Image>
-                        <Label x:Name="lblEventName" Grid.Row="0" Grid.Column="1"  VerticalAlignment="Bottom"  HorizontalAlignment="Left"   Foreground="#FF2489FF"  FontSize="15" >
-                            <Label.Content>
-                                <Binding Path="CurrentEvent" Source="{x:Static Application.Current}"/>
-                            </Label.Content>
-                        </Label>
-                        <Label x:Name="lblEventDateLocation" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left"  FontSize="10" Foreground="#FF8A8A8A" >
+                        <Label x:Name="lblEventDateLocation" FontSize="14" FontWeight="Regular" Grid.Row="1" Margin="90,0,0,0">
                             <Label.Content>
                                 <Binding Path="CurrentEventLocation" Source="{x:Static Application.Current}"/>
                             </Label.Content>
                         </Label>
+                    </Grid>
+                </DockPanel>
+            </Border>
+        </Grid>
 
+        <!-- Content row -->
+        <Border MaxWidth="1200" Grid.Row="2" x:Name="gdrContent" Margin="50,30">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"></ColumnDefinition>
+                    <ColumnDefinition Width="70*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock x:Name="tblPrintSettings" Text="PRINT SETTINGS" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockTitle}" Margin="0,0,0,25"></TextBlock>
+                <TextBlock x:Name="tblPrintActivation" Text="PRINT ACTIVATION" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBlockTitle}"></TextBlock>
+                <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderSettings}" >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40*"></ColumnDefinition>
+                            <ColumnDefinition Width="10*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Name="tblPrintingDevice" Margin="40,0,0,0" VerticalAlignment="Center" Text="SELECTED PRINTING DEVICE" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockSubtitle}"></TextBlock>
+                        <StackPanel Margin="40,0,0,10"  Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                            <Image HorizontalAlignment="Left" Source="/Images/icon_printer.png"  Grid.Row="1" Grid.Column="0"/>
+                            <TextBlock x:Name="tblPrinterName" Margin="20,10,10,10" Text="Printer name 1" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBlockSubtitle}"/>
+                        </StackPanel>
+                        <Button x:Name="btnEditPrinter" Grid.Row="0" Grid.Column="1" Click="btneditPrinter_Click"  ></Button>
                     </Grid>
                 </Border>
-              
-                <Grid Grid.Row="1" x:Name="gdrContent" Grid.ColumnSpan="2">
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="50*"></ColumnDefinition>
-                        <ColumnDefinition Width="70*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="10*"></RowDefinition>
-                        <RowDefinition Height="20*"></RowDefinition>
-                        <RowDefinition Height="30*"></RowDefinition>
-                        <RowDefinition Height="40*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <TextBlock x:Name="tblPrintSettings" Text="PRINT SETTINGS"  Margin="40,10,10,10" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockTitle}"></TextBlock>
-                    <TextBlock x:Name="tblPrintActivation" Text="PRINT ACTIVATION" Margin="40,10,10,10"  Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBlockTitle}"></TextBlock>
-                    <Border Margin="40,10,10,10" Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderSettings}" >
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="40*"></ColumnDefinition>
-                                <ColumnDefinition Width="10*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <TextBlock x:Name="tblPrintingDevice" Margin="40,0,0,0" VerticalAlignment="Center" Text="SELECTED PRINTING DEVICE" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockSubtitle}"></TextBlock>
-                            <StackPanel Margin="40,0,0,10"  Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
-                                <Image HorizontalAlignment="Left" Source="/Images/icon_printer.png"  Grid.Row="1" Grid.Column="0"/>
-                                <TextBlock x:Name="tblPrinterName" Margin="20,10,10,10" Text="Printer name 1" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBlockSubtitle}"/>
-                            </StackPanel>
-                            <Button x:Name="btnEditPrinter" Grid.Row="0" Grid.Column="1" Click="btneditPrinter_Click"  ></Button>
-                        </Grid>
-                    </Border>
-                    <Border Margin="40,10,10,10" Grid.Row="2" Grid.Column="0" Style="{StaticResource BorderSettings}" >
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="40*"></ColumnDefinition>
-                                <ColumnDefinition Width="10*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <TextBlock x:Name="tblAccountsTitle" Margin="40,0,0,0" VerticalAlignment="Center" Text="SELECTED PRINTING DEVICE" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockSubtitle}"></TextBlock>
-                            <ItemsControl x:Name="icAccountItem" Grid.Row="1" Grid.RowSpan="2" Margin="30" >
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel/>
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.Template>
-                                    <ControlTemplate>
-                                        <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}">
-                                            <ItemsPresenter />
-                                        </ScrollViewer>
-                                    </ControlTemplate>
-                                </ItemsControl.Template>
-                            </ItemsControl>
-                            <Button x:Name="btnEditAccount" Grid.Row="0" Grid.Column="1" Click="btnEditAccount_Click"   ></Button>
-                        </Grid>
-                    </Border>
-                    <Border Margin="40,10,10,10" Grid.Row="3" Grid.Column="0" Style="{StaticResource BorderSettings}" >
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="40*"></ColumnDefinition>
-                                <ColumnDefinition Width="10*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <TextBlock x:Name="tblTemplateTitle" Margin="40,0,0,0" VerticalAlignment="Center" Text="SET TEMPLATE" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockSubtitle}"></TextBlock>
-                            <Button x:Name="btnEditTemplate" Grid.Row="0" Grid.Column="1" Click="btnEditTemplate_Click"  ></Button>
-                        </Grid>
-                    </Border>
-                    <Border Margin="40,10,10,10" Grid.Row="1" Grid.Column="1" Style="{StaticResource BorderSettings}" >
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30*"></ColumnDefinition>
-                                <ColumnDefinition Width="60*"></ColumnDefinition>
-                                <ColumnDefinition Width="30*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock x:Name="tblLivePrint" FontSize="16" Text="Live print" Grid.Column="0" Foreground="Black"   HorizontalAlignment="Center" VerticalAlignment="Center"  ></TextBlock>
-                            <Border  Grid.Column="1" Background="#FFF8F8F8" Margin="20" >
-                                <StackPanel Orientation="Horizontal">
-                                    <CheckBox x:Name="cbInactive" FontSize="16" HorizontalAlignment="Center" Foreground="Black" VerticalAlignment="Center" Content="Inactive" Checked="cbInactive_Checked"></CheckBox>
-                                    <CheckBox x:Name="cbActive" FontSize="16" HorizontalAlignment="Center" Foreground="Black" VerticalAlignment="Center" Content="Active" Checked="cbActive_Checked"></CheckBox>
-                                </StackPanel>
-                            </Border>
-                        </Grid>
-                    </Border>
-                    <Grid Grid.Column="1" Grid.Row="2">
+                <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource BorderSettings}" >
+                    <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="40*"></ColumnDefinition>
+                            <ColumnDefinition Width="10*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Button x:Name="btnPrintEmpty" Content="PRINT EMPTY LABEL" FontSize="16" Grid.Column="0" Grid.Row="0"  Margin="40,10,10,10" Background="#FF50A2FF" Foreground="white" Click="btnPrintEmpty_Click" ></Button>
-                        <Button x:Name="btnPrintTest" Content="PRINT TEST TEMPLATE" FontSize="16" Grid.Column="1" Grid.Row="0"  Margin="10,10,10,10" Background="#FF50A2FF" Foreground="white" Click="btnPrintTest_Click" ></Button>
-                        <Button x:Name="btnViewLog" Content="View print log" FontSize="16" Grid.Column="2" Grid.Row="0"  Margin="10,10,10,10" Background="#FFAFAFAF" Foreground="white" Click="btnViewLog_Click" ></Button>
+                        <TextBlock x:Name="tblAccountsTitle" Margin="40,0,0,0" VerticalAlignment="Center" Text="SELECTED PRINTING DEVICE" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockSubtitle}"></TextBlock>
+                        <ItemsControl x:Name="icAccountItem" Grid.Row="1" Grid.RowSpan="2" Margin="30" >
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.Template>
+                                <ControlTemplate>
+                                    <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}">
+                                        <ItemsPresenter />
+                                    </ScrollViewer>
+                                </ControlTemplate>
+                            </ItemsControl.Template>
+                        </ItemsControl>
+                        <Button x:Name="btnEditAccount" Grid.Row="0" Grid.Column="1" Click="btnEditAccount_Click"   ></Button>
                     </Grid>
+                </Border>
+                <Border Grid.Row="3" Grid.Column="0" Style="{StaticResource BorderSettings}" >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40*"></ColumnDefinition>
+                            <ColumnDefinition Width="10*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Name="tblTemplateTitle" Margin="40,0,0,0" VerticalAlignment="Center" Text="SET TEMPLATE" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockSubtitle}"></TextBlock>
+                        <Button x:Name="btnEditTemplate" Grid.Row="0" Grid.Column="1" Click="btnEditTemplate_Click"  ></Button>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource BorderSettings}" >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                            <ColumnDefinition Width="60*"></ColumnDefinition>
+                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="tblLivePrint" FontSize="16" Text="Live print" Grid.Column="0" Foreground="Black"   HorizontalAlignment="Center" VerticalAlignment="Center"  ></TextBlock>
+                        <Border  Grid.Column="1" Background="#FFF8F8F8" Margin="20" >
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox x:Name="cbInactive" FontSize="16" HorizontalAlignment="Center" Foreground="Black" VerticalAlignment="Center" Content="Inactive" Checked="cbInactive_Checked"></CheckBox>
+                                <CheckBox x:Name="cbActive" FontSize="16" HorizontalAlignment="Center" Foreground="Black" VerticalAlignment="Center" Content="Active" Checked="cbActive_Checked"></CheckBox>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Border>
+                <Grid Grid.Column="1" Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button x:Name="btnPrintEmpty" Content="PRINT EMPTY LABEL" Style="{StaticResource ButtonPrimary}" Grid.Column="0" Grid.Row="0"  Margin="40,10,10,10" Click="btnPrintEmpty_Click" ></Button>
+                    <Button x:Name="btnPrintTest" Content="PRINT TEST TEMPLATE" Style="{StaticResource ButtonPrimary}" Grid.Column="1" Grid.Row="0"  Margin="10,10,10,10" Click="btnPrintTest_Click" ></Button>
+                    <Button x:Name="btnViewLog" Content="View print log" Style="{StaticResource ButtonPrimary}" Grid.Column="2" Grid.Row="0"  Margin="10,10,10,10" Click="btnViewLog_Click" ></Button>
                 </Grid>
             </Grid>
-        </Grid>
+        </Border>
     </Grid>
 </Page>

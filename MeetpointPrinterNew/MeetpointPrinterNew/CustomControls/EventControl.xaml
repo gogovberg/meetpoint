@@ -5,42 +5,48 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MeetpointPrinterNew.CustomControls"
              mc:Ignorable="d" 
-             Height="150" Width="300" >
-    <Grid>
-        <Border MouseUp="EventBorder_MouseUp" MouseDown="EventBorder_MouseDown"   Background="White">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="1" Direction="315" />
-            </Border.Effect>
+             >
+    
+    <Grid Width="350" Cursor="Hand">
+        <!-- Rectangle hack to put shadow on event panels (in a way that it won't affect text rendering) -->
+        <Rectangle Width="350" HorizontalAlignment="Center" Fill="#fff" RadiusX="4" RadiusY="4">
+            <Rectangle.Effect>
+                <DropShadowEffect ShadowDepth="1" Direction="315" Color="#ccc"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        
+        <!-- Event panel -->
+        <Border MouseUp="EventBorder_MouseUp" MouseDown="EventBorder_MouseDown" Background="#fff" CornerRadius="4" Padding="25">
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                    <ColumnDefinition Width="5*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image x:Name="imgEventLogo" Grid.Column="0" Grid.Row="0" Margin="5" Stretch="Fill" ></Image>
-                <TextBlock x:Name="tblEventName" Grid.Column="1" Grid.Row="0" Margin="5" VerticalAlignment="Center" Foreground="#FF2489FF"  FontSize="15" ></TextBlock>
-                <Grid Grid.Column="1" Grid.Row="1">
+
+                <DockPanel Grid.Row="0">
+                    <Image x:Name="imgEventLogo" Width="30" DockPanel.Dock="Left"></Image>
+                    <TextBlock x:Name="tblEventName" Margin="10,0,0,5" DockPanel.Dock="Left" Foreground="#FF2489FF" FontWeight="SemiBold" FontSize="18" ></TextBlock>
+                </DockPanel>
+                
+                <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock x:Name="tblEventDate"  Grid.Row="0" Margin="5,2.5"   FontSize="10"  VerticalAlignment="Bottom"  ></TextBlock>
-                    <TextBlock x:Name="tblEventLocation" Grid.Row="1" Margin="5,2.5"  FontSize="10"  VerticalAlignment="Top"  ></TextBlock>
+                    <TextBlock x:Name="tblEventDate" Grid.Row="0" Margin="40,0,25,0" FontSize="14"></TextBlock>
+                    <TextBlock x:Name="tblEventLocation" Grid.Row="1" Margin="40,0,25,35" FontSize="14"></TextBlock>
                 </Grid>
-                <Grid Grid.Column="1" Grid.Row="2">
+                
+                <Grid Grid.Row="2">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock x:Name="tblCreatedLabel"  Grid.Row="0" Margin="5,2.5"  FontSize="10"  VerticalAlignment="Bottom"  Foreground="#FF8A8A8A" ></TextBlock>
-                    <TextBlock x:Name="tblCreatedDate" Grid.Row="1" Margin="5,2.5" FontSize="10"  VerticalAlignment="Top"   Foreground="#FF8A8A8A" ></TextBlock>
+                    <TextBlock x:Name="tblCreatedLabel"  Grid.Row="0" FontWeight="SemiBold" FontSize="12" Foreground="#8A8A8A" ></TextBlock>
+                    <TextBlock x:Name="tblCreatedDate" Grid.Row="1" FontSize="12"  Foreground="#8A8A8A" ></TextBlock>
                 </Grid>
             </Grid>
         </Border>
-
     </Grid>
 </UserControl>

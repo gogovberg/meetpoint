@@ -19,6 +19,7 @@
         <!-- Textbox styles -->
         <Style TargetType="TextBox">
             <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="#333" />
             <Setter Property="Padding" Value="8,0,8,0" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -45,12 +46,13 @@
             </Setter>
         </Style>
 
-        <!-- Button styles -->
-        <Style TargetType="Button">
+        <!-- Primary Button style -->
+        <Style x:Key="ButtonPrimary" TargetType="Button">
             <Setter Property="Background" Value="#50A2FF"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Foreground" Value="#fff"/>
             <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Height" Value="40"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -69,52 +71,59 @@
             </Style.Triggers>
         </Style>
         
+        <!-- Page with header Template -->
         <Style x:Key="HeaderFooterPageStyle" TargetType="Page">
+            <Setter Property="Background" Value="#50A2FF"/>
+
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Page}">
-                        <Grid Background="#FFEFEFEF" >
+                        <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="10*"/>
-                                <RowDefinition Height="110*"/>
+                                <RowDefinition Height="60"/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
-                             <!--Header--> 
+                            
+                             <!-- Header row --> 
                             <Grid Grid.Row="0">
-                                <Border Background="#FF434752">
-                                    <Border.Effect>
-                                        <DropShadowEffect ShadowDepth="1" Direction="315" />
-                                    </Border.Effect>
 
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="30*"></ColumnDefinition>
-                                            <ColumnDefinition Width="20*"></ColumnDefinition>
-                                            <ColumnDefinition Width="70*"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0">
-                                            <Image HorizontalAlignment="Left" Margin="40,10,10,10" Source="/Images/logo_mp_white.png"></Image>
-                                        </Grid>
+                                <!-- Rectangle hack to put shadow on header (in a way that it won't affect text rendering) -->
+                                <Rectangle Fill="#434752" RadiusX="4" RadiusY="4" HorizontalAlignment="Stretch" >
+                                    <Rectangle.Effect>
+                                        <DropShadowEffect ShadowDepth="2" Direction="315" Color="#ccc"/>
+                                    </Rectangle.Effect>
+                                </Rectangle>
 
-                                        <Button  x:Name="btnEvents" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" Grid.Column="1"  Content="Events" Click="btnEvents_Click" ></Button>
+                                <!-- Header -->
+                                <Border Background="#434752">
+                                    <DockPanel LastChildFill="False">
+                                        <Image DockPanel.Dock="Left" Margin="20,0,0,0" Source="/Images/logo_mp_white.png" Width="170"></Image>
+                                        <Button x:Name="btnEvents" 
+                                                Margin="50,0,0,0" 
+                                                DockPanel.Dock="Left"
+                                                Foreground="White" 
+                                                Background="Transparent" 
+                                                BorderThickness="0" 
+                                                Content="EVENTS" 
+                                                FontWeight="SemiBold"
+                                                FontSize="13"
+                                                Cursor="Hand"
+                                                Click="btnEvents_Click">
+                                        </Button>
 
-                                        <Grid HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" >
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="30*"></ColumnDefinition>
-                                                <ColumnDefinition Width="90*"></ColumnDefinition>
-                                            </Grid.ColumnDefinitions>
-                                            <Label x:Name="LblCurrentUser"  VerticalAlignment="Center"  FontSize="16"  Foreground="White" Grid.Column="0" >
-                                                <Label.Content>
-                                                    <Binding Path="CurrentUser" Source="{x:Static Application.Current}"/>
-                                                </Label.Content>
-                                            </Label>
-                                            <Button x:Name="btnLogout"  VerticalAlignment="Center"  Content="Logout"  Grid.Column="1"  Margin="10,10,30,10"  FontSize="20" Padding="15,5,15,5" Background="#FF50A2FF" BorderBrush="{x:Null}" Foreground="White" Click="btnLogout_Click"></Button>
-                                        </Grid>
-                                    </Grid>
+                                        <Button x:Name="btnLogout" DockPanel.Dock="Right" Content="LOG OUT" FontSize="12" Margin="20,0,20,0" Height="30" Width="80" Padding="10, 40, 40, 10" Style="{StaticResource ButtonPrimary}" Click="btnLogout_Click"></Button>
+                                        <Label x:Name="LblCurrentUser" DockPanel.Dock="Right" VerticalAlignment="Center" FontSize="14" FontWeight="Regular" Foreground="White">
+                                            <Label.Content>
+                                                <Binding Path="CurrentUser" Source="{x:Static Application.Current}"/>
+                                            </Label.Content>
+                                        </Label>
+                                    </DockPanel>
                                 </Border>
+                                
                             </Grid>
-                             <!--Body--> 
+                            
+                             <!-- Content row --> 
                             <ContentPresenter Grid.Row="1"/>
-
 
                         </Grid>
                     </ControlTemplate>
@@ -122,109 +131,120 @@
             </Setter>
         </Style>
 
+        <!-- Page with header and subheader Template -->
         <Style x:Key="HeaderFooterSettingsPageStyle" TargetType="Page">
+            <Setter Property="Background" Value="#50A2FF"/>
+
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Page}">
-                        <Grid Background="#FFEFEFEF" >
+                        <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="10*"/>
-                                <RowDefinition Height="110*"/>
+                                <RowDefinition Height="60"/>
+                                <RowDefinition Height="85"/>
+                                <RowDefinition />
                             </Grid.RowDefinitions>
-                             <!--Header--> 
+
+                            <!-- Header row -->
                             <Grid Grid.Row="0">
-                                <Border Background="#FF434752">
-                                    <Border.Effect>
-                                        <DropShadowEffect ShadowDepth="1" Direction="315" />
-                                    </Border.Effect>
 
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="30*"></ColumnDefinition>
-                                            <ColumnDefinition Width="20*"></ColumnDefinition>
-                                            <ColumnDefinition Width="70*"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0">
-                                            <Image HorizontalAlignment="Left" Margin="40,10,10,10" Source="/Images/logo_mp_white.png"></Image>
-                                        </Grid>
-                                        
-                                        <Button  x:Name="btnEvents" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" Grid.Column="1"  Content="Events" Click="btnEvents_Click" ></Button>
+                                <!-- Rectangle hack to put shadow on header (in a way that it won't affect text rendering) -->
+                                <Rectangle Fill="#434752" RadiusX="4" RadiusY="4" HorizontalAlignment="Stretch" >
+                                    <Rectangle.Effect>
+                                        <DropShadowEffect ShadowDepth="2" Direction="315" Color="#ccc"/>
+                                    </Rectangle.Effect>
+                                </Rectangle>
 
-                                        <Grid HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" >
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="30*"></ColumnDefinition>
-                                                <ColumnDefinition Width="90*"></ColumnDefinition>
-                                            </Grid.ColumnDefinitions>
-                                            <Label x:Name="LblCurrentUser"  VerticalAlignment="Center"  FontSize="16"  Foreground="White" Grid.Column="0" >
+                                <!-- Header -->
+                                <Border Background="#434752">
+                                    <DockPanel LastChildFill="False">
+                                        <Image DockPanel.Dock="Left" Margin="20,0,0,0" Source="/Images/logo_mp_white.png" Width="170"></Image>
+                                        <Button x:Name="btnEvents" 
+                                            Margin="50,0,0,0" 
+                                            DockPanel.Dock="Left"
+                                            Foreground="White" 
+                                            Background="Transparent" 
+                                            BorderThickness="0" 
+                                            Content="EVENTS" 
+                                            FontWeight="SemiBold"
+                                            FontSize="13"
+                                            Cursor="Hand"
+                                            Click="btnEvents_Click">
+                                        </Button>
+
+                                        <Button x:Name="btnLogout" DockPanel.Dock="Right" Content="LOG OUT" FontSize="12" Margin="20,0,20,0" Height="30" Width="80" Padding="10, 40, 40, 10" Style="{StaticResource ButtonPrimary}" Click="btnLogout_Click"></Button>
+                                        <Label x:Name="LblCurrentUser" DockPanel.Dock="Right" VerticalAlignment="Center" FontSize="14" FontWeight="Regular" Foreground="White">
+                                            <Label.Content>
+                                                <Binding Path="CurrentUser" Source="{x:Static Application.Current}"/>
+                                            </Label.Content>
+                                        </Label>
+                                    </DockPanel>
+                                </Border>
+
+                            </Grid>
+
+                            <!-- Subheader row -->
+                            <Grid Grid.Row="1">
+                                <Border Grid.Row="0" Background="#fff" >
+                                    <DockPanel VerticalAlignment="Center">
+                                        <Grid DockPanel.Dock="Left">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                            </Grid.RowDefinitions>
+
+                                            <DockPanel Grid.Row="0">
+                                                <Image x:Name="imgEventLogo" Width="30" Source="/Images/icon_event_primary.png" DockPanel.Dock="Left" Margin="50,0,10,0"></Image>
+                                                <Label x:Name="lblEventName" Foreground="#FF2489FF" FontSize="18" DockPanel.Dock="Left" Margin="0,5,0,0" >
+                                                    <Label.Content>
+                                                        <Binding Path="CurrentEvent" Source="{x:Static Application.Current}"/>
+                                                    </Label.Content>
+                                                </Label>
+                                            </DockPanel>
+
+                                            <Label x:Name="lblEventDateLocation" FontSize="14" FontWeight="Regular" Grid.Row="1" Margin="90,0,0,0">
                                                 <Label.Content>
-                                                    <Binding Path="CurrentUser" Source="{x:Static Application.Current}"/>
+                                                    <Binding Path="CurrentEventLocation" Source="{x:Static Application.Current}"/>
                                                 </Label.Content>
                                             </Label>
-                                            <Button x:Name="btnLogout"  VerticalAlignment="Center"  Content="Logout" FontSize="20" Grid.Column="1" Margin="10,10,30,10" Padding="15,5,15,5" Background="#FF50A2FF" BorderBrush="{x:Null}" Foreground="White" Click="btnLogout_Click"></Button>
                                         </Grid>
-                                    </Grid>
+                                    </DockPanel>
                                 </Border>
                             </Grid>
-                            <Grid Grid.Row="1">
+
+                            <!-- Content row -->
+                            <Grid Grid.Row="2">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="15*"/>
-                                    <RowDefinition Height="110*"/>
-                                    <RowDefinition Height="25*"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="100"/>
                                 </Grid.RowDefinitions>
-                                <Border Grid.Row="0" Background="White" >
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="10*"></ColumnDefinition>
-                                            <ColumnDefinition Width="90*"></ColumnDefinition>
-                                            <ColumnDefinition Width="10*"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-
-                                        <Image x:Name="imgEventLogo" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="40,20,0,0" Source="/Images/icon_event_primary.png" Stretch="Uniform" StretchDirection="Both"></Image>
-                                        <Label x:Name="lblEventName" Grid.Row="0" Grid.Column="1"  VerticalAlignment="Bottom"  HorizontalAlignment="Left"   Foreground="#FF2489FF"  FontSize="15" >
-                                            <Label.Content>
-                                                <Binding Path="CurrentEvent" Source="{x:Static Application.Current}"/>
-                                            </Label.Content>
-                                        </Label>
-                                        <Label x:Name="lblEventDateLocation" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left"  FontSize="10" Foreground="#FF8A8A8A" >
-                                            <Label.Content>
-                                                <Binding Path="CurrentEventLocation" Source="{x:Static Application.Current}"/>
-                                            </Label.Content>
-                                        </Label>
-
-                                    </Grid>
-                                </Border>
-                                <Grid Grid.Row="1" x:Name="gdrContent">
+                                
+                                <Grid Grid.Row="0" x:Name="gdrContent" Margin="50, 35, 50, 0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="30*"></ColumnDefinition>
                                         <ColumnDefinition Width="60*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
 
-                                    <Border Margin="40,20,40,40" Grid.Column="1"  Background="White" >
-                                        <Border.Effect>
-                                            <DropShadowEffect ShadowDepth="1" Direction="315" />
-                                        </Border.Effect>
-                                        <ContentPresenter Grid.Column="1"  />
+                                    <!-- Rectangle hack to put shadow on panel (in a way that it won't affect text rendering) -->
+                                    <Rectangle Stretch="Fill" Fill="#fff" RadiusX="4" RadiusY="4" Grid.Column="1">
+                                        <Rectangle.Effect>
+                                            <DropShadowEffect ShadowDepth="1" Direction="315" Color="#ccc"/>
+                                        </Rectangle.Effect>
+                                    </Rectangle>
+
+                                    <Border Grid.Column="1" Background="#fff" CornerRadius="4">
+                                        <ContentPresenter Grid.Column="1" />
                                     </Border>
                                 </Grid>
 
-
-                                <Grid Grid.Row="2"  HorizontalAlignment="Right">
-                                    <WrapPanel Margin="30">
-                                        <Button x:Name="btnCancel" Content="CANCEL" FontSize="20" Padding="15,5,15,5" Margin="10,10,30,10"   HorizontalAlignment="Right" VerticalAlignment="Center"  Foreground="White"  BorderBrush="{x:Null}"  Background="#FFD3D4D6" Click="btnCancel_Click"  ></Button>
-                                        <Button x:Name="btnNext"  Content="NEXT"   FontSize="20" Padding="15,5,15,5" Margin="10,10,30,10"   HorizontalAlignment="Right" VerticalAlignment="Center" Background="#FF50A2FF" BorderBrush="{x:Null}" Foreground="White" Click="btnNext_Click" >
-                                            <Button.BitmapEffect>
-                                                <DropShadowBitmapEffect ShadowDepth="1" Direction="315" />
-                                            </Button.BitmapEffect>
-                                        </Button>
-                                    </WrapPanel>
-
+                                <Grid Grid.Row="1" Margin="0,0,50,0">
+                                    <DockPanel LastChildFill="False">
+                                        <Button x:Name="btnNext" Width="100" Margin="10,0,0,0" Content="NEXT" Style="{StaticResource ButtonPrimary}" DockPanel.Dock="Right" Click="btnNext_Click"></Button>
+                                        <Button x:Name="btnCancel" Width="100" Content="CANCEL" Style="{StaticResource ButtonPrimary}" Background="#CECFD1" DockPanel.Dock="Right" Click="btnCancel_Click"></Button>
+                                    </DockPanel>
                                 </Grid>
                             </Grid>
-                             <!--Body--> 
+
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -234,7 +254,7 @@
         <Style x:Key="EventBorderStyle"  TargetType="custom:EventControl">
             <Setter Property="BorderThickness"  Value="2" />
             <Setter Property="Background"  Value="Transparent" />
-            <Setter Property="Margin"  Value="10" />
+            <Setter Property="Margin" Value="10, 0, 10, 25" />
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="BorderBrush" Value="#FF1FE6A5" />
@@ -261,52 +281,64 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#FF8A8A8A"  Margin="0" BorderThickness="2">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" BorderThickness="2" CornerRadius="4" Width="300" Padding="15,12" Margin="0,0,25,25">
                             <StackPanel Orientation="Horizontal">
-                                <Image x:Name="imageCheckBox" Source="/Images/icon_printer_primary.png" Width="30" Height="30" Margin="10" />
-                                <ContentPresenter VerticalAlignment="Center" Margin="10"  />
+                                <Image x:Name="imageCheckBox" Source="/Images/icon_printer_primary.png" Width="30" Height="30" Margin="0,0,10,0" />
+                                <ContentPresenter VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="bdrOutside" Property="Background" Value="#EEF5FE" />
+                                <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="Foreground" Value="#1581FB"></Setter>
+            <Setter Property="FontWeight" Value="Semibold"></Setter>
+            <Setter Property="Cursor" Value="Hand"></Setter>
         </Style>
 
         <Style x:Key="ChecBoxAccountStyle" TargetType="{x:Type CheckBox}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#FF8A8A8A"  Margin="0" BorderThickness="2">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" BorderThickness="2" CornerRadius="4" Width="300" Padding="15,12" Margin="0,0,25,25">
                             <StackPanel Orientation="Horizontal">
-                                <Image x:Name="imageCheckBox" Source="/Images/icon_printer_primary.png" Width="30" Height="30" Margin="10" />
-                                <ContentPresenter VerticalAlignment="Center" Margin="10"  />
+                                <Image x:Name="imageCheckBox" Source="/Images/icon_user_primary.png" Width="25" Height="25" Margin="0,0,10,0"/>
+                                <ContentPresenter VerticalAlignment="Center" />
                             </StackPanel>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="bdrOutside" Property="Background" Value="#EEF5FE" />
+                                <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="Foreground" Value="#1581FB"></Setter>
+            <Setter Property="FontWeight" Value="Semibold"></Setter>
+            <Setter Property="Cursor" Value="Hand"></Setter>
         </Style>
         
         <Style x:Key="CheckBoxTemplateSizeStyle" TargetType="{x:Type CheckBox}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#FF8A8A8A"  Margin="0" BorderThickness="2">
-                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" TextBlock.Foreground="#FF1581FB" Margin="10,6"  />
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" BorderThickness="2" CornerRadius="4" Padding="10,5" Margin="0,0,15,15">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
@@ -316,24 +348,22 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Foreground" Value="#1581FB"></Setter>
+            <Setter Property="FontWeight" Value="Semibold"></Setter>
+            <Setter Property="Cursor" Value="Hand"></Setter>
         </Style>
 
         <Style x:Key="CheckBoxTemplateLayoutStyleHL" TargetType="{x:Type CheckBox}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#FF8A8A8A"  Margin="0" BorderThickness="2">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,15,15" BorderThickness="2" CornerRadius="4" Width="115" Height="55" >
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Image Grid.Column="0"  Source="/Images/qr.jpg" Stretch="UniformToFill" Width="30" Height="30"  Margin="5"></Image>
-                                <StackPanel Grid.Column="1" Margin="5">
-                                    <TextBlock TextWrapping="Wrap" FontStretch="Normal" FontSize="8" Text="text 1"></TextBlock>
-                                    <TextBlock TextWrapping="Wrap" FontStretch="Normal" FontSize="8" Text="text 2"></TextBlock>
-                                    <TextBlock TextWrapping="Wrap" FontStretch="Normal" FontSize="8" Text="text 3"></TextBlock>
-                                </StackPanel>
+                                <Image Grid.Column="0" Source="/Images/qr.jpg" HorizontalAlignment="Left"></Image>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -344,24 +374,20 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Cursor" Value="Hand"></Setter>
         </Style>
 
         <Style x:Key="CheckBoxTemplateLayoutStyleHR" TargetType="{x:Type CheckBox}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#FF8A8A8A"  Margin="0" BorderThickness="2">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,15,15"  BorderThickness="2" CornerRadius="4" Width="115" Height="55">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0" Margin="5">
-                                    <TextBlock TextWrapping="Wrap" FontStretch="Normal" FontSize="8" Text="text 1"></TextBlock>
-                                    <TextBlock TextWrapping="Wrap" FontStretch="Normal" FontSize="8" Text="text 2"></TextBlock>
-                                    <TextBlock TextWrapping="Wrap" FontStretch="Normal" FontSize="8" Text="text 3"></TextBlock>
-                                </StackPanel>
-                                <Image Grid.Column="1"  Source="/Images/qr.jpg" Stretch="UniformToFill" Width="30" Height="30"  Margin="5"></Image>
+                                <Image Grid.Column="1" Source="/Images/qr.jpg" HorizontalAlignment="Right"></Image>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -372,24 +398,24 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Cursor" Value="Hand"></Setter>
         </Style>
 
         <Style x:Key="CheckBoxTemplateLayoutStyleQRT" TargetType="{x:Type CheckBox}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#FF8A8A8A"  Margin="0" BorderThickness="2">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,15,15" CornerRadius="4" BorderThickness="2" Width="115" Height="55">
                             <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0" Margin="5">
-                                    <TextBlock TextWrapping="Wrap" FontStretch="Normal" FontSize="8" Text="text 1"></TextBlock>
-                                    <TextBlock TextWrapping="Wrap" FontStretch="Normal" FontSize="8" Text="text 2"></TextBlock>
-                                    <TextBlock TextWrapping="Wrap" FontStretch="Normal" FontSize="8" Text="text 3"></TextBlock>
-                                </StackPanel>
-                                <Image Grid.Column="1"  VerticalAlignment="Top" Source="/Images/qr.jpg" Stretch="UniformToFill" Width="15" Height="15"  Margin="5"></Image>
+                                <Image Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Source="/Images/qr.jpg"></Image>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -400,24 +426,24 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Cursor" Value="Hand"></Setter>
         </Style>
      
         <Style x:Key="CheckBoxTemplateLayoutStyleQRB" TargetType="{x:Type CheckBox}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#FF8A8A8A"  Margin="0" BorderThickness="2">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,15,15" CornerRadius="4" BorderThickness="2" Width="115" Height="55">
                             <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0" Margin="5">
-                                    <TextBlock TextWrapping="Wrap" FontStretch="Normal" FontSize="8" Text="text 1"></TextBlock>
-                                    <TextBlock TextWrapping="Wrap" FontStretch="Normal" FontSize="8" Text="text 2"></TextBlock>
-                                    <TextBlock TextWrapping="Wrap" FontStretch="Normal" FontSize="8" Text="text 3"></TextBlock>
-                                </StackPanel>
-                                <Image Grid.Column="1"  VerticalAlignment="Bottom" Source="/Images/qr.jpg" Stretch="UniformToFill" Width="15" Height="15"  Margin="5"></Image>
+                                <Image Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" Source="/Images/qr.jpg" Width="30" Height="30" HorizontalAlignment="Right"></Image>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -428,25 +454,24 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Cursor" Value="Hand"></Setter>
         </Style>
      
         <Style x:Key="CheckBoxTemplateLayoutStyleQLT" TargetType="{x:Type CheckBox}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#FF8A8A8A"  Margin="0" BorderThickness="2">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,15,15" CornerRadius="4" BorderThickness="2" Width="115" Height="55">
                             <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Image Grid.Column="0"  VerticalAlignment="Top" Source="/Images/qr.jpg" Stretch="UniformToFill" Width="15" Height="15"  Margin="5"></Image>
-                                <StackPanel Grid.Column="1" Margin="5">
-                                    <TextBlock TextWrapping="Wrap" FontStretch="Normal" FontSize="8" Text="text 1"></TextBlock>
-                                    <TextBlock TextWrapping="Wrap" FontStretch="Normal" FontSize="8" Text="text 2"></TextBlock>
-                                    <TextBlock TextWrapping="Wrap" FontStretch="Normal" FontSize="8" Text="text 3"></TextBlock>
-                                </StackPanel>
-                                
+                                <Image Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Source="/Images/qr.jpg" Width="30" Height="30" HorizontalAlignment="Left"></Image>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -457,24 +482,24 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Cursor" Value="Hand"></Setter>
         </Style>
     
         <Style x:Key="CheckBoxTemplateLayoutStyleQLB" TargetType="{x:Type CheckBox}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#FF8A8A8A"  Margin="0" BorderThickness="2">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,15,15" CornerRadius="4" BorderThickness="2" Width="115" Height="55">
                             <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Image Grid.Column="0"  VerticalAlignment="Bottom" Source="/Images/qr.jpg" Stretch="UniformToFill" Width="15" Height="15"  Margin="5"></Image>
-                                <StackPanel Grid.Column="1" Margin="5">
-                                    <TextBlock TextWrapping="Wrap" FontStretch="Normal" FontSize="8" Text="text 1"></TextBlock>
-                                    <TextBlock TextWrapping="Wrap" FontStretch="Normal" FontSize="8" Text="text 2"></TextBlock>
-                                    <TextBlock TextWrapping="Wrap" FontStretch="Normal" FontSize="8" Text="text 3"></TextBlock>
-                                </StackPanel>
+                                <Image Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" Source="/Images/qr.jpg" Width="30" Height="30" HorizontalAlignment="left"></Image>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -485,18 +510,40 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Cursor" Value="Hand"></Setter>
+        </Style>
+
+        <Style x:Key="ChecBoxDataStyle" TargetType="{x:Type CheckBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <DockPanel>
+                            <Border x:Name="bdrOutside" DockPanel.Dock="Left" Background="Transparent" BorderBrush="#CBCBCB" BorderThickness="2" CornerRadius="4" Width="18" Height="18" Margin="0,0,10,0"></Border>
+                            <ContentPresenter VerticalAlignment="Center" DockPanel.Dock="Left" />
+                        </DockPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="bdrOutside" Property="Background" Value="#EEF5FE" />
+                                <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Cursor" Value="Hand"></Setter>
+            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Margin" Value="0,0,0,5"></Setter>
         </Style>
 
         <Style x:Key="TextBlockTitle" TargetType="{x:Type TextBlock}">
-            <Setter Property="FontSize"  Value="20"/>
-            <Setter Property="FontWeight"  Value="SemiBold"/>
-            <Setter Property="Foreground"  Value="Black"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
         </Style>
      
         <Style x:Key="TextBlockSubtitle" TargetType="{x:Type TextBlock}">
             <Setter Property="FontSize"  Value="16"/>
             <Setter Property="FontWeight"  Value="SemiBold"/>
-            <Setter Property="Foreground"  Value="Black"/>
         </Style>
 
         <Style x:Key="BorderSettings" TargetType="{x:Type Border}">

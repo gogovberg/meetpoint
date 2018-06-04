@@ -8,26 +8,30 @@
       d:DesignHeight="900" d:DesignWidth="1200"  Style="{StaticResource HeaderFooterSettingsPageStyle}"
       Title="PrintSetupPage" >
 
-    <Grid x:Name="EventSetup">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20*"></RowDefinition>
-            <RowDefinition Height="130*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Label Grid.Row="0" Margin="40,0,0,0" x:Name="lblPrintingDevice" FontSize="16"  VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-        
-        <ItemsControl x:Name="icPrinterItems" Grid.Row="1" Margin="30"  ItemsSource="{Binding PrinterItems}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.Template>
-                <ControlTemplate>
-                    <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}">
-                        <ItemsPresenter />
-                    </ScrollViewer>
-                </ControlTemplate>
-            </ItemsControl.Template>
-        </ItemsControl>
-    </Grid>
+    <Border x:Name="EventSetup" Padding="40">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+
+            <Label Grid.Row="0" Margin="0,0,0,25" x:Name="lblPrintingDevice" FontSize="16" HorizontalAlignment="Left"></Label>
+
+            <ItemsControl x:Name="icPrinterItems" Grid.Row="1" Margin="0"  ItemsSource="{Binding PrinterItems}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.Template>
+                    <ControlTemplate>
+                        <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}">
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </ItemsControl.Template>
+            </ItemsControl>
+        </Grid>
+    </Border>
 </Page>

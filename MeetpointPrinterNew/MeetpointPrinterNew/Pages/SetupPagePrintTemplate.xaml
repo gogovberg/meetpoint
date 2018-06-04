@@ -12,91 +12,92 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="gdrLabelTemplate" Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="20*"></RowDefinition>
-                <RowDefinition Height="40*"></RowDefinition>
-                <RowDefinition Height="50*"></RowDefinition>
-                <RowDefinition Height="40*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Margin="40,0,0,0" x:Name="lblPrintingDevice" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-            <StackPanel Grid.Row="1" Orientation="Vertical">
-                <Label Margin="40,0,40,0" FontSize="16" Content="Label size" ></Label>
-                <Label Margin="40,0,40,0" FontSize="12" Foreground="#FF8A8A8A" Content="Size in nm." ></Label>
-                <WrapPanel Margin="30,0,30,0" >
-                    <CheckBox x:Name="cbSizeOne"    Margin="10" Content="500 x 100" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeOne_Checked" ></CheckBox>
-                    <CheckBox x:Name="cbSizeTwo" Margin="10" Content="500 x 200" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeTwo_Checked" ></CheckBox>
-                    <CheckBox x:Name="cbSizeThree" Margin="10" Content="500 x 300" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeThree_Checked" ></CheckBox>
-                </WrapPanel>
-            </StackPanel>
-            <StackPanel Grid.Row="2" Orientation="Vertical">
-                <Label Margin="40,0,40,0" FontSize="16" Content="Layout" ></Label>
-                <WrapPanel Margin="30,0,30,0" >
-                    <CheckBox x:Name="cbLayoutHL"  Margin="10"  Style="{StaticResource CheckBoxTemplateLayoutStyleHL}"   Checked="cbLayoutHL_Checked"></CheckBox>
-                    <CheckBox x:Name="cbLayoutQLT" Margin="10"  Style="{StaticResource CheckBoxTemplateLayoutStyleQLT}"  Checked="cbLayoutQLT_Checked"></CheckBox>
-                    <CheckBox x:Name="cbLayoutQLB" Margin="10"  Style="{StaticResource CheckBoxTemplateLayoutStyleQLB}"  Checked="cbLayoutQLB_Checked"></CheckBox>
-                    <CheckBox x:Name="cbLayoutHR"  Margin="10"  Style="{StaticResource CheckBoxTemplateLayoutStyleHR}"   Checked="cbLayoutHR_Checked"></CheckBox>
-                    <CheckBox x:Name="cbLayoutQRT" Margin="10"  Style="{StaticResource CheckBoxTemplateLayoutStyleQRT}"  Checked="cbLayoutQRT_Checked"></CheckBox>
-                    <CheckBox x:Name="cbLayoutQRB" Margin="10"  Style="{StaticResource CheckBoxTemplateLayoutStyleQRB}"  Checked="cbLayoutQRB_Checked"></CheckBox>
-                </WrapPanel>
-            </StackPanel>
-            <StackPanel Grid.Row="3" Orientation="Vertical">
-                <Label Margin="40,0,0,0" FontSize="16" Content="Data" ></Label>
-                <Label Margin="40,0,0,0" FontSize="12" Foreground="#FF8A8A8A" Content="You can select 3 options." ></Label>
-                <Grid  Margin="40,0,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0">
-                        <CheckBox x:Name="cbName" Content="Ime"      FontSize="14" Checked="cbOption_Checked" Unchecked="cbOption_Unchecked"></CheckBox>
-                        <CheckBox x:Name="cbSurName" Content="Priimek"  FontSize="14" Checked="cbOption_Checked" Unchecked="cbOption_Unchecked"></CheckBox>
-                        <CheckBox x:Name="cbCompanyName" Content="Podjetje" FontSize="14" Checked="cbOption_Checked" Unchecked="cbOption_Unchecked"></CheckBox>
-                    </StackPanel>
-                    <StackPanel Grid.Column="1">
-                        <CheckBox x:Name="cbFunctionName" Content="Funkcija" FontSize="14" Checked="cbOption_Checked" Unchecked="cbOption_Unchecked"></CheckBox>
-                        <CheckBox x:Name="cbCountryName" Content="Drzava"   FontSize="14" Checked="cbOption_Checked" Unchecked="cbOption_Unchecked"></CheckBox>
-                        <CheckBox x:Name="cbGroupName" Content="Skupina"  FontSize="14" Checked="cbOption_Checked" Unchecked="cbOption_Unchecked"></CheckBox>
-                    </StackPanel>
-                </Grid>
-             </StackPanel>
-           
-        </Grid>
-        <Grid x:Name="gdrPreview" Grid.Column="1" Background="#E5E5E5" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="20*"></RowDefinition>
-                <RowDefinition Height="30*"></RowDefinition>
-                <RowDefinition Height="30*"></RowDefinition>
-                <RowDefinition Height="30*"></RowDefinition>
-                <RowDefinition Height="40*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Margin="40,0,0,0" Content="PRIVEW" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-         
-            <Border Grid.Row="1" Margin="40,0,40,0" Background="#28434752">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                        <ColumnDefinition Width="4*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Image VerticalAlignment="Center" Margin="10" Source="/Images/icon_search.png" HorizontalAlignment="Center" Grid.Column="0"></Image>
-                    <TextBlock Grid.Column="1" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Please select some options on the left for preview to start forming."></TextBlock>
-                </Grid> 
-            </Border>
+        <Border Padding="40,40" Grid.Column="0">
+            <Grid x:Name="gdrLabelTemplate" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="40*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" x:Name="lblPrintingDevice" FontSize="16" HorizontalAlignment="Left" Margin="0,0,0,15"></Label>
+                <StackPanel Grid.Row="1" Orientation="Vertical">
+                    <Label FontSize="16" Content="Label size" Padding="0"></Label>
+                    <Label FontSize="12" Foreground="#8A8A8A" Content="Size in mm." FontWeight="Regular" Margin="0,0,0,5"></Label>
+                    <WrapPanel >
+                        <CheckBox x:Name="cbSizeOne" Content="500 x 100" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeOne_Checked" ></CheckBox>
+                        <CheckBox x:Name="cbSizeTwo" Content="500 x 200" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeTwo_Checked" ></CheckBox>
+                        <CheckBox x:Name="cbSizeThree" Content="500 x 300" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeThree_Checked" ></CheckBox>
+                    </WrapPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Orientation="Vertical">
+                    <Label FontSize="16" Content="Layout" Margin="0,0,0,10"></Label>
+                    <WrapPanel>
+                        <CheckBox x:Name="cbLayoutHL"  Style="{StaticResource CheckBoxTemplateLayoutStyleHL}"   Checked="cbLayoutHL_Checked"></CheckBox>
+                        <CheckBox x:Name="cbLayoutQLT" Style="{StaticResource CheckBoxTemplateLayoutStyleQLT}"  Checked="cbLayoutQLT_Checked"></CheckBox>
+                        <CheckBox x:Name="cbLayoutQLB" Style="{StaticResource CheckBoxTemplateLayoutStyleQLB}"  Checked="cbLayoutQLB_Checked"></CheckBox>
+                        <CheckBox x:Name="cbLayoutHR"  Style="{StaticResource CheckBoxTemplateLayoutStyleHR}"   Checked="cbLayoutHR_Checked"></CheckBox>
+                        <CheckBox x:Name="cbLayoutQRT" Style="{StaticResource CheckBoxTemplateLayoutStyleQRT}"  Checked="cbLayoutQRT_Checked"></CheckBox>
+                        <CheckBox x:Name="cbLayoutQRB" Style="{StaticResource CheckBoxTemplateLayoutStyleQRB}"  Checked="cbLayoutQRB_Checked"></CheckBox>
+                    </WrapPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Orientation="Vertical">
+                    <Label FontSize="16" Content="Data" Margin="0,0,0,0" Padding="0"></Label>
+                    <Label FontSize="12" Foreground="#8A8A8A" Content="You can select 3 options." FontWeight="Regular" Margin="0,0,0,5"></Label>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <CheckBox x:Name="cbName" Style="{StaticResource ChecBoxDataStyle}"  Content="First name" Checked="cbOption_Checked" Unchecked="cbOption_Unchecked"></CheckBox>
+                            <CheckBox x:Name="cbSurName" Style="{StaticResource ChecBoxDataStyle}" Content="Last name" Checked="cbOption_Checked" Unchecked="cbOption_Unchecked"></CheckBox>
+                            <CheckBox x:Name="cbCompanyName" Style="{StaticResource ChecBoxDataStyle}" Content="Company" Checked="cbOption_Checked" Unchecked="cbOption_Unchecked"></CheckBox>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <CheckBox x:Name="cbFunctionName" Style="{StaticResource ChecBoxDataStyle}" Content="Job position" Checked="cbOption_Checked" Unchecked="cbOption_Unchecked"></CheckBox>
+                            <CheckBox x:Name="cbCountryName" Style="{StaticResource ChecBoxDataStyle}" Content="Country" Checked="cbOption_Checked" Unchecked="cbOption_Unchecked"></CheckBox>
+                            <CheckBox x:Name="cbGroupName" Style="{StaticResource ChecBoxDataStyle}" Content="Group" Checked="cbOption_Checked" Unchecked="cbOption_Unchecked"></CheckBox>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border x:Name="gdrPreview" Grid.Column="1" Padding="40"  Background="#E5E5E5" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="30*"></RowDefinition>
+                    <RowDefinition Height="30*"></RowDefinition>
+                    <RowDefinition Height="40*"></RowDefinition>
+                </Grid.RowDefinitions>
 
-            <Border x:Name="bdrPreview" Grid.Row="3" Margin="40,0,40,0"   Background="#FFFFFFFF">
-                <Border.Effect>
-                    <DropShadowEffect ShadowDepth="1" Direction="315" />
-                </Border.Effect>
-                <Canvas x:Name="cnvPrivew">
-                    <Image  x:Name="imgQrPreview" Margin="10"  ></Image>
-                    <StackPanel  x:Name="spDataOptions" Margin="10">
-                        <TextBlock  x:Name="tbOptOne" FontSize="16"  Margin="5,0,0,0"></TextBlock>
-                        <TextBlock  x:Name="tbOptTwo" FontSize="14"  Margin="5,0,0,0"></TextBlock>
-                        <TextBlock  x:Name="tbOptThree" FontSize="14"  Margin="5"></TextBlock>
-                    </StackPanel>
-                </Canvas>
-            </Border>
-        </Grid>
-        
+                <Label Grid.Row="0" Content="PREVIEW" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,25"></Label>
+
+                <Border Grid.Row="1" Background="#CACBCD" CornerRadius="4" Padding="10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image  HorizontalAlignment="Left" Source="/Images/icon_search.png" Width="25" Grid.Column="0"></Image>
+                        <TextBlock HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" TextWrapping="Wrap" FontWeight="SemiBold" FontSize="14" Foreground="#434752" 
+                        Text="Please select some options on the left for preview to start forming." ></TextBlock>
+                    </Grid>
+                </Border>
+
+                <Border x:Name="bdrPreview" Grid.Row="3" Background="#FFFFFFFF" CornerRadius="4">
+                    <Canvas x:Name="cnvPrivew">
+                        <Image x:Name="imgQrPreview"></Image>
+                        <StackPanel  x:Name="spDataOptions" Margin="10">
+                            <TextBlock  x:Name="tbOptOne" FontSize="16"  Margin="5,0,0,0"></TextBlock>
+                            <TextBlock  x:Name="tbOptTwo" FontSize="14"  Margin="5,0,0,0"></TextBlock>
+                            <TextBlock  x:Name="tbOptThree" FontSize="14"  Margin="5"></TextBlock>
+                        </StackPanel>
+                    </Canvas>
+                </Border>
+            </Grid>
+        </Border>
     </Grid>
 </Page>

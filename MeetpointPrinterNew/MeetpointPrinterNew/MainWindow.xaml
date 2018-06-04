@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MeetpointPrinterNew"
         mc:Ignorable="d"
-        Title="Meetpoint print application" Width="1200" Height="900" MinWidth="410" MinHeight="600">
+        Title="Meetpoint print application" Width="1200" Height="900" MinWidth="520" MinHeight="600"  Background="#EFEFEF">
 
     <Grid>
         <Frame x:Name="MainFrame" ></Frame>
