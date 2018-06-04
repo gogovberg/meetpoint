@@ -19,9 +19,15 @@ namespace MeetpointPrinterNew.Windows
     /// </summary>
     public partial class MessageBox : Window
     {
+
         public MessageBox()
         {
             InitializeComponent();
+        }
+        public MessageBox(string Content)
+        {
+            InitializeComponent();
+            tblContentText.Text = Content;
         }
 
         private void btnOk_Click(object sender, RoutedEventArgs e)

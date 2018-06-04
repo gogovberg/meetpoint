@@ -113,9 +113,8 @@ namespace MeetpointPrinterNew.Pages
 
         private void btnPrintTest_Click(object sender, RoutedEventArgs e)
         {
-            Windows.MessageBox mb = new Windows.MessageBox();
-            mb.Show();
-            mb.Activate();
+            Windows.MessageBox mb = new Windows.MessageBox("Printer is out of paper.");
+            mb.ShowDialog();
         }
 
         private void btnViewLog_Click(object sender, RoutedEventArgs e)
