@@ -64,7 +64,10 @@ namespace MeetpointPrinterNew.Pages
                     }
                 }
             }
-            
+
+            cbInactive.IsChecked = true;
+
+
         }
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {

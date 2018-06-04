@@ -8,13 +8,12 @@
       d:DesignHeight="900" d:DesignWidth="1200"  Style="{StaticResource HeaderFooterSettingsPageStyle}"
       Title="PrintSetupPage" >
 
-    <Border x:Name="EventSetup" Padding="40">
+    <Border x:Name="EventSetup" Padding="35,30">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-
 
             <Label Grid.Row="0" Margin="0,0,0,25" x:Name="lblPrintingDevice" FontSize="16" HorizontalAlignment="Left"></Label>
 

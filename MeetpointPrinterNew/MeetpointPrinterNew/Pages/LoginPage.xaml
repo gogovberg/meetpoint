@@ -6,9 +6,10 @@
       xmlns:local="clr-namespace:MeetpointPrinterNew.Pages"
       mc:Ignorable="d" 
         d:DesignHeight="787" d:DesignWidth="1315" 
-       Title="Login"  >
+       Title="Login">
 
-    <Grid >
+    <Grid>
+        <Image Source="/Images/bg.jpg" Stretch="UniformToFill"></Image>
         
         <!-- Rectangle hack to put shadow on login panel (in a way that it won't affect text rendering) -->
         <Rectangle Width="410" Height="600" HorizontalAlignment="Center" Fill="#fff" RadiusX="4" RadiusY="4">
@@ -22,20 +23,22 @@
             <StackPanel FocusManager.FocusedElement="{Binding ElementName=tbUsername}">
                 <Image x:Name="imgLogo" VerticalAlignment="Top" HorizontalAlignment="Center" Source="/Images/logo_mp.png" Width="200"/>
 
-                <Label x:Name="lblLogin" FontSize="18" FontWeight="Bold" Content="LOGIN" Margin="0,40,0,0"/>
-                <Label x:Name="lblLoginDesc" Content="Use your MeetPoint application credentials to login." Foreground="#8A8A8A" FontSize="12" FontWeight="Regular" Margin="0,0,0,30"/>
+                <TextBlock x:Name="lblLogin" Style="{StaticResource TextBlockTitle}" Text="LOGIN" Margin="0,40,0,0"/>
+                <TextBlock x:Name="lblLoginDesc" Text="Use your MeetPoint application credentials to login." Style="{StaticResource TextBlockHelperText}" Margin="0,0,0,30"/>
 
                 <Label x:Name="lblUsername" Content="Username" />
-                
                 <TextBox x:Name="tbUsername"  Height="40" VerticalContentAlignment="Center"  Margin="0,0,0,20"></TextBox>
                 
                 <Label x:Name="lblPassword" Content="Password" />
                 <PasswordBox x:Name="tbPassword" Height="40" VerticalContentAlignment="Center" Margin="0,0,0,30"></PasswordBox>
 
-                <Button x:Name="btnLogin" IsDefault="True" Content="LOG IN" Click="btnLogin_Click" Style="{StaticResource ButtonPrimary}"></Button>
+                <Button x:Name="btnLogin" IsDefault="True" Content="LOG IN" Click="btnLogin_Click" Style="{StaticResource ButtonPrimary}" FontSize="16" Height="40">
+                </Button>
             </StackPanel>
         </Border>
-        
+
+        <!--<Image Source="/Images/printer_bg.png" Width="300" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="50,25"></Image>-->
+
     </Grid>
     
 </Page>

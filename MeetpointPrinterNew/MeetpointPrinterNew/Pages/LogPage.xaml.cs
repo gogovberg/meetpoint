@@ -42,7 +42,7 @@ namespace MeetpointPrinterNew.Pages
                 lc.UsernameLogoSource = imgNameSrc;
                 lc.StatusLogoSource = imgStatusSrc;
                 lc.ButtonPrintAgainContent = "PRINT AGAIN";
-                lc.ButtonPrivewContent = "PREVIEW CONTENT";
+                lc.ButtonPrivewContent = "PREVIEW LABEL";
                 icEventItems.Items.Add(lc);
             }
         }

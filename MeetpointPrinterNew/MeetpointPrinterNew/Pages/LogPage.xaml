@@ -10,25 +10,51 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="6*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Margin="40,0,0,0" Content="PRINT LOG"  VerticalAlignment="Center" FontSize="16" HorizontalAlignment="Left" ></Label>
-        <Button Grid.Row="0" Margin="0,0,40,0" VerticalAlignment="Center" HorizontalAlignment="Right"  Content="BACK" FontSize="20" Padding="15,5,15,5" Click="Button_Click" ></Button>
-        <Border Grid.Row="1"  Margin="40" Background="#FFFFFFFF" >
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="1" Direction="315" />
-            </Border.Effect>
-            <ScrollViewer  Grid.Row="1" Margin="30" VerticalScrollBarVisibility="Auto" >
-                <ItemsControl x:Name="icEventItems">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-            </ScrollViewer>
-           
+        
+        <TextBlock Grid.Row="0" Margin="50,35" Text="PRINT LOG" Style="{StaticResource TextBlockTitle}"></TextBlock>
+        <Button Grid.Row="0" Margin="50,0" VerticalAlignment="Center" HorizontalAlignment="Right" Content="BACK" Style="{StaticResource ButtonDefault}" Click="Button_Click" ></Button>
+
+        <!-- Rectangle hack to put shadow on login panel (in a way that it won't affect text rendering) -->
+        <Rectangle Grid.Row="1" Stretch="Fill" Fill="#fff" RadiusX="4" RadiusY="4" Margin="50,0">
+            <Rectangle.Effect>
+                <DropShadowEffect ShadowDepth="1" Direction="315" Color="#ccc"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        
+        <Border Grid.Row="1" Margin="50,0" Style="{StaticResource Panel}" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                    
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                        <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Left" Text="VISITOR" Style="{StaticResource TextBlockSubtitle}" Margin="55,0,0,15"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Left" Text="PRINT STATUS" Style="{StaticResource TextBlockSubtitle}" Margin="0,0,0,15"></TextBlock>
+                    </StackPanel>
+                </Grid>
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                    <ItemsControl x:Name="icEventItems">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
         </Border>
     </Grid>
 </Page>

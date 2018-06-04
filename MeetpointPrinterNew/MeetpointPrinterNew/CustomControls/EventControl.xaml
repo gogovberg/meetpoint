@@ -16,7 +16,7 @@
         </Rectangle>
         
         <!-- Event panel -->
-        <Border MouseUp="EventBorder_MouseUp" MouseDown="EventBorder_MouseDown" Background="#fff" CornerRadius="4" Padding="25">
+        <Border MouseUp="EventBorder_MouseUp" MouseDown="EventBorder_MouseDown" Style="{StaticResource Panel}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -43,8 +43,8 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock x:Name="tblCreatedLabel"  Grid.Row="0" FontWeight="SemiBold" FontSize="12" Foreground="#8A8A8A" ></TextBlock>
-                    <TextBlock x:Name="tblCreatedDate" Grid.Row="1" FontSize="12"  Foreground="#8A8A8A" ></TextBlock>
+                    <TextBlock x:Name="tblCreatedLabel"  Grid.Row="0" Style="{StaticResource TextBlockHelperText}" FontWeight="SemiBold"></TextBlock>
+                    <TextBlock x:Name="tblCreatedDate" Grid.Row="1" Style="{StaticResource TextBlockHelperText}"></TextBlock>
                 </Grid>
             </Grid>
         </Border>

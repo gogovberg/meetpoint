@@ -7,10 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="1500">
     <Grid>
-        <Border Background="White" CornerRadius="8" Style="{StaticResource LogBorderStyle}">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="1" Direction="315"></DropShadowEffect>
-            </Border.Effect>
+        <Border Style="{StaticResource LogBorderStyle}" Padding="15,10">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
@@ -18,20 +15,19 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Orientation="Horizontal">
-                    <Image  x:Name="imgName" Source="/Images/calendar.png" Margin="10" Width="100" Height="50"></Image>
-                    <TextBlock  x:Name="tbName"  VerticalAlignment="Center" FontSize="30" FontStretch="Normal" TextWrapping="Wrap"  HorizontalAlignment="Left" Margin="10"></TextBlock>
+                    <Image  x:Name="imgName" Source="/Images/calendar.png" Width="30" Margin="0,0,10,0"></Image>
+                    <TextBlock  x:Name="tbName" VerticalAlignment="Center" TextWrapping="Wrap"  HorizontalAlignment="Left" FontSize="14"></TextBlock>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
-                    <Image x:Name="imgStatus" Source="/Images/calendar.png" Margin="10" Width="100" Height="50"></Image>
-                    <TextBlock   x:Name="tbStatus"  VerticalAlignment="Center" FontSize="30" FontStretch="Normal" TextWrapping="Wrap"  HorizontalAlignment="Left" Margin="10"></TextBlock>
+                    <Image x:Name="imgStatus" Source="/Images/calendar.png" Width="15" Margin="0,0,10,0"></Image>
+                    <TextBlock x:Name="tbStatus"  VerticalAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="14"></TextBlock>
                 </StackPanel>
                 <StackPanel Grid.Column="2"  Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="btnPreview" Margin="10"  Padding="10"  Click="btnPreview_Click" BorderBrush="{x:Null}" Background="#FF50A2FF" Foreground="White" ></Button>
-                    <Button x:Name="btnPrintAgain" Margin="10"   Padding="10"  Click="btnPrintAgain_Click" Background="#FF50A2FF" BorderBrush="{x:Null}" Foreground="White" ></Button>
+                    <Button x:Name="btnPreview" Click="btnPreview_Click" Style="{StaticResource ButtonPrimaryS}" Margin="0,0,10,0"></Button>
+                    <Button x:Name="btnPrintAgain" Click="btnPrintAgain_Click" Style="{StaticResource ButtonPrimaryS}"></Button>
                 </StackPanel>
             </Grid>
         </Border>
-       
     </Grid>
    
 </UserControl>
