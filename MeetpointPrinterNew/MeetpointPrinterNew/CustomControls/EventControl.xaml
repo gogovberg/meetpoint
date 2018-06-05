@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:MeetpointPrinterNew.CustomControls"
              mc:Ignorable="d" 
              >
-    
-    <Grid Width="350" Cursor="Hand">
+
+    <Grid Width="350" Cursor="Hand" Margin="10, 0, 10, 25">
         <!-- Rectangle hack to put shadow on event panels (in a way that it won't affect text rendering) -->
         <Rectangle Width="350" HorizontalAlignment="Center" Fill="#fff" RadiusX="4" RadiusY="4">
             <Rectangle.Effect>
@@ -16,7 +16,7 @@
         </Rectangle>
         
         <!-- Event panel -->
-        <Border MouseUp="EventBorder_MouseUp" MouseDown="EventBorder_MouseDown" Style="{StaticResource Panel}">
+        <Border MouseUp="EventBorder_MouseUp" MouseDown="EventBorder_MouseDown" Style="{StaticResource Panel2}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>

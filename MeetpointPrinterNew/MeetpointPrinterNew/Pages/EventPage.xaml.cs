@@ -28,7 +28,6 @@ namespace MeetpointPrinterNew.Pages
 
             _currentApp.CurrentUser = username;
             BitmapImage imgsrc = new BitmapImage(new Uri("/Images/icon_event_primary.png", UriKind.Relative));
-            Style eventStyle = (Style)FindResource("EventBorderStyle");
             List<EventDataEvent> edv = Helpers.GetEvents(accessToken);
 
             foreach(EventDataEvent item in edv)
@@ -42,7 +41,6 @@ namespace MeetpointPrinterNew.Pages
                 ec1.EventCreatedLabel = "CREATED ON";
                 ec1.EventID = item.EventID;
                 ec1.Control_Click += new EventHandler(Control_click);
-                ec1.Style = eventStyle;
                 icEventItems.Items.Add(ec1);
             }
 
@@ -88,6 +86,14 @@ namespace MeetpointPrinterNew.Pages
             }
             _currentApp.CurrentEvent = ec.EventName;
             _currentApp.CurrentEventLocation = ec.EventDate + " " + ec.EventLocation;
+            _currentApp.CurrentEventLocation = string.Format("{0}{1}{2}{3}{4}",
+                eve.EventStartDate.ToShortDateString(),
+                eve.EventStartDate != eve.EventEndDate ? " - " : "",
+                eve.EventStartDate != eve.EventEndDate ? eve.EventEndDate.ToShortDateString() : "",
+                string.IsNullOrEmpty(ec.EventLocation) ? "" : ", ",
+                string.IsNullOrEmpty(ec.EventLocation) ? "" : ec.EventLocation
+                );
+
             Helpers.SaveUserSettings(GlobalSettings.ApplicationSettings);
             GlobalSettings.PreviousPageID = GlobalSettings.PreviousPageID;
             if (!string.IsNullOrWhiteSpace(GlobalSettings.ApplicationSettings.Printer) && GlobalSettings.ApplicationSettings.Accounts != null && GlobalSettings.ApplicationSettings.Accounts.Account.Count > 0)

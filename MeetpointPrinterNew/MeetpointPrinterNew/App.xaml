@@ -70,6 +70,21 @@
             <Setter Property="CornerRadius" Value="4"/>
         </Style>
 
+        <!-- White panel style -->
+        <Style x:Key="Panel2" TargetType="{x:Type Border}">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="25"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="BorderBrush" Value="#FF1FE6A5"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="#fff"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#FF1FE6A5"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
         <!-- Textbox styles -->
         <Style TargetType="TextBox">
             <Setter Property="FontSize" Value="14" />
@@ -498,20 +513,6 @@
             </Setter>
         </Style>
 
-        <Style x:Key="EventBorderStyle"  TargetType="custom:EventControl">
-            <Setter Property="BorderThickness"  Value="2" />
-            <Setter Property="Background"  Value="Transparent" />
-            <Setter Property="Margin" Value="10, 0, 10, 25" />
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="BorderBrush" Value="#FF1FE6A5" />
-                </Trigger>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="BorderBrush" Value="#FF1FE6A5" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
         <Style x:Key="LogBorderStyle" TargetType="{x:Type Border}">
             <Setter Property="BorderBrush" Value="#CBCBCB" />
             <Setter Property="CornerRadius" Value="4" />
@@ -766,13 +767,14 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
                         <DockPanel>
-                            <Border x:Name="bdrOutside" DockPanel.Dock="Left" Background="Transparent" BorderBrush="#CBCBCB" BorderThickness="2" CornerRadius="4" Width="18" Height="18" Margin="0,0,10,0"></Border>
+                            <Border x:Name="bdrOutside" DockPanel.Dock="Left" Background="Transparent" BorderBrush="#CBCBCB" BorderThickness="2" CornerRadius="4" Width="18" Height="18" Margin="0,0,10,0">
+                                <Image x:Name="imgCheck" Source="Images/check_mark.png" Width="0"></Image>
+                            </Border>
                             <ContentPresenter VerticalAlignment="Center" DockPanel.Dock="Left" />
                         </DockPanel>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="bdrOutside" Property="Background" Value="#EEF5FE" />
-                                <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
+                                <Setter TargetName="imgCheck" Property="Width" Value="12" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
