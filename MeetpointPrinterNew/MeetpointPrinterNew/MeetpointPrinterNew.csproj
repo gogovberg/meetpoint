@@ -178,14 +178,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\bg.jpg" />
     <Resource Include="Images\calendar.png" />
     <Resource Include="Images\cloud.png" />
-    <Resource Include="Images\login-logo.png" />
-    <Resource Include="Images\meetpoint-admin-logo.png" />
-    <Resource Include="Images\printer.png" />
-    <Resource Include="Images\qr.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\icon_badge.png" />
     <Resource Include="Images\icon_danger.png" />
     <Resource Include="Images\icon_event_primary.png" />
@@ -202,13 +197,12 @@
     <Resource Include="Images\icon_users.png" />
     <Resource Include="Images\icon_users_primary.png" />
     <Resource Include="Images\icon_user_primary.png" />
+    <Resource Include="Images\login-logo.png" />
     <Resource Include="Images\logo_mp.png" />
     <Resource Include="Images\logo_mp_white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\bg.jpg" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="Images\meetpoint-admin-logo.png" />
+    <Resource Include="Images\qr.jpg" />
+    <Resource Include="Images\qr.png" />
     <Resource Include="Images\warning.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

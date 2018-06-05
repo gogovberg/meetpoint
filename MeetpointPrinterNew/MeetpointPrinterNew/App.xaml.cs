@@ -14,6 +14,10 @@ namespace MeetpointPrinterNew
         public bool IsAccount { set; get; }
         public bool IsTemplate { set; get; }
 
+        public string PrintAcountBrush { set; get; }
+        public string AccountTemplateBrush { set; get; }
+
+
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             Helpers.SaveUserSettings(GlobalSettings.ApplicationSettings);
@@ -115,6 +119,11 @@ namespace MeetpointPrinterNew
                     break;
             }
             return false;
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -9,6 +9,8 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using MeetpointPrinterNew.Windows;
+using MeetpointPrinterNew.CustomControls;
+using System.Windows.Media.Imaging;
 
 namespace MeetpointPrinterNew.Pages
 {
@@ -26,15 +28,19 @@ namespace MeetpointPrinterNew.Pages
         private object _printObject = new object();
         private double _printTimer;
         private System.Printing.PrintQueue _printQueue;
+        private List<string> _dataOptions;
+        
 
         public SettingsPage(UserSettings settings)
         {
-          
+
             InitializeComponent();
             GlobalSettings.CurrentPageID = 5;
 
             _settings = settings;
             _printTimer = 10000;
+            
+
             GlobalSettings.ApplicationSettings.Event = settings.Event;
             _currentApp.CurrentEvent = settings.Event.EventName;
 
@@ -47,17 +53,27 @@ namespace MeetpointPrinterNew.Pages
                 );
 
             string _tempPrintName = _settings.Printer;
+
+            BitmapImage imgAccountSrc = new BitmapImage(new Uri("/Images/icon_printer.png", UriKind.Relative));
+            BitmapImage imgPrinterSrc = new BitmapImage(new Uri("/Images/icon_users.png", UriKind.Relative));
+
+
+
             foreach (var item in _settings.Accounts.Account)
             {
-                icAccountItem.Items.Add(item.AccountName);
+                TextBlockImageControl tbic = new TextBlockImageControl();
+                tbic.ContentText = item.AccountName;
+                tbic.ContentID = item.AccountID;
+                tbic.ContentImageSource = imgAccountSrc;
+                icAccountItem.Items.Add(tbic);
             }
 
             _timerPrint = new Timer();
             _timerPrint.Elapsed += new ElapsedEventHandler(PrintQueueLabels);
             _timerPrint.Interval = _printTimer; // 1000 ms => 1 second
             _timerPrint.Enabled = false;
-            
-            lock(_printObject)
+
+            lock (_printObject)
             {
                 var server = new LocalPrintServer();
                 PrintQueueCollection myPrintQueues = server.GetPrintQueues();
@@ -71,9 +87,16 @@ namespace MeetpointPrinterNew.Pages
                 }
             }
 
+            tbicPrinter.ContentImageSource = imgPrinterSrc;
+            tbicPrinter.ContentID = _tempPrintName;
+            tbicPrinter.ContentText = _tempPrintName;
+
             cbInactive.IsChecked = true;
 
 
+            _dataOptions = GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption;
+
+            PrivewTemplateLogic();
         }
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
@@ -82,7 +105,7 @@ namespace MeetpointPrinterNew.Pages
 
         private void btneditPrinter_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Content = new SetupPage(_settings,0);
+            Application.Current.MainWindow.Content = new SetupPage(_settings, 0);
         }
 
         private void btnEditAccount_Click(object sender, RoutedEventArgs e)
@@ -106,7 +129,7 @@ namespace MeetpointPrinterNew.Pages
 
             List<byte> page = new List<byte>();
             page.AddRange(ZPLCommands.ClearPrinter(ps));
-      
+
 
             page.AddRange(ZPLCommands.TextWrite(15, 75, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_LARGEST, 45, 30, "Mahatma Gandhi"));
             page.AddRange(ZPLCommands.TextWrite(15, 150, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_NORMAL, 30, 20, "Indian activist"));
@@ -154,15 +177,15 @@ namespace MeetpointPrinterNew.Pages
                     }
                     List<PrintQueueItem> items = Helpers.GetPrintQueue(_settings.AuthToken, users);
 
-                    foreach(PrintQueueItem item in items)
+                    foreach (PrintQueueItem item in items)
                     {
-                        PrintLabelStickers(_settings.PrinterSetup.LayoutTemplate,item.FirstName,item.Company,item.PrintUserID.ToString());
+                        PrintLabelStickers(_settings.PrinterSetup.LayoutTemplate, item.FirstName, item.Company, item.PrintUserID.ToString());
                     }
 
                 }
                 catch (Exception ex)
                 {
-                  
+
                     Debug.Log("WatchForReaders", ex.ToString());
                 }
             }
@@ -196,5 +219,74 @@ namespace MeetpointPrinterNew.Pages
             GlobalSettings.PreviousPageID = GlobalSettings.CurrentPageID;
             Application.Current.MainWindow.Content = new EventPage(GlobalSettings.ApplicationSettings.Username, GlobalSettings.ApplicationSettings.AuthToken, GlobalSettings.ApplicationSettings.Event.EventID.ToString());
         }
+
+        private void PrivewTemplateLogic()
+        {
+            BitmapImage imgBigSrc = new BitmapImage(new Uri("/Images/icon_qr_code_big.png", UriKind.Relative));
+            BitmapImage imgSmallSrc = new BitmapImage(new Uri("/Images/icon_qr_code.png", UriKind.Relative));
+
+            tbOptOne.Text = _dataOptions[0];
+            tbOptTwo.Text = _dataOptions[1];
+            tbOptThree.Text = _dataOptions[2];
+
+
+            bdrPreview.Width = GlobalSettings.ApplicationSettings.PrinterSetup.LayoutWidth;
+            bdrPreview.Height = GlobalSettings.ApplicationSettings.PrinterSetup.LayoutHeight;
+
+            switch (GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate)
+            {
+                case "cbLayoutQRT":
+                    imgQrPreview.Source = imgSmallSrc;
+                    SetControlCanvasPosition(imgQrPreview, double.NaN, 10, 10, double.NaN);
+                    SetControlCanvasPosition(spDataOptions, 10, double.NaN, double.NaN, double.NaN);
+                    break;
+                case "cbLayoutQRB":
+                    imgQrPreview.Source = imgSmallSrc;
+                    SetControlCanvasPosition(imgQrPreview, double.NaN, double.NaN, 10, 10);
+                    SetControlCanvasPosition(spDataOptions, 10, double.NaN, double.NaN, double.NaN);
+                    break;
+                case "cbLayoutHR":
+                    imgQrPreview.Source = imgBigSrc;
+                    SetControlCanvasPosition(imgQrPreview, double.NaN, double.NaN, 10, double.NaN);
+                    SetControlCanvasPosition(spDataOptions, 10, double.NaN, double.NaN, double.NaN);
+                    break;
+                case "cbLayoutQLT":
+                    imgQrPreview.Source = imgSmallSrc;
+                    SetControlCanvasPosition(imgQrPreview, 10, 10, double.NaN, double.NaN);
+                    SetControlCanvasPosition(spDataOptions, double.NaN, double.NaN, 10, double.NaN);
+                    break;
+                case "cbLayoutQLB":
+                    imgQrPreview.Source = imgSmallSrc;
+                    SetControlCanvasPosition(imgQrPreview, 10, 10, double.NaN, double.NaN);
+                    SetControlCanvasPosition(spDataOptions, double.NaN, double.NaN, 10, double.NaN);
+                    break;
+                case "cbLayoutHL":
+                    imgQrPreview.Source = imgBigSrc;
+                    SetControlCanvasPosition(imgQrPreview, 10, double.NaN, double.NaN, double.NaN);
+                    SetControlCanvasPosition(spDataOptions, double.NaN, double.NaN, 10, double.NaN);
+                    break;
+                case "cbLayoutClean":
+                    CanvasControlClearPosition(imgQrPreview);
+                    SetControlCanvasPosition(spDataOptions, 10, double.NaN, double.NaN, double.NaN);
+                    break;
+            }
+        }
+        private void CanvasControlClearPosition(UIElement control)
+        {
+
+            SetControlCanvasPosition(control, double.NaN, double.NaN, double.NaN, double.NaN);
+            control.Visibility = Visibility.Hidden;
+        }
+
+        private void SetControlCanvasPosition(UIElement control, double left, double top, double right, double bottom)
+        {
+            Canvas.SetLeft(control, left);
+            Canvas.SetTop(control, top);
+            Canvas.SetRight(control, right);
+            Canvas.SetBottom(control, bottom);
+            control.Visibility = Visibility.Visible;
+        }
+
+       
     }
 }

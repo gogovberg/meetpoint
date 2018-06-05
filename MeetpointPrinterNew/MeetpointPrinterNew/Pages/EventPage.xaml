@@ -21,8 +21,8 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Image  HorizontalAlignment="Left" Source="/Images/icon_hello.png" Width="35" Grid.Column="0"></Image>
-                <TextBlock HorizontalAlignment="Left"  Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" TextWrapping="Wrap" FontWeight="SemiBold" FontSize="14" Foreground="#434752" 
-                        Text="Welcome Bostjan, please select the event you want to print labels for." ></TextBlock>
+                <TextBlock x:Name="tblWelcomeUser"  HorizontalAlignment="Left"  Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" TextWrapping="Wrap" FontWeight="SemiBold" FontSize="13" Foreground="#434752" 
+                        Text="Welcome Bostjan, please select the event you want to print labels for."></TextBlock>
             </Grid>
         </Border>
 

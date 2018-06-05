@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MeetpointPrinterNew.Windows"
         mc:Ignorable="d"
-        Title="Printer error" Height="241" Width="581" ResizeMode="NoResize" Icon="/Images/warning.ico" >
+        Title="Printer error" Height="241" Width="581" ResizeMode="NoResize"  >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60*"></RowDefinition>

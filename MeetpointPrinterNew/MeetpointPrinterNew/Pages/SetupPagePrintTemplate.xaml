@@ -39,7 +39,7 @@
                         <CheckBox x:Name="cbLayoutHR"  Style="{StaticResource CheckBoxTemplateLayoutStyleHR}" Checked="cbLayoutHR_Checked"></CheckBox>
                         <CheckBox x:Name="cbLayoutQRT" Style="{StaticResource CheckBoxTemplateLayoutStyleQRT}" Checked="cbLayoutQRT_Checked"></CheckBox>
                         <CheckBox x:Name="cbLayoutQRB" Style="{StaticResource CheckBoxTemplateLayoutStyleQRB}"  Checked="cbLayoutQRB_Checked"></CheckBox>
-                        <CheckBox Style="{StaticResource CheckBoxTemplateLayoutStyleNC}" Checked="cbLayoutQRB_Checked"></CheckBox>
+                        <CheckBox x:Name="cbLayoutClean" Style="{StaticResource CheckBoxTemplateLayoutStyleNC}" Checked="cbLayoutClean_Checked"></CheckBox>
                     </WrapPanel>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Orientation="Vertical">

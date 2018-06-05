@@ -1,5 +1,4 @@
-﻿using MeetpointPrinterNew.CustomControls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Printing;
@@ -27,33 +26,32 @@ namespace MeetpointPrinterNew.Pages
         public int SetupPageType { get { return this.pageType; } }
 
 
+
         private List<Account> _accounts;
         private UserSettings _settings;
 
-      
+
+        private bool _isUnchecked;
+
         public SetupPage(UserSettings settings, int setupPageType)
         {
-         
+
             InitializeComponent();
 
             try
             {
-                
+                _isUnchecked = false;
                 _settings = settings;
                 _accounts = _settings.Accounts.Account;
                 GlobalSettings.ApplicationSettings = settings;
                 this.pageType = setupPageType;
-                BitmapImage imgsrc;
-                Style tbicStyle = (Style)FindResource("TextBlockImageStyle"); ;
+
                 switch (pageType)
                 {
                     case 0:
                         GlobalSettings.CurrentPageID = 2;
-                        
+                        Style cbPrinterStyle = (Style)FindResource("ChecBoxPrinterStyle");
                         lblPrintingDevice.Text = "SELECT PRINTING DEVICE";
-                        lblHelper.Text = "Please select 1 device.";
-
-                        imgsrc = new BitmapImage(new Uri("/Images/icon_printer_primary.png", UriKind.Relative));
 
                         var server = new LocalPrintServer();
                         PrintQueueCollection myPrintQueues = server.GetPrintQueues();
@@ -61,39 +59,34 @@ namespace MeetpointPrinterNew.Pages
                         foreach (System.Printing.PrintQueue pq in myPrintQueues)
                         {
                             pq.Refresh();
-
-                            TextBlockImageControl tbic = new TextBlockImageControl();
-                            tbic.ContentText = pq.Name;
-                            tbic.ContentID = pq.Name;
-                            tbic.ContentImageSource = imgsrc;
-                            tbic.IsSelected = pq.Name.Equals(_settings.Printer);
-                            tbic.Control_Click += new EventHandler(tbicPrinter_Checked);
-                            tbic.Control_UnClick += new EventHandler(tbicPrinter_Unchecked);
-                            tbic.Style = tbicStyle;
-                            icPrinterItems.Items.Add(tbic);
+                            CheckBox cbp = new CheckBox();
+                            cbp.Style = cbPrinterStyle;
+                            cbp.Content = pq.Name;
+                            cbp.Tag = pq;
+                            cbp.IsChecked = pq.Name.Equals(_settings.Printer);
+                            cbp.Checked += cbPrinter_Checked;
+                            cbp.Unchecked += cbPrinter_Unchecked;
+                            icPrinterItems.Items.Add(cbp);
                         }
                         break;
                     case 1:
                         GlobalSettings.CurrentPageID = 3;
                         List<User> users = Helpers.GetCustomerUsers(_settings.AuthToken);
 
+                        Style cbAccountStyle = (Style)FindResource("ChecBoxAccountStyle");
                         lblPrintingDevice.Text = "SELECT ACCOUNTS";
-                        lblHelper.Text = "Selected printer will print from scanners connected to the accounts selected below. You can select multiple accounts.";
-
-                        imgsrc = new BitmapImage(new Uri("/Images/icon_user_primary.png", UriKind.Relative));
 
                         foreach (User item in users)
                         {
-                            TextBlockImageControl tbic = new TextBlockImageControl();
+                            CheckBox cbp = new CheckBox();
+                            cbp.Style = cbAccountStyle;
+                            cbp.Content = item.value;
+                            cbp.Tag = item.key.ToString();
 
-                            tbic.ContentText = item.value;
-                            tbic.ContentID = item.key.ToString();
-                            tbic.ContentImageSource = imgsrc;
-                            tbic.IsSelected = _accounts.Where(q => q.AccountID == item.key.ToString() && q.AccountName == item.value).Count() == 1;
-                            tbic.Control_Click += new EventHandler(cbAccount_Checked);
-                            tbic.Control_UnClick += new EventHandler(cbAccount_Unchecked);
-                            tbic.Style = tbicStyle;
-                            icPrinterItems.Items.Add(tbic);
+                            cbp.IsChecked = _accounts.Where(q => q.AccountID == item.key.ToString() && q.AccountName == item.value).Count() == 1;
+                            cbp.Checked += cbAccount_Checked;
+                            cbp.Unchecked += cbAccount_Unchecked;
+                            icPrinterItems.Items.Add(cbp);
                         }
                         break;
                     case 2:
@@ -102,44 +95,50 @@ namespace MeetpointPrinterNew.Pages
                         break;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 //DebugLog("")
             }
 
         }
-
-        protected void tbicPrinter_Checked(object sender, EventArgs e)
+        private void cbPrinter_Checked(object sender, RoutedEventArgs e)
         {
-            TextBlockImageControl cb = (TextBlockImageControl)sender;
-            _settings.Printer = cb.ContentText;
-            foreach (TextBlockImageControl cbItem in icPrinterItems.Items)
+            CheckBox cb = (CheckBox)sender;
+            _settings.Printer = cb.Content.ToString();
+            _isUnchecked = true;
+            foreach (CheckBox cbItem in icPrinterItems.Items)
             {
-                if(!cb.ContentText.Equals(cbItem.ContentText))
+                if (!cb.Content.Equals(cbItem.Content))
                 {
-                    cbItem.IsSelected = false;
+                    cbItem.IsChecked = false;
                 }
+
             }
+            _isUnchecked = false;
         }
-        protected void tbicPrinter_Unchecked(object sender, EventArgs e)
+        private void cbPrinter_Unchecked(object sender, RoutedEventArgs e)
         {
-            _settings.Printer = "";
+            if (!_isUnchecked)
+            {
+                _settings.Printer = "";
+            }
+
         }
 
-        protected void cbAccount_Checked(object sender, EventArgs e)
+        private void cbAccount_Checked(object sender, RoutedEventArgs e)
         {
-            TextBlockImageControl cb = (TextBlockImageControl)sender;
+            CheckBox cb = (CheckBox)sender;
             Account ac = new Account();
-            ac.AccountID = cb.ContentID.ToString();
-            ac.AccountName = cb.ContentText.ToString();
+            ac.AccountID = cb.Tag.ToString();
+            ac.AccountName = cb.Content.ToString();
             _accounts.Add(ac);
         }
-        protected void cbAccount_Unchecked(object sender, EventArgs e)
+        private void cbAccount_Unchecked(object sender, RoutedEventArgs e)
         {
-            TextBlockImageControl cb = (TextBlockImageControl)sender;
-            Helpers.RemoveAccountItem(_accounts, cb.ContentID.ToString());
+            CheckBox cb = (CheckBox)sender;
+            Helpers.RemoveAccountItem(_accounts, cb.Tag.ToString());
         }
 
-       
+
     }
 }

@@ -27,6 +27,8 @@ namespace MeetpointPrinterNew.Pages
             GlobalSettings.CurrentPageID = 1;
 
             _currentApp.CurrentUser = username;
+            tblWelcomeUser.Text = string.Format("Welcome {0}, please select the event you want to print labels for.", username);
+
             BitmapImage imgsrc = new BitmapImage(new Uri("/Images/icon_event_primary.png", UriKind.Relative));
             List<EventDataEvent> edv = Helpers.GetEvents(accessToken);
 

@@ -42,16 +42,16 @@
 
         <!-- TextBlockImage panel style -->
         <Style x:Key="TextBlockImagePanel" TargetType="{x:Type Border}">
-            <Setter Property="Background" Value="White"/>
+            <!--<Setter Property="Background" Value="White"/>
             <Setter Property="CornerRadius" Value="4"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="BorderBrush" Value="#FFCBCBCB"/>
-            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderThickness" Value="2"/>-->
 
             <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="CornerRadius" Value="8"/>
-                </Trigger>
+                <!--<Trigger Property="IsMouseOver" Value="True">-->
+                    <!--<Setter Property="CornerRadius" Value="8"/>-->
+                <!--</Trigger>-->
                
             </Style.Triggers>
         </Style>
@@ -256,7 +256,7 @@
                     <Setter Property="BorderThickness" Value="2"/>
                 </Trigger>
                 <Trigger Property="IsChecked" Value="true">
-                    <Setter Property="Background" Value="#fff"/>
+                    <Setter Property="Background" Value="#EEF5FE"/>
                     <Setter Property="BorderBrush" Value="#1FE6A5"/>
                     <Setter Property="BorderThickness" Value="2"/>
                 </Trigger>
@@ -330,7 +330,7 @@
                     <ControlTemplate TargetType="{x:Type Page}">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="60"/>
+                                <RowDefinition Height="65"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             
@@ -378,7 +378,7 @@
                     <ControlTemplate TargetType="{x:Type Page}">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="60"/>
+                                <RowDefinition Height="55"/>
                                 <RowDefinition Height="85"/>
                                 <RowDefinition />
                             </Grid.RowDefinitions>
@@ -435,6 +435,7 @@
                                                 </Label.Content>
                                             </Label>
                                         </Grid>
+                                        <Button x:Name="btnBack"  Width="100"  DockPanel.Dock="Right" Content="BACK" Style="{StaticResource ButtonDefault}" Click="btnBack_Click"  ></Button>
                                     </DockPanel>
                                 </Border>
                             </Grid>
@@ -467,8 +468,13 @@
                                                 <LineBreak />
                                                 Select printing device
                                             </TextBlock>
+                                           
                                         </DockPanel>
-                                            <Line x:Name="linePrintAccount" StrokeThickness="8" Stroke="#D3D4D6" X1="35" Y1="0" X2="35" Y2="60"></Line>
+                                            <Line x:Name="linePrintAccount" StrokeThickness="8" X1="35" Y1="0" X2="35" Y2="60">
+                                                <Line.Stroke>
+                                                     <Binding Path="PrintAcountBrush" Source="{x:Static Application.Current}"/>
+                                                </Line.Stroke>
+                                            </Line>
                                         <DockPanel LastChildFill="False">
                                             <CheckBox x:Name="cbSelectAccounts"  Style="{StaticResource SetupStep}" HorizontalAlignment="Left" Margin="0,0,25,0">
                                                 <CheckBox.IsChecked>
@@ -482,7 +488,11 @@
                                                 Select accounts
                                             </TextBlock>
                                         </DockPanel>
-                                        <Line  x:Name="lineAccountTemplate"  StrokeThickness="8" Stroke="#D3D4D6" X1="35" Y1="0" X2="35" Y2="60"></Line>
+                                        <Line  x:Name="lineAccountTemplate"  StrokeThickness="8"  X1="35" Y1="0" X2="35" Y2="60">
+                                            <Line.Stroke>
+                                                <Binding Path="AccountTemplateBrush" Source="{x:Static Application.Current}"/>
+                                            </Line.Stroke>
+                                        </Line>
                                         <DockPanel LastChildFill="False">
                                             <CheckBox  x:Name="cbSelectTemplate" Style="{StaticResource SetupStep}" HorizontalAlignment="Left" Margin="0,0,25,0">
                                                 <CheckBox.IsChecked>
@@ -513,7 +523,7 @@
                                 <Grid Grid.Row="1" Margin="0,0,50,0">
                                     <DockPanel LastChildFill="False">
                                         <Button x:Name="btnNext" Width="100" Margin="10,0,0,0" Content="NEXT" Style="{StaticResource ButtonPrimary}" DockPanel.Dock="Right" Click="btnNext_Click"></Button>
-                                        <Button x:Name="btnCancel" Width="100" Content="CANCEL" Style="{StaticResource ButtonPrimary}" Background="#CECFD1" DockPanel.Dock="Right" Click="btnCancel_Click"></Button>
+                                        <Button x:Name="btnPrevious" Width="100" Content="PREVIOUS" Style="{StaticResource ButtonPrimary}" Background="#CECFD1" DockPanel.Dock="Right" Click="btnCancel_Click"></Button>
                                     </DockPanel>
                                 </Grid>
                             </Grid>
@@ -524,8 +534,9 @@
             </Setter>
         </Style>
 
+    
         <Style x:Key="LogBorderStyle" TargetType="{x:Type Border}">
-            <Setter Property="BorderBrush" Value="#CBCBCB" />
+            <Setter Property="BorderBrush" Value="#ddd" />
             <Setter Property="CornerRadius" Value="4" />
             <Setter Property="Margin" Value="0,0,0,15" />
             <Setter Property="BorderThickness" Value="1" />
@@ -601,7 +612,11 @@
                             <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
                         </Border>
                         <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
+                            </Trigger>
                             <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="bdrOutside" Property="Background" Value="#EEF5FE" />
                                 <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -617,10 +632,14 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,10,10" BorderThickness="2" CornerRadius="4" Width="100" Height="50" >
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,10,10" BorderThickness="2" CornerRadius="4" Width="100" Height="55" >
                         </Border>
                         <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
+                            </Trigger>
                             <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="bdrOutside" Property="Background" Value="#EEF5FE" />
                                 <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -634,17 +653,21 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,10,10" BorderThickness="2" CornerRadius="4" Width="100" Height="50" >
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,10,10" BorderThickness="2" CornerRadius="4" Width="100" Height="55" >
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Image Grid.Column="0" Source="/Images/qr.jpg" HorizontalAlignment="Left"></Image>
+                                <Image Grid.Column="0" Source="/Images/icon_qr_code_big.png" HorizontalAlignment="Left"></Image>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
+                            </Trigger>
                             <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="bdrOutside" Property="Background" Value="#EEF5FE" />
                                 <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -658,17 +681,21 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,10,10"  BorderThickness="2" CornerRadius="4" Width="100" Height="50">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,10,10"  BorderThickness="2" CornerRadius="4" Width="100" Height="55">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Image Grid.Column="1" Source="/Images/qr.jpg" HorizontalAlignment="Right"></Image>
+                                <Image Grid.Column="1" Source="/Images/icon_qr_code_big.png" HorizontalAlignment="Right"></Image>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
+                            </Trigger>
                             <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="bdrOutside" Property="Background" Value="#EEF5FE" />
                                 <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -682,7 +709,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,10,10" CornerRadius="4" BorderThickness="2" Width="100" Height="50">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,10,10" CornerRadius="4" BorderThickness="2" Width="100" Height="55">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*"></RowDefinition>
@@ -692,11 +719,15 @@
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Image Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Source="/Images/qr.jpg"></Image>
+                                <Image Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Source="/Images/icon_qr_code.png"></Image>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
+                            </Trigger>
                             <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="bdrOutside" Property="Background" Value="#EEF5FE" />
                                 <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -710,7 +741,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,10,10" CornerRadius="4" BorderThickness="2" Width="100" Height="50">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,10,10" CornerRadius="4" BorderThickness="2" Width="100" Height="55">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*"></RowDefinition>
@@ -720,11 +751,15 @@
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Image Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" Source="/Images/qr.jpg" Width="30" Height="30" HorizontalAlignment="Right"></Image>
+                                <Image Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" Source="/Images/icon_qr_code.png" HorizontalAlignment="Right"></Image>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
+                            </Trigger>
                             <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="bdrOutside" Property="Background" Value="#EEF5FE" />
                                 <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -738,7 +773,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,10,10" CornerRadius="4" BorderThickness="2" Width="100" Height="50">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,10,10" CornerRadius="4" BorderThickness="2" Width="100" Height="55">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*"></RowDefinition>
@@ -748,11 +783,15 @@
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Image Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Source="/Images/qr.jpg" Width="30" Height="30" HorizontalAlignment="Left"></Image>
+                                <Image Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Source="/Images/icon_qr_code.png"  HorizontalAlignment="Left"></Image>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
+                            </Trigger>
                             <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="bdrOutside" Property="Background" Value="#EEF5FE" />
                                 <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -766,7 +805,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,10,10" CornerRadius="4" BorderThickness="2" Width="100" Height="50">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,10,10" CornerRadius="4" BorderThickness="2" Width="100" Height="55">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*"></RowDefinition>
@@ -776,11 +815,15 @@
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Image Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" Source="/Images/qr.jpg" Width="30" Height="30" HorizontalAlignment="left"></Image>
+                                <Image Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" Source="/Images/icon_qr_code.png" HorizontalAlignment="left"></Image>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
+                            </Trigger>
                             <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="bdrOutside" Property="Background" Value="#EEF5FE" />
                                 <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
                             </Trigger>
                         </ControlTemplate.Triggers>
