@@ -44,19 +44,31 @@
         <Style x:Key="TextBlockImagePanel" TargetType="{x:Type Border}">
             <Setter Property="Background" Value="White"/>
             <Setter Property="CornerRadius" Value="4"/>
-            
-        </Style>
-
-        <!-- TextBlockImage control  style -->
-        <Style x:Key="TextBlockImageStyle" TargetType="{x:Type custom:TextBlockImageControl}">
-            <Setter Property="Margin" Value="0,0,25,25"/> 
+            <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="BorderBrush" Value="#FFCBCBCB"/>
             <Setter Property="BorderThickness" Value="2"/>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="CornerRadius" Value="8"/>
+                </Trigger>
+               
+            </Style.Triggers>
+        </Style>
+
+        <!-- TextBlockImage control style -->
+        <Style x:Key="TextBlockImageStyle" TargetType="{x:Type custom:TextBlockImageControl}">
+            <Setter Property="Margin" Value="0,0,15,15"/>
+            <Setter Property="BorderBrush" Value="#FFCBCBCB"/>
+            <Setter Property="BorderThickness" Value="2"/>
+
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="BorderBrush" Value="#FF1FE6A5" />
+                    
                 </Trigger>
                 <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#EEF5FE" />
                     <Setter Property="BorderBrush" Value="#FF1FE6A5" />
                 </Trigger>
             </Style.Triggers>
@@ -66,12 +78,11 @@
         <Style x:Key="Panel" TargetType="{x:Type Border}">
             <Setter Property="Background" Value="White"/>
             <Setter Property="Padding" Value="25"/>
-            <!--<Setter Property="Margin" Value="0,0,0,25"/>-->
             <Setter Property="CornerRadius" Value="4"/>
         </Style>
 
-        <!-- White panel style -->
-        <Style x:Key="Panel2" TargetType="{x:Type Border}">
+        <!-- Event white panel style -->
+        <Style x:Key="EventPanel" TargetType="{x:Type Border}">
             <Setter Property="Background" Value="White"/>
             <Setter Property="Padding" Value="25"/>
             <Setter Property="CornerRadius" Value="4"/>
@@ -449,7 +460,7 @@
                                                 <CheckBox.IsChecked>
                                                     <Binding Path="IsPrinter" Source="{x:Static Application.Current}"/>
                                                 </CheckBox.IsChecked>
-                                                <Image x:Name="imgSelectPrinter"  Source="/Images/icon_printer.png" Margin="15"></Image>
+                                                <Image x:Name="imgSelectPrinter"  Source="/Images/icon_printer.png" Width="33"></Image>
                                             </CheckBox>
                                             <TextBlock Text="" Foreground="#434752" FontSize="16" FontWeight="SemiBold" Margin="0,10,0,0">
                                                 STEP 1
@@ -463,7 +474,7 @@
                                                 <CheckBox.IsChecked>
                                                     <Binding Path="IsAccount" Source="{x:Static Application.Current}"/>
                                                 </CheckBox.IsChecked>
-                                                <Image x:Name="imgSelectAccounts"  Source="/Images/icon_users.png" Margin="15"></Image>
+                                                <Image x:Name="imgSelectAccounts"  Source="/Images/icon_users.png" Width="33"></Image>
                                             </CheckBox>
                                             <TextBlock Text="" Foreground="#434752" FontSize="16" FontWeight="SemiBold" Margin="0,10,0,0">
                                                 STEP 2
@@ -477,7 +488,7 @@
                                                 <CheckBox.IsChecked>
                                                     <Binding Path="IsTemplate" Source="{x:Static Application.Current}"/>
                                                 </CheckBox.IsChecked>
-                                                <Image x:Name="imgSelectTemplate"  Source="/Images/qr.jpg" Margin="15"></Image>
+                                                <Image x:Name="imgSelectTemplate" Source="/Images/icon_qr_code.png" Width="33"></Image>
                                             </CheckBox>
                                             <TextBlock Text="" Foreground="#434752" FontSize="16" FontWeight="SemiBold" Margin="0,10,0,0">
                                                 STEP 3
@@ -586,7 +597,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" BorderThickness="2" CornerRadius="4" Padding="10,5" Margin="0,0,15,15">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" BorderThickness="2" CornerRadius="4" Padding="10,5" Margin="0,0,10,10">
                             <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
                         </Border>
                         <ControlTemplate.Triggers>
@@ -602,11 +613,28 @@
             <Setter Property="Cursor" Value="Hand"></Setter>
         </Style>
 
+        <Style x:Key="CheckBoxTemplateLayoutStyleNC" TargetType="{x:Type CheckBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,10,10" BorderThickness="2" CornerRadius="4" Width="100" Height="50" >
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF1FE6A5" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Cursor" Value="Hand"></Setter>
+        </Style>
+
         <Style x:Key="CheckBoxTemplateLayoutStyleHL" TargetType="{x:Type CheckBox}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,15,15" BorderThickness="2" CornerRadius="4" Width="115" Height="55" >
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,10,10" BorderThickness="2" CornerRadius="4" Width="100" Height="50" >
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -630,7 +658,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,15,15"  BorderThickness="2" CornerRadius="4" Width="115" Height="55">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,10,10"  BorderThickness="2" CornerRadius="4" Width="100" Height="50">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -654,7 +682,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,15,15" CornerRadius="4" BorderThickness="2" Width="115" Height="55">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,10,10" CornerRadius="4" BorderThickness="2" Width="100" Height="50">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*"></RowDefinition>
@@ -682,7 +710,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,15,15" CornerRadius="4" BorderThickness="2" Width="115" Height="55">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,10,10" CornerRadius="4" BorderThickness="2" Width="100" Height="50">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*"></RowDefinition>
@@ -710,7 +738,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,15,15" CornerRadius="4" BorderThickness="2" Width="115" Height="55">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,10,10" CornerRadius="4" BorderThickness="2" Width="100" Height="50">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*"></RowDefinition>
@@ -738,7 +766,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,15,15" CornerRadius="4" BorderThickness="2" Width="115" Height="55">
+                        <Border x:Name="bdrOutside" Background="Transparent" BorderBrush="#CBCBCB" Margin="0,0,10,10" CornerRadius="4" BorderThickness="2" Width="100" Height="50">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*"></RowDefinition>
@@ -768,7 +796,7 @@
                     <ControlTemplate TargetType="{x:Type CheckBox}">
                         <DockPanel>
                             <Border x:Name="bdrOutside" DockPanel.Dock="Left" Background="Transparent" BorderBrush="#CBCBCB" BorderThickness="2" CornerRadius="4" Width="18" Height="18" Margin="0,0,10,0">
-                                <Image x:Name="imgCheck" Source="Images/check_mark.png" Width="0"></Image>
+                                <Image x:Name="imgCheck" Source="/Images/check_mark.png" Width="0"></Image>
                             </Border>
                             <ContentPresenter VerticalAlignment="Center" DockPanel.Dock="Left" />
                         </DockPanel>
@@ -785,7 +813,81 @@
             <Setter Property="FontSize" Value="14"></Setter>
             <Setter Property="Margin" Value="0,0,0,5"></Setter>
         </Style>
+
+        <!-- Scrollbar thumb style -->
+        <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Grid x:Name="Grid">
+                            <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Fill="Transparent" />
+                            <Border x:Name="Rectangle1" CornerRadius="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Background="{TemplateBinding Background}" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Tag" Value="Horizontal">
+                                <Setter TargetName="Rectangle1" Property="Width" Value="Auto" />
+                                <Setter TargetName="Rectangle1" Property="Height" Value="4" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         
+        <!-- Scrollbar style -->
+        <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
+            <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
+            <Setter Property="Foreground" Value="#D3D4D6" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Width" Value="8" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Grid x:Name="GridRoot" Width="8" Background="{TemplateBinding Background}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.00001*" />
+                            </Grid.RowDefinitions>
+
+                            <Track x:Name="PART_Track" Grid.Row="0" IsDirectionReversed="true" Focusable="false">
+                                <Track.Thumb>
+                                    <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}" Style="{DynamicResource ScrollThumbs}" />
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton x:Name="PageUp" Command="ScrollBar.PageDownCommand" Opacity="0" Focusable="false" />
+                                </Track.IncreaseRepeatButton>
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton x:Name="PageDown" Command="ScrollBar.PageUpCommand" Opacity="0" Focusable="false" />
+                                </Track.DecreaseRepeatButton>
+                            </Track>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed" />
+                            </Trigger>
+                            <Trigger Property="Orientation" Value="Horizontal">
+                                <Setter TargetName="GridRoot" Property="LayoutTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="PART_Track" Property="LayoutTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Width" Value="Auto" />
+                                <Setter Property="Height" Value="8" />
+                                <Setter TargetName="Thumb" Property="Tag" Value="Horizontal" />
+                                <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand" />
+                                <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Application.Resources>
 </Application>
 

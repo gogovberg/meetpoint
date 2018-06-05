@@ -50,7 +50,9 @@ namespace MeetpointPrinterNew.Pages
                     case 0:
                         GlobalSettings.CurrentPageID = 2;
                         
-                        lblPrintingDevice.Content = "SELECT PRINTING DEVICE";
+                        lblPrintingDevice.Text = "SELECT PRINTING DEVICE";
+                        lblHelper.Text = "Please select 1 device.";
+
                         imgsrc = new BitmapImage(new Uri("/Images/icon_printer_primary.png", UriKind.Relative));
 
                         var server = new LocalPrintServer();
@@ -75,7 +77,9 @@ namespace MeetpointPrinterNew.Pages
                         GlobalSettings.CurrentPageID = 3;
                         List<User> users = Helpers.GetCustomerUsers(_settings.AuthToken);
 
-                        lblPrintingDevice.Content = "SELECT ACCOUNTS";
+                        lblPrintingDevice.Text = "SELECT ACCOUNTS";
+                        lblHelper.Text = "Selected printer will print from scanners connected to the accounts selected below. You can select multiple accounts.";
+
                         imgsrc = new BitmapImage(new Uri("/Images/icon_user_primary.png", UriKind.Relative));
 
                         foreach (User item in users)
@@ -93,7 +97,7 @@ namespace MeetpointPrinterNew.Pages
                         }
                         break;
                     case 2:
-                        lblPrintingDevice.Content = "SELECT LABEL TEMPLATE";
+                        lblPrintingDevice.Text = "SELECT LABEL TEMPLATE";
 
                         break;
                 }

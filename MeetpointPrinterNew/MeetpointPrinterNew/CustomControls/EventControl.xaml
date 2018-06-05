@@ -16,7 +16,7 @@
         </Rectangle>
         
         <!-- Event panel -->
-        <Border MouseUp="EventBorder_MouseUp" MouseDown="EventBorder_MouseDown" Style="{StaticResource Panel2}">
+        <Border MouseUp="EventBorder_MouseUp" MouseDown="EventBorder_MouseDown" Style="{StaticResource EventPanel}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -26,7 +26,7 @@
 
                 <DockPanel Grid.Row="0">
                     <Image x:Name="imgEventLogo" Width="30" DockPanel.Dock="Left"></Image>
-                    <TextBlock x:Name="tblEventName" Margin="10,0,0,5" DockPanel.Dock="Left" Foreground="#FF2489FF" FontWeight="SemiBold" FontSize="18" ></TextBlock>
+                    <TextBlock x:Name="tblEventName" Margin="10,0,0,5" DockPanel.Dock="Left" Foreground="#FF2489FF" FontWeight="SemiBold" FontSize="18"></TextBlock>
                 </DockPanel>
                 
                 <Grid Grid.Row="1">

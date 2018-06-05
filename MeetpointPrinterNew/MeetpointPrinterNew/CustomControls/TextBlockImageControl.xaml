@@ -5,16 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MeetpointPrinterNew.CustomControls"
              Height="67" Width="340">
-    <Grid Cursor="Hand">
-        <Border MouseUp="TextBlockImageBorder_MouseUp" MouseDown="TextBlockImageBorder_MouseDown" Style="{StaticResource TextBlockImagePanel}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="20*"></ColumnDefinition>
-                    <ColumnDefinition Width="70*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Image x:Name="imgContentImage" Grid.Column="0" Margin="27,17,0,15" Source="/Images/icon_user_primary.png"></Image>
-                <TextBlock x:Name="tblContentText" Foreground="#FF1581FB" FontWeight="SemiBold" FontSize="18" Grid.Column="1" Margin="21,21,0,22" Text="Account name 1"></TextBlock>
-            </Grid>
-        </Border>
-    </Grid>
+    <Border x:Name="panelTextBlockImage" MouseUp="TextBlockImageBorder_MouseUp" MouseDown="TextBlockImageBorder_MouseDown" Style="{StaticResource TextBlockImagePanel}" Padding="10">
+        <DockPanel>
+            <Image x:Name="imgContentImage" DockPanel.Dock="Left" Source="/Images/icon_user_primary.png" Width="30" Margin="0,0,10,0"></Image>
+            <TextBlock x:Name="tblContentText" DockPanel.Dock="Left" Foreground="#1581FB" FontWeight="SemiBold" FontSize="16" Text="Account name 1" VerticalAlignment="Center"></TextBlock>
+        </DockPanel>
+    </Border>
 </UserControl>

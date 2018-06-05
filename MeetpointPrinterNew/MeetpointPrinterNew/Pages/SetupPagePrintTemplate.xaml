@@ -33,12 +33,13 @@
                 <StackPanel Grid.Row="2" Orientation="Vertical">
                     <Label FontSize="16" Content="Layout" Margin="0,0,0,10"></Label>
                     <WrapPanel>
-                        <CheckBox x:Name="cbLayoutHL"  Style="{StaticResource CheckBoxTemplateLayoutStyleHL}"   Checked="cbLayoutHL_Checked"></CheckBox>
-                        <CheckBox x:Name="cbLayoutQLT" Style="{StaticResource CheckBoxTemplateLayoutStyleQLT}"  Checked="cbLayoutQLT_Checked"></CheckBox>
-                        <CheckBox x:Name="cbLayoutQLB" Style="{StaticResource CheckBoxTemplateLayoutStyleQLB}"  Checked="cbLayoutQLB_Checked"></CheckBox>
-                        <CheckBox x:Name="cbLayoutHR"  Style="{StaticResource CheckBoxTemplateLayoutStyleHR}"   Checked="cbLayoutHR_Checked"></CheckBox>
-                        <CheckBox x:Name="cbLayoutQRT" Style="{StaticResource CheckBoxTemplateLayoutStyleQRT}"  Checked="cbLayoutQRT_Checked"></CheckBox>
+                        <CheckBox x:Name="cbLayoutHL"  Style="{StaticResource CheckBoxTemplateLayoutStyleHL}" Checked="cbLayoutHL_Checked"></CheckBox>
+                        <CheckBox x:Name="cbLayoutQLT" Style="{StaticResource CheckBoxTemplateLayoutStyleQLT}" Checked="cbLayoutQLT_Checked"></CheckBox>
+                        <CheckBox x:Name="cbLayoutQLB" Style="{StaticResource CheckBoxTemplateLayoutStyleQLB}" Checked="cbLayoutQLB_Checked"></CheckBox>
+                        <CheckBox x:Name="cbLayoutHR"  Style="{StaticResource CheckBoxTemplateLayoutStyleHR}" Checked="cbLayoutHR_Checked"></CheckBox>
+                        <CheckBox x:Name="cbLayoutQRT" Style="{StaticResource CheckBoxTemplateLayoutStyleQRT}" Checked="cbLayoutQRT_Checked"></CheckBox>
                         <CheckBox x:Name="cbLayoutQRB" Style="{StaticResource CheckBoxTemplateLayoutStyleQRB}"  Checked="cbLayoutQRB_Checked"></CheckBox>
+                        <CheckBox Style="{StaticResource CheckBoxTemplateLayoutStyleNC}" Checked="cbLayoutQRB_Checked"></CheckBox>
                     </WrapPanel>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Orientation="Vertical">

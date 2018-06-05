@@ -12,7 +12,7 @@
         <Image Source="/Images/bg.jpg" Stretch="UniformToFill"></Image>
         
         <!-- Rectangle hack to put shadow on login panel (in a way that it won't affect text rendering) -->
-        <Rectangle Width="410" Height="600" HorizontalAlignment="Center" Fill="#fff" RadiusX="4" RadiusY="4">
+        <Rectangle Width="410" Height="634" HorizontalAlignment="Center" Fill="#fff" RadiusX="4" RadiusY="4">
             <Rectangle.Effect>
                 <DropShadowEffect ShadowDepth="1" Direction="315" Color="#ccc"/>
             </Rectangle.Effect>
@@ -47,8 +47,6 @@
                 </Button>
             </StackPanel>
         </Border>
-
-        <!--<Image Source="/Images/printer_bg.png" Width="300" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="50,25"></Image>-->
 
     </Grid>
     

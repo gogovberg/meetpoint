@@ -211,8 +211,5 @@
   <ItemGroup>
     <Resource Include="Images\warning.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\check_mark.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

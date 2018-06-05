@@ -87,9 +87,9 @@ namespace MeetpointPrinterNew.Pages
             _currentApp.CurrentEvent = ec.EventName;
             _currentApp.CurrentEventLocation = ec.EventDate + " " + ec.EventLocation;
             _currentApp.CurrentEventLocation = string.Format("{0}{1}{2}{3}{4}",
-                eve.EventStartDate.ToShortDateString(),
-                eve.EventStartDate != eve.EventEndDate ? " - " : "",
-                eve.EventStartDate != eve.EventEndDate ? eve.EventEndDate.ToShortDateString() : "",
+                us.Event.EventStartDate.ToShortDateString(),
+                us.Event.EventStartDate != us.Event.EventEndDate ? " - " : "",
+                us.Event.EventStartDate != us.Event.EventEndDate ? us.Event.EventEndDate.ToShortDateString() : "",
                 string.IsNullOrEmpty(ec.EventLocation) ? "" : ", ",
                 string.IsNullOrEmpty(ec.EventLocation) ? "" : ec.EventLocation
                 );
