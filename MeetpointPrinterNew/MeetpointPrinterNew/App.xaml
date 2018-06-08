@@ -201,7 +201,45 @@
             </Style.Triggers>
         </Style>
 
-        <!-- Round primary button style -->
+        <!-- Disabled primary button style -->
+        <Style x:Key="ButtonPrimaryDisabled" TargetType="Button">
+            <Setter Property="Background" Value="#C6DBF3"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#fff"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Cursor" Value="No"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{x:Null}" BorderThickness="0" CornerRadius="4" Padding="15,0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Disabled primary button style -->
+        <Style x:Key="ButtonDefaultDisabled" TargetType="Button">
+            <Setter Property="Background" Value="#CECFD1"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#fff"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Cursor" Value="No"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{x:Null}" BorderThickness="0" CornerRadius="4" Padding="15,0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Round default button style -->
         <Style x:Key="ButtonPrimaryCircle" TargetType="Button">
             <Setter Property="Background" Value="#50A2FF"/>
             <Setter Property="FontSize" Value="16"/>
@@ -235,8 +273,8 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Margin" Value="10,0,10,0"/>
             <Setter Property="Height" Value="35"/>
-            <Setter Property="Width" Value="90"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
@@ -248,20 +286,59 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#fff"/>
+                    <!--<Setter Property="Background" Value="#fff"/>-->
                     <Setter Property="BorderBrush" Value="#1FE6A5"/>
                     <Setter Property="BorderThickness" Value="2"/>
+                    <!--<Setter Property="Foreground" Value="#50A2FF"/>-->
                 </Trigger>
                 <Trigger Property="IsChecked" Value="true">
                     <Setter Property="Background" Value="#EEF5FE"/>
                     <Setter Property="BorderBrush" Value="#1FE6A5"/>
                     <Setter Property="BorderThickness" Value="2"/>
+                    <!--<Setter Property="Foreground" Value="#50A2FF"/>-->
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <!-- Toggle button off style-->
+        <Style x:Key="ToggleButtonOff" TargetType="CheckBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#333"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10,0,10,0"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderBrush" Value="#ccc"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                    <!--<Setter Property="Foreground" Value="#50A2FF"/>-->
+                </Trigger>
+                <Trigger Property="IsChecked" Value="true">
+                    <Setter Property="Background" Value="#fdfdfd"/>
+                    <Setter Property="BorderBrush" Value="#ccc"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                    <!--<Setter Property="Foreground" Value="#50A2FF"/>-->
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
 
         <!-- SetupStep -->
         <Style x:Key="SetupStep" TargetType="CheckBox">
@@ -411,7 +488,7 @@
                             </Grid>
 
                             <!-- Subheader row -->
-                            <Grid Grid.Row="1">
+                            <Grid Grid.Row="1" Visibility="Collapsed">
                                 <Border Grid.Row="0" Background="#fff" >
                                     <DockPanel VerticalAlignment="Center">
                                         <Grid DockPanel.Dock="Left">
@@ -523,7 +600,7 @@
                                 <Grid Grid.Row="1" Margin="0,0,50,0">
                                     <DockPanel LastChildFill="False">
                                         <Button x:Name="btnNext" Width="100" Margin="10,0,0,0" Content="NEXT" Style="{StaticResource ButtonPrimary}" DockPanel.Dock="Right" Click="btnNext_Click"></Button>
-                                        <Button x:Name="btnPrevious" Width="100" Content="PREVIOUS" Style="{StaticResource ButtonPrimary}" Background="#CECFD1" DockPanel.Dock="Right" Click="btnCancel_Click"></Button>
+                                        <Button x:Name="btnPrevious" Width="100" Content="PREVIOUS" Style="{StaticResource ButtonDefault}" DockPanel.Dock="Right" Click="btnCancel_Click"></Button>
                                     </DockPanel>
                                 </Grid>
                             </Grid>
@@ -534,7 +611,6 @@
             </Setter>
         </Style>
 
-    
         <Style x:Key="LogBorderStyle" TargetType="{x:Type Border}">
             <Setter Property="BorderBrush" Value="#ddd" />
             <Setter Property="CornerRadius" Value="4" />
@@ -881,6 +957,7 @@
         <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
             <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
             <Setter Property="Foreground" Value="#D3D4D6" />
+            <Setter Property="Margin" Value="5,5" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="Width" Value="8" />
             <Setter Property="Template">

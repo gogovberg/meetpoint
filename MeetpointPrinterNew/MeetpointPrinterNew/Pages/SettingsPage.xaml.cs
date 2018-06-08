@@ -238,37 +238,37 @@ namespace MeetpointPrinterNew.Pages
             {
                 case "cbLayoutQRT":
                     imgQrPreview.Source = imgSmallSrc;
-                    SetControlCanvasPosition(imgQrPreview, double.NaN, 10, 10, double.NaN);
+                    SetControlCanvasPosition(imgQrPreview, double.NaN, 0, 0, double.NaN);
                     SetControlCanvasPosition(spDataOptions, 10, double.NaN, double.NaN, double.NaN);
                     break;
                 case "cbLayoutQRB":
                     imgQrPreview.Source = imgSmallSrc;
-                    SetControlCanvasPosition(imgQrPreview, double.NaN, double.NaN, 10, 10);
-                    SetControlCanvasPosition(spDataOptions, 10, double.NaN, double.NaN, double.NaN);
+                    SetControlCanvasPosition(imgQrPreview, double.NaN, double.NaN, 0, 0);
+                    SetControlCanvasPosition(spDataOptions, 0, double.NaN, double.NaN, double.NaN);
                     break;
                 case "cbLayoutHR":
                     imgQrPreview.Source = imgBigSrc;
-                    SetControlCanvasPosition(imgQrPreview, double.NaN, double.NaN, 10, double.NaN);
-                    SetControlCanvasPosition(spDataOptions, 10, double.NaN, double.NaN, double.NaN);
+                    SetControlCanvasPosition(imgQrPreview, double.NaN, double.NaN, 0, double.NaN);
+                    SetControlCanvasPosition(spDataOptions, 0, double.NaN, double.NaN, double.NaN);
                     break;
                 case "cbLayoutQLT":
                     imgQrPreview.Source = imgSmallSrc;
-                    SetControlCanvasPosition(imgQrPreview, 10, 10, double.NaN, double.NaN);
-                    SetControlCanvasPosition(spDataOptions, double.NaN, double.NaN, 10, double.NaN);
+                    SetControlCanvasPosition(imgQrPreview, 0, 0, double.NaN, double.NaN);
+                    SetControlCanvasPosition(spDataOptions, double.NaN, double.NaN, 0, double.NaN);
                     break;
                 case "cbLayoutQLB":
                     imgQrPreview.Source = imgSmallSrc;
-                    SetControlCanvasPosition(imgQrPreview, 10, 10, double.NaN, double.NaN);
+                    SetControlCanvasPosition(imgQrPreview, 0, 0, double.NaN, double.NaN);
                     SetControlCanvasPosition(spDataOptions, double.NaN, double.NaN, 10, double.NaN);
                     break;
                 case "cbLayoutHL":
                     imgQrPreview.Source = imgBigSrc;
-                    SetControlCanvasPosition(imgQrPreview, 10, double.NaN, double.NaN, double.NaN);
-                    SetControlCanvasPosition(spDataOptions, double.NaN, double.NaN, 10, double.NaN);
+                    SetControlCanvasPosition(imgQrPreview, 0, double.NaN, double.NaN, double.NaN);
+                    SetControlCanvasPosition(spDataOptions, double.NaN, double.NaN, 0, double.NaN);
                     break;
                 case "cbLayoutClean":
                     CanvasControlClearPosition(imgQrPreview);
-                    SetControlCanvasPosition(spDataOptions, 10, double.NaN, double.NaN, double.NaN);
+                    SetControlCanvasPosition(spDataOptions, 0, double.NaN, double.NaN, double.NaN);
                     break;
             }
         }
