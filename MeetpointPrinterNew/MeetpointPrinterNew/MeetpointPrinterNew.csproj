@@ -205,5 +205,8 @@
     <Resource Include="Images\qr.png" />
     <Resource Include="Images\warning.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\big_qr.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
