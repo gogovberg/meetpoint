@@ -21,6 +21,11 @@ namespace MeetpointPrinterNew.Pages
             GlobalSettings.CurrentPageID = 6;
 
             _settings = settings;
+
+            headerControl.CurrentUser = GlobalSettings.CurrentUser;
+            subHeaderControl.EventName = GlobalSettings.CurrentEvent;
+            subHeaderControl.EventDateLocation = GlobalSettings.CurrentEventLocation;
+
             BitmapImage imgNameSrc = new BitmapImage(new Uri("/Images/icon_badge.png", UriKind.Relative));
             BitmapImage imgStatusSrc = new BitmapImage(new Uri("/Images/icon_more.png", UriKind.Relative));
 

@@ -26,7 +26,7 @@ namespace MeetpointPrinterNew.Pages
 
             GlobalSettings.CurrentPageID = 1;
 
-            _currentApp.CurrentUser = username;
+            GlobalSettings.CurrentUser = username;
             tblWelcomeUser.Text = string.Format("Welcome {0}, please select the event you want to print labels for.", username);
 
             BitmapImage imgsrc = new BitmapImage(new Uri("/Images/icon_event_primary.png", UriKind.Relative));
@@ -86,9 +86,9 @@ namespace MeetpointPrinterNew.Pages
                 Helpers.SaveUserSettings(us);
                 GlobalSettings.ApplicationSettings = us;
             }
-            _currentApp.CurrentEvent = ec.EventName;
-            _currentApp.CurrentEventLocation = ec.EventDate + " " + ec.EventLocation;
-            _currentApp.CurrentEventLocation = string.Format("{0}{1}{2}{3}{4}",
+            GlobalSettings.CurrentEvent = ec.EventName;
+            GlobalSettings.CurrentEventLocation = ec.EventDate + " " + ec.EventLocation;
+            GlobalSettings.CurrentEventLocation = string.Format("{0}{1}{2}{3}{4}",
                 us.Event.EventStartDate.ToShortDateString(),
                 us.Event.EventStartDate != us.Event.EventEndDate ? " - " : "",
                 us.Event.EventStartDate != us.Event.EventEndDate ? us.Event.EventEndDate.ToShortDateString() : "",
@@ -96,6 +96,7 @@ namespace MeetpointPrinterNew.Pages
                 string.IsNullOrEmpty(ec.EventLocation) ? "" : ec.EventLocation
                 );
 
+            
             Helpers.SaveUserSettings(GlobalSettings.ApplicationSettings);
             GlobalSettings.PreviousPageID = GlobalSettings.PreviousPageID;
             if (!string.IsNullOrWhiteSpace(GlobalSettings.ApplicationSettings.Printer) && GlobalSettings.ApplicationSettings.Accounts != null && GlobalSettings.ApplicationSettings.Accounts.Account.Count > 0)

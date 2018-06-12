@@ -39,18 +39,11 @@ namespace MeetpointPrinterNew.Pages
 
             _settings = settings;
             _printTimer = 10000;
-            
 
-            GlobalSettings.ApplicationSettings.Event = settings.Event;
-            _currentApp.CurrentEvent = settings.Event.EventName;
 
-            _currentApp.CurrentEventLocation = string.Format("{0}{1}{2}{3}{4}",
-                settings.Event.EventStartDate.ToShortDateString(),
-                settings.Event.EventStartDate != settings.Event.EventEndDate ? " - " : "",
-                settings.Event.EventStartDate != settings.Event.EventEndDate ? settings.Event.EventEndDate.ToShortDateString() : "",
-                string.IsNullOrEmpty(settings.Event.EventLocation) ? "" : ", ",
-                string.IsNullOrEmpty(settings.Event.EventLocation) ? "" : settings.Event.EventLocation
-                );
+            headerControl.CurrentUser = GlobalSettings.CurrentUser;
+            subHeaderControl.EventName = GlobalSettings.CurrentEvent;
+            subHeaderControl.EventDateLocation = GlobalSettings.CurrentEventLocation;
 
             string _tempPrintName = _settings.Printer;
 

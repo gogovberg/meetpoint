@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MeetpointPrinterNew"
         mc:Ignorable="d"
-        Title="Meetpoint print application" Width="1240" Height="950"  Background="#EFEFEF">
-    
-        <Grid>
+        Title="Meetpoint print application" Width="1315" Height="787"  Background="#EFEFEF">
+   
+    <Grid>
             <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="visible">
                 <Frame x:Name="MainFrame" Height="300"></Frame>
             </ScrollViewer> 

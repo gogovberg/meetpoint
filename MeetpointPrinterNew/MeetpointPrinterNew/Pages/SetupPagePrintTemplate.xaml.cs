@@ -16,6 +16,8 @@ namespace MeetpointPrinterNew.Pages
         private int _pageType = -1;
         private List<string> _dataOptions;
 
+        private bool _isCompleted;
+        private bool _isUncheck;
         BitmapImage imgBigSrc = new BitmapImage(new Uri("/Images/big_qr.png", UriKind.Relative));
         BitmapImage imgSmallSrc = new BitmapImage(new Uri("/Images/big_qr.png", UriKind.Relative));
 
@@ -38,15 +40,18 @@ namespace MeetpointPrinterNew.Pages
             _isOnLoadChecked = false;
             _pageType = 2;
             _dataOptions = new List<string>();
+            _isCompleted = false;
 
-           
+            headerControl.CurrentUser = GlobalSettings.CurrentUser;
+            subHeaderControl.EventName = GlobalSettings.CurrentEvent;
+            subHeaderControl.EventDateLocation = GlobalSettings.CurrentEventLocation;
 
             CanvasControlClearPosition(imgQrPreview);
             CanvasControlClearPosition(spDataOptions);
 
             SetPriviewBorderSize(1);
 
-
+            _isUncheck = true;
 
             switch (GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID)
             {
@@ -119,43 +124,57 @@ namespace MeetpointPrinterNew.Pages
             SwitchDataOptions();
             _isOnLoadChecked = false;
 
-
+            ButtonNextLogic();
 
         }
 
         private void cbSizeOne_Checked(object sender, RoutedEventArgs e)
         {
-            CheckBox cb = (CheckBox)sender;
+            _isUncheck = false;
             cbSizeTwo.IsChecked = false;
 
-
-            SetPriviewBorderSize(0.6);
-            SetPriviewControlsSize();
+            CheckBox cb = (CheckBox)sender;
 
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID = cb.Name;
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutWidth = bdrPreview.Width;
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutHeight = bdrPreview.Height;
+
+            SetPriviewBorderSize(0.6);
+            SetPriviewControlsSize();
+          
+            ButtonNextLogic();
+            _isUncheck = true;
         }
 
         private void cbSizeTwo_Checked(object sender, RoutedEventArgs e)
         {
-            CheckBox cb = (CheckBox)sender;
+            _isUncheck = false;
             cbSizeOne.IsChecked = false;
-
-            SetPriviewBorderSize(0.8);
-            SetPriviewControlsSize();
-
+            CheckBox cb = (CheckBox)sender;
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID = cb.Name;
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutWidth = bdrPreview.Width;
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutHeight = bdrPreview.Height;
+            SetPriviewBorderSize(0.8);
+            SetPriviewControlsSize();
+
+            ButtonNextLogic();
+            _isUncheck = true;
         }
 
-     
+        private void cbSize_Unchecked(object sender, RoutedEventArgs e)
+        {
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID = "";
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutWidth = 0;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutHeight = 0;
+            if (_isUncheck)
+            {
+                ButtonNextLogic();
+            }
+        }
+
         private void cbLayoutQRT_Checked(object sender, RoutedEventArgs e)
         {
-            CheckBox cb = (CheckBox)sender;
-            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
-
+            _isUncheck = false;
             cbLayoutHL.IsChecked = false;
             cbLayoutHR.IsChecked = false;
             cbLayoutQLB.IsChecked = false;
@@ -163,100 +182,114 @@ namespace MeetpointPrinterNew.Pages
             cbLayoutQRB.IsChecked = false;
             cbLayoutClean.IsChecked = false;
 
+            CheckBox cb = (CheckBox)sender;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
+
+
             SetPriviewControlsSize();
             imgQrPreview.Source = imgSmallSrc;
             SetControlCanvasPosition(imgQrPreview, double.NaN, _xPositionOffset, _xPositionOffset, double.NaN);
             SetControlCanvasPosition(spDataOptions, 10, double.NaN, double.NaN, double.NaN);
-           
+            ButtonNextLogic();
+            _isUncheck = true;
         }
 
         private void cbLayoutQRB_Checked(object sender, RoutedEventArgs e)
         {
-            CheckBox cb = (CheckBox)sender;
-            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
-
+            _isUncheck = false;
             cbLayoutHL.IsChecked = false;
             cbLayoutHR.IsChecked = false;
             cbLayoutQLB.IsChecked = false;
             cbLayoutQLT.IsChecked = false;
             cbLayoutQRT.IsChecked = false;
             cbLayoutClean.IsChecked = false;
+
+            CheckBox cb = (CheckBox)sender;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
+
 
             SetPriviewControlsSize();
             imgQrPreview.Source = imgSmallSrc;
             SetControlCanvasPosition(imgQrPreview, double.NaN, double.NaN, _xPositionOffset, _xPositionOffset);
             SetControlCanvasPosition(spDataOptions, 10, double.NaN, double.NaN, double.NaN);
 
-         
-
+            ButtonNextLogic();
+            _isUncheck = true;
         }
 
         private void cbLayoutHR_Checked(object sender, RoutedEventArgs e)
         {
-            CheckBox cb = (CheckBox)sender;
-            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
-
+            _isUncheck = false;
             cbLayoutHL.IsChecked = false;
             cbLayoutQLB.IsChecked = false;
             cbLayoutQLT.IsChecked = false;
             cbLayoutQRB.IsChecked = false;
             cbLayoutQRT.IsChecked = false;
             cbLayoutClean.IsChecked = false;
+
+            CheckBox cb = (CheckBox)sender;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
+
 
             SetPriviewControlsSize();
             imgQrPreview.Source = imgBigSrc;
             SetControlCanvasPosition(imgQrPreview, double.NaN, double.NaN, _xPositionOffset, double.NaN);
             SetControlCanvasPosition(spDataOptions, 10, double.NaN, double.NaN, double.NaN);
 
-        
+            ButtonNextLogic();
+            _isUncheck = true;
         }
 
         private void cbLayoutQLT_Checked(object sender, RoutedEventArgs e)
         {
-            CheckBox cb = (CheckBox)sender;
-            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
-
+            _isUncheck = false;
             cbLayoutHL.IsChecked = false;
             cbLayoutHR.IsChecked = false;
             cbLayoutQLB.IsChecked = false;
             cbLayoutQRB.IsChecked = false;
             cbLayoutQRT.IsChecked = false;
             cbLayoutClean.IsChecked = false;
+
+            CheckBox cb = (CheckBox)sender;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
 
             SetPriviewControlsSize();
             imgQrPreview.Source = imgSmallSrc;
             SetControlCanvasPosition(imgQrPreview, _xPositionOffset, _xPositionOffset, double.NaN, double.NaN);
             SetControlCanvasPosition(spDataOptions, double.NaN, double.NaN, 10, double.NaN);
 
-           
+            ButtonNextLogic();
+
+            _isUncheck = true;
         }
 
         private void cbLayoutQLB_Checked(object sender, RoutedEventArgs e)
         {
-            CheckBox cb = (CheckBox)sender;
-            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
-
+            _isUncheck = false;
             cbLayoutHL.IsChecked = false;
             cbLayoutHR.IsChecked = false;
             cbLayoutQLT.IsChecked = false;
             cbLayoutQRB.IsChecked = false;
             cbLayoutQRT.IsChecked = false;
             cbLayoutClean.IsChecked = false;
+
+            CheckBox cb = (CheckBox)sender;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
 
             SetPriviewControlsSize();
             imgQrPreview.Source = imgSmallSrc;
             SetControlCanvasPosition(imgQrPreview, _xPositionOffset, double.NaN, double.NaN, _xPositionOffset);
             SetControlCanvasPosition(spDataOptions, double.NaN, double.NaN, 10, double.NaN);
 
-           
+            ButtonNextLogic();
+
+            _isUncheck = true;
 
         }
 
         private void cbLayoutHL_Checked(object sender, RoutedEventArgs e)
         {
-            CheckBox cb = (CheckBox)sender;
-            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
-
+            _isUncheck = false;
             cbLayoutHR.IsChecked = false;
             cbLayoutQLB.IsChecked = false;
             cbLayoutQLT.IsChecked = false;
@@ -264,19 +297,21 @@ namespace MeetpointPrinterNew.Pages
             cbLayoutQRT.IsChecked = false;
             cbLayoutClean.IsChecked = false;
 
+            CheckBox cb = (CheckBox)sender;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
+
             SetPriviewControlsSize();
             imgQrPreview.Source = imgBigSrc;
             SetControlCanvasPosition(imgQrPreview, _xPositionOffset, double.NaN, double.NaN, double.NaN);
             SetControlCanvasPosition(spDataOptions, double.NaN, double.NaN, 10, double.NaN);
 
-       
+            ButtonNextLogic();
+            _isUncheck = true;
         }
 
         private void cbLayoutClean_Checked(object sender, RoutedEventArgs e)
         {
-            CheckBox cb = (CheckBox)sender;
-            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
-
+            _isUncheck = false;
             cbLayoutHR.IsChecked = false;
             cbLayoutHL.IsChecked = false;
             cbLayoutQLB.IsChecked = false;
@@ -284,10 +319,25 @@ namespace MeetpointPrinterNew.Pages
             cbLayoutQRB.IsChecked = false;
             cbLayoutQRT.IsChecked = false;
 
+            CheckBox cb = (CheckBox)sender;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
+
             SetPriviewControlsSize();
             CanvasControlClearPosition(imgQrPreview);
             SetControlCanvasPosition(spDataOptions, 10, double.NaN, double.NaN, double.NaN);
-          
+
+            ButtonNextLogic();
+            _isUncheck = true;
+        }
+      
+        private void cbLayout_Unchecked(object sender, RoutedEventArgs e)
+        {
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = "";
+            if (_isUncheck)
+            {
+                ButtonNextLogic();
+            }
+            
         }
 
         private void cbOption_Checked(object sender, RoutedEventArgs e)
@@ -297,6 +347,7 @@ namespace MeetpointPrinterNew.Pages
                 DataOptionsLogic(sender);
                 GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption = _dataOptions;
             }
+            ButtonNextLogic();
         }
 
         private void cbOption_Unchecked(object sender, RoutedEventArgs e)
@@ -321,7 +372,7 @@ namespace MeetpointPrinterNew.Pages
 
                 GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption = _dataOptions;
             }
-          
+            ButtonNextLogic();
         }
 
         private void DataOptionsLogic(Object sender)
@@ -416,6 +467,50 @@ namespace MeetpointPrinterNew.Pages
             spDataOptions.Height = (bdrPreview.Height / 2);
             imgQrPreview.Width = imgWidth;
             imgQrPreview.Height = imgHeight;
+        }
+
+        private void btnNext_Click(object sender, RoutedEventArgs e)
+        {
+            if (_isCompleted)
+            {
+                Helpers.SaveUserSettings(GlobalSettings.ApplicationSettings);
+                GlobalSettings.PreviousPageID = GlobalSettings.CurrentPageID;
+
+                if (GlobalSettings.CurrentPageID == 4)
+                {
+                    Application.Current.MainWindow.Content = new SettingsPage(GlobalSettings.ApplicationSettings);
+                }
+            }
+        }
+
+        private void btnPrevious_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalSettings.ApplicationSettings = Helpers.ReadUserSettings(GlobalSettings.CurrentUser, GlobalSettings.ApplicationSettings.Event.EventID.ToString());
+
+            if (GlobalSettings.ApplicationSettings != null)
+            {
+                GlobalSettings.CurrentUser = GlobalSettings.ApplicationSettings.Username;
+                GlobalSettings.CurrentEvent = GlobalSettings.ApplicationSettings.Event.EventName;
+                GlobalSettings.CurrentEventLocation = GlobalSettings.ApplicationSettings.Event.EventLocation;
+
+                GlobalSettings.PreviousPageID = GlobalSettings.CurrentPageID;
+
+                if (GlobalSettings.CurrentPageID == 4)
+                {
+                    Application.Current.MainWindow.Content = new SetupPage(GlobalSettings.ApplicationSettings, 1);
+                }
+            }
+
+        }
+
+        private void ButtonNextLogic()
+        {
+            _isCompleted = Helpers.IsComplete(GlobalSettings.CurrentPageID);
+            Style enable = (Style)FindResource("ButtonPrimary");
+            Style disable = (Style)FindResource("ButtonPrimaryDisabled");
+
+            btnNext.Style = _isCompleted ? enable : disable;
+
         }
     }
 }

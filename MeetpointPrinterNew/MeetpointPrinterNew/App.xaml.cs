@@ -1,15 +1,13 @@
 ﻿using MeetpointPrinterNew.Pages;
+using System;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace MeetpointPrinterNew
 {
 
     public partial class App : Application
     {
-        public string CurrentUser { set; get; }
-        public string CurrentEvent { set; get; }
-        public string CurrentEventLocation { set; get; }
-
         public bool IsPrinter { set; get; }
         public bool IsAccount { set; get; }
         public bool IsTemplate { set; get; }
@@ -17,6 +15,7 @@ namespace MeetpointPrinterNew
         public string PrintAcountBrush { set; get; }
         public string AccountTemplateBrush { set; get; }
 
+        public Style ButtonNextStyle { set; get; }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
@@ -54,18 +53,17 @@ namespace MeetpointPrinterNew
                         break;
                 }
             }
-        
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            GlobalSettings.ApplicationSettings = Helpers.ReadUserSettings(CurrentUser, GlobalSettings.ApplicationSettings.Event.EventID.ToString());
+            GlobalSettings.ApplicationSettings = Helpers.ReadUserSettings(GlobalSettings.CurrentUser, GlobalSettings.ApplicationSettings.Event.EventID.ToString());
 
             if(GlobalSettings.ApplicationSettings !=null)
             {
-                CurrentUser = GlobalSettings.ApplicationSettings.Username;
-                CurrentEvent = GlobalSettings.ApplicationSettings.Event.EventName;
-                CurrentEventLocation = GlobalSettings.ApplicationSettings.Event.EventLocation;
+                GlobalSettings.CurrentUser = GlobalSettings.ApplicationSettings.Username;
+                GlobalSettings.CurrentEvent = GlobalSettings.ApplicationSettings.Event.EventName;
+                GlobalSettings.CurrentEventLocation = GlobalSettings.ApplicationSettings.Event.EventLocation;
 
                 GlobalSettings.PreviousPageID = GlobalSettings.CurrentPageID;
 
@@ -91,21 +89,25 @@ namespace MeetpointPrinterNew
             Application.Current.MainWindow.Content = new EventPage(GlobalSettings.ApplicationSettings.Username,GlobalSettings.ApplicationSettings.AuthToken, GlobalSettings.ApplicationSettings.Event.EventID.ToString());
         }
 
-        private bool IsComplete(int currentPageID)
+        public bool IsComplete(int currentPageID)
         {
-           
-            switch(currentPageID)
+
+            Style enable = (Style)FindResource("ButtonPrimary");
+            Style disable = (Style)FindResource("ButtonPrimaryDisabled");
+            bool isComplete = false;
+            
+            switch (currentPageID)
             {
                 case 2:
-                    if(!string.IsNullOrEmpty(GlobalSettings.ApplicationSettings.Printer))
+                    if (!string.IsNullOrEmpty(GlobalSettings.ApplicationSettings.Printer))
                     {
-                       return true;
+                        isComplete = true;
                     }
                     break;
                 case 3:
-                    if(GlobalSettings.ApplicationSettings.Accounts.Account.Count>0)
+                    if (GlobalSettings.ApplicationSettings.Accounts.Account.Count > 0)
                     {
-                        return true;
+                        isComplete = true;
                     }
                     break;
                 case 4:
@@ -114,11 +116,15 @@ namespace MeetpointPrinterNew
                         !string.IsNullOrEmpty(GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID)
                         )
                     {
-                        return true;
+                        isComplete = true;
                     }
                     break;
             }
-            return false;
+
+          
+            ButtonNextStyle = isComplete ? enable : disable;
+         
+            return isComplete;
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)

@@ -4,57 +4,68 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MeetpointPrinterNew.Pages"
+      xmlns:custom="clr-namespace:MeetpointPrinterNew.CustomControls"
       mc:Ignorable="d" 
         d:DesignHeight="787" d:DesignWidth="1315"  Style="{StaticResource HeaderFooterPageStyle}"
       Title="LogPage">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
         </Grid.RowDefinitions>
-        
-        <TextBlock Grid.Row="0" Margin="50,35" Text="PRINT LOG" Style="{StaticResource TextBlockTitle}"></TextBlock>
-        <Button Grid.Row="0" Margin="50,0" VerticalAlignment="Center" HorizontalAlignment="Right" Content="BACK" Style="{StaticResource ButtonDefault}" Click="Button_Click" ></Button>
+        <custom:HeaderControl x:Name="headerControl" Grid.Row="0"></custom:HeaderControl>
+        <custom:SubHeaderControl x:Name="subHeaderControl" Grid.Row="1"></custom:SubHeaderControl>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
 
-        <!-- Rectangle hack to put shadow on login panel (in a way that it won't affect text rendering) -->
-        <Rectangle Grid.Row="1" Stretch="Fill" Fill="#fff" RadiusX="4" RadiusY="4" Margin="50,0">
-            <Rectangle.Effect>
-                <DropShadowEffect ShadowDepth="1" Direction="315" Color="#ccc"/>
-            </Rectangle.Effect>
-        </Rectangle>
-        
-        <Border Grid.Row="1" Margin="50,0" Style="{StaticResource Panel}" >
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                    
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" Orientation="Horizontal">
-                        <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Left" Text="VISITOR" Style="{StaticResource TextBlockSubtitle}" Margin="55,0,0,15"></TextBlock>
-                    </StackPanel>
-                    <StackPanel Grid.Column="1" Orientation="Horizontal">
-                        <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Left" Text="PRINT STATUS" Style="{StaticResource TextBlockSubtitle}" Margin="0,0,0,15"></TextBlock>
-                    </StackPanel>
+            <TextBlock Grid.Row="0" Margin="50,35" Text="PRINT LOG" Style="{StaticResource TextBlockTitle}"></TextBlock>
+            <Button Grid.Row="0" Margin="50,0" VerticalAlignment="Center" HorizontalAlignment="Right" Content="BACK" Style="{StaticResource ButtonDefault}" Click="Button_Click" ></Button>
+
+            <!-- Rectangle hack to put shadow on login panel (in a way that it won't affect text rendering) -->
+            <Rectangle Grid.Row="1" Stretch="Fill" Fill="#fff" RadiusX="4" RadiusY="4" Margin="50,0">
+                <Rectangle.Effect>
+                    <DropShadowEffect ShadowDepth="1" Direction="315" Color="#ccc"/>
+                </Rectangle.Effect>
+            </Rectangle>
+
+            <Border Grid.Row="1" Margin="50,0" Style="{StaticResource Panel}" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Left" Text="VISITOR" Style="{StaticResource TextBlockSubtitle}" Margin="55,0,0,15"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Left" Text="PRINT STATUS" Style="{StaticResource TextBlockSubtitle}" Margin="0,0,0,15"></TextBlock>
+                        </StackPanel>
+                    </Grid>
+
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                        <ItemsControl x:Name="icEventItems">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </ScrollViewer>
                 </Grid>
-
-                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
-                    <ItemsControl x:Name="icEventItems">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </ScrollViewer>
-            </Grid>
-        </Border>
+            </Border>
+        </Grid>
     </Grid>
+ 
 </Page>

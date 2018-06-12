@@ -1,4 +1,5 @@
-﻿using System;
+﻿using hgi.Environment;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Printing;
@@ -26,11 +27,11 @@ namespace MeetpointPrinterNew.Pages
         public int SetupPageType { get { return this.pageType; } }
 
 
-
+        App _currentApp = ((App)Application.Current);
         private List<Account> _accounts;
         private UserSettings _settings;
 
-
+        private bool _isCompleted;
         private bool _isUnchecked;
 
         public SetupPage(UserSettings settings, int setupPageType)
@@ -40,11 +41,16 @@ namespace MeetpointPrinterNew.Pages
 
             try
             {
+                _isCompleted = false;
                 _isUnchecked = false;
                 _settings = settings;
                 _accounts = _settings.Accounts.Account;
                 GlobalSettings.ApplicationSettings = settings;
                 this.pageType = setupPageType;
+
+                headerControl.CurrentUser = GlobalSettings.CurrentUser;
+                subHeaderControl.EventName = GlobalSettings.CurrentEvent;
+                subHeaderControl.EventDateLocation = GlobalSettings.CurrentEventLocation;
 
                 switch (pageType)
                 {
@@ -97,10 +103,11 @@ namespace MeetpointPrinterNew.Pages
             }
             catch (Exception ex)
             {
-                //DebugLog("")
+                Debug.Log("MeetpointPrinter", ex.ToString());
             }
-
+            ButtonNextLogic();
         }
+
         private void cbPrinter_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox cb = (CheckBox)sender;
@@ -115,14 +122,18 @@ namespace MeetpointPrinterNew.Pages
 
             }
             _isUnchecked = false;
+            ButtonNextLogic();
+
+
         }
+
         private void cbPrinter_Unchecked(object sender, RoutedEventArgs e)
         {
             if (!_isUnchecked)
             {
                 _settings.Printer = "";
             }
-
+            ButtonNextLogic();
         }
 
         private void cbAccount_Checked(object sender, RoutedEventArgs e)
@@ -132,13 +143,67 @@ namespace MeetpointPrinterNew.Pages
             ac.AccountID = cb.Tag.ToString();
             ac.AccountName = cb.Content.ToString();
             _accounts.Add(ac);
+            ButtonNextLogic();
         }
+
         private void cbAccount_Unchecked(object sender, RoutedEventArgs e)
         {
             CheckBox cb = (CheckBox)sender;
             Helpers.RemoveAccountItem(_accounts, cb.Tag.ToString());
+            ButtonNextLogic();
         }
 
+        private void btnNext_Click(object sender, RoutedEventArgs e)
+        {
+            if(_isCompleted)
+            {
+                Helpers.SaveUserSettings(GlobalSettings.ApplicationSettings);
+                GlobalSettings.PreviousPageID = GlobalSettings.CurrentPageID;
 
+                if (GlobalSettings.CurrentPageID == 2)
+                {
+                    Application.Current.MainWindow.Content = new SetupPage(GlobalSettings.ApplicationSettings, 1);
+                }
+                else if(GlobalSettings.CurrentPageID == 3)
+                {
+                    Application.Current.MainWindow.Content = new SetupPagePrintTemplate(GlobalSettings.ApplicationSettings);
+                }
+                
+            }
+        }
+
+        private void btnPrevious_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalSettings.ApplicationSettings = Helpers.ReadUserSettings(GlobalSettings.CurrentUser, GlobalSettings.ApplicationSettings.Event.EventID.ToString());
+
+            if (GlobalSettings.ApplicationSettings != null)
+            {
+                GlobalSettings.CurrentUser = GlobalSettings.ApplicationSettings.Username;
+                GlobalSettings.CurrentEvent = GlobalSettings.ApplicationSettings.Event.EventName;
+                GlobalSettings.CurrentEventLocation = GlobalSettings.ApplicationSettings.Event.EventLocation;
+
+                GlobalSettings.PreviousPageID = GlobalSettings.CurrentPageID;
+
+                if (GlobalSettings.CurrentPageID == 2)
+                {
+                    Application.Current.MainWindow.Content = new EventPage(GlobalSettings.ApplicationSettings.Username, GlobalSettings.ApplicationSettings.AuthToken, GlobalSettings.ApplicationSettings.Event.EventID.ToString());
+                }
+                else if (GlobalSettings.CurrentPageID == 3)
+                {
+                    Application.Current.MainWindow.Content = new SetupPage(GlobalSettings.ApplicationSettings, 0);
+                }
+            }
+
+        }
+
+        private void ButtonNextLogic()
+        {
+            _isCompleted = Helpers.IsComplete(GlobalSettings.CurrentPageID);
+            Style enable = (Style)FindResource("ButtonPrimary");
+            Style disable = (Style)FindResource("ButtonPrimaryDisabled");
+
+            btnNext.Style = _isCompleted ? enable : disable;
+
+        }
     }
 }

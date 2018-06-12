@@ -1,0 +1,56 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:MeetpointPrinterNew.Resources">
+
+    <!-- White panel style -->
+    <Style x:Key="Panel" TargetType="{x:Type Border}">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Padding" Value="25"/>
+        <Setter Property="CornerRadius" Value="4"/>
+    </Style>
+
+    <!-- Event white panel style -->
+    <Style x:Key="EventPanel" TargetType="{x:Type Border}">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Padding" Value="25"/>
+        <Setter Property="CornerRadius" Value="4"/>
+        <Setter Property="BorderBrush" Value="#FF1FE6A5"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderBrush" Value="#fff"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="#FF1FE6A5"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="LogBorderStyle" TargetType="{x:Type Border}">
+        <Setter Property="BorderBrush" Value="#ddd" />
+        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="Margin" Value="0,0,0,15" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Background" Value="Transparent" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#F8F8F8" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- TextBlockImage panel style -->
+    <Style x:Key="TextBlockImagePanel" TargetType="{x:Type Border}">
+        <!--<Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderBrush" Value="#FFCBCBCB"/>
+            <Setter Property="BorderThickness" Value="2"/>-->
+
+        <Style.Triggers>
+            <!--<Trigger Property="IsMouseOver" Value="True">-->
+            <!--<Setter Property="CornerRadius" Value="8"/>-->
+            <!--</Trigger>-->
+
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

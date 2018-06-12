@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -264,6 +265,49 @@ namespace MeetpointPrinterNew
         public class Utf8StringWriter : StringWriter
         {
             public override Encoding Encoding => Encoding.UTF8;
+        }
+
+        public static bool IsComplete(int currentPageID)
+        {
+
+      
+            bool isComplete = false;
+
+            switch (currentPageID)
+            {
+                case 2:
+                    if (!string.IsNullOrEmpty(GlobalSettings.ApplicationSettings.Printer))
+                    {
+                        isComplete = true;
+                    }
+                    break;
+                case 3:
+                    if (GlobalSettings.ApplicationSettings.Accounts.Account.Count > 0)
+                    {
+                        isComplete = true;
+                    }
+                    break;
+                case 4:
+                    int options = 0;
+                    foreach(string option in GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption)
+                    {
+                        if(!string.IsNullOrEmpty(option))
+                        {
+                            options++;
+                        }
+                    }
+                    if (options > 0 &&
+                        !string.IsNullOrEmpty(GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate) &&
+                        !string.IsNullOrEmpty(GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID)
+                        )
+                    {
+                        isComplete = true;
+                    }
+                    break;
+            }
+
+
+            return isComplete;
         }
     }
   

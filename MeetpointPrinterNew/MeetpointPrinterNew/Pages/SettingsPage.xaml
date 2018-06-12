@@ -7,73 +7,16 @@
       xmlns:customcontrols="clr-namespace:MeetpointPrinterNew.CustomControls"
       mc:Ignorable="d" 
       d:DesignHeight="787" d:DesignWidth="1315"  
-      Title="PrintSettingsPage">
+      Title="PrintSettingsPage" Style="{StaticResource HeaderFooterPageStyle}">
 
-    <Grid>
+    <Grid >
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="85"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Popup x:Name="pupWarning" IsOpen="False">
-            <TextBlock Text="BLALALAL"/>
-        </Popup>
-        <!-- Header row -->
-        <Grid Grid.Row="0">
-
-            <!-- Rectangle hack to put shadow on header (in a way that it won't affect text rendering) -->
-            <Rectangle Fill="#434752" RadiusX="4" RadiusY="4" HorizontalAlignment="Stretch" >
-                <Rectangle.Effect>
-                    <DropShadowEffect ShadowDepth="2" Direction="315" Color="#ccc"/>
-                </Rectangle.Effect>
-            </Rectangle>
-
-            <!-- Header -->
-            <Border Background="#434752">
-                <DockPanel LastChildFill="False">
-                    <Image DockPanel.Dock="Left" Margin="20,0,0,0" Source="/Images/logo_mp_white.png" Width="170"></Image>
-                    <Button x:Name="btnEvents" Margin="50,0,0,0" DockPanel.Dock="Left" Content="EVENTS" Click="btnEvents_Click" Style="{StaticResource HeaderLink}"></Button>
-
-                    <Button x:Name="btnLogout" DockPanel.Dock="Right" Content="LOG OUT" Margin="20,0,20,0" Style="{StaticResource ButtonPrimaryS}" Click="btnLogout_Click"></Button>
-                    <Label x:Name="LblCurrentUser" DockPanel.Dock="Right" VerticalAlignment="Center" FontSize="14" FontWeight="Regular" Foreground="White">
-                        <Label.Content>
-                            <Binding Path="CurrentUser" Source="{x:Static Application.Current}"/>
-                        </Label.Content>
-                    </Label>
-                </DockPanel>
-            </Border>
-
-        </Grid>
-
-        <!-- Subheader row -->
-        <Grid Grid.Row="1">
-            <Border Grid.Row="0" Background="#fff" >
-                <DockPanel VerticalAlignment="Center">
-                    <Grid DockPanel.Dock="Left">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                        </Grid.RowDefinitions>
-
-                        <DockPanel Grid.Row="0">
-                            <Image x:Name="imgEventLogo" Width="30" Source="/Images/icon_event_primary.png" DockPanel.Dock="Left" Margin="50,0,10,0"></Image>
-                            <Label x:Name="lblEventName" Foreground="#FF2489FF" FontSize="18" DockPanel.Dock="Left" Margin="0,5,0,0" >
-                                <Label.Content>
-                                    <Binding Path="CurrentEvent" Source="{x:Static Application.Current}"/>
-                                </Label.Content>
-                            </Label>
-                        </DockPanel>
-
-                        <Label x:Name="lblEventDateLocation" FontSize="14" FontWeight="Regular" Grid.Row="1" Margin="90,0,0,0">
-                            <Label.Content>
-                                <Binding Path="CurrentEventLocation" Source="{x:Static Application.Current}"/>
-                            </Label.Content>
-                        </Label>
-                    </Grid>
-                </DockPanel>
-            </Border>
-        </Grid>
-
+        <customcontrols:HeaderControl x:Name="headerControl" Grid.Row="0"></customcontrols:HeaderControl>
+        <customcontrols:SubHeaderControl x:Name="subHeaderControl" Grid.Row="1"></customcontrols:SubHeaderControl>
         <!-- Content row -->
         <Border MaxWidth="1200" Grid.Row="2" x:Name="gdrContent" Margin="50,35">
             <Grid>

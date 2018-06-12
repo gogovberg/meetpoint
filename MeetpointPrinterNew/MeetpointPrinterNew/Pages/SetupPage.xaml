@@ -4,35 +4,82 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MeetpointPrinterNew.Pages"
+      xmlns:custom="clr-namespace:MeetpointPrinterNew.CustomControls"
       mc:Ignorable="d" 
-      d:DesignHeight="900" d:DesignWidth="1200"  Style="{StaticResource HeaderFooterSettingsPageStyle}"
+      d:DesignHeight="787" d:DesignWidth="1315"  Style="{StaticResource HeaderFooterPageStyle}"
       Title="PrintSetupPage" >
 
-    <Border x:Name="EventSetup" Padding="35,30">
-        <Grid>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <custom:HeaderControl x:Name="headerControl" Grid.Row="0"></custom:HeaderControl>
+        <custom:SubHeaderControl x:Name="subHeaderControl" Grid.Row="1"></custom:SubHeaderControl>
+        <!-- Content row -->
+        <Grid Grid.Row="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition/>
+                <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Margin="0,0,0,5" x:Name="lblPrintingDevice" Style="{StaticResource TextBlockSubtitle}"></TextBlock>
-            <TextBlock Grid.Row="1" Margin="0,0,0,25" x:Name="lblHelper" Style="{StaticResource TextBlockHelperText}"></TextBlock>
+            <Grid Grid.Row="0" x:Name="gdrContent" Margin="50, 35, 50, 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-            <ItemsControl x:Name="icPrinterItems" Grid.Row="2" Margin="0"  ItemsSource="{Binding PrinterItems}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.Template>
-                    <ControlTemplate>
-                        <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}">
-                            <ItemsPresenter />
-                        </ScrollViewer>
-                    </ControlTemplate>
-                </ItemsControl.Template>
-            </ItemsControl>
+                <StackPanel Margin="0,0,70,0">
+                    <TextBlock Style="{StaticResource TextBlockTitle}" Text="PRINT SETUP" Margin="0,0,0,25"></TextBlock>
+
+                   
+                </StackPanel>
+
+                <!-- Rectangle hack to put shadow on panel (in a way that it won't affect text rendering) -->
+                <Rectangle Stretch="Fill" Fill="#fff" RadiusX="4" RadiusY="4" Grid.Column="1">
+                    <Rectangle.Effect>
+                        <DropShadowEffect ShadowDepth="1" Direction="315" Color="#ccc"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+
+                <Border Grid.Column="1" Background="#fff" CornerRadius="4">
+                    <Border x:Name="PrinterAccountSetup" Padding="35,30">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Margin="0,0,0,5" x:Name="lblPrintingDevice" Style="{StaticResource TextBlockSubtitle}"></TextBlock>
+                            <TextBlock Grid.Row="1" Margin="0,0,0,25" x:Name="lblHelper" Style="{StaticResource TextBlockHelperText}"></TextBlock>
+
+                            <ItemsControl x:Name="icPrinterItems" Grid.Row="2" Margin="0"  ItemsSource="{Binding PrinterItems}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.Template>
+                                    <ControlTemplate>
+                                        <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}">
+                                            <ItemsPresenter />
+                                        </ScrollViewer>
+                                    </ControlTemplate>
+                                </ItemsControl.Template>
+                            </ItemsControl>
+                        </Grid>
+                    </Border>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="0,0,50,0">
+                <DockPanel LastChildFill="False">
+                    <Button x:Name="btnNext" Width="100" Margin="10,0,0,0" Content="NEXT" DockPanel.Dock="Right" Style="{StaticResource ButtonPrimary}" Click="btnNext_Click"></Button>
+                    <Button x:Name="btnPrevious" Width="100" Content="PREVIOUS" Style="{StaticResource ButtonDefault}" DockPanel.Dock="Right" Click="btnPrevious_Click" ></Button>
+                </DockPanel>
+            </Grid>
         </Grid>
-    </Border>
+    </Grid>
 </Page>
