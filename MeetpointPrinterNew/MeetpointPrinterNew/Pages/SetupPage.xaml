@@ -30,11 +30,7 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Margin="0,0,70,0">
-                    <TextBlock Style="{StaticResource TextBlockTitle}" Text="PRINT SETUP" Margin="0,0,0,25"></TextBlock>
-
-                   
-                </StackPanel>
+                <custom:WizardSetpsControl />
 
                 <!-- Rectangle hack to put shadow on panel (in a way that it won't affect text rendering) -->
                 <Rectangle Stretch="Fill" Fill="#fff" RadiusX="4" RadiusY="4" Grid.Column="1">

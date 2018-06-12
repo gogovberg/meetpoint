@@ -24,5 +24,23 @@ namespace MeetpointPrinterNew.CustomControls
         {
             InitializeComponent();
         }
+
+        private void cbSelectPrinter_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void cbSelectAccounts_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void cbSelectTemplate_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        
     }
+
 }

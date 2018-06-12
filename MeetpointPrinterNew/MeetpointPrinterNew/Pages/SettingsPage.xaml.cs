@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using MeetpointPrinterNew.Windows;
 using MeetpointPrinterNew.CustomControls;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace MeetpointPrinterNew.Pages
 {
@@ -27,6 +28,11 @@ namespace MeetpointPrinterNew.Pages
         private Timer _timerPrint;
         private object _printObject = new object();
         private double _printTimer;
+
+        private Timer _timerPrinterStatus;
+        private object _printerStatusObject = new object();
+        private double _printerStatusTimer;
+
         private System.Printing.PrintQueue _printQueue;
         private List<string> _dataOptions;
         
@@ -39,7 +45,7 @@ namespace MeetpointPrinterNew.Pages
 
             _settings = settings;
             _printTimer = 10000;
-
+            _printerStatusTimer = 5000;
 
             headerControl.CurrentUser = GlobalSettings.CurrentUser;
             subHeaderControl.EventName = GlobalSettings.CurrentEvent;
@@ -66,6 +72,12 @@ namespace MeetpointPrinterNew.Pages
             _timerPrint.Interval = _printTimer; // 1000 ms => 1 second
             _timerPrint.Enabled = false;
 
+
+            _timerPrinterStatus = new Timer();
+            _timerPrinterStatus.Elapsed += new ElapsedEventHandler(PrinterStatusCheck);
+            _timerPrinterStatus.Interval = _printerStatusTimer; // 1000 ms => 1 second
+            _timerPrinterStatus.Enabled = true;
+
             lock (_printObject)
             {
                 var server = new LocalPrintServer();
@@ -80,6 +92,18 @@ namespace MeetpointPrinterNew.Pages
                 }
             }
 
+            _printQueue.Refresh();
+            if (_printQueue.IsOffline)
+            {
+                bdrOnline.Visibility = Visibility.Hidden;
+                bdrOffline.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                bdrOffline.Visibility = Visibility.Hidden;
+                bdrOnline.Visibility = Visibility.Visible;
+            }
+
             tbicPrinter.ContentImageSource = imgPrinterSrc;
             tbicPrinter.ContentID = _tempPrintName;
             tbicPrinter.ContentText = _tempPrintName;
@@ -91,6 +115,7 @@ namespace MeetpointPrinterNew.Pages
 
             PrivewTemplateLogic();
         }
+
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow.Content = new LoginPage();
@@ -180,7 +205,44 @@ namespace MeetpointPrinterNew.Pages
                 catch (Exception ex)
                 {
 
-                    Debug.Log("WatchForReaders", ex.ToString());
+                    Debug.Log("MeetpointPrinter", ex.ToString());
+                }
+            }
+
+        }
+
+        private void PrinterStatusCheck(object source, ElapsedEventArgs e)
+        {
+
+            lock (_printerStatusObject)
+            {
+                try
+                {
+                    
+                    Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => bdrOnline.Visibility = Visibility.Hidden));
+                    Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => bdrOffline.Visibility = Visibility.Visible));
+
+                    var server = new LocalPrintServer();
+                    PrintQueueCollection myPrintQueues = server.GetPrintQueues();
+                    foreach (System.Printing.PrintQueue queue in myPrintQueues)
+                    {
+                        if (queue.Name.Equals(_printQueue.Name))
+                        {
+                            queue.Refresh();
+                            if(!queue.IsOffline)
+                            {
+                                Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => bdrOffline.Visibility = Visibility.Hidden));
+                                Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => bdrOnline.Visibility = Visibility.Visible));
+                            }
+
+                            break;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    Debug.Log("MeetpointPrinter", ex.ToString());
                 }
             }
 
@@ -265,6 +327,7 @@ namespace MeetpointPrinterNew.Pages
                     break;
             }
         }
+
         private void CanvasControlClearPosition(UIElement control)
         {
 

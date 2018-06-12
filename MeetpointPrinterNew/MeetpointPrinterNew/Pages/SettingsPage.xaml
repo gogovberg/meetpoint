@@ -60,10 +60,10 @@
                                 <Border Grid.Row="1" Margin="0,15,0,0" Padding="15,10" Background="#f6f6f6" Grid.ColumnSpan="2" CornerRadius="4">
                                     <DockPanel LastChildFill="False">
                                         <customcontrols:TextBlockImageControl  x:Name="tbicPrinter" DockPanel.Dock="Left"/>
-                                        <Border Background="#d6fbef" DockPanel.Dock="Left" CornerRadius="4" Padding="7,3" HorizontalAlignment="Center" Margin="15,0,0,0" VerticalAlignment="Center">
+                                        <Border x:Name="bdrOnline" Background="#d6fbef" DockPanel.Dock="Left" CornerRadius="4" Padding="7,3" HorizontalAlignment="Center" Margin="15,0,0,0" VerticalAlignment="Center">
                                             <TextBlock Foreground="#16cf94" FontWeight="DemiBold">Online</TextBlock>
                                         </Border>
-                                        <Border Background="#ddd" DockPanel.Dock="Left" CornerRadius="4" Padding="7,3" HorizontalAlignment="Center" Margin="15,0,0,0" VerticalAlignment="Center">
+                                        <Border x:Name="bdrOffline" Background="#ddd" DockPanel.Dock="Left" CornerRadius="4" Padding="7,3" HorizontalAlignment="Center" Margin="15,0,0,0" VerticalAlignment="Center">
                                             <TextBlock Foreground="#aaa" FontWeight="DemiBold">Offline</TextBlock>
                                         </Border>
                                     </DockPanel>

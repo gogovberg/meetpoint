@@ -123,6 +123,7 @@ namespace MeetpointPrinterNew
             }
             return queue;
         }
+
         public static string ToTitleCase(this string s)
         {
             return System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(s.ToLower());
