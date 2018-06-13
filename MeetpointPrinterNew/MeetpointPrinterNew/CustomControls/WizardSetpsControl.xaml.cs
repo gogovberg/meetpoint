@@ -42,13 +42,15 @@ namespace MeetpointPrinterNew.CustomControls
 
         public void SetWizardStepState(WizardStep step, WizardStepState state)
         {
-            var converter = new System.Windows.Media.BrushConverter();
+            var converter = new BrushConverter();
 
             switch (step)
             {
                 case WizardStep.Printer:
                     BitmapImage imgPrinterSource = new BitmapImage(new Uri("/Images/icon_printer.png", UriKind.Relative));
                     BitmapImage imgPrinterSourcePrimary = new BitmapImage(new Uri("/Images/icon_printer_primary.png", UriKind.Relative));
+                    linePrintAccount.Stroke = (Brush)converter.ConvertFromString("#D3D4D6");
+                    lineAccountTemplate.Stroke = (Brush)converter.ConvertFromString("#D3D4D6");
                     switch (state)
                     {
                         case WizardStepState.CurrentEmpty:
@@ -76,6 +78,8 @@ namespace MeetpointPrinterNew.CustomControls
                 case WizardStep.Account:
                     BitmapImage imgAccountSource = new BitmapImage(new Uri("/Images/icon_users.png", UriKind.Relative));
                     BitmapImage imgAccounSourcePrimary = new BitmapImage(new Uri("/Images/icon_users_primary.png", UriKind.Relative));
+                    linePrintAccount.Stroke = (Brush)converter.ConvertFromString("#C6DBF3");
+                    lineAccountTemplate.Stroke = (Brush)converter.ConvertFromString("#D3D4D6");
                     switch (state)
                     {
                         case WizardStepState.CurrentEmpty:
@@ -86,23 +90,25 @@ namespace MeetpointPrinterNew.CustomControls
                         case WizardStepState.Empty:
                             btnSelectAccounts.BorderBrush = (Brush)converter.ConvertFromString("#D3D4D6");
                             btnSelectAccounts.Background = (Brush)converter.ConvertFromString("#D3D4D6");
-                            imgSelectPrinter.Source = imgAccountSource;
+                            imgSelectAccounts.Source = imgAccountSource;
                             break;
                         case WizardStepState.CurrentFilled:
                             btnSelectAccounts.BorderBrush = (Brush)converter.ConvertFromString("#1FE6A5");
                             btnSelectAccounts.Background = (Brush)converter.ConvertFromString("#C6DBF3");
-                            imgSelectPrinter.Source = imgAccounSourcePrimary;
+                            imgSelectAccounts.Source = imgAccounSourcePrimary;
                             break;
                         case WizardStepState.Filled:
                             btnSelectAccounts.BorderBrush = (Brush)converter.ConvertFromString("#C6DBF3");
                             btnSelectAccounts.Background = (Brush)converter.ConvertFromString("#C6DBF3");
-                            imgSelectPrinter.Source = imgAccounSourcePrimary;
+                            imgSelectAccounts.Source = imgAccounSourcePrimary;
                             break;
                     }
                     break;
                 case WizardStep.Template:
                     BitmapImage imgTemplateSource = new BitmapImage(new Uri("/Images/icon_qr_code.png", UriKind.Relative));
                     BitmapImage imgTemplateSourcePrimary = new BitmapImage(new Uri("/Images/icon_qr_code_big.png", UriKind.Relative));
+                    linePrintAccount.Stroke = (Brush)converter.ConvertFromString("#C6DBF3");
+                    lineAccountTemplate.Stroke = (Brush)converter.ConvertFromString("#C6DBF3");
                     switch (state)
                     {
                         case WizardStepState.CurrentEmpty:
@@ -127,6 +133,7 @@ namespace MeetpointPrinterNew.CustomControls
                             break;
                     }
                     break;
+
             }
         }
     }
