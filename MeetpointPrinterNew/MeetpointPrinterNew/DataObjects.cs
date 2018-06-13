@@ -226,4 +226,19 @@ namespace MeetpointPrinterNew
         public PrinterSetup PrinterSetup { get; set; }
     }
 
+
+    public enum WizardStep
+    {
+        Printer = 0,
+        Account = 1,
+        Template = 2
+    }
+    public enum WizardStepState
+    {
+        CurrentEmpty,
+        Empty,
+        CurrentFilled,
+        Filled
+    }
+
 }

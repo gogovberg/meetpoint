@@ -30,7 +30,7 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <custom:WizardSetpsControl />
+                <custom:WizardSetpsControl x:Name="wizardSteps" />
 
                 <!-- Rectangle hack to put shadow on panel (in a way that it won't affect text rendering) -->
                 <Rectangle Stretch="Fill" Fill="#fff" RadiusX="4" RadiusY="4" Grid.Column="1">

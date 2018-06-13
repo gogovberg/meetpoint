@@ -99,7 +99,38 @@ namespace MeetpointPrinterNew.Pages
             
             Helpers.SaveUserSettings(GlobalSettings.ApplicationSettings);
             GlobalSettings.PreviousPageID = GlobalSettings.PreviousPageID;
-            if (!string.IsNullOrWhiteSpace(GlobalSettings.ApplicationSettings.Printer) && GlobalSettings.ApplicationSettings.Accounts != null && GlobalSettings.ApplicationSettings.Accounts.Account.Count > 0)
+
+            GlobalSettings.IsPrinterSet = false;
+            GlobalSettings.IsAccountSet = false;
+            GlobalSettings.IsTemplateSet = false;
+
+            if (!string.IsNullOrWhiteSpace(GlobalSettings.ApplicationSettings.Printer))
+            {
+                GlobalSettings.IsPrinterSet = true;
+            }
+            if(GlobalSettings.ApplicationSettings.Accounts != null && GlobalSettings.ApplicationSettings.Accounts.Account.Count > 0)
+            {
+                GlobalSettings.IsAccountSet = true;
+            }
+
+            int options = 0;
+            foreach (string option in GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption)
+            {
+                if (!string.IsNullOrEmpty(option))
+                {
+                    options++;
+                }
+            }
+            if (options > 0 &&
+                !string.IsNullOrEmpty(GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate) &&
+                !string.IsNullOrEmpty(GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID)
+                )
+            {
+                GlobalSettings.IsTemplateSet = true;
+            }
+
+
+            if (GlobalSettings.IsPrinterSet && GlobalSettings.IsAccountSet && GlobalSettings.IsTemplateSet)
             {
                 Application.Current.MainWindow.Content = new SettingsPage(GlobalSettings.ApplicationSettings);
             }

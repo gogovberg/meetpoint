@@ -4,38 +4,38 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MeetpointPrinterNew.CustomControls"
-             mc:Ignorable="d" Height="385" Width="175">
+             mc:Ignorable="d" Height="385" Width="200">
     <Grid Background="Transparent">
         <StackPanel Margin="0,0,0,0" >
             <TextBlock Style="{StaticResource TextBlockTitle}" Text="PRINT SETUP" Margin="0,0,0,25"></TextBlock>
 
             <DockPanel LastChildFill="False">
-                <CheckBox x:Name="cbSelectPrinter" Style="{StaticResource SetupStep}" DockPanel.Dock="Left" Margin="0,0,25,0" Checked="cbSelectPrinter_Checked" >
+                <Button x:Name="btnSelectPrinter" Style="{StaticResource SetupStep}" DockPanel.Dock="Left" Margin="0,0,25,0" Click="btnSelectPrinter_Click"  >
                     <Image x:Name="imgSelectPrinter"  Source="/Images/icon_printer.png" Width="33"></Image>
-                </CheckBox>
+                </Button>
                 <TextBlock Text="" Foreground="#434752" FontSize="16" FontWeight="SemiBold" Margin="0,10,0,0">
                                                 STEP 1
                                                 <LineBreak />
                                                 Select printing device
                 </TextBlock>
             </DockPanel>
-            <Line x:Name="linePrintAccount" Stroke="#FF434752" StrokeThickness="8" X1="35" Y1="0" X2="35" Y2="60"></Line>
+            <Line x:Name="linePrintAccount" Stroke="#D3D4D6" StrokeThickness="8" X1="35" Y1="0" X2="35" Y2="60"></Line>
             <DockPanel LastChildFill="False">
-                <CheckBox x:Name="cbSelectAccounts"  Style="{StaticResource SetupStep}" HorizontalAlignment="Left" Margin="0,0,25,0" Checked="cbSelectAccounts_Checked">
+                <Button x:Name="btnSelectAccounts"  Style="{StaticResource SetupStep}" HorizontalAlignment="Left" Margin="0,0,25,0" Click="btnSelectAccounts_Click" >
                     <Image x:Name="imgSelectAccounts"  Source="/Images/icon_users.png" Width="33"></Image>
-                </CheckBox>
+                </Button>
                 <TextBlock Text="" Foreground="#434752" FontSize="16" FontWeight="SemiBold" Margin="0,10,0,0">
                                                 STEP 2
                                                 <LineBreak />
                                                 Select accounts
                 </TextBlock>
             </DockPanel>
-            <Line  x:Name="lineAccountTemplate" Stroke="#FF434752"   StrokeThickness="8"  X1="35" Y1="0" X2="35" Y2="60">
+            <Line  x:Name="lineAccountTemplate" Stroke="#D3D4D6"   StrokeThickness="8"  X1="35" Y1="0" X2="35" Y2="60">
             </Line>
             <DockPanel LastChildFill="False">
-                <CheckBox  x:Name="cbSelectTemplate" Style="{StaticResource SetupStep}" HorizontalAlignment="Left" Margin="0,0,25,0" Checked="cbSelectTemplate_Checked">
+                <Button  x:Name="btnSelectTemplate" Style="{StaticResource SetupStep}" HorizontalAlignment="Left" Margin="0,0,25,0" Click="btnSelectTemplate_Click" >
                     <Image x:Name="imgSelectTemplate" Source="/Images/icon_qr_code.png" Width="33"></Image>
-                </CheckBox>
+                </Button>
                 <TextBlock Text="" Foreground="#434752" FontSize="16" FontWeight="SemiBold" Margin="0,10,0,0">
                                                 STEP 3
                                                 <LineBreak />

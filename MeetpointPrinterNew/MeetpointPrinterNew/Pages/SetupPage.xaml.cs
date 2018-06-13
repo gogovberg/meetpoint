@@ -55,6 +55,9 @@ namespace MeetpointPrinterNew.Pages
                 switch (pageType)
                 {
                     case 0:
+
+                        SetPrinterWizardStepsState();
+
                         GlobalSettings.CurrentPageID = 2;
                         Style cbPrinterStyle = (Style)FindResource("ChecBoxPrinterStyle");
                         lblPrintingDevice.Text = "SELECT PRINTING DEVICE";
@@ -76,6 +79,9 @@ namespace MeetpointPrinterNew.Pages
                         }
                         break;
                     case 1:
+
+                        SetAccountWizardStepsState();
+
                         GlobalSettings.CurrentPageID = 3;
                         List<User> users = Helpers.GetCustomerUsers(_settings.AuthToken);
 
@@ -105,6 +111,9 @@ namespace MeetpointPrinterNew.Pages
             {
                 Debug.Log("MeetpointPrinter", ex.ToString());
             }
+
+           
+
             ButtonNextLogic();
         }
 
@@ -204,6 +213,96 @@ namespace MeetpointPrinterNew.Pages
 
             btnNext.Style = _isCompleted ? enable : disable;
 
+            switch (GlobalSettings.CurrentPageID)
+            {
+                case 2:
+                    GlobalSettings.IsPrinterSet = _isCompleted;
+                    break;
+                case 3:
+                    GlobalSettings.IsAccountSet = _isCompleted;
+                    break;
+            }
+            SetCurrentWizardStepsState();
+        }
+        private void SetPrinterWizardStepsState()
+        {
+            if (GlobalSettings.IsPrinterSet)
+            {
+                wizardSteps.SetWizardStepState(WizardStep.Printer, WizardStepState.CurrentFilled);
+            }
+            else
+            {
+                wizardSteps.SetWizardStepState(WizardStep.Printer, WizardStepState.CurrentEmpty);
+            }
+            if (GlobalSettings.IsAccountSet)
+            {
+                wizardSteps.SetWizardStepState(WizardStep.Account, WizardStepState.Filled);
+            }
+            else
+            {
+                wizardSteps.SetWizardStepState(WizardStep.Account, WizardStepState.Empty);
+            }
+            if (GlobalSettings.IsTemplateSet)
+            {
+                wizardSteps.SetWizardStepState(WizardStep.Template, WizardStepState.Filled);
+            }
+            else
+            {
+                wizardSteps.SetWizardStepState(WizardStep.Template, WizardStepState.Empty);
+            }
+        }
+        private void SetAccountWizardStepsState()
+        {
+            if (GlobalSettings.IsPrinterSet)
+            {
+                wizardSteps.SetWizardStepState(WizardStep.Printer, WizardStepState.Filled);
+            }
+            else
+            {
+                wizardSteps.SetWizardStepState(WizardStep.Printer, WizardStepState.Empty);
+            }
+            if (GlobalSettings.IsAccountSet)
+            {
+                wizardSteps.SetWizardStepState(WizardStep.Account, WizardStepState.CurrentFilled);
+            }
+            else
+            {
+                wizardSteps.SetWizardStepState(WizardStep.Account, WizardStepState.CurrentEmpty);
+            }
+            if (GlobalSettings.IsTemplateSet)
+            {
+                wizardSteps.SetWizardStepState(WizardStep.Template, WizardStepState.Filled);
+            }
+            else
+            {
+                wizardSteps.SetWizardStepState(WizardStep.Template, WizardStepState.Empty);
+            }
+        }
+        private void SetCurrentWizardStepsState()
+        {
+            switch(GlobalSettings.CurrentPageID)
+            {
+                case 2:
+                    if(GlobalSettings.IsPrinterSet)
+                    {
+                        wizardSteps.SetWizardStepState(WizardStep.Printer, WizardStepState.CurrentFilled);
+                    }
+                    else
+                    {
+                        wizardSteps.SetWizardStepState(WizardStep.Printer, WizardStepState.CurrentEmpty);
+                    }
+                    break;
+                case 3:
+                    if (GlobalSettings.IsAccountSet)
+                    {
+                        wizardSteps.SetWizardStepState(WizardStep.Account, WizardStepState.CurrentFilled);
+                    }
+                    else
+                    {
+                        wizardSteps.SetWizardStepState(WizardStep.Account, WizardStepState.CurrentEmpty);
+                    }
+                    break;
+            }
         }
     }
 }

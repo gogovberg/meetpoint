@@ -124,6 +124,8 @@ namespace MeetpointPrinterNew.Pages
             SwitchDataOptions();
             _isOnLoadChecked = false;
 
+            SetOtherWizardStepsState();
+
             ButtonNextLogic();
 
         }
@@ -436,7 +438,6 @@ namespace MeetpointPrinterNew.Pages
             _xPositionOffset = bdrPreview.Width * 0.1;
             _yPositionOffset = bdrPreview.Height * 0.1;
         }
-
         private void SetPriviewControlsSize()
         {
 
@@ -468,7 +469,6 @@ namespace MeetpointPrinterNew.Pages
             imgQrPreview.Width = imgWidth;
             imgQrPreview.Height = imgHeight;
         }
-
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
             if (_isCompleted)
@@ -482,7 +482,6 @@ namespace MeetpointPrinterNew.Pages
                 }
             }
         }
-
         private void btnPrevious_Click(object sender, RoutedEventArgs e)
         {
             GlobalSettings.ApplicationSettings = Helpers.ReadUserSettings(GlobalSettings.CurrentUser, GlobalSettings.ApplicationSettings.Event.EventID.ToString());
@@ -502,7 +501,6 @@ namespace MeetpointPrinterNew.Pages
             }
 
         }
-
         private void ButtonNextLogic()
         {
             _isCompleted = Helpers.IsComplete(GlobalSettings.CurrentPageID);
@@ -510,7 +508,39 @@ namespace MeetpointPrinterNew.Pages
             Style disable = (Style)FindResource("ButtonPrimaryDisabled");
 
             btnNext.Style = _isCompleted ? enable : disable;
+            GlobalSettings.IsTemplateSet = _isCompleted;
 
+            SetCurrentWizardStepsState();
+        }
+        private void SetCurrentWizardStepsState()
+        {
+            if (GlobalSettings.IsTemplateSet)
+            {
+                wizardSteps.SetWizardStepState(WizardStep.Template, WizardStepState.CurrentFilled);
+            }
+            else
+            {
+                wizardSteps.SetWizardStepState(WizardStep.Template, WizardStepState.CurrentEmpty);
+            }
+        }
+        private void SetOtherWizardStepsState()
+        {
+            if (GlobalSettings.IsPrinterSet)
+            {
+                wizardSteps.SetWizardStepState(WizardStep.Printer, WizardStepState.CurrentFilled);
+            }
+            else
+            {
+                wizardSteps.SetWizardStepState(WizardStep.Printer, WizardStepState.CurrentEmpty);
+            }
+            if (GlobalSettings.IsAccountSet)
+            {
+                wizardSteps.SetWizardStepState(WizardStep.Account, WizardStepState.CurrentFilled);
+            }
+            else
+            {
+                wizardSteps.SetWizardStepState(WizardStep.Account, WizardStepState.CurrentEmpty);
+            }
         }
     }
 }
