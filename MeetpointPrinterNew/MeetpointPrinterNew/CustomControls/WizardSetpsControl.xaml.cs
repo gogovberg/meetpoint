@@ -27,17 +27,27 @@ namespace MeetpointPrinterNew.CustomControls
 
         private void btnSelectPrinter_Click(object sender, RoutedEventArgs e)
         {
+            if(GlobalSettings.IsPrinterSet)
+            {
+
+            }
 
         }
 
         private void btnSelectAccounts_Click(object sender, RoutedEventArgs e)
         {
+            if (GlobalSettings.IsAccountSet)
+            {
 
+            }
         }
 
         private void btnSelectTemplate_Click(object sender, RoutedEventArgs e)
         {
+            if (GlobalSettings.IsTemplateSet)
+            {
 
+            }
         }
 
         public void SetWizardStepState(WizardStep step, WizardStepState state)
