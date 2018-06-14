@@ -15,7 +15,6 @@ namespace MeetpointPrinterNew
         public static string CurrentEventLocation { set; get; }
         public static int PreviousPageID { set; get; }
         public static int CurrentPageID { set; get; }
-
         public static bool IsPrinterSet { set; get; }
         public static bool IsAccountSet { set; get; }
         public static bool IsTemplateSet { set; get; }

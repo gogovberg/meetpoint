@@ -51,6 +51,8 @@ namespace MeetpointPrinterNew.Pages
                 headerControl.CurrentUser = GlobalSettings.CurrentUser;
                 subHeaderControl.EventName = GlobalSettings.CurrentEvent;
                 subHeaderControl.EventDateLocation = GlobalSettings.CurrentEventLocation;
+                subHeaderControl.btnBack.Visibility = Visibility.Collapsed;
+
 
                 switch (pageType)
                 {
@@ -223,6 +225,15 @@ namespace MeetpointPrinterNew.Pages
                     break;
             }
             SetCurrentWizardStepsState();
+
+            if(GlobalSettings.IsAccountSet && GlobalSettings.IsPrinterSet && GlobalSettings.IsTemplateSet)
+            {
+                subHeaderControl.BackButtonVisibility = Visibility.Visible;
+            }
+            else
+            {
+                subHeaderControl.BackButtonVisibility = Visibility.Collapsed;
+            }
         }
         private void SetPrinterWizardStepsState()
         {

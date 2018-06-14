@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MeetpointPrinterNew.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,6 +36,11 @@ namespace MeetpointPrinterNew.CustomControls
             get { return imgEventLogo.Source; }
             set { imgEventLogo.Source = value; }
         }
+        public Visibility BackButtonVisibility
+        {
+            get { return btnBack.Visibility; }
+            set { btnBack.Visibility = value; }
+        }
         public SubHeaderControl()
         {
             InitializeComponent();
@@ -42,7 +48,10 @@ namespace MeetpointPrinterNew.CustomControls
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-
+            if(GlobalSettings.IsAccountSet && GlobalSettings.IsPrinterSet && GlobalSettings.IsTemplateSet)
+            {
+                Application.Current.MainWindow.Content = new SettingsPage(GlobalSettings.ApplicationSettings);
+            }
         }
     }
 }

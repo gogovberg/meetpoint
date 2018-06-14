@@ -45,6 +45,8 @@ namespace MeetpointPrinterNew.Pages
             headerControl.CurrentUser = GlobalSettings.CurrentUser;
             subHeaderControl.EventName = GlobalSettings.CurrentEvent;
             subHeaderControl.EventDateLocation = GlobalSettings.CurrentEventLocation;
+            subHeaderControl.btnBack.Visibility = Visibility.Collapsed;
+
 
             CanvasControlClearPosition(imgQrPreview);
             CanvasControlClearPosition(spDataOptions);
@@ -129,7 +131,6 @@ namespace MeetpointPrinterNew.Pages
             ButtonNextLogic();
 
         }
-
         private void cbSizeOne_Checked(object sender, RoutedEventArgs e)
         {
             _isUncheck = false;
@@ -147,7 +148,6 @@ namespace MeetpointPrinterNew.Pages
             ButtonNextLogic();
             _isUncheck = true;
         }
-
         private void cbSizeTwo_Checked(object sender, RoutedEventArgs e)
         {
             _isUncheck = false;
@@ -162,7 +162,6 @@ namespace MeetpointPrinterNew.Pages
             ButtonNextLogic();
             _isUncheck = true;
         }
-
         private void cbSize_Unchecked(object sender, RoutedEventArgs e)
         {
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID = "";
@@ -173,7 +172,6 @@ namespace MeetpointPrinterNew.Pages
                 ButtonNextLogic();
             }
         }
-
         private void cbLayoutQRT_Checked(object sender, RoutedEventArgs e)
         {
             _isUncheck = false;
@@ -195,7 +193,6 @@ namespace MeetpointPrinterNew.Pages
             ButtonNextLogic();
             _isUncheck = true;
         }
-
         private void cbLayoutQRB_Checked(object sender, RoutedEventArgs e)
         {
             _isUncheck = false;
@@ -218,7 +215,6 @@ namespace MeetpointPrinterNew.Pages
             ButtonNextLogic();
             _isUncheck = true;
         }
-
         private void cbLayoutHR_Checked(object sender, RoutedEventArgs e)
         {
             _isUncheck = false;
@@ -241,7 +237,6 @@ namespace MeetpointPrinterNew.Pages
             ButtonNextLogic();
             _isUncheck = true;
         }
-
         private void cbLayoutQLT_Checked(object sender, RoutedEventArgs e)
         {
             _isUncheck = false;
@@ -264,7 +259,6 @@ namespace MeetpointPrinterNew.Pages
 
             _isUncheck = true;
         }
-
         private void cbLayoutQLB_Checked(object sender, RoutedEventArgs e)
         {
             _isUncheck = false;
@@ -288,7 +282,6 @@ namespace MeetpointPrinterNew.Pages
             _isUncheck = true;
 
         }
-
         private void cbLayoutHL_Checked(object sender, RoutedEventArgs e)
         {
             _isUncheck = false;
@@ -310,7 +303,6 @@ namespace MeetpointPrinterNew.Pages
             ButtonNextLogic();
             _isUncheck = true;
         }
-
         private void cbLayoutClean_Checked(object sender, RoutedEventArgs e)
         {
             _isUncheck = false;
@@ -331,7 +323,6 @@ namespace MeetpointPrinterNew.Pages
             ButtonNextLogic();
             _isUncheck = true;
         }
-      
         private void cbLayout_Unchecked(object sender, RoutedEventArgs e)
         {
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = "";
@@ -341,7 +332,6 @@ namespace MeetpointPrinterNew.Pages
             }
             
         }
-
         private void cbOption_Checked(object sender, RoutedEventArgs e)
         {
             if(!_isOnLoadChecked)
@@ -351,7 +341,6 @@ namespace MeetpointPrinterNew.Pages
             }
             ButtonNextLogic();
         }
-
         private void cbOption_Unchecked(object sender, RoutedEventArgs e)
         {
             if(!_isOnLoadChecked)
@@ -376,7 +365,6 @@ namespace MeetpointPrinterNew.Pages
             }
             ButtonNextLogic();
         }
-
         private void DataOptionsLogic(Object sender)
         {
             CheckBox cb = (CheckBox)sender;
@@ -394,7 +382,6 @@ namespace MeetpointPrinterNew.Pages
 
             }
         }
-
         private bool OptionExists(string cbName)
         {
            foreach(string cb in _dataOptions)
@@ -407,21 +394,18 @@ namespace MeetpointPrinterNew.Pages
 
             return false;
         }
-
         private void SwitchDataOptions()
         {
             tbOptOne.Text = string.IsNullOrEmpty(_dataOptions[0]) ? "" : ((CheckBox)this.FindName(_dataOptions[0])).Content.ToString(); 
             tbOptTwo.Text = string.IsNullOrEmpty(_dataOptions[1]) ? "" : ((CheckBox)this.FindName(_dataOptions[1])).Content.ToString(); 
             tbOptThree.Text = string.IsNullOrEmpty(_dataOptions[2]) ? "" : ((CheckBox)this.FindName(_dataOptions[2])).Content.ToString(); 
         }
-
         private void CanvasControlClearPosition(UIElement control)
         {
 
             SetControlCanvasPosition(control, double.NaN, double.NaN, double.NaN, double.NaN);
             control.Visibility = Visibility.Hidden;
         }
-
         private void SetControlCanvasPosition(UIElement control, double left, double top, double right, double bottom)
         {
             Canvas.SetLeft(control, left);
@@ -430,7 +414,6 @@ namespace MeetpointPrinterNew.Pages
             Canvas.SetBottom(control, bottom);
             control.Visibility = Visibility.Visible;
         }
-
         private void SetPriviewBorderSize(double borderScale)
         {
             bdrPreview.Width = _borderWidth * borderScale;
@@ -511,6 +494,15 @@ namespace MeetpointPrinterNew.Pages
             GlobalSettings.IsTemplateSet = _isCompleted;
 
             SetCurrentWizardStepsState();
+
+            if (GlobalSettings.IsAccountSet && GlobalSettings.IsPrinterSet && GlobalSettings.IsTemplateSet)
+            {
+                subHeaderControl.BackButtonVisibility = Visibility.Visible;
+            }
+            else
+            {
+                subHeaderControl.BackButtonVisibility = Visibility.Collapsed;
+            }
         }
         private void SetCurrentWizardStepsState()
         {
@@ -527,19 +519,19 @@ namespace MeetpointPrinterNew.Pages
         {
             if (GlobalSettings.IsPrinterSet)
             {
-                wizardSteps.SetWizardStepState(WizardStep.Printer, WizardStepState.CurrentFilled);
+                wizardSteps.SetWizardStepState(WizardStep.Printer, WizardStepState.Filled);
             }
             else
             {
-                wizardSteps.SetWizardStepState(WizardStep.Printer, WizardStepState.CurrentEmpty);
+                wizardSteps.SetWizardStepState(WizardStep.Printer, WizardStepState.Empty);
             }
             if (GlobalSettings.IsAccountSet)
             {
-                wizardSteps.SetWizardStepState(WizardStep.Account, WizardStepState.CurrentFilled);
+                wizardSteps.SetWizardStepState(WizardStep.Account, WizardStepState.Filled);
             }
             else
             {
-                wizardSteps.SetWizardStepState(WizardStep.Account, WizardStepState.CurrentEmpty);
+                wizardSteps.SetWizardStepState(WizardStep.Account, WizardStepState.Empty);
             }
         }
     }

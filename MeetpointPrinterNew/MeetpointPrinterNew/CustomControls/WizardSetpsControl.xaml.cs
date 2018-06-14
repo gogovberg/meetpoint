@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MeetpointPrinterNew.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,26 +28,33 @@ namespace MeetpointPrinterNew.CustomControls
 
         private void btnSelectPrinter_Click(object sender, RoutedEventArgs e)
         {
-            if(GlobalSettings.IsPrinterSet)
+            if(GlobalSettings.CurrentPageID!=2)
             {
-
+                Helpers.SaveUserSettings(GlobalSettings.ApplicationSettings);
+                GlobalSettings.PreviousPageID = GlobalSettings.CurrentPageID;
+                Application.Current.MainWindow.Content = new SetupPage(GlobalSettings.ApplicationSettings, 0);
             }
+            
 
         }
 
         private void btnSelectAccounts_Click(object sender, RoutedEventArgs e)
         {
-            if (GlobalSettings.IsAccountSet)
+            if (GlobalSettings.CurrentPageID != 3 && GlobalSettings.IsPrinterSet)
             {
-
+                Helpers.SaveUserSettings(GlobalSettings.ApplicationSettings);
+                GlobalSettings.PreviousPageID = GlobalSettings.CurrentPageID;
+                Application.Current.MainWindow.Content = new SetupPage(GlobalSettings.ApplicationSettings, 1);
             }
         }
 
         private void btnSelectTemplate_Click(object sender, RoutedEventArgs e)
         {
-            if (GlobalSettings.IsTemplateSet)
+            if (GlobalSettings.CurrentPageID != 4 && GlobalSettings.IsPrinterSet && GlobalSettings.IsAccountSet)
             {
-
+                Helpers.SaveUserSettings(GlobalSettings.ApplicationSettings);
+                GlobalSettings.PreviousPageID = GlobalSettings.CurrentPageID;
+                Application.Current.MainWindow.Content = new SetupPagePrintTemplate(GlobalSettings.ApplicationSettings);
             }
         }
 

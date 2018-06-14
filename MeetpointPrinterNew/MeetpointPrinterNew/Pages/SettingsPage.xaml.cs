@@ -50,6 +50,7 @@ namespace MeetpointPrinterNew.Pages
             headerControl.CurrentUser = GlobalSettings.CurrentUser;
             subHeaderControl.EventName = GlobalSettings.CurrentEvent;
             subHeaderControl.EventDateLocation = GlobalSettings.CurrentEventLocation;
+            subHeaderControl.btnBack.Visibility = Visibility.Collapsed;
 
             string _tempPrintName = _settings.Printer;
 
