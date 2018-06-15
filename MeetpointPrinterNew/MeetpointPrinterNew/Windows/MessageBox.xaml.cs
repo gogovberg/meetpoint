@@ -28,7 +28,7 @@ namespace MeetpointPrinterNew.Windows
         {
             InitializeComponent();
             tblContentText.Text = Content;
-            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+      
         }
 
         private void btnOk_Click(object sender, RoutedEventArgs e)

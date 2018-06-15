@@ -41,6 +41,9 @@
     <Reference Include="hgi.Base">
       <HintPath>..\..\..\..\Refs\hgi.Base.dll</HintPath>
     </Reference>
+    <Reference Include="ResponsiveGrid.Wpf">
+      <HintPath>..\..\..\..\Refs\ResponsiveGrid.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp">
       <HintPath>..\..\..\..\Refs\RestSharp.dll</HintPath>
     </Reference>
@@ -81,6 +84,9 @@
     </Compile>
     <Compile Include="Windows\MessageBox.xaml.cs">
       <DependentUpon>MessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TemplatePriview.xaml.cs">
+      <DependentUpon>TemplatePriview.xaml</DependentUpon>
     </Compile>
     <Page Include="CustomControls\EventControl.xaml">
       <SubType>Designer</SubType>
@@ -159,6 +165,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\MessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TemplatePriview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

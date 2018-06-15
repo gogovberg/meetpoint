@@ -13,7 +13,8 @@ namespace MeetpointPrinterNew.Pages
     {
        
         private UserSettings _settings;
-      
+
+        private App _currentApp = ((App)Application.Current);
 
         public LogPage(UserSettings settings)
         {
@@ -38,6 +39,8 @@ namespace MeetpointPrinterNew.Pages
                 lc.StatusLogoSource = imgStatusSrc;
                 lc.ButtonPrintAgainContent = "PRINT AGAIN";
                 lc.ButtonPrivewContent = "PREVIEW LABEL";
+                lc.btnPreview.Click += new RoutedEventHandler(btnPreview_Click);
+                lc.btnPrintAgain.Click += new RoutedEventHandler(btnPrintAgain_Click);
                 icEventItems.Items.Add(lc);
             }
         }
@@ -45,6 +48,16 @@ namespace MeetpointPrinterNew.Pages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow.Content = new SettingsPage(_settings);
+        }
+        private void btnPreview_Click(object sender, RoutedEventArgs e)
+        {
+            Windows.TemplatePriview mb = new Windows.TemplatePriview();
+            mb.Owner = _currentApp.MainWindow;
+            mb.ShowDialog();
+        }
+        private void btnPrintAgain_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO:print again logic bro
         }
     }
 }

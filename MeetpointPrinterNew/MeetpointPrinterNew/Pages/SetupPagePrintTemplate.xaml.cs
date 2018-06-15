@@ -26,6 +26,8 @@ namespace MeetpointPrinterNew.Pages
         private double _xPositionOffset = 0;
         private double _yPositionOffset = 0;
 
+        private App _currentApp = ((App)Application.Current);
+
         public int SetupPageType { get { return this._pageType; } }
 
         private bool _isOnLoadChecked;
@@ -368,19 +370,27 @@ namespace MeetpointPrinterNew.Pages
         private void DataOptionsLogic(Object sender)
         {
             CheckBox cb = (CheckBox)sender;
+
             if (!OptionExists(cb.Name))
             {
+                bool isAdded = false;
                 for (int i = 0; i < _dataOptions.Count; i++)
                 {
                     if (string.IsNullOrEmpty(_dataOptions[i]))
                     {
                         _dataOptions[i] = cb.Name;
+                        isAdded = true;
                         break;
                     }
                 }
                 SwitchDataOptions();
-
+                if(!isAdded)
+                {
+                    cb.IsChecked = false;
+                    ShowErrorWindow("You can choose only 3 data options!");
+                }
             }
+           
         }
         private bool OptionExists(string cbName)
         {
@@ -533,6 +543,13 @@ namespace MeetpointPrinterNew.Pages
             {
                 wizardSteps.SetWizardStepState(WizardStep.Account, WizardStepState.Empty);
             }
+        }
+
+        private void ShowErrorWindow(string content)
+        {
+            Windows.MessageBox mb = new Windows.MessageBox(content);
+            mb.Owner = _currentApp.MainWindow;
+            mb.ShowDialog();
         }
     }
 }

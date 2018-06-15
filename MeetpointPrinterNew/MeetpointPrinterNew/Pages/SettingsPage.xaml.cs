@@ -93,17 +93,29 @@ namespace MeetpointPrinterNew.Pages
                 }
             }
 
-            _printQueue.Refresh();
-            if (_printQueue.IsOffline)
+            try
             {
-                bdrOnline.Visibility = Visibility.Hidden;
+                UsbPrinterConnector ps = new UsbPrinterConnector(_settings.Printer);
+                if (ps.BeginSend())
+                {
+                    bdrOffline.Visibility = Visibility.Collapsed;
+                    bdrOnline.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    bdrOnline.Visibility = Visibility.Collapsed;
+                    bdrOffline.Visibility = Visibility.Visible;
+                }
+            }
+            catch(Exception ex)
+            {
+                Debug.Log("MeetpointPrinter", ex.ToString());
+                bdrOnline.Visibility = Visibility.Collapsed;
                 bdrOffline.Visibility = Visibility.Visible;
             }
-            else
-            {
-                bdrOffline.Visibility = Visibility.Hidden;
-                bdrOnline.Visibility = Visibility.Visible;
-            }
+           
+           
+
 
             tbicPrinter.ContentImageSource = imgPrinterSrc;
             tbicPrinter.ContentID = _tempPrintName;
@@ -220,29 +232,22 @@ namespace MeetpointPrinterNew.Pages
                 try
                 {
                     
-                    Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => bdrOnline.Visibility = Visibility.Hidden));
+                    Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => bdrOnline.Visibility = Visibility.Collapsed));
                     Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => bdrOffline.Visibility = Visibility.Visible));
 
-                    var server = new LocalPrintServer();
-                    PrintQueueCollection myPrintQueues = server.GetPrintQueues();
-                    foreach (System.Printing.PrintQueue queue in myPrintQueues)
+                    UsbPrinterConnector ps = new UsbPrinterConnector(_settings.Printer);
+                  
+                    if(ps.BeginSend())
                     {
-                        if (queue.Name.Equals(_printQueue.Name))
-                        {
-                            queue.Refresh();
-                            if(!queue.IsOffline)
-                            {
-                                Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => bdrOffline.Visibility = Visibility.Hidden));
-                                Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => bdrOnline.Visibility = Visibility.Visible));
-                            }
-
-                            break;
-                        }
+                        Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => bdrOnline.Visibility = Visibility.Visible));
+                        Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => bdrOffline.Visibility = Visibility.Collapsed));
                     }
+                    
                 }
                 catch (Exception ex)
                 {
-
+                    Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => bdrOnline.Visibility = Visibility.Collapsed));
+                    Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => bdrOffline.Visibility = Visibility.Visible));
                     Debug.Log("MeetpointPrinter", ex.ToString());
                 }
             }
