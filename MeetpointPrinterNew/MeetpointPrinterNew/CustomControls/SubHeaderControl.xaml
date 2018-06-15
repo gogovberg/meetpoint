@@ -3,26 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MeetpointPrinterNew.CustomControls"
-             Height="60" Width="1315">
+             xmlns:local="clr-namespace:MeetpointPrinterNew.CustomControls">
     <Grid>
         <Border Background="#fff" >
-            <DockPanel VerticalAlignment="Center">
+            <DockPanel VerticalAlignment="Center" LastChildFill="False">
                 <Grid DockPanel.Dock="Left">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <DockPanel Grid.Row="0">
-                        <Image x:Name="imgEventLogo" Width="30" Source="/Images/icon_event_primary.png" DockPanel.Dock="Left" Margin="50,10,10,0"></Image>
-                        <Label x:Name="lblEventName" Foreground="#FF2489FF" FontSize="18" DockPanel.Dock="Left" Margin="0,5,0,0" >
+                        <Image x:Name="imgEventLogo" Width="30" Source="/Images/icon_event_primary.png" DockPanel.Dock="Left" Margin="50,15,10,0"></Image>
+                        <Label x:Name="lblEventName" Foreground="#FF2489FF" FontSize="18" DockPanel.Dock="Left" Margin="0,20,0,0" >
                         </Label>
                     </DockPanel>
-                    <Label x:Name="lblEventDateLocation" FontSize="14" FontWeight="Regular" Grid.Row="1" Margin="90,0,0,0">
+                    <Label x:Name="lblEventDateLocation" FontSize="14" FontWeight="Regular" Grid.Row="1" Margin="90,-5,0,15">
                     </Label>
                 </Grid>
                 
-                <Button x:Name="btnBack"  Width="100"  HorizontalAlignment="Right" Margin="10" Content="BACK" Style="{StaticResource ButtonDefault}" Click="btnBack_Click"  ></Button>
+                <Button x:Name="btnBack"  Width="100"  DockPanel.Dock="Right" Margin="0,0,50,0" Content="BACK" Style="{StaticResource ButtonDefault}" Click="btnBack_Click"></Button>
             </DockPanel>
         </Border>
     </Grid>

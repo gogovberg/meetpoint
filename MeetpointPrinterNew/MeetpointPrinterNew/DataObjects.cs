@@ -224,6 +224,8 @@ namespace MeetpointPrinterNew
       
         [XmlElement(ElementName = "PrinterSetup")]
         public PrinterSetup PrinterSetup { get; set; }
+
+
     }
 
 

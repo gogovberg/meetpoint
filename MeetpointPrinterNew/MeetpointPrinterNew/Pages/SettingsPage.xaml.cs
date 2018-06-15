@@ -40,6 +40,7 @@ namespace MeetpointPrinterNew.Pages
         public SettingsPage(UserSettings settings)
         {
 
+
             InitializeComponent();
             GlobalSettings.CurrentPageID = 5;
 

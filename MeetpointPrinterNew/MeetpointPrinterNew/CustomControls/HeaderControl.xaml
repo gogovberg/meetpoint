@@ -3,11 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MeetpointPrinterNew.CustomControls"
-             Height="60" Width="1315" >
+             xmlns:local="clr-namespace:MeetpointPrinterNew.CustomControls">
     <Grid>
         <!-- Header -->
-        <Border Background="#434752">
+        <Border Background="#434752" Height="60">
             <DockPanel LastChildFill="False">
                 <Image x:Name="imgLogoMpWhite" DockPanel.Dock="Left" Margin="20,0,0,0" Source="/Images/logo_mp_white.png" Width="170"></Image>
                 <!--Click="btnEvents_Click"-->
