@@ -48,12 +48,13 @@ namespace MeetpointPrinterNew.CustomControls
             get { return tbName.Text; }
             set { tbName.Text = value; }
         }
-
         public string LogStatus
         {
             get { return tbStatus.Text; }
             set { tbStatus.Text = value; }
         }
+
+        public PrintQueueItem PrintQueueItem { set; get; }
 
         public LogControl()
         {

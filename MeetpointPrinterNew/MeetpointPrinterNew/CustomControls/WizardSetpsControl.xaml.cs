@@ -22,6 +22,7 @@ namespace MeetpointPrinterNew.CustomControls
     public partial class WizardSetpsControl : UserControl
     {
         private  BrushConverter _converter = new BrushConverter();
+
         private Brush _previousBrush;
 
         public WizardSetpsControl()
@@ -172,6 +173,7 @@ namespace MeetpointPrinterNew.CustomControls
             _previousBrush = temp.BorderBrush;
              temp.BorderBrush = (Brush)_converter.ConvertFromString("#1FE6A5");
         }
+
         private void btnSelect_MouseLeave(object sender, RoutedEventArgs e)
         {
 

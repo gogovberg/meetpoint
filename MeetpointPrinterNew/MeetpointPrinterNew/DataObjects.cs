@@ -111,12 +111,10 @@ namespace MeetpointPrinterNew
         public string Company { get; set; }
         public string JobPosition { get; set; }
         public string Country { get; set; }
-
         public int PrintUserID { get; set; }
         public string ActionUID { get; set; }
-
         public string EventPosition { get; set; }
-
+        public int Status { set; get; }
 
     }
 

@@ -43,6 +43,11 @@ namespace MeetpointPrinterNew.Pages
 
             InitializeComponent();
             GlobalSettings.CurrentPageID = 5;
+            
+            if(GlobalSettings.PrintQueueItemLog==null)
+            {
+                GlobalSettings.PrintQueueItemLog = new List<PrintQueueItem>();
+            }
 
             _settings = settings;
             _printTimer = 10000;
@@ -99,11 +104,13 @@ namespace MeetpointPrinterNew.Pages
                 UsbPrinterConnector ps = new UsbPrinterConnector(_settings.Printer);
                 if (ps.BeginSend())
                 {
+                    GlobalSettings.IsPrinterOnline = true;
                     bdrOffline.Visibility = Visibility.Collapsed;
                     bdrOnline.Visibility = Visibility.Visible;
                 }
                 else
                 {
+                    GlobalSettings.IsPrinterOnline = false;
                     bdrOnline.Visibility = Visibility.Collapsed;
                     bdrOffline.Visibility = Visibility.Visible;
                 }
@@ -113,6 +120,7 @@ namespace MeetpointPrinterNew.Pages
                 Debug.Log("MeetpointPrinter", ex.ToString());
                 bdrOnline.Visibility = Visibility.Collapsed;
                 bdrOffline.Visibility = Visibility.Visible;
+                GlobalSettings.IsPrinterOnline = false;
             }
            
            
@@ -209,10 +217,10 @@ namespace MeetpointPrinterNew.Pages
                         users = users + user.AccountID + ",";
                     }
                     List<PrintQueueItem> items = Helpers.GetPrintQueue(_settings.AuthToken, users);
-
+             
                     foreach (PrintQueueItem item in items)
                     {
-                        PrintLabelStickers(_settings.PrinterSetup.LayoutTemplate, item.FirstName, item.Company, item.PrintUserID.ToString());
+                        PrintLabelStickers(item);
                     }
 
                 }
@@ -235,11 +243,13 @@ namespace MeetpointPrinterNew.Pages
                     
                     Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => bdrOnline.Visibility = Visibility.Collapsed));
                     Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => bdrOffline.Visibility = Visibility.Visible));
-
+                    Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => GlobalSettings.IsPrinterOnline = false));
                     UsbPrinterConnector ps = new UsbPrinterConnector(_settings.Printer);
                   
                     if(ps.BeginSend())
                     {
+                       
+                        Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => GlobalSettings.IsPrinterOnline = true));
                         Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => bdrOnline.Visibility = Visibility.Visible));
                         Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => bdrOffline.Visibility = Visibility.Collapsed));
                     }
@@ -247,6 +257,7 @@ namespace MeetpointPrinterNew.Pages
                 }
                 catch (Exception ex)
                 {
+                    Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => GlobalSettings.IsPrinterOnline = false));
                     Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => bdrOnline.Visibility = Visibility.Collapsed));
                     Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => bdrOffline.Visibility = Visibility.Visible));
                     Debug.Log("MeetpointPrinter", ex.ToString());
@@ -255,25 +266,60 @@ namespace MeetpointPrinterNew.Pages
 
         }
 
-        private void PrintLabelStickers(string templateType, string fieldOne, string fieldTwo, string fieldThree)
+        private void PrintLabelStickers(PrintQueueItem item)
         {
-            PrinterSettings ps = new PrinterSettings();
-            ps.PrinterName = _settings.Printer;
-            ps.Width = (int)(203 * 3);
-            ps.Length = (int)(203 * 1);
-            ps.Darkness = 30;
+            try
+            {
+                if (GlobalSettings.IsPrinterOnline)
+                {
+                    PrinterSettings ps = new PrinterSettings();
+                    ps.PrinterName = _settings.Printer;
+                    ps.Width = (int)(203 * 3);
+                    ps.Length = (int)(203 * 1);
+                    ps.Darkness = 30;
 
-            List<byte> page = new List<byte>();
-            page.AddRange(ZPLCommands.ClearPrinter(ps));
+                    List<byte> page = new List<byte>();
+
+                    page.AddRange(ZPLCommands.ClearPrinter(ps));
+                    page.AddRange(ZPLCommands.TextWrite(15, 75, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_LARGEST, 45, 30, Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[0], item)));
+                    page.AddRange(ZPLCommands.TextWrite(15, 150, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_NORMAL, 30, 20, Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[1], item)));
+                    page.AddRange(ZPLCommands.TextWrite(15, 225, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_NORMAL, 20, 15, Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[2], item)));
+                    page.AddRange(ZPLCommands.PrintBuffer(1));
+
+                    new SpoolPrinter(ps).Print(page.ToArray());
+                    item.Status = 1;
+                }
+               
+            }
+            catch(Exception ex)
+            {
+                item.Status = 2;
+                Debug.Log("MeetpointPrinter", ex.ToString());
+            }
 
 
-            page.AddRange(ZPLCommands.TextWrite(15, 75, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_LARGEST, 45, 30, fieldOne));
-            page.AddRange(ZPLCommands.TextWrite(15, 150, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_NORMAL, 30, 20, fieldTwo));
-            page.AddRange(ZPLCommands.TextWrite(15, 225, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_NORMAL, 20, 15, fieldThree));
+            int index = GetPrintQueueExistingItem(item.PrintUserID);
 
-            page.AddRange(ZPLCommands.PrintBuffer(1));
+            if(index<0)
+            {
+                GlobalSettings.PrintQueueItemLog.Add(item);
+            }
+            else
+            {
+                GlobalSettings.PrintQueueItemLog[index].Status = item.Status;
+            }
 
-            new SpoolPrinter(ps).Print(page.ToArray());
+        }
+        private int GetPrintQueueExistingItem(int PrintUserID)
+        {
+            for(int i=0; i<GlobalSettings.PrintQueueItemLog.Count; i++)
+            {
+                if(PrintUserID == GlobalSettings.PrintQueueItemLog[i].PrintUserID)
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
 
         private void btnEvents_Click(object sender, RoutedEventArgs e)
@@ -351,6 +397,7 @@ namespace MeetpointPrinterNew.Pages
             control.Visibility = Visibility.Visible;
         }
 
+       
        
     }
 }

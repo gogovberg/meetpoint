@@ -310,6 +310,40 @@ namespace MeetpointPrinterNew
 
             return isComplete;
         }
+
+        public static string GetDataOptionsFiled(string FieldName, PrintQueueItem item)
+        {
+
+            string value = "";
+            switch (FieldName)
+            {
+                case "cbName":
+                    value = item.FirstName;
+                    break;
+                case "cbSurName":
+                    value = item.LastName;
+                    break;
+                case "cbCompanyName":
+                    value = item.Company;
+                    break;
+                case "cbFunctionName":
+                    value = item.JobPosition;
+                    break;
+                case "cbCountryName":
+                    value = item.Country;
+                    break;
+                case "cbGroupName":
+                    value = "";
+                    break;
+                default:
+                    value = "";
+                    break;
+            }
+
+            return value;
+
+        }
+
     }
   
 
