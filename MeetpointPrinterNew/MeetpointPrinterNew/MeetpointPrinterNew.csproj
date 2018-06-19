@@ -85,8 +85,8 @@
     <Compile Include="Windows\MessageBox.xaml.cs">
       <DependentUpon>MessageBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\TemplatePriview.xaml.cs">
-      <DependentUpon>TemplatePriview.xaml</DependentUpon>
+    <Compile Include="Windows\TemplatePreview.xaml.cs">
+      <DependentUpon>TemplatePreview.xaml</DependentUpon>
     </Compile>
     <Page Include="CustomControls\EventControl.xaml">
       <SubType>Designer</SubType>
@@ -168,7 +168,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\TemplatePriview.xaml">
+    <Page Include="Windows\TemplatePreview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

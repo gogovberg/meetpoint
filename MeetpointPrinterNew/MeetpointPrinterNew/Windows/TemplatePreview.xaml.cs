@@ -17,9 +17,9 @@ namespace MeetpointPrinterNew.Windows
     /// <summary>
     /// Interaction logic for TemplatePriview.xaml
     /// </summary>
-    public partial class TemplatePriview : Window
+    public partial class TemplatePreview : Window
     {
-        public TemplatePriview()
+        public TemplatePreview()
         {
             InitializeComponent();
 

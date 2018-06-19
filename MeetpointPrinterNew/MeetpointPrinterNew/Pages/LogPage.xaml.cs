@@ -62,7 +62,7 @@ namespace MeetpointPrinterNew.Pages
         {
             LogControl lc = (LogControl)sender;
 
-            TemplatePriview tp = new TemplatePriview();
+            TemplatePreview tp = new TemplatePreview();
             tp.Owner = _currentApp.MainWindow;
 
             PrivewTemplateLogic(lc.PrintQueueItem, tp);
@@ -72,7 +72,7 @@ namespace MeetpointPrinterNew.Pages
         {
             //TODO:print again logic bro
         }
-        private void PrivewTemplateLogic(PrintQueueItem item, TemplatePriview tp)
+        private void PrivewTemplateLogic(PrintQueueItem item, TemplatePreview tp)
         {
             BitmapImage imgBigSrc = new BitmapImage(new Uri("/Images/icon_qr_code_big.png", UriKind.Relative));
             BitmapImage imgSmallSrc = new BitmapImage(new Uri("/Images/icon_qr_code.png", UriKind.Relative));
