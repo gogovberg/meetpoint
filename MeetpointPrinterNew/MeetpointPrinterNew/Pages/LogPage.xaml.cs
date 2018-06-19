@@ -53,7 +53,6 @@ namespace MeetpointPrinterNew.Pages
 
          
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow.Content = new SettingsPage(_settings);
@@ -139,7 +138,6 @@ namespace MeetpointPrinterNew.Pages
             Canvas.SetBottom(control, bottom);
             control.Visibility = Visibility.Visible;
         }
-
         private void SetPrintingStatusSource(LogControl lc)
         {
             switch (lc.PrintQueueItem.Status)
