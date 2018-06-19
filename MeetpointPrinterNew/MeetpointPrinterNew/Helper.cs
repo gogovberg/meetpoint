@@ -17,7 +17,6 @@ namespace MeetpointPrinterNew
     public static class Helpers
     {
         private static string _host = "http://data.meetpoint.si/";
-        //private static string _host = "http://localhost/MeetPointRest/";
         public static List<string> GetConnectedPrinters()
         {
             List<string> printers = new List<string>();

@@ -79,6 +79,7 @@
     <Compile Include="CustomControls\WizardSetpsControl.xaml.cs">
       <DependentUpon>WizardSetpsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Windows\MessageBox.xaml.cs">
       <DependentUpon>MessageBox.xaml</DependentUpon>
     </Compile>
@@ -260,6 +261,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\big_qr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon_padlock.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
