@@ -387,7 +387,7 @@ namespace MeetpointPrinterNew.Pages
                 if(!isAdded)
                 {
                     cb.IsChecked = false;
-                    ShowErrorWindow("You can choose only 3 data options!");
+                    ShowErrorWindow("You can select up to 3 options.");
                 }
             }
            

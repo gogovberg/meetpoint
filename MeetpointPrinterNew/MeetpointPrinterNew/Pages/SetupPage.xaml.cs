@@ -63,7 +63,7 @@ namespace MeetpointPrinterNew.Pages
                         GlobalSettings.CurrentPageID = 2;
                         Style cbPrinterStyle = (Style)FindResource("ChecBoxPrinterStyle");
                         lblPrintingDevice.Text = "SELECT PRINTING DEVICE";
-
+                        lblHelper.Text = "Please select 1 device.";
                         var server = new LocalPrintServer();
                         PrintQueueCollection myPrintQueues = server.GetPrintQueues();
 
@@ -89,7 +89,7 @@ namespace MeetpointPrinterNew.Pages
 
                         Style cbAccountStyle = (Style)FindResource("ChecBoxAccountStyle");
                         lblPrintingDevice.Text = "SELECT ACCOUNTS";
-
+                        lblHelper.Text = "Selected printing device will print from scanners connected to the accounts selected below.";
                         foreach (User item in users)
                         {
                             CheckBox cbp = new CheckBox();

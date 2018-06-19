@@ -19,7 +19,7 @@
         <!-- Content row -->
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
-                <RowDefinition/>
+                <RowDefinition MaxHeight="590"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
 
@@ -57,8 +57,8 @@
                                     <Label FontSize="16" Content="Label size" Padding="0"></Label>
                                     <TextBlock Style="{StaticResource TextBlockHelperText}" Text="Size in mm." Margin="0,0,0,10"></TextBlock>
                                     <WrapPanel >
-                                        <CheckBox x:Name="cbSizeOne" Content="80 x 40" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeOne_Checked"  Unchecked="cbSize_Unchecked"></CheckBox>
-                                        <CheckBox x:Name="cbSizeTwo" Content="70 x 50" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeTwo_Checked" Unchecked="cbSize_Unchecked"></CheckBox>
+                                        <CheckBox x:Name="cbSizeOne" Content="70 x 50" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeOne_Checked"  Unchecked="cbSize_Unchecked"></CheckBox>
+                                        <CheckBox x:Name="cbSizeTwo" Content="80 x 40" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeTwo_Checked" Unchecked="cbSize_Unchecked"></CheckBox>
 
                                     </WrapPanel>
                                 </StackPanel>
@@ -74,7 +74,7 @@
                                         <CheckBox x:Name="cbLayoutClean" Style="{StaticResource CheckBoxTemplateLayoutStyleNC}" Checked="cbLayoutClean_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
                                     </WrapPanel>
                                 </StackPanel>
-                                <StackPanel Grid.Row="3" Orientation="Vertical">
+                                <StackPanel Grid.Row="3" Orientation="Vertical" Margin="0,0,0,15">
                                     <Label FontSize="16" Content="Data" Margin="0,0,0,0" Padding="0"></Label>
                                     <TextBlock Text="You can select 3 options." Style="{StaticResource TextBlockHelperText}" Margin="0,0,0,10"></TextBlock>
                                     <Grid>

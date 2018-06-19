@@ -52,18 +52,18 @@
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
 
-                                <TextBlock x:Name="tblPrintingDevice" Text="SELECTED PRINTING DEVICE" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockSubtitle}" TextWrapping="Wrap"></TextBlock>
+                                <TextBlock x:Name="tblPrintingDevice" Text="SELECTED PRINTING DEVICE" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockSubtitle}" TextWrapping="Wrap"></TextBlock>
                                 <Button x:Name="btnEditPrinter" Grid.Row="0" Grid.Column="1" Style="{StaticResource ButtonPrimaryCircle}" Click="btneditPrinter_Click" HorizontalAlignment="Right">
-                                    <Image Source="/Images/icon_pencil_white.png" Width="14" ></Image>
+                                    <Image Source="/Images/icon_pencil_white.png" Width="12" ></Image>
                                 </Button>
 
-                                <Border Grid.Row="1" Margin="0,15,0,0" Padding="15,10" Background="#f6f6f6" Grid.ColumnSpan="2" CornerRadius="4">
+                                <Border Grid.Row="1" Margin="0,10,0,0" Padding="15,10" Background="#f6f6f6" Grid.ColumnSpan="2" CornerRadius="4" VerticalAlignment="Center">
                                     <DockPanel LastChildFill="False">
                                         <customcontrols:TextBlockImageControl  x:Name="tbicPrinter" DockPanel.Dock="Left"/>
-                                        <Border x:Name="bdrOnline" Background="#d6fbef" DockPanel.Dock="Left" CornerRadius="4" Padding="7,3" HorizontalAlignment="Center" Margin="15,0,0,0" VerticalAlignment="Center">
+                                        <Border x:Name="bdrOnline" Background="#d6fbef" DockPanel.Dock="Left" CornerRadius="4" Padding="7,3" HorizontalAlignment="Center" Margin="15,3,0,0" VerticalAlignment="Center">
                                             <TextBlock Foreground="#16cf94" FontWeight="DemiBold">Online</TextBlock>
                                         </Border>
-                                        <Border x:Name="bdrOffline" Background="#ddd" DockPanel.Dock="Left" CornerRadius="4" Padding="7,3" HorizontalAlignment="Center" Margin="15,0,0,0" VerticalAlignment="Center">
+                                        <Border x:Name="bdrOffline" Background="#ddd" DockPanel.Dock="Left" CornerRadius="4" Padding="7,3" HorizontalAlignment="Center" Margin="15,3,0,0" VerticalAlignment="Center">
                                             <TextBlock Foreground="#aaa" FontWeight="DemiBold">Offline</TextBlock>
                                         </Border>
                                     </DockPanel>
@@ -89,12 +89,12 @@
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
 
-                                <TextBlock x:Name="tblAccountsTitle" VerticalAlignment="Center" Text="SELECTED ACCOUNTS" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockSubtitle}" TextWrapping="Wrap"></TextBlock>
+                                <TextBlock x:Name="tblAccountsTitle" Text="SELECTED ACCOUNTS" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockSubtitle}" TextWrapping="Wrap"></TextBlock>
                                 <Button x:Name="btnEditAccount" Grid.Row="0" Grid.Column="1" Style="{StaticResource ButtonPrimaryCircle}" Click="btnEditAccount_Click" HorizontalAlignment="Right" >
-                                    <Image Source="/Images/icon_pencil_white.png" Width="14"></Image>
+                                    <Image Source="/Images/icon_pencil_white.png" Width="12"></Image>
                                 </Button>
 
-                                <Border Grid.Row="1" Grid.ColumnSpan="2" Margin="0,15,0,0" Height="120" CornerRadius="4" Padding="15,10,0,10" Background="#f6f6f6">
+                                <Border Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10,0,0" Height="120" CornerRadius="4" Padding="15,10,0,10" Background="#f6f6f6">
                                     <ItemsControl x:Name="icAccountItem" >
                                         <ItemsControl.ItemsPanel>
                                             <ItemsPanelTemplate>
@@ -104,12 +104,11 @@
                                         <ItemsControl.Template>
                                             <ControlTemplate>
                                                 <ScrollViewer x:Name="ScrollViewer" >
-                                                    <ItemsPresenter />
+                                                    <ItemsPresenter/>
                                                 </ScrollViewer>
                                             </ControlTemplate>
                                         </ItemsControl.Template>
                                     </ItemsControl>
-
                                 </Border>
                             </Grid>
                         </Border>
@@ -132,13 +131,13 @@
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
 
-                                <TextBlock x:Name="tblTemplateTitle" VerticalAlignment="Center" Text="SET TEMPLATE" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockSubtitle}" TextWrapping="Wrap"></TextBlock>
+                                <TextBlock x:Name="tblTemplateTitle" Text="SET TEMPLATE" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockSubtitle}" TextWrapping="Wrap"></TextBlock>
                                 <Button x:Name="btnEditTemplate" Grid.Row="0" Grid.Column="1" Style="{StaticResource ButtonPrimaryCircle}" Click="btnEditTemplate_Click" HorizontalAlignment="Right" >
-                                    <Image Source="/Images/icon_pencil_white.png" Width="14"></Image>
+                                    <Image Source="/Images/icon_pencil_white.png" Width="12"></Image>
                                 </Button>
 
-                                <Border Padding="15,15" Background="#f6f6f6" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,15,0,0" CornerRadius="4">
-                                    <Border x:Name="bdrPreview" CornerRadius="4" Background="#fff"  BorderThickness="2" BorderBrush="#ccc" HorizontalAlignment="Left" Width="250" Height="120">
+                                <Border Padding="15,15" Background="#f6f6f6" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10,0,0" CornerRadius="4">
+                                    <Border x:Name="bdrPreview" CornerRadius="4" Background="#fff"  BorderThickness="2" BorderBrush="#ccc" HorizontalAlignment="Left" Width="200" Height="100">
                                         <Canvas x:Name="cnvPrivew">
                                             <Image x:Name="imgQrPreview"></Image>
                                             <StackPanel  x:Name="spDataOptions" Margin="10">
@@ -176,7 +175,7 @@
                                     <RowDefinition Height="Auto"></RowDefinition>
                                 </Grid.RowDefinitions>
 
-                                <TextBlock x:Name="tblLivePrint" VerticalAlignment="Top" Text="LIVE PRINT" Grid.Row="0" Style="{StaticResource TextBlockSubtitle}" Margin="0,0,0,15"></TextBlock>
+                                <TextBlock x:Name="tblLivePrint" Text="LIVE PRINT" Grid.Row="0" Style="{StaticResource TextBlockSubtitle}" Margin="0,0,0,10"></TextBlock>
                                 <Border Grid.Row="1" Background="#f6f6f6" Padding="15,15" BorderBrush="#ddd" BorderThickness="0" CornerRadius="4">
                                     <DockPanel LastChildFill="False">
                                         <CheckBox x:Name="cbInactive" HorizontalAlignment="Center" VerticalAlignment="Center" Content="INACTIVE" Checked="cbInactive_Checked" Style="{StaticResource ToggleButtonOff}"></CheckBox>
