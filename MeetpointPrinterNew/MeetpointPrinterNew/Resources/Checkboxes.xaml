@@ -317,9 +317,9 @@
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Margin" Value="10,0,10,0"/>
-        <Setter Property="Height" Value="35"/>
-        <Setter Property="Width" Value="120"/>
-        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Height" Value="32"/>
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="FontSize" Value="15"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
@@ -353,10 +353,10 @@
         <Setter Property="Foreground" Value="#333"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="10,0,10,0"/>
-        <Setter Property="Height" Value="35"/>
-        <Setter Property="Width" Value="120"/>
-        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Margin" Value="10,0,0,0"/>
+        <Setter Property="Height" Value="32"/>
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="FontSize" Value="15"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">

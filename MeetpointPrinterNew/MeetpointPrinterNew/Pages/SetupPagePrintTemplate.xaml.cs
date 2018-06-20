@@ -502,7 +502,10 @@ namespace MeetpointPrinterNew.Pages
 
             btnNext.Style = _isCompleted ? enable : disable;
             GlobalSettings.IsTemplateSet = _isCompleted;
-
+            if(_isCompleted && !GlobalSettings.ApplicationSettings.IsTemplateSet)
+            {
+                GlobalSettings.ApplicationSettings.IsTemplateSet = _isCompleted;
+            }
             SetCurrentWizardStepsState();
 
             if (GlobalSettings.IsAccountSet && GlobalSettings.IsPrinterSet && GlobalSettings.IsTemplateSet)
@@ -516,35 +519,40 @@ namespace MeetpointPrinterNew.Pages
         }
         private void SetCurrentWizardStepsState()
         {
-            if (GlobalSettings.IsTemplateSet)
+            if (GlobalSettings.ApplicationSettings.IsTemplateSet)
             {
-                wizardSteps.SetWizardStepState(WizardStep.Template, WizardStepState.CurrentFilled);
+                wizardSteps.SetWizardStepState(WizardStep.Template, WizardStepState.CurrentFilled,WizardStepLine.AccountTemplate);
             }
             else
             {
-                wizardSteps.SetWizardStepState(WizardStep.Template, WizardStepState.CurrentEmpty);
+
+                WizardStepLine sl = WizardStepLine.AccountTemplate;
+                if (!GlobalSettings.ApplicationSettings.IsAccountsSet)
+                {
+                    sl = WizardStepLine.PrinterAccount;
+                }
+                wizardSteps.SetWizardStepState(WizardStep.Template, WizardStepState.CurrentEmpty, sl);
             }
         }
         private void SetOtherWizardStepsState()
         {
-            if (GlobalSettings.IsPrinterSet)
+            if (GlobalSettings.ApplicationSettings.IsPrinterSet)
             {
-                wizardSteps.SetWizardStepState(WizardStep.Printer, WizardStepState.Filled);
+                wizardSteps.SetWizardStepState(WizardStep.Printer, WizardStepState.Filled, WizardStepLine.PrinterAccount);
             }
             else
             {
-                wizardSteps.SetWizardStepState(WizardStep.Printer, WizardStepState.Empty);
+                wizardSteps.SetWizardStepState(WizardStep.Printer, WizardStepState.Empty, WizardStepLine.Empty);
             }
-            if (GlobalSettings.IsAccountSet)
+            if (GlobalSettings.ApplicationSettings.IsAccountsSet)
             {
-                wizardSteps.SetWizardStepState(WizardStep.Account, WizardStepState.Filled);
+                wizardSteps.SetWizardStepState(WizardStep.Account, WizardStepState.Filled, WizardStepLine.PrinterAccount);
             }
             else
             {
-                wizardSteps.SetWizardStepState(WizardStep.Account, WizardStepState.Empty);
+                wizardSteps.SetWizardStepState(WizardStep.Account, WizardStepState.Empty, WizardStepLine.Empty);
             }
         }
-
         private void ShowErrorWindow(string content)
         {
             Windows.MessageBox mb = new Windows.MessageBox(content);

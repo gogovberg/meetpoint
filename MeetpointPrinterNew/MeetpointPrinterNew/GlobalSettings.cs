@@ -19,6 +19,8 @@ namespace MeetpointPrinterNew
         public static bool IsAccountSet { set; get; }
         public static bool IsTemplateSet { set; get; }
         public static bool IsPrinterOnline { set; get; }
+        public static bool IsPrinterAccountLine { set; get; }
+        public static bool IsAccountTemplateLine { set; get; }
         public static List<PrintQueueItem> PrintQueueItemLog { set; get; }
     }
 }

@@ -310,6 +310,7 @@ namespace MeetpointPrinterNew.Pages
             }
 
         }
+
         private int GetPrintQueueExistingItem(int PrintUserID)
         {
             for(int i=0; i<GlobalSettings.PrintQueueItemLog.Count; i++)
@@ -396,8 +397,5 @@ namespace MeetpointPrinterNew.Pages
             Canvas.SetBottom(control, bottom);
             control.Visibility = Visibility.Visible;
         }
-
-       
-       
     }
 }

@@ -54,7 +54,6 @@ namespace MeetpointPrinterNew.Pages
                 }
             }
         }
-
         protected void Control_click(object sender, EventArgs e)
         {
             EventControl ec = (EventControl)sender;

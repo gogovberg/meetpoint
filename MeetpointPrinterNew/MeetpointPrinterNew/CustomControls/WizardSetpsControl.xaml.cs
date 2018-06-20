@@ -62,7 +62,7 @@ namespace MeetpointPrinterNew.CustomControls
             }
         }
 
-        public void SetWizardStepState(WizardStep step, WizardStepState state)
+        public void SetWizardStepState(WizardStep step, WizardStepState state, WizardStepLine stepLine)
         {
            
 
@@ -71,9 +71,6 @@ namespace MeetpointPrinterNew.CustomControls
                 case WizardStep.Printer:
                     BitmapImage imgPrinterSource = new BitmapImage(new Uri("/Images/icon_printer.png", UriKind.Relative));
                     BitmapImage imgPrinterSourcePrimary = new BitmapImage(new Uri("/Images/icon_printer_primary.png", UriKind.Relative));
-                    linePrintAccount.Stroke = (Brush)_converter.ConvertFromString("#D3D4D6");
-                    lineAccountTemplate.Stroke = (Brush)_converter.ConvertFromString("#D3D4D6");
-                   
 
                     switch (state)
                     {
@@ -104,9 +101,6 @@ namespace MeetpointPrinterNew.CustomControls
                 case WizardStep.Account:
                     BitmapImage imgAccountSource = new BitmapImage(new Uri("/Images/icon_users.png", UriKind.Relative));
                     BitmapImage imgAccounSourcePrimary = new BitmapImage(new Uri("/Images/icon_users_primary.png", UriKind.Relative));
-                    linePrintAccount.Stroke = (Brush)_converter.ConvertFromString("#C6DBF3");
-                    lineAccountTemplate.Stroke = (Brush)_converter.ConvertFromString("#D3D4D6");
-
                     switch (state)
                     {
                         case WizardStepState.CurrentEmpty:
@@ -135,9 +129,6 @@ namespace MeetpointPrinterNew.CustomControls
                 case WizardStep.Template:
                     BitmapImage imgTemplateSource = new BitmapImage(new Uri("/Images/icon_qr_code.png", UriKind.Relative));
                     BitmapImage imgTemplateSourcePrimary = new BitmapImage(new Uri("/Images/icon_qr_code_big.png", UriKind.Relative));
-                    linePrintAccount.Stroke = (Brush)_converter.ConvertFromString("#C6DBF3");
-                    lineAccountTemplate.Stroke = (Brush)_converter.ConvertFromString("#C6DBF3");
-
                     switch (state)
                     {
                         case WizardStepState.CurrentEmpty:
@@ -162,6 +153,24 @@ namespace MeetpointPrinterNew.CustomControls
                             imgSelectTemplate.Source = imgTemplateSourcePrimary;
                             break;
                     }
+                    break;
+            }
+
+           
+
+            switch(stepLine)
+            {
+                case WizardStepLine.Empty:
+                    linePrintAccount.Stroke = (Brush)_converter.ConvertFromString("#D3D4D6");
+                    lineAccountTemplate.Stroke = (Brush)_converter.ConvertFromString("#D3D4D6");
+                    break;
+                case WizardStepLine.PrinterAccount:
+                    linePrintAccount.Stroke = (Brush)_converter.ConvertFromString("#C6DBF3");
+                    lineAccountTemplate.Stroke = (Brush)_converter.ConvertFromString("#D3D4D6");
+                    break;
+                case WizardStepLine.AccountTemplate:
+                    linePrintAccount.Stroke = (Brush)_converter.ConvertFromString("#C6DBF3");
+                    lineAccountTemplate.Stroke = (Brush)_converter.ConvertFromString("#C6DBF3");
                     break;
             }
         }

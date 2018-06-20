@@ -8,7 +8,7 @@
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="Foreground" Value="#fff"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Height" Value="35"/>
+        <Setter Property="Height" Value="32"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -58,7 +58,7 @@
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="Foreground" Value="#fff"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Height" Value="35"/>
+        <Setter Property="Height" Value="32"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>

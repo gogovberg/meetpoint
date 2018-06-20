@@ -217,13 +217,21 @@ namespace MeetpointPrinterNew
 
         [XmlElement(ElementName = "Event")]
         public Event Event { get; set; }
+
         [XmlElement(ElementName = "Accounts")]
         public Accounts Accounts { get; set; }
       
         [XmlElement(ElementName = "PrinterSetup")]
         public PrinterSetup PrinterSetup { get; set; }
 
+        [XmlElement(ElementName = "IsPrinterSet")]
+        public bool IsPrinterSet { set; get; }
 
+        [XmlElement(ElementName = "IsAccountsSet")]
+        public bool IsAccountsSet { set; get; }
+
+        [XmlElement(ElementName = "IsTemplateSet")]
+        public bool IsTemplateSet { set; get; }
     }
 
 
@@ -239,6 +247,12 @@ namespace MeetpointPrinterNew
         Empty,
         CurrentFilled,
         Filled
+    }
+    public enum WizardStepLine
+    {
+        Empty=0,
+        PrinterAccount=1,
+        AccountTemplate=2
     }
 
 }
