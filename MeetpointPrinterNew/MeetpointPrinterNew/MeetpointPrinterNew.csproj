@@ -73,6 +73,9 @@
     <Compile Include="CustomControls\HeaderControl.xaml.cs">
       <DependentUpon>HeaderControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\PrintTemplateControl.xaml.cs">
+      <DependentUpon>PrintTemplateControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\SubHeaderControl.xaml.cs">
       <DependentUpon>SubHeaderControl.xaml</DependentUpon>
     </Compile>
@@ -94,6 +97,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomControls\LogControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\PrintTemplateControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

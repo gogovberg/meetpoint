@@ -66,11 +66,11 @@
                                     <Label FontSize="16" Content="Layout" Margin="0,0,0,10"></Label>
                                     <WrapPanel>
                                         <CheckBox x:Name="cbLayoutHL"  Style="{StaticResource CheckBoxTemplateLayoutStyleHL}" Checked="cbLayoutHL_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
-                                        <CheckBox x:Name="cbLayoutQLT" Style="{StaticResource CheckBoxTemplateLayoutStyleQLT}" Checked="cbLayoutQLT_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
-                                        <CheckBox x:Name="cbLayoutQLB" Style="{StaticResource CheckBoxTemplateLayoutStyleQLB}" Checked="cbLayoutQLB_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
-                                        <CheckBox x:Name="cbLayoutHR"  Style="{StaticResource CheckBoxTemplateLayoutStyleHR}" Checked="cbLayoutHR_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
-                                        <CheckBox x:Name="cbLayoutQRT" Style="{StaticResource CheckBoxTemplateLayoutStyleQRT}" Checked="cbLayoutQRT_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
-                                        <CheckBox x:Name="cbLayoutQRB" Style="{StaticResource CheckBoxTemplateLayoutStyleQRB}"  Checked="cbLayoutQRB_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
+                                        <CheckBox x:Name="cbLayoutQLT" Style="{StaticResource CheckBoxTemplateLayoutStyleQLT}" Visibility="Collapsed" Checked="cbLayoutQLT_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
+                                        <CheckBox x:Name="cbLayoutQLB" Style="{StaticResource CheckBoxTemplateLayoutStyleQLB}" Visibility="Collapsed"  Checked="cbLayoutQLB_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
+                                        <CheckBox x:Name="cbLayoutHR"  Style="{StaticResource CheckBoxTemplateLayoutStyleHR}"  Checked="cbLayoutHR_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
+                                        <CheckBox x:Name="cbLayoutQRT" Style="{StaticResource CheckBoxTemplateLayoutStyleQRT}" Visibility="Collapsed"  Checked="cbLayoutQRT_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
+                                        <CheckBox x:Name="cbLayoutQRB" Style="{StaticResource CheckBoxTemplateLayoutStyleQRB}" Visibility="Collapsed"   Checked="cbLayoutQRB_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
                                         <CheckBox x:Name="cbLayoutClean" Style="{StaticResource CheckBoxTemplateLayoutStyleNC}" Checked="cbLayoutClean_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
                                     </WrapPanel>
                                 </StackPanel>
@@ -119,17 +119,8 @@
                         Text="Please select some options on the left for preview to start forming." ></TextBlock>
                                     </Grid>
                                 </Border>
-
-                                <Border x:Name="bdrPreview" Grid.Row="3" Background="#FFFFFFFF" CornerRadius="4">
-                                    <Canvas x:Name="cnvPrivew">
-                                        <Image x:Name="imgQrPreview"></Image>
-                                        <StackPanel  x:Name="spDataOptions">
-                                            <TextBlock  x:Name="tbOptOne" FontSize="16"  Margin="5,0,0,0"></TextBlock>
-                                            <TextBlock  x:Name="tbOptTwo" FontSize="14"  Margin="5,0,0,0"></TextBlock>
-                                            <TextBlock  x:Name="tbOptThree" FontSize="14"  Margin="5"></TextBlock>
-                                        </StackPanel>
-                                    </Canvas>
-                                </Border>
+                                <custom:PrintTemplateControl Grid.Row="3"  x:Name="printTemplate"/>
+                               
                             </Grid>
                         </Border>
                     </Grid>

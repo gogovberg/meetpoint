@@ -17,6 +17,7 @@ namespace MeetpointPrinterNew
     public static class Helpers
     {
         private static string _host = "http://data.meetpoint.si/";
+        private static double _milimeterInPixels = 3.7795275591;
         public static List<string> GetConnectedPrinters()
         {
             List<string> printers = new List<string>();
@@ -343,6 +344,23 @@ namespace MeetpointPrinterNew
 
         }
 
+        public static double MilimeterPixelConverter(double value, bool direction=true)
+        {
+
+            double result = 0;
+
+            //convert milimiters in pixels
+            if(direction)
+            {
+                result = value * _milimeterInPixels;
+            }
+            else
+            {
+                // convert pixels in milimiters
+                result = value / _milimeterInPixels;
+            }
+            return result;
+        }
     }
   
 
