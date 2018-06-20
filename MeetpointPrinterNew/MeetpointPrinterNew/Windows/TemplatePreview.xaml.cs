@@ -22,79 +22,47 @@ namespace MeetpointPrinterNew.Windows
         public TemplatePreview()
         {
             InitializeComponent();
-
+          
         }
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-         private void PrivewTemplateLogic()
-        {
-            //BitmapImage imgBigSrc = new BitmapImage(new Uri("/Images/icon_qr_code_big.png", UriKind.Relative));
-            //BitmapImage imgSmallSrc = new BitmapImage(new Uri("/Images/icon_qr_code.png", UriKind.Relative));
+         public void PrivewTemplateLogic(PrintQueueItem item)
+         {
 
-            //tbOptOne.Text = GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[0];
-            //tbOptTwo.Text = GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[1];
-            //tbOptThree.Text = GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[2];
+            printTemplate.tbOptOne.Text = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[0], item);
+            printTemplate.tbOptTwo.Text = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[1], item);
+            printTemplate.tbOptThree.Text = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[2], item);
+          
 
 
-            //bdrPreview.Width = GlobalSettings.ApplicationSettings.PrinterSetup.LayoutWidth;
-            //bdrPreview.Height = GlobalSettings.ApplicationSettings.PrinterSetup.LayoutHeight;
+            printTemplate.bdrPreview.Width = GlobalSettings.ApplicationSettings.PrinterSetup.LayoutWidth;
+            printTemplate.bdrPreview.Height = GlobalSettings.ApplicationSettings.PrinterSetup.LayoutHeight;
 
-            //switch (GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate)
-            //{
-            //    case "cbLayoutQRT":
-            //        imgQrPreview.Source = imgSmallSrc;
-            //        SetControlCanvasPosition(imgQrPreview, double.NaN, 0, 0, double.NaN);
-            //        SetControlCanvasPosition(spDataOptions, 10, double.NaN, double.NaN, double.NaN);
-            //        break;
-            //    case "cbLayoutQRB":
-            //        imgQrPreview.Source = imgSmallSrc;
-            //        SetControlCanvasPosition(imgQrPreview, double.NaN, double.NaN, 0, 0);
-            //        SetControlCanvasPosition(spDataOptions, 0, double.NaN, double.NaN, double.NaN);
-            //        break;
-            //    case "cbLayoutHR":
-            //        imgQrPreview.Source = imgBigSrc;
-            //        SetControlCanvasPosition(imgQrPreview, double.NaN, double.NaN, 0, double.NaN);
-            //        SetControlCanvasPosition(spDataOptions, 0, double.NaN, double.NaN, double.NaN);
-            //        break;
-            //    case "cbLayoutQLT":
-            //        imgQrPreview.Source = imgSmallSrc;
-            //        SetControlCanvasPosition(imgQrPreview, 0, 0, double.NaN, double.NaN);
-            //        SetControlCanvasPosition(spDataOptions, double.NaN, double.NaN, 0, double.NaN);
-            //        break;
-            //    case "cbLayoutQLB":
-            //        imgQrPreview.Source = imgSmallSrc;
-            //        SetControlCanvasPosition(imgQrPreview, 0, 0, double.NaN, double.NaN);
-            //        SetControlCanvasPosition(spDataOptions, double.NaN, double.NaN, 10, double.NaN);
-            //        break;
-            //    case "cbLayoutHL":
-            //        imgQrPreview.Source = imgBigSrc;
-            //        SetControlCanvasPosition(imgQrPreview, 0, double.NaN, double.NaN, double.NaN);
-            //        SetControlCanvasPosition(spDataOptions, double.NaN, double.NaN, 0, double.NaN);
-            //        break;
-            //    case "cbLayoutClean":
-            //        CanvasControlClearPosition(imgQrPreview);
-            //        SetControlCanvasPosition(spDataOptions, 0, double.NaN, double.NaN, double.NaN);
-            //        break;
-            //}
+            switch (GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate)
+            {
+                case "cbLayoutQRT":
+                    break;
+                case "cbLayoutQRB":
+                    break;
+                case "cbLayoutHR":
+                    printTemplate.LayoutHalfRight();
+                    break;
+                case "cbLayoutQLT":
+                    break;
+                case "cbLayoutQLB":
+                    break;
+                case "cbLayoutHL":
+                    printTemplate.LayoutHalfLeft();
+                    break;
+                case "cbLayoutClean":
+                    printTemplate.LayoutClean();
+                    break;
+            }
         }
 
-        private void CanvasControlClearPosition(UIElement control)
-        {
-
-            SetControlCanvasPosition(control, double.NaN, double.NaN, double.NaN, double.NaN);
-            control.Visibility = Visibility.Hidden;
-        }
-
-        private void SetControlCanvasPosition(UIElement control, double left, double top, double right, double bottom)
-        {
-            Canvas.SetLeft(control, left);
-            Canvas.SetTop(control, top);
-            Canvas.SetRight(control, right);
-            Canvas.SetBottom(control, bottom);
-            control.Visibility = Visibility.Visible;
-        }
+       
     }
 }

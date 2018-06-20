@@ -12,17 +12,8 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <!--<Border x:Name="bdrPreview" Grid.Row="0" Background="#FFFFFFFF" CornerRadius="4">
-            <Canvas x:Name="cnvPrivew">
-                <Image x:Name="imgQrPreview"></Image>
-                <StackPanel  x:Name="spDataOptions">
-                    <TextBlock  x:Name="tbOptOne" FontSize="16"  Margin="5,0,0,0"></TextBlock>
-                    <TextBlock  x:Name="tbOptTwo" FontSize="14"  Margin="5,0,0,0"></TextBlock>
-                    <TextBlock  x:Name="tbOptThree" FontSize="14"  Margin="5"></TextBlock>
-                </StackPanel>
-            </Canvas>
-        </Border>-->
-        <customcontrols:PrintTemplateControl Grid.Row="0"/>
+
+        <customcontrols:PrintTemplateControl x:Name="printTemplate" Grid.Row="0"/>
         <Button x:Name="btnOk" Grid.Row="1" Content="OK" Margin="25" Width="60" HorizontalAlignment="Right" Style="{StaticResource ButtonPrimaryS}" Click="btnOk_Click" ></Button>
 
         

@@ -77,7 +77,6 @@ namespace MeetpointPrinterNew
             {
                 var client = new RestClient(_host + "rest/v1/DataAPI/GetCustomerUsers/json");
                 var request = new RestRequest(Method.POST);
-
                 request.AddHeader("content-type", "multipart/form-data;");
                 request.AddParameter("AuthToken", AuthToken);
                 IRestResponse response = client.Execute(request);
