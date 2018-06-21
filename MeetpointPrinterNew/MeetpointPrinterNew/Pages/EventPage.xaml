@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MeetpointPrinterNew.Pages"
       xmlns:custom="clr-namespace:MeetpointPrinterNew.CustomControls"
+      xmlns:rg="clr-namespace:SourceChord.ResponsiveGrid;assembly=ResponsiveGrid.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="787" d:DesignWidth="1315" Style="{StaticResource HeaderFooterPageStyle}"
       Title="EventPage">
@@ -32,20 +33,10 @@
                 </Grid>
             </Border>
 
-            <ItemsControl x:Name="icEventItems" Grid.Row="1" Margin="40,0,40,0" ItemsSource="{Binding EventItems}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.Template>
-                    <ControlTemplate>
-                        <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}">
-                            <ItemsPresenter />
-                        </ScrollViewer>
-                    </ControlTemplate>
-                </ItemsControl.Template>
-            </ItemsControl>
+            <rg:ResponsiveGrid x:Name="rpsGridEvents" Grid.Row="1">
+                
+            </rg:ResponsiveGrid>
+         
         </Grid>
     </Grid>
     

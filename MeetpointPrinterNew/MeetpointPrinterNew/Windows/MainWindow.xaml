@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:MeetpointPrinterNew"
         mc:Ignorable="d"
         Title="Meetpoint print application" Width="800" Height="Auto"  Background="#EFEFEF">
-   
+
     <Grid>
-            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="visible">
-                <Frame x:Name="MainFrame" Height="300"></Frame>
-            </ScrollViewer> 
-        </Grid>
-    
+        <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="visible">
+            <Frame x:Name="MainFrame" Height="300"></Frame>
+        </ScrollViewer>
+    </Grid>
+
 </Window>

@@ -43,10 +43,10 @@ namespace MeetpointPrinterNew.Pages
                 ec1.EventCreatedLabel = "CREATED ON";
                 ec1.EventID = item.EventID;
                 ec1.Control_Click += new EventHandler(Control_click);
-                icEventItems.Items.Add(ec1);
+                rpsGridEvents.Children.Add(ec1);
             }
 
-            foreach(EventControl ec in icEventItems.Items)
+            foreach(EventControl ec in rpsGridEvents.Children)
             {
                 if(EventID.Equals(ec.EventID.ToString()))
                 {
