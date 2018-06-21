@@ -106,6 +106,7 @@ namespace MeetpointPrinterNew
                 request.AddHeader("content-type", "multipart/form-data;");
                 request.AddParameter("AuthToken", AuthToken);
                 request.AddParameter("UserIDs", Users);
+                request.AddParameter("EventID",GlobalSettings.ApplicationSettings.Event.EventID);
                 IRestResponse response = client.Execute(request);
 
                 var res = SimpleJson.DeserializeObject<PrintQueueResponse>(response.Content);
