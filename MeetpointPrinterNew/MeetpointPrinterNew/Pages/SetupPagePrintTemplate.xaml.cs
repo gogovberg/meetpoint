@@ -36,7 +36,7 @@ namespace MeetpointPrinterNew.Pages
       
             InitializeComponent();
             GlobalSettings.CurrentPageID = 4;
-            lblPrintingDevice.Content = "SET LABEL TEMPLATE";
+            lblPrintingDevice.Text = "SET LABEL TEMPLATE";
             _settings = settings;
             _isOnLoadChecked = false;
             _pageType = 2;

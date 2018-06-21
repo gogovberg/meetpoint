@@ -35,7 +35,7 @@
                             <ColumnDefinition Width="90*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Image x:Name="imgError" Grid.Column="0" Source="/Images/icon_padlock.png" VerticalAlignment="Center"></Image>
-                        <TextBlock x:Name="tblError" FontWeight="SemiBold" FontFamily="Open Sans" Margin="15,0,0,0" Grid.Column="1" Text="Incorrect username or password. Please, try again." FontSize="13" Foreground="#FE0023" TextWrapping="Wrap"></TextBlock>
+                        <TextBlock x:Name="tblError" FontWeight="SemiBold" Margin="15,0,0,0" Grid.Column="1" Text="Incorrect username or password. Please, try again." FontSize="13" Foreground="#FE0023" TextWrapping="Wrap"></TextBlock>
                     </Grid>
                 </Border>
                     

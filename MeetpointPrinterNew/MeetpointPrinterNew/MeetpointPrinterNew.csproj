@@ -163,10 +163,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\Pages.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Resources\TextBased.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

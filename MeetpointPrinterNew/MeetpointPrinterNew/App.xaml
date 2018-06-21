@@ -10,7 +10,6 @@
                 <ResourceDictionary x:Name="Buttons"  Source="pack://application:,,,/MeetpointPrinterNew;component/Resources/Buttons.xaml" />
                 <ResourceDictionary x:Name="Checkboxes"  Source="pack://application:,,,/MeetpointPrinterNew;component/Resources/Checkboxes.xaml" />
                 <ResourceDictionary x:Name="CustomControls"  Source="pack://application:,,,/MeetpointPrinterNew;component/Resources/CustomControls.xaml" />
-                <ResourceDictionary x:Name="Pages"  Source="pack://application:,,,/MeetpointPrinterNew;component/Resources/Pages.xaml" />
                 <ResourceDictionary x:Name="TextBased"  Source="pack://application:,,,/MeetpointPrinterNew;component/Resources/TextBased.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

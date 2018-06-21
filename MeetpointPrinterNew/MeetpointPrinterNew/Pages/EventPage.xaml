@@ -5,22 +5,25 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MeetpointPrinterNew.Pages"
       xmlns:custom="clr-namespace:MeetpointPrinterNew.CustomControls"
-      mc:Ignorable="d" 
-      d:DesignHeight="787" d:DesignWidth="1315" Style="{StaticResource HeaderFooterPageStyle}"
+      xmlns:rg="clr-namespace:SourceChord.ResponsiveGrid;assembly=ResponsiveGrid.Wpf"
       Title="EventPage">
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+
         <custom:HeaderControl Grid.Row="0"></custom:HeaderControl>
-        <Grid HorizontalAlignment="Center" Grid.Row="1">
+
+        <Grid HorizontalAlignment="Stretch" Grid.Row="1" MaxWidth="1200">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="0" Margin="50,30" Background="#FFD3D4D6" CornerRadius="4" Padding="15, 10">
+            <Border Grid.Row="0" Margin="30,30" Background="#FFD3D4D6" CornerRadius="4" Padding="15, 10" HorizontalAlignment="Stretch">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -28,25 +31,16 @@
                     </Grid.ColumnDefinitions>
                     <Image  HorizontalAlignment="Left" Source="/Images/icon_hello.png" Width="35" Grid.Column="0"></Image>
                     <TextBlock x:Name="tblWelcomeUser"  HorizontalAlignment="Left"  Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" TextWrapping="Wrap" FontWeight="SemiBold" FontSize="13" Foreground="#434752" 
-                        Text="Welcome Bostjan, please select the event you want to print labels for."></TextBlock>
+                    Text="Welcome Bostjan, please select the event you want to print labels for."></TextBlock>
                 </Grid>
             </Border>
 
-            <ItemsControl x:Name="icEventItems" Grid.Row="1" Margin="40,0,40,0" ItemsSource="{Binding EventItems}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.Template>
-                    <ControlTemplate>
-                        <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}">
-                            <ItemsPresenter />
-                        </ScrollViewer>
-                    </ControlTemplate>
-                </ItemsControl.Template>
-            </ItemsControl>
+            <Border Grid.Row="1" Margin="20,0">
+                <ScrollViewer x:Name="ScrollViewer">
+                    <rg:ResponsiveGrid x:Name="rpsGridEvents" ></rg:ResponsiveGrid>
+                </ScrollViewer>
+            </Border>
         </Grid>
+
     </Grid>
-    
 </Page>

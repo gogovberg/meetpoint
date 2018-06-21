@@ -126,7 +126,7 @@ namespace MeetpointPrinterNew.Pages
             CheckBox cb = (CheckBox)sender;
             _settings.Printer = cb.Content.ToString();
             _isUnchecked = true;
-            foreach (CheckBox cbItem in icPrinterItems.Items)
+            foreach (CheckBox cbItem in rpsGridPrinterAccount.Children)
             {
                 if (!cb.Content.Equals(cbItem.Content))
                 {
