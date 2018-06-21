@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MeetpointPrinterNew.Pages"
       xmlns:custom="clr-namespace:MeetpointPrinterNew.CustomControls"
+      xmlns:rg="clr-namespace:SourceChord.ResponsiveGrid;assembly=ResponsiveGrid.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="787" d:DesignWidth="1315"  Style="{StaticResource HeaderFooterPageStyle}"
       Title="PrintSetupPage" >
@@ -51,7 +52,7 @@
                             <TextBlock Grid.Row="0" Margin="0,0,0,5" x:Name="lblPrintingDevice" Style="{StaticResource TextBlockSubtitle}"></TextBlock>
                             <TextBlock Grid.Row="1" Margin="0,0,0,25" x:Name="lblHelper" Style="{StaticResource TextBlockHelperText}"></TextBlock>
 
-                            <ItemsControl x:Name="icPrinterItems" Grid.Row="2" Margin="0"  ItemsSource="{Binding PrinterItems}">
+                            <ItemsControl x:Name="icPrinterItems" Grid.Row="2" Margin="0"  ItemsSource="{Binding PrinterItems}" Visibility="Collapsed">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel/>
@@ -65,6 +66,10 @@
                                     </ControlTemplate>
                                 </ItemsControl.Template>
                             </ItemsControl>
+
+                            <rg:ResponsiveGrid x:Name="rpsGridPrinterAccount">
+                                
+                            </rg:ResponsiveGrid>
                         </Grid>
                     </Border>
                 </Border>

@@ -57,7 +57,7 @@
                                     <Label FontSize="16" Content="Label size" Padding="0"></Label>
                                     <TextBlock Style="{StaticResource TextBlockHelperText}" Text="Size in mm." Margin="0,0,0,10"></TextBlock>
                                     <WrapPanel >
-                                        <CheckBox x:Name="cbSizeOne" Content="70 x 50" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeOne_Checked"  Unchecked="cbSize_Unchecked"></CheckBox>
+                                        <CheckBox x:Name="cbSizeOne" Content="75 x 50" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeOne_Checked"  Unchecked="cbSize_Unchecked"></CheckBox>
                                         <CheckBox x:Name="cbSizeTwo" Content="80 x 40" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeTwo_Checked" Unchecked="cbSize_Unchecked"></CheckBox>
 
                                     </WrapPanel>
@@ -119,7 +119,7 @@
                         Text="Please select some options on the left for preview to start forming." ></TextBlock>
                                     </Grid>
                                 </Border>
-                                <custom:PrintTemplateControl Grid.Row="3"  x:Name="printTemplate"/>
+                                <custom:PrintTemplateControl Grid.Row="3" x:Name="printTemplate"/>
                                
                             </Grid>
                         </Border>

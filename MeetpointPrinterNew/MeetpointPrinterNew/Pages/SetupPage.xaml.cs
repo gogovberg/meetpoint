@@ -77,7 +77,9 @@ namespace MeetpointPrinterNew.Pages
                             cbp.IsChecked = pq.Name.Equals(_settings.Printer);
                             cbp.Checked += cbPrinter_Checked;
                             cbp.Unchecked += cbPrinter_Unchecked;
-                            icPrinterItems.Items.Add(cbp);
+                            
+                            rpsGridPrinterAccount.Children.Add(cbp);
+                            //icPrinterItems.Items.Add(cbp);
                         }
                         break;
                     case 1:
@@ -96,11 +98,11 @@ namespace MeetpointPrinterNew.Pages
                             cbp.Style = cbAccountStyle;
                             cbp.Content = item.value;
                             cbp.Tag = item.key.ToString();
-
                             cbp.IsChecked = _accounts.Where(q => q.AccountID == item.key.ToString() && q.AccountName == item.value).Count() == 1;
                             cbp.Checked += cbAccount_Checked;
                             cbp.Unchecked += cbAccount_Unchecked;
-                            icPrinterItems.Items.Add(cbp);
+                            rpsGridPrinterAccount.Children.Add(cbp);
+                            //icPrinterItems.Items.Add(cbp);
                         }
                         break;
                     case 2:

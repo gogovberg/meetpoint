@@ -4,8 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MeetpointPrinterNew.CustomControls"
+             xmlns:rg="clr-namespace:SourceChord.ResponsiveGrid;assembly=ResponsiveGrid.Wpf"
+
              >
-    <Border x:Name="panelTextBlockImage" MouseUp="TextBlockImageBorder_MouseUp" MouseDown="TextBlockImageBorder_MouseDown" Style="{StaticResource TextBlockImagePanel}" Padding="0,10">
+    <Border x:Name="panelTextBlockImage" MouseUp="TextBlockImageBorder_MouseUp" MouseDown="TextBlockImageBorder_MouseDown" Style="{StaticResource TextBlockImagePanel}" Padding="0,10" rg:ResponsiveGrid.SM="6">
         <DockPanel>
             <Image x:Name="imgContentImage" DockPanel.Dock="Left" Source="/Images/icon_user_primary.png" Width="30" Margin="0,0,10,0"></Image>
             <TextBlock x:Name="tblContentText" DockPanel.Dock="Left" FontWeight="SemiBold" FontSize="16" Text="Account name 1" VerticalAlignment="Center" Foreground="#434776" TextWrapping="Wrap"></TextBlock>

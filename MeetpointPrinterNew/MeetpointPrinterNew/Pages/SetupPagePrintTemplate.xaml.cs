@@ -389,8 +389,8 @@ namespace MeetpointPrinterNew.Pages
     
         private void SetPriviewBorderSize(double borderScale)
         {
-            printTemplate.bdrPreview.Width = _borderWidth * borderScale;
-            printTemplate.bdrPreview.Height = _borderHeight * borderScale;
+            //printTemplate.bdrPreview.Width = _borderWidth * borderScale;
+            //printTemplate.bdrPreview.Height = _borderHeight * borderScale;
         }
       
         private void btnNext_Click(object sender, RoutedEventArgs e)

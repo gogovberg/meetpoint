@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:MeetpointPrinterNew.CustomControls"
              mc:Ignorable="d" >
     <Grid>
-        <Border x:Name="bdrPreview"  Background="#FFFFFFFF" CornerRadius="4" Width="300" Height="100" Padding="5,0">
+        <Border x:Name="bdrPreview"  Background="#FFFFFFFF" CornerRadius="4" Padding="5,0">
            
             <Grid x:Name="gdrPreview">
                 <Grid.ColumnDefinitions>
