@@ -338,21 +338,21 @@ namespace MeetpointPrinterNew.Pages
             printTemplate.tbOptThree.Text = _dataOptions[2];
 
 
+            
+            Helpers.SetPrintTemplateSize(printTemplate, PrintTemplateSize.SettingsBig);
+
+            if(GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID.Equals("cbSizeTwo"))
+            {
+                Helpers.SetPrintTemplateSize(printTemplate, PrintTemplateSize.SettingsSmall);
+            }
+
             printTemplate.bdrPreview.Width = GlobalSettings.ApplicationSettings.PrinterSetup.LayoutWidth;
             printTemplate.bdrPreview.Height = GlobalSettings.ApplicationSettings.PrinterSetup.LayoutHeight;
 
             switch (GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate)
             {
-                case "cbLayoutQRT":
-                    break;
-                case "cbLayoutQRB":
-                    break;
                 case "cbLayoutHR":
                     printTemplate.LayoutHalfRight();
-                    break;
-                case "cbLayoutQLT":
-                    break;
-                case "cbLayoutQLB":
                     break;
                 case "cbLayoutHL":
                     printTemplate.LayoutHalfLeft();
@@ -362,6 +362,5 @@ namespace MeetpointPrinterNew.Pages
                     break;
             }
         }
-
     }
 }

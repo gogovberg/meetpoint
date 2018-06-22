@@ -1,0 +1,53 @@
+﻿<Window x:Class="ResponsiveGridSample.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ResponsiveGridSample.Wpf"
+        xmlns:rg="clr-namespace:SourceChord.ResponsiveGrid;assembly=ResponsiveGrid.Wpf"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        
+    </Window.Resources>
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="BorderBrush" Value="Black" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Background" Value="LightGray" />
+                <Setter Property="Height" Value="60" />
+                <Setter Property="TextBlock.FontSize" Value="10" />
+            </Style>
+        </Grid.Resources>
+        <rg:ResponsiveGrid Margin="10" BreakPoints="345, 567, 789">
+
+            <Border rg:ResponsiveGrid.XS="12">
+                <TextBlock Text="[Header]&#xa;XS=12"/>
+            </Border>
+            <Border rg:ResponsiveGrid.XS="6" rg:ResponsiveGrid.SM="3" rg:ResponsiveGrid.MD="2">
+                <TextBlock Text="[A]&#xa;XS=6&#xa;SM=3&#xa;MD=2"/>
+            </Border>
+            <Border rg:ResponsiveGrid.XS="6" rg:ResponsiveGrid.SM="3" rg:ResponsiveGrid.MD="2">
+                <TextBlock Text="[B]&#xa;XS=6&#xa;SM=3&#xa;MD=2"/>
+            </Border>
+            <Border rg:ResponsiveGrid.XS="6" rg:ResponsiveGrid.SM="3" rg:ResponsiveGrid.MD="2" rg:ResponsiveGrid.SM_Push="3" rg:ResponsiveGrid.MD_Push="2">
+                <TextBlock Text="[C]&#xa;XS=6&#xa;SM=3&#xa;MD=2"/>
+            </Border>
+            <Border rg:ResponsiveGrid.XS="6" rg:ResponsiveGrid.SM="3" rg:ResponsiveGrid.MD="2" rg:ResponsiveGrid.SM_Pull="3" rg:ResponsiveGrid.MD_Pull="2">
+                <TextBlock Text="[D]&#xa;XS=6&#xa;SM=3&#xa;MD=2"/>
+            </Border>
+            <Border rg:ResponsiveGrid.XS="12" rg:ResponsiveGrid.SM="6" rg:ResponsiveGrid.MD="2">
+                <TextBlock Text="[E]&#xa;XS=12&#xa;SM=6&#xa;MD=2"/>
+            </Border>
+            <Border rg:ResponsiveGrid.XS="12" rg:ResponsiveGrid.SM="6" rg:ResponsiveGrid.MD="2">
+                <TextBlock Text="[F]&#xa;XS=12&#xa;SM=6&#xa;MD=2"/>
+            </Border>
+
+            <Border rg:ResponsiveGrid.XS="12">
+                <TextBlock Text="[Footer]&#xa;XS=12"/>
+            </Border>
+            
+        </rg:ResponsiveGrid>
+    </Grid>
+</Window>

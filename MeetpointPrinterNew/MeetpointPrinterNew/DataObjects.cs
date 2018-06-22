@@ -255,4 +255,13 @@ namespace MeetpointPrinterNew
         AccountTemplate=2
     }
 
+    public enum PrintTemplateSize
+    {
+        TemplateSetupBig=0,
+        TemplateSetupSmall=1,
+        SettingsBig =2,
+        SettingsSmall=3,
+        PrintLogBig =4,
+        PrintLogSmall=5
+    }
 }

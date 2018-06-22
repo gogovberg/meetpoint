@@ -42,7 +42,7 @@
       <HintPath>..\..\..\..\Refs\hgi.Base.dll</HintPath>
     </Reference>
     <Reference Include="ResponsiveGrid.Wpf">
-      <HintPath>..\..\..\..\Refs\ResponsiveGrid.Wpf.dll</HintPath>
+      <HintPath>..\..\..\Refs\ResponsiveGrid.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp">
       <HintPath>..\..\..\..\Refs\RestSharp.dll</HintPath>

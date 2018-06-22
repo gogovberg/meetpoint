@@ -5,17 +5,18 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MeetpointPrinterNew.Pages"
       xmlns:custom="clr-namespace:MeetpointPrinterNew.CustomControls"
-      mc:Ignorable="d" 
-      d:DesignHeight="787" d:DesignWidth="1315" Style="{StaticResource HeaderFooterPageStyle}"
       Title="PrintSetupPage">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
+        
         <custom:HeaderControl x:Name="headerControl" Grid.Row="0"></custom:HeaderControl>
         <custom:SubHeaderControl x:Name="subHeaderControl" Grid.Row="1"></custom:SubHeaderControl>
+        
         <!-- Content row -->
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
@@ -66,11 +67,7 @@
                                     <Label FontSize="16" Content="Layout" Margin="0,0,0,10"></Label>
                                     <WrapPanel>
                                         <CheckBox x:Name="cbLayoutHL"  Style="{StaticResource CheckBoxTemplateLayoutStyleHL}" Checked="cbLayoutHL_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
-                                        <CheckBox x:Name="cbLayoutQLT" Style="{StaticResource CheckBoxTemplateLayoutStyleQLT}" Visibility="Collapsed" Checked="cbLayoutQLT_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
-                                        <CheckBox x:Name="cbLayoutQLB" Style="{StaticResource CheckBoxTemplateLayoutStyleQLB}" Visibility="Collapsed"  Checked="cbLayoutQLB_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
                                         <CheckBox x:Name="cbLayoutHR"  Style="{StaticResource CheckBoxTemplateLayoutStyleHR}"  Checked="cbLayoutHR_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
-                                        <CheckBox x:Name="cbLayoutQRT" Style="{StaticResource CheckBoxTemplateLayoutStyleQRT}" Visibility="Collapsed"  Checked="cbLayoutQRT_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
-                                        <CheckBox x:Name="cbLayoutQRB" Style="{StaticResource CheckBoxTemplateLayoutStyleQRB}" Visibility="Collapsed"   Checked="cbLayoutQRB_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
                                         <CheckBox x:Name="cbLayoutClean" Style="{StaticResource CheckBoxTemplateLayoutStyleNC}" Checked="cbLayoutClean_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
                                     </WrapPanel>
                                 </StackPanel>
@@ -101,9 +98,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                     <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="30*"></RowDefinition>
-                                    <RowDefinition Height="50*"></RowDefinition>
-                                    <RowDefinition Height="30*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
                                 </Grid.RowDefinitions>
 
                                 <Label Grid.Row="0" Content="PREVIEW" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,25"></Label>
@@ -119,8 +114,8 @@
                         Text="Please select some options on the left for preview to start forming." ></TextBlock>
                                     </Grid>
                                 </Border>
-                                <custom:PrintTemplateControl Grid.Row="3" x:Name="printTemplate"/>
-                               
+                                
+                                <custom:PrintTemplateControl Grid.Row="3" x:Name="printTemplate" Margin="15,25" VerticalAlignment="Top"/>
                             </Grid>
                         </Border>
                     </Grid>
