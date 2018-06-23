@@ -18,7 +18,7 @@
         <customcontrols:SubHeaderControl x:Name="subHeaderControl" Grid.Row="1"></customcontrols:SubHeaderControl>
         
         <!-- Content row -->
-        <Border MaxWidth="1200" Grid.Row="2" x:Name="gdrContent" Margin="25,35">
+        <Border MaxWidth="1200" Grid.Row="2" x:Name="gdrContent" Padding="25,35">
             <ScrollViewer x:Name="ScrollViewer">
                 <rg:ResponsiveGrid>
                     <Border rg:ResponsiveGrid.XS="12" rg:ResponsiveGrid.SM="6" rg:ResponsiveGrid.SM_Push="6" Margin="0,0,0,25" >

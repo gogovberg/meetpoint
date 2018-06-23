@@ -27,7 +27,6 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
-                            
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Image  HorizontalAlignment="Left" Source="/Images/icon_hello.png" Width="35" Grid.Column="0"></Image>

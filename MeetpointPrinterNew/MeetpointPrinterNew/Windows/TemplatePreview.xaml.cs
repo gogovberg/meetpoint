@@ -31,24 +31,27 @@ namespace MeetpointPrinterNew.Windows
         }
 
         public void PrivewTemplateLogic(PrintQueueItem item)
-         {
+        {
 
             printTemplate.tbOptOne.Text = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[0], item);
             printTemplate.tbOptTwo.Text = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[1], item);
             printTemplate.tbOptThree.Text = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[2], item);
 
-            Helpers.SetPrintTemplateSize(printTemplate, PrintTemplateSize.PrintLogBig);
 
+            Helpers.SetPrintTemplateSize(printTemplate, PrintTemplateSize.PrintLogBig);
             if (GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID.Equals("cbSizeTwo"))
             {
                 Helpers.SetPrintTemplateSize(printTemplate, PrintTemplateSize.PrintLogSmall);
             }
+            printTemplate.bdrPreview.Width = GlobalSettings.ApplicationSettings.PrinterSetup.LayoutWidth;
+            printTemplate.bdrPreview.Height = GlobalSettings.ApplicationSettings.PrinterSetup.LayoutHeight;
 
             switch (GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate)
             {
+             
                 case "cbLayoutHR":
                     printTemplate.LayoutHalfRight();
-                    break;
+                    break;  
                 case "cbLayoutHL":
                     printTemplate.LayoutHalfLeft();
                     break;
@@ -57,5 +60,7 @@ namespace MeetpointPrinterNew.Windows
                     break;
             }
         }
+
+       
     }
 }

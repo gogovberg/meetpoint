@@ -13,15 +13,17 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
+        
         <custom:HeaderControl x:Name="headerControl" Grid.Row="0"></custom:HeaderControl>
         <custom:SubHeaderControl x:Name="subHeaderControl" Grid.Row="1"></custom:SubHeaderControl>
+        
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Margin="50,35" Text="PRINT LOG" Style="{StaticResource TextBlockTitle}"></TextBlock>
+            <TextBlock Grid.Row="0" Margin="50,35, 50,25" Text="PRINT LOG" Style="{StaticResource TextBlockTitle}"></TextBlock>
 
             <!-- Rectangle hack to put shadow on login panel (in a way that it won't affect text rendering) -->
             <Rectangle Grid.Row="1" Stretch="Fill" Fill="#fff" RadiusX="4" RadiusY="4" Margin="50,0,50,25">

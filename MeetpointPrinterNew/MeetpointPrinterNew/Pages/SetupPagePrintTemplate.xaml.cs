@@ -21,7 +21,9 @@ namespace MeetpointPrinterNew.Pages
         BitmapImage imgBigSrc = new BitmapImage(new Uri("/Images/big_qr.png", UriKind.Relative));
         BitmapImage imgSmallSrc = new BitmapImage(new Uri("/Images/big_qr.png", UriKind.Relative));
 
-
+        private double _borderWidth = 300;
+        private double _borderHeight = 100;
+        
 
         private App _currentApp = ((App)Application.Current);
 
@@ -34,7 +36,7 @@ namespace MeetpointPrinterNew.Pages
       
             InitializeComponent();
             GlobalSettings.CurrentPageID = 4;
-            lblPrintingDevice.Content = "SET LABEL TEMPLATE";
+            lblPrintingDevice.Text = "SET LABEL TEMPLATE";
             _settings = settings;
             _isOnLoadChecked = false;
             _pageType = 2;
@@ -60,6 +62,7 @@ namespace MeetpointPrinterNew.Pages
                 case "cbSizeTwo":
                     cbSizeTwo.IsChecked = true;
                     break;
+
                 default:
                     cbSizeOne.IsChecked = false;
                     cbSizeTwo.IsChecked = false;
@@ -70,7 +73,6 @@ namespace MeetpointPrinterNew.Pages
 
             switch(GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate)
             {
-                
                 case "cbLayoutHR":
                     cbLayoutHR.IsChecked = true;
                     break;
@@ -81,6 +83,7 @@ namespace MeetpointPrinterNew.Pages
                     cbLayoutClean.IsChecked = true;
                     break;
                 default:
+                    cbLayoutHR.IsChecked = false;
                     cbLayoutHL.IsChecked = false;
                     cbLayoutClean.IsChecked = false;
                     break;
@@ -118,13 +121,15 @@ namespace MeetpointPrinterNew.Pages
 
             CheckBox cb = (CheckBox)sender;
 
+
             Helpers.SetPrintTemplateSize(printTemplate, PrintTemplateSize.TemplateSetupBig);
+
 
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID = cb.Name;
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutWidth = printTemplate.Width;
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutHeight = printTemplate.Height;
 
-      
+        
          
 
             ButtonNextLogic();
@@ -136,12 +141,12 @@ namespace MeetpointPrinterNew.Pages
             cbSizeOne.IsChecked = false;
             CheckBox cb = (CheckBox)sender;
 
+
             Helpers.SetPrintTemplateSize(printTemplate, PrintTemplateSize.TemplateSetupSmall);
 
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID = cb.Name;
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutWidth = printTemplate.Width;
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutHeight = printTemplate.Height;
-        
            
 
             ButtonNextLogic();
@@ -156,6 +161,38 @@ namespace MeetpointPrinterNew.Pages
             {
                 ButtonNextLogic();
             }
+        }
+        private void cbLayoutQRT_Checked(object sender, RoutedEventArgs e)
+        {
+            _isUncheck = false;
+            cbLayoutHL.IsChecked = false;
+            cbLayoutHR.IsChecked = false;
+            cbLayoutClean.IsChecked = false;
+
+            CheckBox cb = (CheckBox)sender;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
+
+
+          
+            ButtonNextLogic();
+            _isUncheck = true;
+        }
+        private void cbLayoutQRB_Checked(object sender, RoutedEventArgs e)
+        {
+            _isUncheck = false;
+            cbLayoutHL.IsChecked = false;
+            cbLayoutHR.IsChecked = false;
+        
+            cbLayoutClean.IsChecked = false;
+
+            CheckBox cb = (CheckBox)sender;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
+
+
+       
+
+            ButtonNextLogic();
+            _isUncheck = true;
         }
         private void cbLayoutHR_Checked(object sender, RoutedEventArgs e)
         {
@@ -173,10 +210,45 @@ namespace MeetpointPrinterNew.Pages
             ButtonNextLogic();
             _isUncheck = true;
         }
+        private void cbLayoutQLT_Checked(object sender, RoutedEventArgs e)
+        {
+            _isUncheck = false;
+            cbLayoutHL.IsChecked = false;
+            cbLayoutHR.IsChecked = false;
+       
+            cbLayoutClean.IsChecked = false;
+
+            CheckBox cb = (CheckBox)sender;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
+
+         
+            ButtonNextLogic();
+
+            _isUncheck = true;
+        }
+        private void cbLayoutQLB_Checked(object sender, RoutedEventArgs e)
+        {
+            _isUncheck = false;
+            cbLayoutHL.IsChecked = false;
+            cbLayoutHR.IsChecked = false;
+           
+            cbLayoutClean.IsChecked = false;
+
+            CheckBox cb = (CheckBox)sender;
+            GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
+
+           
+
+            ButtonNextLogic();
+
+            _isUncheck = true;
+
+        }
         private void cbLayoutHL_Checked(object sender, RoutedEventArgs e)
         {
             _isUncheck = false;
             cbLayoutHR.IsChecked = false;
+        
             cbLayoutClean.IsChecked = false;
 
             CheckBox cb = (CheckBox)sender;
@@ -192,6 +264,8 @@ namespace MeetpointPrinterNew.Pages
             _isUncheck = false;
             cbLayoutHR.IsChecked = false;
             cbLayoutHL.IsChecked = false;
+           
+
             CheckBox cb = (CheckBox)sender;
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
 
@@ -284,7 +358,6 @@ namespace MeetpointPrinterNew.Pages
             printTemplate.tbOptTwo.Text = string.IsNullOrEmpty(_dataOptions[1]) ? "" : ((CheckBox)this.FindName(_dataOptions[1])).Content.ToString();
             printTemplate.tbOptThree.Text = string.IsNullOrEmpty(_dataOptions[2]) ? "" : ((CheckBox)this.FindName(_dataOptions[2])).Content.ToString(); 
         }
-    
     
       
         private void btnNext_Click(object sender, RoutedEventArgs e)

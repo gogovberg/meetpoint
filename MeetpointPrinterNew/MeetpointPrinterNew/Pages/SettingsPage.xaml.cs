@@ -337,10 +337,7 @@ namespace MeetpointPrinterNew.Pages
             printTemplate.tbOptTwo.Text = _dataOptions[1];
             printTemplate.tbOptThree.Text = _dataOptions[2];
 
-
-            
             Helpers.SetPrintTemplateSize(printTemplate, PrintTemplateSize.SettingsBig);
-
             if(GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID.Equals("cbSizeTwo"))
             {
                 Helpers.SetPrintTemplateSize(printTemplate, PrintTemplateSize.SettingsSmall);
@@ -362,5 +359,6 @@ namespace MeetpointPrinterNew.Pages
                     break;
             }
         }
+
     }
 }
