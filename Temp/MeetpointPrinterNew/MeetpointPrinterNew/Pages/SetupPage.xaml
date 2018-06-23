@@ -19,7 +19,7 @@
         <!-- Content row -->
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
-                <RowDefinition MaxHeight="590"/>
+                <RowDefinition MaxHeight="550"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
 
