@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="MeetpointPrinterNew.CustomControls.WizardSetpsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MeetpointPrinterNew.CustomControls"
+             mc:Ignorable="d">
+    <Grid Background="Transparent" Margin="0,0,50,0">
+        <StackPanel Margin="0,0,0,0" >
+            <TextBlock Style="{StaticResource TextBlockTitle}" Text="PRINT SETUP" Margin="0,0,0,25"></TextBlock>
+
+            <DockPanel LastChildFill="False">
+                <Button x:Name="btnSelectPrinter" Style="{StaticResource SetupStep}" DockPanel.Dock="Left" Margin="0,0,25,0" Click="btnSelectPrinter_Click" MouseEnter="btnSelect_MouseEnter" MouseLeave="btnSelect_MouseLeave" >
+                    <Image x:Name="imgSelectPrinter" Source="/Images/icon_printer.png" Width="33"></Image>
+                </Button>
+                <TextBlock Text="" Foreground="#434752" FontSize="16" FontWeight="SemiBold" Margin="0,10,0,0" TextWrapping="Wrap" HorizontalAlignment="Stretch">
+                                                STEP 1
+                                                <LineBreak />
+                                                Select printing device
+                </TextBlock>
+            </DockPanel>
+            <Line x:Name="linePrintAccount" Stroke="#D3D4D6" StrokeThickness="8" X1="35" Y1="0" X2="35" Y2="60"></Line>
+            <DockPanel LastChildFill="False">
+                <Button x:Name="btnSelectAccounts" Style="{StaticResource SetupStep}" HorizontalAlignment="Left" Margin="0,0,25,0" Click="btnSelectAccounts_Click" MouseLeave="btnSelect_MouseLeave" MouseEnter="btnSelect_MouseEnter" >
+                    <Image x:Name="imgSelectAccounts" Source="/Images/icon_users.png" Width="33"></Image>
+                </Button>
+                <TextBlock Text="" Foreground="#434752" FontSize="16" FontWeight="SemiBold" Margin="0,10,0,0" TextWrapping="Wrap">
+                                                STEP 2
+                                                <LineBreak />
+                                                Select accounts
+                </TextBlock>
+            </DockPanel>
+            <Line x:Name="lineAccountTemplate" Stroke="#D3D4D6" StrokeThickness="8"  X1="35" Y1="0" X2="35" Y2="60"></Line>
+            <DockPanel LastChildFill="False">
+                <Button  x:Name="btnSelectTemplate" Style="{StaticResource SetupStep}" HorizontalAlignment="Left" Margin="0,0,25,0" Click="btnSelectTemplate_Click" MouseLeave="btnSelect_MouseLeave" MouseEnter="btnSelect_MouseEnter" >
+                    <Image x:Name="imgSelectTemplate" Source="/Images/icon_qr_code.png" Width="33"></Image>
+                </Button>
+                <TextBlock Text="" Foreground="#434752" FontSize="16" FontWeight="SemiBold" Margin="0,10,0,0" TextWrapping="Wrap">
+                                                STEP 3
+                                                <LineBreak />
+                                                Set label template
+                </TextBlock>
+            </DockPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

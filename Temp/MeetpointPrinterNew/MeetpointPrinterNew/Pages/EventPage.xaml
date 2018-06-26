@@ -1,0 +1,46 @@
+﻿<Page x:Name="Events" x:Class="MeetpointPrinterNew.Pages.EventPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MeetpointPrinterNew.Pages"
+      xmlns:custom="clr-namespace:MeetpointPrinterNew.CustomControls"
+      xmlns:rg="clr-namespace:SourceChord.ResponsiveGrid;assembly=ResponsiveGrid.Wpf"
+      Title="EventPage">
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <custom:HeaderControl Grid.Row="0"></custom:HeaderControl>
+
+        <Grid HorizontalAlignment="Stretch" Grid.Row="1" MaxWidth="1200">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Margin="30,30" Background="#FFD3D4D6" CornerRadius="4" Padding="15, 10" HorizontalAlignment="Stretch">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image  HorizontalAlignment="Left" Source="/Images/icon_hello.png" Width="35" Grid.Column="0"></Image>
+                    <TextBlock x:Name="tblWelcomeUser"  HorizontalAlignment="Left"  Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" TextWrapping="Wrap" FontWeight="SemiBold" FontSize="13" Foreground="#434752" 
+                    Text="Welcome Bostjan, please select the event you want to print labels for."></TextBlock>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="1" Margin="20,0">
+                <ScrollViewer x:Name="ScrollViewer">
+                    <rg:ResponsiveGrid x:Name="rpsGridEvents" ></rg:ResponsiveGrid>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+
+    </Grid>
+</Page>

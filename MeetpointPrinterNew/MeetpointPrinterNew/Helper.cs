@@ -1,5 +1,6 @@
 ﻿using Com.SharpZebra.Printing;
 using hgi.Environment;
+using MeetpointPrinterNew.CustomControls;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,9 @@ namespace MeetpointPrinterNew
     {
         private static string _host = "http://data.meetpoint.si/";
         private static double _milimeterInPixels = 3.7795275591;
+
+
+
         public static List<string> GetConnectedPrinters()
         {
             List<string> printers = new List<string>();
@@ -35,9 +39,6 @@ namespace MeetpointPrinterNew
             PrinterSettings s = new PrinterSettings();
             return s.PrinterName;
         }
-
-       
-
         public static List<EventDataEvent> GetEvents(string AuthToken)
         {
             List<EventDataEvent> edv = new List<EventDataEvent>();
@@ -361,6 +362,43 @@ namespace MeetpointPrinterNew
             }
             return result;
         }
+
+        public static void SetPrintTemplateSize(PrintTemplateControl printTemplate, PrintTemplateSize size)
+        {
+            if(printTemplate!=null)
+            {
+                switch (size)
+                {
+                    case PrintTemplateSize.TemplateSetupBig:
+                        printTemplate.Width = 300;
+                        printTemplate.Height = 150;
+                        break;
+                    case PrintTemplateSize.TemplateSetupSmall:
+                        printTemplate.Width = 281;
+                        printTemplate.Height = 188;
+                        break;
+                    case PrintTemplateSize.SettingsBig:
+                        printTemplate.Width = 200;
+                        printTemplate.Height = 100;
+                        break;
+                    case PrintTemplateSize.SettingsSmall:
+                        printTemplate.Width = 188;
+                        printTemplate.Height = 125;
+                        break;
+                    case PrintTemplateSize.PrintLogBig:
+                        printTemplate.Width = 300;
+                        printTemplate.Height = 150;
+                        break;
+                    case PrintTemplateSize.PrintLogSmall:
+                        printTemplate.Width = 281;
+                        printTemplate.Height = 188;
+                        break;
+                }
+            }
+           
+
+        }
+
     }
   
 

@@ -61,13 +61,9 @@
                                         <StackPanel Grid.Row="2" Orientation="Vertical">
                                             <TextBlock FontSize="16" Text="Layout" Margin="0,0,0,10" FontWeight="SemiBold"></TextBlock>
                                             <WrapPanel>
-                                               <CheckBox x:Name="cbLayoutHL"  Style="{StaticResource CheckBoxTemplateLayoutStyleHL}" Checked="cbLayoutHL_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
-                                               <CheckBox x:Name="cbLayoutQLT" Style="{StaticResource CheckBoxTemplateLayoutStyleQLT}" Visibility="Collapsed" Checked="cbLayoutQLT_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
-                                               <CheckBox x:Name="cbLayoutQLB" Style="{StaticResource CheckBoxTemplateLayoutStyleQLB}" Visibility="Collapsed"  Checked="cbLayoutQLB_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
-                                               <CheckBox x:Name="cbLayoutHR"  Style="{StaticResource CheckBoxTemplateLayoutStyleHR}"  Checked="cbLayoutHR_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
-                                               <CheckBox x:Name="cbLayoutQRT" Style="{StaticResource CheckBoxTemplateLayoutStyleQRT}" Visibility="Collapsed"  Checked="cbLayoutQRT_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
-                                               <CheckBox x:Name="cbLayoutQRB" Style="{StaticResource CheckBoxTemplateLayoutStyleQRB}" Visibility="Collapsed"   Checked="cbLayoutQRB_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
-                                               <CheckBox x:Name="cbLayoutClean" Style="{StaticResource CheckBoxTemplateLayoutStyleNC}" Checked="cbLayoutClean_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
+                                                <CheckBox x:Name="cbLayoutHL"  Style="{StaticResource CheckBoxTemplateLayoutStyleHL}" Checked="cbLayoutHL_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
+                                                <CheckBox x:Name="cbLayoutHR"  Style="{StaticResource CheckBoxTemplateLayoutStyleHR}"  Checked="cbLayoutHR_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
+                                                <CheckBox x:Name="cbLayoutClean" Style="{StaticResource CheckBoxTemplateLayoutStyleNC}" Checked="cbLayoutClean_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
                                             </WrapPanel>
                                         </StackPanel>
                                         <StackPanel Grid.Row="3" Orientation="Vertical" Margin="0,0,0,15">

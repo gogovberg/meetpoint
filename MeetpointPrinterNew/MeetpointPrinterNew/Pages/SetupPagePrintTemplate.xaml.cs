@@ -50,7 +50,7 @@ namespace MeetpointPrinterNew.Pages
 
 
 
-            SetPriviewBorderSize(1);
+            Helpers.SetPrintTemplateSize(printTemplate, PrintTemplateSize.TemplateSetupBig);
 
             _isUncheck = true;
 
@@ -73,20 +73,8 @@ namespace MeetpointPrinterNew.Pages
 
             switch(GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate)
             {
-                case "cbLayoutQRT":
-                    cbLayoutQRT.IsChecked = true;
-                    break;
-                case "cbLayoutQRB":
-                    cbLayoutQRB.IsChecked = true;
-                    break;
                 case "cbLayoutHR":
                     cbLayoutHR.IsChecked = true;
-                    break;
-                case "cbLayoutQLT":
-                    cbLayoutQLT.IsChecked = true;
-                    break;
-                case "cbLayoutQLB":
-                    cbLayoutQLB.IsChecked = true;
                     break;
                 case "cbLayoutHL":
                     cbLayoutHL.IsChecked = true;
@@ -95,11 +83,7 @@ namespace MeetpointPrinterNew.Pages
                     cbLayoutClean.IsChecked = true;
                     break;
                 default:
-                    cbLayoutQRT.IsChecked = false;
-                    cbLayoutQRB.IsChecked = false;
                     cbLayoutHR.IsChecked = false;
-                    cbLayoutQLT.IsChecked = false;
-                    cbLayoutQLB.IsChecked = false;
                     cbLayoutHL.IsChecked = false;
                     cbLayoutClean.IsChecked = false;
                     break;
@@ -137,11 +121,15 @@ namespace MeetpointPrinterNew.Pages
 
             CheckBox cb = (CheckBox)sender;
 
+
+            Helpers.SetPrintTemplateSize(printTemplate, PrintTemplateSize.TemplateSetupBig);
+
+
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID = cb.Name;
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutWidth = printTemplate.Width;
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutHeight = printTemplate.Height;
 
-            SetPriviewBorderSize(1.2);
+        
          
 
             ButtonNextLogic();
@@ -152,10 +140,13 @@ namespace MeetpointPrinterNew.Pages
             _isUncheck = false;
             cbSizeOne.IsChecked = false;
             CheckBox cb = (CheckBox)sender;
+
+
+            Helpers.SetPrintTemplateSize(printTemplate, PrintTemplateSize.TemplateSetupSmall);
+
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID = cb.Name;
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutWidth = printTemplate.Width;
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutHeight = printTemplate.Height;
-            SetPriviewBorderSize(0.8);
            
 
             ButtonNextLogic();
@@ -176,9 +167,6 @@ namespace MeetpointPrinterNew.Pages
             _isUncheck = false;
             cbLayoutHL.IsChecked = false;
             cbLayoutHR.IsChecked = false;
-            cbLayoutQLB.IsChecked = false;
-            cbLayoutQLT.IsChecked = false;
-            cbLayoutQRB.IsChecked = false;
             cbLayoutClean.IsChecked = false;
 
             CheckBox cb = (CheckBox)sender;
@@ -194,9 +182,7 @@ namespace MeetpointPrinterNew.Pages
             _isUncheck = false;
             cbLayoutHL.IsChecked = false;
             cbLayoutHR.IsChecked = false;
-            cbLayoutQLB.IsChecked = false;
-            cbLayoutQLT.IsChecked = false;
-            cbLayoutQRT.IsChecked = false;
+        
             cbLayoutClean.IsChecked = false;
 
             CheckBox cb = (CheckBox)sender;
@@ -212,10 +198,6 @@ namespace MeetpointPrinterNew.Pages
         {
             _isUncheck = false;
             cbLayoutHL.IsChecked = false;
-            cbLayoutQLB.IsChecked = false;
-            cbLayoutQLT.IsChecked = false;
-            cbLayoutQRB.IsChecked = false;
-            cbLayoutQRT.IsChecked = false;
             cbLayoutClean.IsChecked = false;
 
             CheckBox cb = (CheckBox)sender;
@@ -233,9 +215,7 @@ namespace MeetpointPrinterNew.Pages
             _isUncheck = false;
             cbLayoutHL.IsChecked = false;
             cbLayoutHR.IsChecked = false;
-            cbLayoutQLB.IsChecked = false;
-            cbLayoutQRB.IsChecked = false;
-            cbLayoutQRT.IsChecked = false;
+       
             cbLayoutClean.IsChecked = false;
 
             CheckBox cb = (CheckBox)sender;
@@ -251,9 +231,7 @@ namespace MeetpointPrinterNew.Pages
             _isUncheck = false;
             cbLayoutHL.IsChecked = false;
             cbLayoutHR.IsChecked = false;
-            cbLayoutQLT.IsChecked = false;
-            cbLayoutQRB.IsChecked = false;
-            cbLayoutQRT.IsChecked = false;
+           
             cbLayoutClean.IsChecked = false;
 
             CheckBox cb = (CheckBox)sender;
@@ -270,10 +248,7 @@ namespace MeetpointPrinterNew.Pages
         {
             _isUncheck = false;
             cbLayoutHR.IsChecked = false;
-            cbLayoutQLB.IsChecked = false;
-            cbLayoutQLT.IsChecked = false;
-            cbLayoutQRB.IsChecked = false;
-            cbLayoutQRT.IsChecked = false;
+        
             cbLayoutClean.IsChecked = false;
 
             CheckBox cb = (CheckBox)sender;
@@ -289,10 +264,7 @@ namespace MeetpointPrinterNew.Pages
             _isUncheck = false;
             cbLayoutHR.IsChecked = false;
             cbLayoutHL.IsChecked = false;
-            cbLayoutQLB.IsChecked = false;
-            cbLayoutQLT.IsChecked = false;
-            cbLayoutQRB.IsChecked = false;
-            cbLayoutQRT.IsChecked = false;
+           
 
             CheckBox cb = (CheckBox)sender;
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
@@ -387,11 +359,6 @@ namespace MeetpointPrinterNew.Pages
             printTemplate.tbOptThree.Text = string.IsNullOrEmpty(_dataOptions[2]) ? "" : ((CheckBox)this.FindName(_dataOptions[2])).Content.ToString(); 
         }
     
-        private void SetPriviewBorderSize(double borderScale)
-        {
-            //printTemplate.bdrPreview.Width = _borderWidth * borderScale;
-            //printTemplate.bdrPreview.Height = _borderHeight * borderScale;
-        }
       
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {

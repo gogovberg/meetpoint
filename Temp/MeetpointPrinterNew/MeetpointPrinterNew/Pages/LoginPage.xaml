@@ -1,0 +1,55 @@
+﻿<Page x:Name="EventLogin" x:Class="MeetpointPrinterNew.Pages.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MeetpointPrinterNew.Pages"
+
+      mc:Ignorable="d" 
+        d:DesignHeight="787" d:DesignWidth="1315" 
+       Title="Login">
+
+    <Grid>
+        
+        <Image Source="/Images/bg.jpg" Stretch="UniformToFill"></Image>
+        
+        <!-- Rectangle hack to put shadow on login panel (in a way that it won't affect text rendering) -->
+        <Rectangle Width="410" Height="Auto" MaxHeight="634" HorizontalAlignment="Center" Fill="#fff" RadiusX="4" RadiusY="4">
+            <Rectangle.Effect>
+                <DropShadowEffect ShadowDepth="1" Direction="315" Color="#ccc"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        
+        <!-- Login panel -->
+        <Border Background="#fff" HorizontalAlignment="Center" Width="410"  Height="Auto" MaxHeight="634" Padding="60" CornerRadius="4">
+            <StackPanel FocusManager.FocusedElement="{Binding ElementName=tbUsername}">
+                <Image x:Name="imgLogo" VerticalAlignment="Top" HorizontalAlignment="Center" Source="/Images/logo_mp.png" Width="200"/>
+
+                <TextBlock x:Name="lblLogin" Style="{StaticResource TextBlockTitle}" Text="LOGIN" Margin="0,40,0,0"/>
+                <TextBlock x:Name="lblLoginDesc" Text="Use your MeetPoint application credentials to login." Style="{StaticResource TextBlockHelperText}" Margin="0,0,0,25"/>
+
+                <Border x:Name="bdrError"  CornerRadius="4" Margin="0,0,0,10" Background="#FFFFEEEE" Padding="15">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10*"></ColumnDefinition>
+                            <ColumnDefinition Width="90*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image x:Name="imgError" Grid.Column="0" Source="/Images/icon_padlock.png" VerticalAlignment="Center"></Image>
+                        <TextBlock x:Name="tblError" FontWeight="SemiBold" Margin="15,0,0,0" Grid.Column="1" Text="Incorrect username or password. Please, try again." FontSize="13" Foreground="#FE0023" TextWrapping="Wrap"></TextBlock>
+                    </Grid>
+                </Border>
+                    
+                <Label x:Name="lblUsername" Content="Username" Margin="0,5,0,0" />
+                <TextBox x:Name="tbUsername"  Height="40" VerticalContentAlignment="Center"  Margin="0,0,0,20" IsMouseCapturedChanged="tbCridentials_IsMouseCapturedChanged"></TextBox>
+                
+                <Label x:Name="lblPassword" Content="Password" />
+                <PasswordBox x:Name="tbPassword" Height="40" VerticalContentAlignment="Center" Margin="0,0,0,30" IsMouseCapturedChanged="tbCridentials_IsMouseCapturedChanged"></PasswordBox>
+
+                <Button x:Name="btnLogin" IsDefault="True" Content="LOG IN" Click="btnLogin_Click" Style="{StaticResource ButtonPrimary}" FontSize="16" Height="40">
+                </Button>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+    
+</Page>

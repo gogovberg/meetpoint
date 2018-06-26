@@ -1,0 +1,20 @@
+﻿<Application x:Class="MeetpointPrinterNew.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="/Windows/MainWindow.xaml">
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary x:Name="Borders"  Source="pack://application:,,,/MeetpointPrinterNew;component/Resources/Borders.xaml" />
+                <ResourceDictionary x:Name="Buttons"  Source="pack://application:,,,/MeetpointPrinterNew;component/Resources/Buttons.xaml" />
+                <ResourceDictionary x:Name="Checkboxes"  Source="pack://application:,,,/MeetpointPrinterNew;component/Resources/Checkboxes.xaml" />
+                <ResourceDictionary x:Name="CustomControls"  Source="pack://application:,,,/MeetpointPrinterNew;component/Resources/CustomControls.xaml" />
+                <ResourceDictionary x:Name="TextBased"  Source="pack://application:,,,/MeetpointPrinterNew;component/Resources/TextBased.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+
+    </Application.Resources>
+</Application>
+

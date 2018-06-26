@@ -1,0 +1,22 @@
+﻿<Window x:Class="MeetpointPrinterNew.Windows.MessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MeetpointPrinterNew.Windows"
+        mc:Ignorable="d"
+        Title="Printer error" Height="220" Width="500" ResizeMode="NoResize" Background="#EFEFEF"  WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0"  Background="#28434752" CornerRadius="4" Margin="25" Padding="10">
+            <DockPanel>
+                <Image x:Name="imgContentImage" Grid.Column="0" Margin="0,0,10,0" Source="/Images/icon_danger.png" Width="30"></Image>
+                <TextBlock x:Name="tblContentText" Foreground="#FF434752" FontWeight="SemiBold" FontSize="13" Grid.Column="1" VerticalAlignment="Center" Text="Printer is out of paper."></TextBlock>
+            </DockPanel>
+        </Border>
+        <Button x:Name="btnOk" Grid.Row="1" Content="OK" Margin="25" Width="60" HorizontalAlignment="Right" Style="{StaticResource ButtonPrimaryS}" Click="btnOk_Click" ></Button>
+    </Grid>
+</Window>

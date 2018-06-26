@@ -1,0 +1,192 @@
+﻿<Page x:Class="MeetpointPrinterNew.Pages.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MeetpointPrinterNew.Pages"
+      xmlns:customcontrols="clr-namespace:MeetpointPrinterNew.CustomControls"
+      xmlns:rg="clr-namespace:SourceChord.ResponsiveGrid;assembly=ResponsiveGrid.Wpf">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <customcontrols:HeaderControl x:Name="headerControl" Grid.Row="0"></customcontrols:HeaderControl>
+        <customcontrols:SubHeaderControl x:Name="subHeaderControl" Grid.Row="1"></customcontrols:SubHeaderControl>
+        
+        <!-- Content row -->
+        <Border MaxWidth="1200" Grid.Row="2" x:Name="gdrContent" Padding="25,35">
+            <ScrollViewer x:Name="ScrollViewer">
+                <rg:ResponsiveGrid>
+                    <Border rg:ResponsiveGrid.XS="12" rg:ResponsiveGrid.SM="6" rg:ResponsiveGrid.SM_Push="6" Margin="0,0,0,25" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock x:Name="tblPrintActivation" Text="PRINT ACTIVATION" Grid.Row="0" Style="{StaticResource TextBlockTitle}" Margin="25,0,25,20"></TextBlock>
+
+                            <Grid Grid.Row="1" Margin="20,0,20,25">
+                                <Rectangle  Fill="#fff" Stretch="Fill" RadiusX="4" RadiusY="4">
+                                    <Rectangle.Effect>
+                                        <DropShadowEffect ShadowDepth="1" Direction="315" Color="#ccc"/>
+                                    </Rectangle.Effect>
+                                </Rectangle>
+                                <Border Style="{StaticResource Panel}" >
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock x:Name="tblLivePrint" Text="LIVE PRINT" Grid.Row="0" Style="{StaticResource TextBlockSubtitle}" Margin="0,0,0,10"></TextBlock>
+                                        <Border Grid.Row="1" Background="#f6f6f6" Padding="10,15" BorderBrush="#ddd" BorderThickness="0" CornerRadius="4">
+                                            <DockPanel LastChildFill="False">
+                                                <CheckBox x:Name="cbInactive" HorizontalAlignment="Center" VerticalAlignment="Center" Content="INACTIVE" Checked="cbInactive_Checked" Style="{StaticResource ToggleButtonOff}"></CheckBox>
+                                                <CheckBox x:Name="cbActive" VerticalAlignment="Center" Content="ACTIVE" Checked="cbActive_Checked" Style="{StaticResource ToggleButton}"></CheckBox>
+                                            </DockPanel>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+
+                            <Grid Grid.Row="2" Margin="25,0,25,25" >
+                                <DockPanel LastChildFill="False">
+                                    <Button x:Name="btnPrintEmpty" Content="PRINT EMPTY LABEL" Style="{StaticResource ButtonPrimary}" DockPanel.Dock="Left" Click="btnPrintEmpty_Click" VerticalAlignment="Top" Margin="0,0,10,0"></Button>
+                                    <Button x:Name="btnPrintTest" Content="PRINT TEST TEMPLATE" Style="{StaticResource ButtonPrimary}" DockPanel.Dock="Left" Click="btnPrintTest_Click" VerticalAlignment="Top" Margin="0,0,10,0"></Button>
+                                    <Button x:Name="btnViewLog" Content="View print log" Style="{StaticResource ButtonDefault}" DockPanel.Dock="Right" Click="btnViewLog_Click" VerticalAlignment="Top"></Button>
+                                </DockPanel>
+                            </Grid>
+
+                        </Grid>
+                    </Border>
+
+                    <Border rg:ResponsiveGrid.XS="12" rg:ResponsiveGrid.SM="6" rg:ResponsiveGrid.SM_Pull="6">
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock x:Name="tblPrintSettings" Text="PRINT SETTINGS" Style="{StaticResource TextBlockTitle}"  Margin="25,0,25,20" Grid.Row="0"></TextBlock>
+
+                            <Grid Grid.Row="1"  Margin="25,0,25,25">
+                                <Rectangle  Fill="#fff" Stretch="Fill" RadiusX="4" RadiusY="4">
+                                    <Rectangle.Effect>
+                                        <DropShadowEffect ShadowDepth="1" Direction="315" Color="#ccc"/>
+                                    </Rectangle.Effect>
+                                </Rectangle>
+                                <Border  Style="{StaticResource Panel}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="80*"></ColumnDefinition>
+                                            <ColumnDefinition Width="20*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock x:Name="tblPrintingDevice" Text="SELECTED PRINTING DEVICE" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockSubtitle}" TextWrapping="Wrap"></TextBlock>
+                                        <Button x:Name="btnEditPrinter" Grid.Row="0" Grid.Column="1" Style="{StaticResource ButtonPrimaryCircle}" Click="btneditPrinter_Click" HorizontalAlignment="Right">
+                                            <Image Source="/Images/icon_pencil_white.png" Width="12" ></Image>
+                                        </Button>
+
+                                        <Border Grid.Row="1" Margin="0,10,0,0" Padding="15,10" Background="#f6f6f6" Grid.ColumnSpan="2" CornerRadius="4" VerticalAlignment="Center">
+                                            <DockPanel LastChildFill="False">
+                                                <customcontrols:TextBlockImageControl  x:Name="tbicPrinter" DockPanel.Dock="Left"/>
+                                                <Border x:Name="bdrOnline" Background="#d6fbef" DockPanel.Dock="Left" CornerRadius="4" Padding="7,3" HorizontalAlignment="Center" Margin="15,3,0,0" VerticalAlignment="Center">
+                                                    <TextBlock Foreground="#16cf94" FontWeight="DemiBold">Online</TextBlock>
+                                                </Border>
+                                                <Border x:Name="bdrOffline" Background="#ddd" DockPanel.Dock="Left" CornerRadius="4" Padding="7,3" HorizontalAlignment="Center" Margin="15,3,0,0" VerticalAlignment="Center">
+                                                    <TextBlock Foreground="#aaa" FontWeight="DemiBold">Offline</TextBlock>
+                                                </Border>
+                                            </DockPanel>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+
+                            <Grid Grid.Row="2" Margin="25,0,25,25">
+                                <Rectangle  Fill="#fff" Stretch="Fill" RadiusX="4" RadiusY="4">
+                                    <Rectangle.Effect>
+                                        <DropShadowEffect ShadowDepth="1" Direction="315" Color="#ccc"/>
+                                    </Rectangle.Effect>
+                                </Rectangle>
+                                <Border  Style="{StaticResource Panel}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="80*"></ColumnDefinition>
+                                            <ColumnDefinition Width="20*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock x:Name="tblAccountsTitle" Text="SELECTED ACCOUNTS" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockSubtitle}" TextWrapping="Wrap"></TextBlock>
+                                        <Button x:Name="btnEditAccount" Grid.Row="0" Grid.Column="1" Style="{StaticResource ButtonPrimaryCircle}" Click="btnEditAccount_Click" HorizontalAlignment="Right" >
+                                            <Image Source="/Images/icon_pencil_white.png" Width="12"></Image>
+                                        </Button>
+
+                                        <Border Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10,0,0" MaxHeight="120" CornerRadius="4" Padding="15,10,0,10" Background="#f6f6f6">
+                                            <ItemsControl x:Name="icAccountItem" >
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel/>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.Template>
+                                                    <ControlTemplate>
+                                                        <ScrollViewer x:Name="ScrollViewer" >
+                                                            <ItemsPresenter/>
+                                                        </ScrollViewer>
+                                                    </ControlTemplate>
+                                                </ItemsControl.Template>
+                                            </ItemsControl>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+
+                            <Grid Grid.Row="3" Margin="25,0,25,25">
+                                <Rectangle  Fill="#fff" Stretch="Fill" RadiusX="4" RadiusY="4">
+                                    <Rectangle.Effect>
+                                        <DropShadowEffect ShadowDepth="1" Direction="315" Color="#ccc"/>
+                                    </Rectangle.Effect>
+                                </Rectangle>
+                                <Border  Style="{StaticResource Panel}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="80*"></ColumnDefinition>
+                                            <ColumnDefinition Width="20*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock x:Name="tblTemplateTitle" Text="SET TEMPLATE" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockSubtitle}" TextWrapping="Wrap"></TextBlock>
+                                        <Button x:Name="btnEditTemplate" Grid.Row="0" Grid.Column="1" Style="{StaticResource ButtonPrimaryCircle}" Click="btnEditTemplate_Click" HorizontalAlignment="Right" >
+                                            <Image Source="/Images/icon_pencil_white.png" Width="12"></Image>
+                                        </Button>
+                                        <Border Padding="15,15" Background="#f6f6f6" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10,0,0" CornerRadius="4">
+                                            <customcontrols:PrintTemplateControl x:Name="printTemplate" HorizontalAlignment="Left"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </rg:ResponsiveGrid>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Page>

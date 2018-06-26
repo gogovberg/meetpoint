@@ -1,0 +1,69 @@
+﻿<Page x:Class="MeetpointPrinterNew.Pages.SetupPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MeetpointPrinterNew.Pages"
+      xmlns:custom="clr-namespace:MeetpointPrinterNew.CustomControls"
+      xmlns:rg="clr-namespace:SourceChord.ResponsiveGrid;assembly=ResponsiveGrid.Wpf"
+      Title="PrintSetupPage" >
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <custom:HeaderControl x:Name="headerControl" Grid.Row="0"></custom:HeaderControl>
+        <custom:SubHeaderControl x:Name="subHeaderControl" Grid.Row="1"></custom:SubHeaderControl>
+        <!-- Content row -->
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition MaxHeight="550"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" x:Name="gdrContent" Margin="50, 35, 50, 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <custom:WizardSetpsControl x:Name="wizardSteps" />
+
+                <!-- Rectangle hack to put shadow on panel (in a way that it won't affect text rendering) -->
+                <Rectangle Stretch="Fill" Fill="#fff" RadiusX="4" RadiusY="4" Grid.Column="1">
+                    <Rectangle.Effect>
+                        <DropShadowEffect ShadowDepth="1" Direction="315" Color="#ccc"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+
+                <Border Grid.Column="1" Background="#fff" CornerRadius="4">
+                    <Border x:Name="PrinterAccountSetup" Padding="25,30">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Margin="10,0,10,5" x:Name="lblPrintingDevice" Style="{StaticResource TextBlockSubtitle}"></TextBlock>
+                            <TextBlock Grid.Row="1" Margin="10,0,10,25" x:Name="lblHelper" Style="{StaticResource TextBlockHelperText}" TextWrapping="Wrap"></TextBlock>
+
+                            <ScrollViewer x:Name="ScrollViewer" Grid.Row="2">
+                                <rg:ResponsiveGrid x:Name="rpsGridPrinterAccount"></rg:ResponsiveGrid>
+                            </ScrollViewer>
+                        </Grid>
+                    </Border>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="0,0,50,0">
+                <DockPanel LastChildFill="False">
+                    <Button x:Name="btnNext" Width="100" Margin="10,0,0,0" Content="NEXT" DockPanel.Dock="Right" Style="{StaticResource ButtonPrimary}" Click="btnNext_Click"></Button>
+                    <Button x:Name="btnPrevious" Width="100" Content="PREVIOUS" Style="{StaticResource ButtonDefault}" DockPanel.Dock="Right" Click="btnPrevious_Click" ></Button>
+                </DockPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
