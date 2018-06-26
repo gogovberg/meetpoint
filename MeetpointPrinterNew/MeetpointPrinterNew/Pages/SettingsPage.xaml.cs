@@ -343,9 +343,7 @@ namespace MeetpointPrinterNew.Pages
                 Helpers.SetPrintTemplateSize(printTemplate, PrintTemplateSize.SettingsSmall);
             }
 
-            printTemplate.bdrPreview.Width = GlobalSettings.ApplicationSettings.PrinterSetup.LayoutWidth;
-            printTemplate.bdrPreview.Height = GlobalSettings.ApplicationSettings.PrinterSetup.LayoutHeight;
-
+        
             switch (GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate)
             {
                 case "cbLayoutHR":

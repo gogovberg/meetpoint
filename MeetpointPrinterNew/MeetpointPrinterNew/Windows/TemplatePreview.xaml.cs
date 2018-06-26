@@ -43,8 +43,7 @@ namespace MeetpointPrinterNew.Windows
             {
                 Helpers.SetPrintTemplateSize(printTemplate, PrintTemplateSize.PrintLogSmall);
             }
-            printTemplate.bdrPreview.Width = GlobalSettings.ApplicationSettings.PrinterSetup.LayoutWidth;
-            printTemplate.bdrPreview.Height = GlobalSettings.ApplicationSettings.PrinterSetup.LayoutHeight;
+         
 
             switch (GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate)
             {

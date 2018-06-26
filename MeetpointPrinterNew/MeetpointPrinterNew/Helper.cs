@@ -370,36 +370,31 @@ namespace MeetpointPrinterNew
                 switch (size)
                 {
                     case PrintTemplateSize.TemplateSetupBig:
-                        printTemplate.Width = 300;
-                        printTemplate.Height = 150;
-                        break;
-                    case PrintTemplateSize.TemplateSetupSmall:
                         printTemplate.Width = 281;
                         printTemplate.Height = 188;
                         break;
-                    case PrintTemplateSize.SettingsBig:
-                        printTemplate.Width = 200;
-                        printTemplate.Height = 100;
+                    case PrintTemplateSize.TemplateSetupSmall:
+                        printTemplate.Width = 300;
+                        printTemplate.Height = 150;
                         break;
-                    case PrintTemplateSize.SettingsSmall:
+                    case PrintTemplateSize.SettingsBig:
                         printTemplate.Width = 188;
                         printTemplate.Height = 125;
                         break;
-                    case PrintTemplateSize.PrintLogBig:
-                        printTemplate.Width = 300;
-                        printTemplate.Height = 150;
+                    case PrintTemplateSize.SettingsSmall:
+                        printTemplate.Width = 200;
+                        printTemplate.Height = 100;
                         break;
-                    case PrintTemplateSize.PrintLogSmall:
+                    case PrintTemplateSize.PrintLogBig:
                         printTemplate.Width = 281;
                         printTemplate.Height = 188;
                         break;
+                    case PrintTemplateSize.PrintLogSmall:
+                        printTemplate.Width = 300;
+                        printTemplate.Height = 150;
+                        break;
                 }
             }
-           
-
         }
-
     }
-  
-
 }
