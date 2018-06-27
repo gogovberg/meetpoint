@@ -21,7 +21,7 @@
                     </Label>
                 </Grid>
                 
-                <Button x:Name="btnBack"  Width="100"  DockPanel.Dock="Right" Margin="0,0,50,0" Content="BACK" Style="{StaticResource ButtonDefault}" Click="btnBack_Click"></Button>
+                <Button x:Name="btnBack" DockPanel.Dock="Right" Margin="0,0,50,0" Content="BACK" Height="30" FontSize="12" Style="{StaticResource ButtonDefault}" Click="btnBack_Click"></Button>
             </DockPanel>
         </Border>
     </Grid>

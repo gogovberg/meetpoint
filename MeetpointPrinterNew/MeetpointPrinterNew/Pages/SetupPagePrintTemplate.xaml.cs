@@ -21,8 +21,6 @@ namespace MeetpointPrinterNew.Pages
         BitmapImage imgBigSrc = new BitmapImage(new Uri("/Images/big_qr.png", UriKind.Relative));
         BitmapImage imgSmallSrc = new BitmapImage(new Uri("/Images/big_qr.png", UriKind.Relative));
 
-        private double _borderWidth = 300;
-        private double _borderHeight = 100;
         
 
         private App _currentApp = ((App)Application.Current);

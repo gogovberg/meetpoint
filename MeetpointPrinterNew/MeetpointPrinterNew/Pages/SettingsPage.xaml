@@ -18,12 +18,13 @@
         <customcontrols:SubHeaderControl x:Name="subHeaderControl" Grid.Row="1"></customcontrols:SubHeaderControl>
         
         <!-- Content row -->
-        <Border MaxWidth="1200" Grid.Row="2" x:Name="gdrContent" Padding="25,35">
+        <Border MaxWidth="1300" Grid.Row="2" x:Name="gdrContent" Padding="25,35">
             <ScrollViewer x:Name="ScrollViewer">
                 <rg:ResponsiveGrid>
                     <Border rg:ResponsiveGrid.XS="12" rg:ResponsiveGrid.SM="6" rg:ResponsiveGrid.SM_Push="6" Margin="0,0,0,25" >
                         <Grid>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
                                 <RowDefinition Height="Auto"></RowDefinition>
                                 <RowDefinition Height="Auto"></RowDefinition>
                                 <RowDefinition Height="Auto"></RowDefinition>
@@ -62,7 +63,34 @@
                                     <Button x:Name="btnViewLog" Content="View print log" Style="{StaticResource ButtonDefault}" DockPanel.Dock="Right" Click="btnViewLog_Click" VerticalAlignment="Top"></Button>
                                 </DockPanel>
                             </Grid>
-
+                         
+                            <Grid Grid.Row="3" Margin="25,0,25,25">
+                                <DockPanel LastChildFill="False">
+                                    <Label Content="Left: "></Label>
+                                    <TextBox x:Name="tbLeft" Text="10" Margin="10"></TextBox>
+                                    <Label Content="Top: "></Label>
+                                    <TextBox x:Name="tbTop" Text="10" Margin="10"></TextBox>
+                                    <Label Content="Justification: "></Label>
+                                    <ComboBox x:Name="cmbJustification" Text="10" Margin="10">
+                                        <ComboBoxItem IsSelected="True" Content="0" ></ComboBoxItem>
+                                        <ComboBoxItem Content="1" ></ComboBoxItem>
+                                        <ComboBoxItem Content="2" ></ComboBoxItem>
+                                    </ComboBox>
+                                    <Label Content="Magnitude: "></Label>
+                                    <ComboBox  x:Name="cmbMagnitude" Margin="10" >
+                                        <ComboBoxItem Content="1" ></ComboBoxItem>
+                                        <ComboBoxItem Content="2" ></ComboBoxItem>
+                                        <ComboBoxItem Content="3" ></ComboBoxItem>
+                                        <ComboBoxItem Content="4" ></ComboBoxItem>
+                                        <ComboBoxItem Content="5" ></ComboBoxItem>
+                                        <ComboBoxItem Content="6" ></ComboBoxItem>
+                                        <ComboBoxItem Content="7" ></ComboBoxItem>
+                                        <ComboBoxItem Content="8" ></ComboBoxItem>
+                                        <ComboBoxItem Content="9" ></ComboBoxItem>
+                                        <ComboBoxItem IsSelected="True" Content="10" ></ComboBoxItem>
+                                    </ComboBox>
+                                </DockPanel>
+                            </Grid>
                         </Grid>
                     </Border>
 

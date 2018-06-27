@@ -12,6 +12,10 @@ using MeetpointPrinterNew.Windows;
 using MeetpointPrinterNew.CustomControls;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using Zebra.Sdk.Comm;
+using Zebra.Sdk.Graphics;
+using Zebra.Sdk.Printer;
+using Zebra.Sdk.Printer.Discovery;
 
 namespace MeetpointPrinterNew.Pages
 {
@@ -35,6 +39,7 @@ namespace MeetpointPrinterNew.Pages
 
         private System.Printing.PrintQueue _printQueue;
         private List<string> _dataOptions;
+
         
 
         public SettingsPage(UserSettings settings)
@@ -160,24 +165,42 @@ namespace MeetpointPrinterNew.Pages
 
         private void btnPrintEmpty_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                int left = int.Parse(tbLeft.Text);
+                int top = int.Parse(tbTop.Text);
 
-            PrinterSettings ps = new PrinterSettings();
-            ps.PrinterName = _settings.Printer;
-            ps.Width = (int)(203 * 3);
-            ps.Length = (int)(203 * 1);
-            ps.Darkness = 30;
+                ComboBoxItem jus = (ComboBoxItem)cmbJustification.SelectedItem;
+                ComboBoxItem mag = (ComboBoxItem)cmbMagnitude.SelectedItem;
 
-            List<byte> page = new List<byte>();
-            page.AddRange(ZPLCommands.ClearPrinter(ps));
+                int justification = int.Parse(jus.Content.ToString());
+                int magnitude = int.Parse(mag.Content.ToString());
 
+              
+                foreach (DiscoveredUsbPrinter usbPrinter in UsbDiscoverer.GetZebraUsbPrinters(new ZebraPrinterFilter()))
+                {
 
-            page.AddRange(ZPLCommands.TextWrite(15, 75, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_LARGEST, 45, 30, "Mahatma Gandhi"));
-            page.AddRange(ZPLCommands.TextWrite(15, 150, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_NORMAL, 30, 20, "Indian activist"));
-            page.AddRange(ZPLCommands.TextWrite(15, 225, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_NORMAL, 20, 15, "Assassinated: January 30, 1948, New Delhi, India"));
+                    Connection connection = usbPrinter.GetConnection();
+                    connection.Open();
+                    ZebraPrinter printer = ZebraPrinterFactory.GetInstance(connection);
+                    string qrCommand = QRWrite(50,20,0, magnitude, QRErrorCorrection.ULTRA_HIGH, "e47624f6-6ed8-4e8b-991d-f982526ee7f9");
+                    string commandOne = TextWrite(260, 25, ElementDrawRotation.NO_ROTATION,ZebraFont.STANDARD_LARGEST,40,20, 370, 2,"Mahatma Ghandhi dasdsadasd");
+                    string commandTwo = TextWrite(260, 105, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_SMALL, 30, 15, 370, 2,"Indian activist asdasdas ");
+                    string commandThree = TextWrite(260, 185, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_SMALL, 30, 15, 370, 4,"Born and raised and killed and fucked and raped and jailed");
+                    printer.SendCommand(WholeCommand(qrCommand,commandOne,commandTwo,commandThree));
+                    connection.Close();
 
-            page.AddRange(ZPLCommands.PrintBuffer(1));
+                }
 
-            new SpoolPrinter(ps).Print(page.ToArray());
+            }
+            catch(Exception ex)
+            {
+                Windows.MessageBox mb = new Windows.MessageBox(ex.Message.ToString());
+                mb.Owner = _currentApp.MainWindow;
+                mb.ShowDialog();
+            }
+
+          
         }
 
         private void btnPrintTest_Click(object sender, RoutedEventArgs e)
@@ -280,7 +303,7 @@ namespace MeetpointPrinterNew.Pages
 
                     List<byte> page = new List<byte>();
 
-                    page.AddRange(ZPLCommands.ClearPrinter(ps));
+                    //page.AddRange(ZPLCommands.ClearPrinter(ps));
                     page.AddRange(ZPLCommands.TextWrite(15, 75, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_LARGEST, 45, 30, Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[0], item)));
                     page.AddRange(ZPLCommands.TextWrite(15, 150, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_NORMAL, 30, 20, Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[1], item)));
                     page.AddRange(ZPLCommands.TextWrite(15, 225, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_NORMAL, 20, 15, Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[2], item)));
@@ -310,7 +333,6 @@ namespace MeetpointPrinterNew.Pages
             }
 
         }
-
         private int GetPrintQueueExistingItem(int PrintUserID)
         {
             for(int i=0; i<GlobalSettings.PrintQueueItemLog.Count; i++)
@@ -358,5 +380,46 @@ namespace MeetpointPrinterNew.Pages
             }
         }
 
+        private void PrintLabelHalfLeft()
+        {
+
+        }
+        private void PrintLabelHalfRight()
+        {
+            string command = QRWrite(20, 20, 0, 10, QRErrorCorrection.ULTRA_HIGH, "ef65da48-ca8b-455f-a92e-10d86b56cea6");
+        }
+        private void PrintLabelClear(PrintQueueItem item)
+        {
+            PrinterSettings ps = new PrinterSettings();
+            ps.PrinterName = _settings.Printer;
+            ps.Width = (int)(203 * 3);
+            ps.Length = (int)(203 * 1);
+            ps.Darkness = 30;
+
+            List<byte> page = new List<byte>();
+
+            page.AddRange(ZPLCommands.ClearPrinter(ps));
+            page.AddRange(ZPLCommands.TextWrite(15, 75, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_LARGEST, 45, 30, Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[0], item)));
+            page.AddRange(ZPLCommands.TextWrite(15, 150, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_NORMAL, 30, 20, Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[1], item)));
+            page.AddRange(ZPLCommands.TextWrite(15, 225, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_NORMAL, 20, 15, Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[2], item)));
+            page.AddRange(ZPLCommands.PrintBuffer(1));
+
+            new SpoolPrinter(ps).Print(page.ToArray());
+            item.Status = 1;
+        }
+
+        private string QRWrite(int left, int top, int justification, int magnitude, QRErrorCorrection errorCorrection, string barcode)
+        {
+            return string.Format("^FO{0},{1},{2},^BQ,2,{3}^FD72M,A{5}^FS", (object)left, (object)top, (object)justification, (object)magnitude, (object)(char)errorCorrection, (object)barcode);
+        }
+        public string TextWrite(int left, int top, ElementDrawRotation rotation, ZebraFont font, int height, int width, int blokSize, int blockLines, string text)
+        {
+            return string.Format("^FO{0},{1}^A{2}{3},{4},{5}^FB{6},{7},,^FD{8}^FS", left, top, (char)font, (char)rotation, height, width, blokSize, blockLines,text);
+        }
+
+        private string WholeCommand(string commandQr, string commandTextOne, string commandTextTwo, string commandTextThree)
+        {
+            return string.Format("^XA{0}{1}{2}{3}^XZ",commandQr, commandTextOne, commandTextTwo, commandTextThree);
+        }
     }
 }

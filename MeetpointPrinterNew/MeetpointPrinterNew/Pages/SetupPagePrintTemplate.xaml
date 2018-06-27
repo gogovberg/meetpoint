@@ -93,7 +93,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                     <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
                                 </Grid.RowDefinitions>
 
                                 <TextBlock Grid.Row="0" Text="PREVIEW" FontSize="16" VerticalAlignment="Center" Foreground="#aaa" HorizontalAlignment="Left" Margin="0,0,0,25" Style="{StaticResource TextBlockSubtitle}"></TextBlock>
@@ -110,7 +110,7 @@
                                     </Grid>
                                 </Border>
 
-                                <custom:PrintTemplateControl Grid.Row="3" x:Name="printTemplate" Margin="15,25" VerticalAlignment="Top"/>
+                                <custom:PrintTemplateControl Grid.Row="2" x:Name="printTemplate" Margin="15,25"/>
                             </Grid>
                         </Border>
                             </rg:ResponsiveGrid>
