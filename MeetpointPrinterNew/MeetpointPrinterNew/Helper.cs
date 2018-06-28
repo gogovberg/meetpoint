@@ -396,5 +396,75 @@ namespace MeetpointPrinterNew
                 }
             }
         }
+
+        public static TextFontSize SetTextFontSize(int textLength, TextField textField)
+        {
+            TextFontSize fs = TextFontSize.Normal;
+            switch(textField)
+            {
+                case TextField.FieldOne:
+                    if(textLength<=19)
+                    {
+                        fs = TextFontSize.ExtraBig;
+                    }
+                    else if(textLength>19 && textLength <= 21)
+                    {
+                        fs = TextFontSize.VeryBig;
+                    }
+                    else if(textLength >21 && textLength<=23)
+                    {
+                        fs = TextFontSize.Big;
+                    }
+                    else if (textLength > 23)
+                    {
+                        fs = TextFontSize.Normal;
+                    }
+                    break;
+                case TextField.FieldTwo:
+                    if (textLength <= 21)
+                    {
+                        fs = TextFontSize.VeryBig;
+                    }
+                    else if (textLength > 21 && textLength <= 23)
+                    {
+                        fs = TextFontSize.Big;
+                    }
+                    else if (textLength > 23 && textLength <= 26)
+                    {
+                        fs = TextFontSize.Normal;
+                    }
+                    else if (textLength > 26)
+                    {
+                        fs = TextFontSize.Small;
+                    }
+                    break;
+                case TextField.FieldThree:
+                    if (textLength <= 23)
+                    {
+                        fs = TextFontSize.Big;
+                    }
+                    else if (textLength > 23 && textLength <= 26)
+                    {
+                        fs = TextFontSize.Normal;
+                    }
+                    else if (textLength > 26 && textLength <=30)
+                    {
+                        fs = TextFontSize.Small;
+                    }
+                    else if(textLength>30)
+                    {
+                        fs = TextFontSize.VerySmall;
+                    }
+                    break;
+                case TextField.FieldFour:
+                    fs = TextFontSize.ExtraSmall;
+                    break;
+                case TextField.FieldFive:
+                    fs = TextFontSize.ExtraSmall;
+                    break;
+            }
+
+            return fs;
+        }
     }
 }

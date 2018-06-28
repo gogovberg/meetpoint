@@ -28,6 +28,8 @@
                                 <RowDefinition Height="Auto"></RowDefinition>
                                 <RowDefinition Height="Auto"></RowDefinition>
                                 <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
                             </Grid.RowDefinitions>
 
                             <TextBlock x:Name="tblPrintActivation" Text="PRINT ACTIVATION" Grid.Row="0" Style="{StaticResource TextBlockTitle}" Margin="25,0,25,20"></TextBlock>
@@ -89,6 +91,28 @@
                                         <ComboBoxItem Content="9" ></ComboBoxItem>
                                         <ComboBoxItem IsSelected="True" Content="10" ></ComboBoxItem>
                                     </ComboBox>
+                                </DockPanel>
+                            </Grid>
+                            <Grid Grid.Row="4" Margin="25,0,25,25">
+                                <DockPanel LastChildFill="False">
+                                    <Label Content="Type: "></Label>
+                                    <TextBox x:Name="tbFontType" MaxLength="1" Text="0" Margin="5"></TextBox>
+                                    <Label Content="Size: "></Label>
+                                    <TextBox x:Name="tbFontSize" Text="60" Margin="5"></TextBox>
+                                    <Label Content="Left: "></Label>
+                                    <TextBox x:Name="tbFontLeft"  Text="160" Margin="5"></TextBox>
+                                    <Label Content="Top: "></Label>
+                                    <TextBox x:Name="tbFontTop" Text="20" Margin="5"></TextBox>
+                                    <Label Content="Width: "></Label>
+                                    <TextBox x:Name="tbFontLineWidth" Text="550" Margin="5"></TextBox>
+                                    <Label Content="Lines: "></Label>
+                                    <TextBox x:Name="tbFontLines" Text="3" Margin="5"></TextBox>
+
+                                </DockPanel>
+                            </Grid>
+                            <Grid Grid.Row="5" Margin="25,0,25,25" >
+                                <DockPanel>
+                                    <TextBox x:Name="tbContent" Text="Content" Margin="10"></TextBox>
                                 </DockPanel>
                             </Grid>
                         </Grid>

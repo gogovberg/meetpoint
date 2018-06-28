@@ -40,7 +40,9 @@ namespace MeetpointPrinterNew.Pages
         private System.Printing.PrintQueue _printQueue;
         private List<string> _dataOptions;
 
-        
+        private object _printerPrintingObject = new object();
+
+        private ZebraPrinter _printer;
 
         public SettingsPage(UserSettings settings)
         {
@@ -176,6 +178,13 @@ namespace MeetpointPrinterNew.Pages
                 int justification = int.Parse(jus.Content.ToString());
                 int magnitude = int.Parse(mag.Content.ToString());
 
+
+                char fontType = tbFontType.Text[0];
+                int fontSize = int.Parse(tbFontSize.Text);
+                int fontLeft = int.Parse(tbFontLeft.Text);
+                int fontTop = int.Parse(tbFontTop.Text);
+                int fontLineWidth = int.Parse(tbFontLineWidth.Text);
+                int fontLines = int.Parse(tbFontLines.Text);
               
                 foreach (DiscoveredUsbPrinter usbPrinter in UsbDiscoverer.GetZebraUsbPrinters(new ZebraPrinterFilter()))
                 {
@@ -183,13 +192,17 @@ namespace MeetpointPrinterNew.Pages
                     Connection connection = usbPrinter.GetConnection();
                     connection.Open();
                     ZebraPrinter printer = ZebraPrinterFactory.GetInstance(connection);
-                    string qrCommand = QRWrite(50,20,0, magnitude, QRErrorCorrection.ULTRA_HIGH, "e47624f6-6ed8-4e8b-991d-f982526ee7f9");
-                    string commandOne = TextWrite(260, 25, ElementDrawRotation.NO_ROTATION,ZebraFont.STANDARD_LARGEST,40,20, 370, 2,"Mahatma Ghandhi dasdsadasd");
-                    string commandTwo = TextWrite(260, 105, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_SMALL, 30, 15, 370, 2,"Indian activist asdasdas ");
-                    string commandThree = TextWrite(260, 185, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_SMALL, 30, 15, 370, 4,"Born and raised and killed and fucked and raped and jailed");
-                    printer.SendCommand(WholeCommand(qrCommand,commandOne,commandTwo,commandThree));
-                    connection.Close();
+                   
+                    string qrCommand = QRWrite(570, 250, 0, 5, QRErrorCorrection.ULTRA_HIGH, "e47624f6-6ed8-4e8b-991d-f982526ee7f9");
+                    string commandOne =   TextWrite(fontType, fontSize, fontLeft, fontTop, fontLineWidth, fontLines, tbContent.Text);
+                    //string commandTwo =   TextWrite('0', 55, 160, 100, 600, 3, "ABC  fghijklmnopqrstu");
+                    //string commandThree = TextWrite('0', 50, 160, 160, 600, 3, "ABC  fghijklmnopqrstu");
+                    //string commandFour=   TextWrite('0', 30, 160, 250, 600, 3, "ABC  fghijklmnopqrstu");
+                    //string commandFive =  TextWrite('0', 30, 160, 300, 600, 3, "ABC  fghijklmnopqrstu");
 
+                    printer.SendCommand(WholeCommand(qrCommand, commandOne, "", "", "", ""));
+                    connection.Close();
+                    break;
                 }
 
             }
@@ -205,6 +218,22 @@ namespace MeetpointPrinterNew.Pages
 
         private void btnPrintTest_Click(object sender, RoutedEventArgs e)
         {
+            foreach (DiscoveredUsbPrinter usbPrinter in UsbDiscoverer.GetZebraUsbPrinters(new ZebraPrinterFilter()))
+            {
+
+                Connection connection = usbPrinter.GetConnection();
+                connection.Open();
+                ZebraPrinter printer = ZebraPrinterFactory.GetInstance(connection);
+                printer.Calibrate();
+                //string qrCommand = QRWrite(50, 20, 0, 4, QRErrorCorrection.ULTRA_HIGH, "e47624f6-6ed8-4e8b-991d-f982526ee7f9");
+                ////string commandOne = TextWrite(260, 25, ElementDrawRotation.NO_ROTATION,ZebraFont.STANDARD_NORMAL,40,20, 370, 2,"Mahatma Ghandhi dasdsadasd");
+                ////string commandTwo = TextWrite(260, 105, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_SMALL, 30, 15, 370, 2,"Indian activist asdasdas ");
+                ////string commandThree = TextWrite(260, 185, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_SMALL, 30, 15, 370, 4,"Born and raised and killed and fucked and raped and jailed");
+                ////printer.SendCommand(WholeCommand(qrCommand,commandOne,commandTwo,commandThree));
+                //printer.SendCommand(WholeCommand(qrCommand, "", "", ""));
+                connection.Close();
+
+            }
             Windows.MessageBox mb = new Windows.MessageBox("Printer is out of paper.");
             mb.Owner = _currentApp.MainWindow;
             mb.ShowDialog();
@@ -234,18 +263,32 @@ namespace MeetpointPrinterNew.Pages
             {
                 try
                 {
-                    string users = "";
-                    foreach (Account user in _settings.Accounts.Account)
+                    if (GlobalSettings.IsPrinterOnline)
                     {
-                        users = users + user.AccountID + ",";
-                    }
-                    List<PrintQueueItem> items = Helpers.GetPrintQueue(_settings.AuthToken, users);
-             
-                    foreach (PrintQueueItem item in items)
-                    {
-                        PrintLabelStickers(item);
-                    }
+                        foreach (DiscoveredUsbPrinter usbPrinter in UsbDiscoverer.GetZebraUsbPrinters(new ZebraPrinterFilter()))
+                        {
+                            Connection connection = usbPrinter.GetConnection();
+                            connection.Open();
+                            _printer = ZebraPrinterFactory.GetInstance(connection);
 
+                            string users = "";
+                            foreach (Account user in _settings.Accounts.Account)
+                            {
+                                users = users + user.AccountID + ",";
+                            }
+                            List<PrintQueueItem> items = Helpers.GetPrintQueue(_settings.AuthToken, users);
+
+                            foreach (PrintQueueItem item in items)
+                            {
+                                lock (_printerPrintingObject)
+                                {
+                                    PrintLabelStickers(item);
+                                }
+                            }
+
+                            connection.Close();
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -293,26 +336,33 @@ namespace MeetpointPrinterNew.Pages
         {
             try
             {
-                if (GlobalSettings.IsPrinterOnline)
-                {
-                    PrinterSettings ps = new PrinterSettings();
-                    ps.PrinterName = _settings.Printer;
-                    ps.Width = (int)(203 * 3);
-                    ps.Length = (int)(203 * 1);
-                    ps.Darkness = 30;
+              
 
-                    List<byte> page = new List<byte>();
+                string qrCommand = QRWrite(570, 250, 0, 5, QRErrorCorrection.ULTRA_HIGH, "e47624f6-6ed8-4e8b-991d-f982526ee7f9");
 
-                    //page.AddRange(ZPLCommands.ClearPrinter(ps));
-                    page.AddRange(ZPLCommands.TextWrite(15, 75, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_LARGEST, 45, 30, Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[0], item)));
-                    page.AddRange(ZPLCommands.TextWrite(15, 150, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_NORMAL, 30, 20, Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[1], item)));
-                    page.AddRange(ZPLCommands.TextWrite(15, 225, ElementDrawRotation.NO_ROTATION, ZebraFont.STANDARD_NORMAL, 20, 15, Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[2], item)));
-                    page.AddRange(ZPLCommands.PrintBuffer(1));
+                item.FirstName = string.IsNullOrEmpty(item.FirstName) ? "" : item.FirstName;
+                item.LastName = string.IsNullOrEmpty(item.LastName) ? "" : item.FirstName;
+                item.Country = string.IsNullOrEmpty(item.Country) ? "" : item.Country;
+                item.JobPosition = string.IsNullOrEmpty(item.JobPosition) ? "" : item.JobPosition;
+                item.Company = string.IsNullOrEmpty(item.Company) ? "" : item.Company;
 
-                    new SpoolPrinter(ps).Print(page.ToArray());
-                    item.Status = 1;
-                }
-               
+                TextFontSize tfs = Helpers.SetTextFontSize(item.FirstName.Length, TextField.FieldOne);
+                string commandOne = TextWrite('0', (int)tfs, 160, 40, 600, 0, item.FirstName);
+
+                tfs = Helpers.SetTextFontSize(item.LastName.Length, TextField.FieldTwo);
+                string commandTwo = TextWrite('0', (int)tfs, 160, 100, 600, 0, item.LastName);
+
+                tfs = Helpers.SetTextFontSize(item.Country.Length, TextField.FieldThree);
+                string commandThree = TextWrite('0', (int)tfs, 160, 160, 600, 0, item.Country);
+
+                tfs = Helpers.SetTextFontSize(item.JobPosition.Length, TextField.FieldFour);
+                string commandFour = TextWrite('0', (int)tfs, 160, 250, 400, 3, item.JobPosition);
+
+                tfs = Helpers.SetTextFontSize(item.Country.Length, TextField.FieldFive);
+                string commandFive = TextWrite('0', (int)tfs, 160, 350, 400, 3, item.Company);
+
+                _printer.SendCommand(WholeCommand(qrCommand, commandOne, commandTwo, commandThree, commandFour, commandFive));
+                item.Status = 1;
             }
             catch(Exception ex)
             {
@@ -410,16 +460,28 @@ namespace MeetpointPrinterNew.Pages
 
         private string QRWrite(int left, int top, int justification, int magnitude, QRErrorCorrection errorCorrection, string barcode)
         {
-            return string.Format("^FO{0},{1},{2},^BQ,2,{3}^FD72M,A{5}^FS", (object)left, (object)top, (object)justification, (object)magnitude, (object)(char)errorCorrection, (object)barcode);
-        }
-        public string TextWrite(int left, int top, ElementDrawRotation rotation, ZebraFont font, int height, int width, int blokSize, int blockLines, string text)
-        {
-            return string.Format("^FO{0},{1}^A{2}{3},{4},{5}^FB{6},{7},,^FD{8}^FS", left, top, (char)font, (char)rotation, height, width, blokSize, blockLines,text);
-        }
+            string command = string.Format(
+                                 "^FO{0},{1},{2}," +
+                                 "^BQ,2,{3}" +
+                                 "^FD72M,A{5}" +
+                                 "^FS", (object)left, (object)top, (object)justification, (object)magnitude, (object)(char)errorCorrection, (object)barcode);
 
-        private string WholeCommand(string commandQr, string commandTextOne, string commandTextTwo, string commandTextThree)
+            return command;
+        }
+        private string TextWrite(char fontType, int fontSize, int left, int top,  int blokSize, int blockLines, string text)
         {
-            return string.Format("^XA{0}{1}{2}{3}^XZ",commandQr, commandTextOne, commandTextTwo, commandTextThree);
+            string command = string.Format(
+                                 "^CI28" +
+                                 "^CF{0},{1}" +
+                                 "^FO{2},{3}" +
+                                 "^FB{4},{5}," +
+                                 "^FH" +
+                                 "^FD{6}^FS", (object)(char)fontType, (object)fontSize, (object)left, (object)top, (object)blokSize, (object)blockLines, (object)text);
+            return command;
+        }
+        private string WholeCommand(string commandQr, string commandTextOne, string commandTextTwo, string commandTextThree, string commandTextFour, string commandTextFive)
+        {
+            return string.Format("^XA{0}{1}{2}{3}{4}{5}^XZ",commandQr, commandTextOne, commandTextTwo, commandTextThree, commandTextFour, commandTextFive);
         }
     }
 }

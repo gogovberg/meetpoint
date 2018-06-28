@@ -264,4 +264,32 @@ namespace MeetpointPrinterNew
         PrintLogBig =4,
         PrintLogSmall=5
     }
+    public enum TextLength
+    {
+        ExtraShort = 30,
+        VeryShort = 34,
+        Short = 30,
+        Normal = 26,
+        Long = 23,
+        VeryLong = 21,
+        ExtraLong= 19
+    }
+    public enum TextFontSize
+    {
+        ExtraSmall = 30,
+        VerySmall  = 35,
+        Small = 40,
+        Normal = 45,
+        Big = 50,
+        VeryBig = 55,
+        ExtraBig = 60
+    }
+    public enum TextField
+    {
+        FieldOne=1,
+        FieldTwo=2,
+        FieldThree=3,
+        FieldFour=4,
+        FieldFive=5
+    }
 }
