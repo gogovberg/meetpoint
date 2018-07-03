@@ -20,8 +20,6 @@ namespace MeetpointPrinterNew
         private static string _host = "http://data.meetpoint.si/";
         private static double _milimeterInPixels = 3.7795275591;
 
-
-
         public static List<string> GetConnectedPrinters()
         {
             List<string> printers = new List<string>();
@@ -397,9 +395,10 @@ namespace MeetpointPrinterNew
             }
         }
 
-        public static TextFontSize SetTextFontSize(int textLength, TextField textField)
+        public static TextFontSize SetTextFontSize(string text, TextField textField)
         {
             TextFontSize fs = TextFontSize.Normal;
+            int textLength = text.Length;
             switch(textField)
             {
                 case TextField.FieldOne:
@@ -418,6 +417,11 @@ namespace MeetpointPrinterNew
                     else if (textLength > 23)
                     {
                         fs = TextFontSize.Normal;
+
+                        if (text.Length > 26)
+                        {
+                            text = text.Substring(0, 26);
+                        }
                     }
                     break;
                 case TextField.FieldTwo:
@@ -436,6 +440,10 @@ namespace MeetpointPrinterNew
                     else if (textLength > 26)
                     {
                         fs = TextFontSize.Small;
+                        if (text.Length > 30)
+                        {
+                            text = text.Substring(0, 30);
+                        }
                     }
                     break;
                 case TextField.FieldThree:
@@ -454,17 +462,38 @@ namespace MeetpointPrinterNew
                     else if(textLength>30)
                     {
                         fs = TextFontSize.VerySmall;
+                        if(text.Length>34)
+                        {
+                            text = text.Substring(0, 34);
+                        }
+                        
                     }
                     break;
                 case TextField.FieldFour:
                     fs = TextFontSize.ExtraSmall;
+                    if(text.Length>64)
+                    {
+                        text = text.Substring(0, 64);
+                    }
+
                     break;
                 case TextField.FieldFive:
                     fs = TextFontSize.ExtraSmall;
+                    if (text.Length > 64)
+                    {
+                        text = text.Substring(0, 64);
+                    }
                     break;
             }
 
             return fs;
         }
+
+        public static TextOffset SetTextOffsetHeight()
+        {
+            TextOffset tof = TextOffset.OffsetFive;
+            return tof;
+        }
+       
     }
 }

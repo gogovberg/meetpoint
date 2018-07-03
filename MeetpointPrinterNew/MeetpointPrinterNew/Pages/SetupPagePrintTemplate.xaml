@@ -61,7 +61,6 @@
                                         <StackPanel Grid.Row="2" Orientation="Vertical">
                                             <TextBlock FontSize="16" Text="Layout" Margin="0,0,0,10" FontWeight="SemiBold"></TextBlock>
                                             <WrapPanel>
-                                                <CheckBox x:Name="cbLayoutHL"  Style="{StaticResource CheckBoxTemplateLayoutStyleHL}" Checked="cbLayoutHL_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
                                                 <CheckBox x:Name="cbLayoutHR"  Style="{StaticResource CheckBoxTemplateLayoutStyleHR}"  Checked="cbLayoutHR_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
                                                 <CheckBox x:Name="cbLayoutClean" Style="{StaticResource CheckBoxTemplateLayoutStyleNC}" Checked="cbLayoutClean_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
                                             </WrapPanel>

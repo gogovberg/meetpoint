@@ -292,4 +292,13 @@ namespace MeetpointPrinterNew
         FieldFour=4,
         FieldFive=5
     }
+    public enum TextOffset
+    {
+        OffsetOne = 150,
+        OffsetTwo = 120,
+        OffsetThree = 90,
+        OffsetFour = 40,
+        OffsetFive = 0
+    }
+
 }

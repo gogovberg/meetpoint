@@ -74,22 +74,20 @@ namespace MeetpointPrinterNew.Pages
                 case "cbLayoutHR":
                     cbLayoutHR.IsChecked = true;
                     break;
-                case "cbLayoutHL":
-                    cbLayoutHL.IsChecked = true;
-                    break;
                 case "cbLayoutClean":
                     cbLayoutClean.IsChecked = true;
                     break;
                 default:
                     cbLayoutHR.IsChecked = false;
-                    cbLayoutHL.IsChecked = false;
                     cbLayoutClean.IsChecked = false;
                     break;
             }
             _dataOptions = GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption;
 
-            if(_dataOptions.Count<3)
+            if(_dataOptions.Count<5)
             {
+                _dataOptions.Add("");
+                _dataOptions.Add("");
                 _dataOptions.Add("");
                 _dataOptions.Add("");
                 _dataOptions.Add("");
@@ -163,7 +161,6 @@ namespace MeetpointPrinterNew.Pages
         private void cbLayoutQRT_Checked(object sender, RoutedEventArgs e)
         {
             _isUncheck = false;
-            cbLayoutHL.IsChecked = false;
             cbLayoutHR.IsChecked = false;
             cbLayoutClean.IsChecked = false;
 
@@ -178,7 +175,6 @@ namespace MeetpointPrinterNew.Pages
         private void cbLayoutQRB_Checked(object sender, RoutedEventArgs e)
         {
             _isUncheck = false;
-            cbLayoutHL.IsChecked = false;
             cbLayoutHR.IsChecked = false;
         
             cbLayoutClean.IsChecked = false;
@@ -195,7 +191,6 @@ namespace MeetpointPrinterNew.Pages
         private void cbLayoutHR_Checked(object sender, RoutedEventArgs e)
         {
             _isUncheck = false;
-            cbLayoutHL.IsChecked = false;
             cbLayoutClean.IsChecked = false;
 
             CheckBox cb = (CheckBox)sender;
@@ -211,7 +206,6 @@ namespace MeetpointPrinterNew.Pages
         private void cbLayoutQLT_Checked(object sender, RoutedEventArgs e)
         {
             _isUncheck = false;
-            cbLayoutHL.IsChecked = false;
             cbLayoutHR.IsChecked = false;
        
             cbLayoutClean.IsChecked = false;
@@ -227,7 +221,6 @@ namespace MeetpointPrinterNew.Pages
         private void cbLayoutQLB_Checked(object sender, RoutedEventArgs e)
         {
             _isUncheck = false;
-            cbLayoutHL.IsChecked = false;
             cbLayoutHR.IsChecked = false;
            
             cbLayoutClean.IsChecked = false;
@@ -261,8 +254,6 @@ namespace MeetpointPrinterNew.Pages
         {
             _isUncheck = false;
             cbLayoutHR.IsChecked = false;
-            cbLayoutHL.IsChecked = false;
-           
 
             CheckBox cb = (CheckBox)sender;
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
@@ -333,7 +324,7 @@ namespace MeetpointPrinterNew.Pages
                 if(!isAdded)
                 {
                     cb.IsChecked = false;
-                    ShowErrorWindow("You can select up to 3 options.");
+                    ShowErrorWindow("You can select up to 5 options.");
                 }
             }
            
