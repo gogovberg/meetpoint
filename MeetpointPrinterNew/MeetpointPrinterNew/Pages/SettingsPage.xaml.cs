@@ -169,42 +169,7 @@ namespace MeetpointPrinterNew.Pages
         {
             try
             {
-                //int left = int.Parse(tbLeft.Text);
-                //int top = int.Parse(tbTop.Text);
-
-                //ComboBoxItem jus = (ComboBoxItem)cmbJustification.SelectedItem;
-                //ComboBoxItem mag = (ComboBoxItem)cmbMagnitude.SelectedItem;
-
-                //int justification = int.Parse(jus.Content.ToString());
-                //int magnitude = int.Parse(mag.Content.ToString());
-
-
-                //char fontType = tbFontType.Text[0];
-                //int fontSize = int.Parse(tbFontSize.Text);
-                //int fontLeft = int.Parse(tbFontLeft.Text);
-                //int fontTop = int.Parse(tbFontTop.Text);
-                //int fontLineWidth = int.Parse(tbFontLineWidth.Text);
-                //int fontLines = int.Parse(tbFontLines.Text);
-
-                //List<DiscoveredUsbPrinter> printers = UsbDiscoverer.GetZebraUsbPrinters(new ZebraPrinterFilter());
-                //foreach (DiscoveredUsbPrinter usbPrinter in printers)
-                //{
-                //    Connection connection = usbPrinter.GetConnection();
-                //    connection.Open();
-                //    ZebraPrinter printer = ZebraPrinterFactory.GetInstance(connection);
-
-                //    string qrCommand = QRWrite(570, 250, 0, 5, QRErrorCorrection.ULTRA_HIGH, "e47624f6-6ed8-4e8b-991d-f982526ee7f9");
-                //    string commandOne = TextWrite('0', 60, 125, 40 , 580, 0, "ABC  fghijklmnopqrstu");
-                //    string commandTwo = TextWrite('0', 55, 125, 110 , 580, 0, "ABC  fghijklmnopqrstu");
-                //    string commandThree = TextWrite('0', 50, 125, 180 , 580, 0, "ABC  fghijklmnopqrstu");
-                //    string commandFour = TextWrite('0', 30, 125, 280 , 440, 2, "ABC  fghijklmnopqrstu ABC  fghijklmnopqrstu");
-                //    string commandFive = TextWrite('0', 30, 125, 350 , 440, 2, "ABC  fghijklmnopqrstu ABC  fghijklmnopqrstu");
-
-                //    printer.SendCommand(WholeCommand("", commandOne, commandTwo, commandThree, commandFour, ""));
-                //    connection.Close();
-
-                //    break;
-                //}
+                
                 var encodings = System.Text.Encoding.GetEncodings();
 
             }

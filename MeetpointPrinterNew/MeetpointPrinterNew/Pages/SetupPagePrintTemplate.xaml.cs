@@ -245,7 +245,7 @@ namespace MeetpointPrinterNew.Pages
             CheckBox cb = (CheckBox)sender;
             GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate = cb.Name;
 
-            printTemplate.LayoutHalfLeft();
+            printTemplate.LayoutHalfRight();
 
             ButtonNextLogic();
             _isUncheck = true;

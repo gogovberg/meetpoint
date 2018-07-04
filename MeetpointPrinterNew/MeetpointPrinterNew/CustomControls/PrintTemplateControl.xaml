@@ -13,11 +13,14 @@
                     <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="6*"/>
                 </Grid.ColumnDefinitions>
+               
                 <Image x:Name="imgQRCode" HorizontalAlignment="Stretch" Grid.Column="0" Source="/Images/big_qr.png" VerticalAlignment="Top" Margin="5,10"></Image>
                 <StackPanel   VerticalAlignment="Top" Margin="5,10,5,10" Grid.Column="1"  x:Name="spDataOptions">
                     <TextBlock  x:Name="tbOptOne" FontSize="18" Text="Aleksandar" Margin="0,0,0,0"></TextBlock>
-                    <TextBlock  x:Name="tbOptTwo" FontSize="14"  Text="Gogov" Margin="0,0,0,0"></TextBlock>
-                    <TextBlock  x:Name="tbOptThree" FontSize="12"  Text="Blablablalbalbla" Margin="0,10,0,0"></TextBlock>
+                    <TextBlock  x:Name="tbOptTwo" FontSize="16"  Text="Gogov" Margin="0,0,0,0"></TextBlock>
+                    <TextBlock  x:Name="tbOptThree" FontSize="14"  Text="Blablablalbalbla" Margin="0,0,0,0"></TextBlock>
+                    <TextBlock  x:Name="tbOptFour" FontSize="12"  Text="Gogov" Margin="0,0,0,0"></TextBlock>
+                    <TextBlock  x:Name="tbOptFive" FontSize="12"  Text="Blablablalbalbla" Margin="0,0,0,0"></TextBlock>
                 </StackPanel>
             </Grid>
         </Border>
