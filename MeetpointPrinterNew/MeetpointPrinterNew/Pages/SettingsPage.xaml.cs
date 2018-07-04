@@ -220,29 +220,37 @@ namespace MeetpointPrinterNew.Pages
 
         private void btnPrintTest_Click(object sender, RoutedEventArgs e)
         {
-            PrintQueueItem item = new PrintQueueItem();
-            item.FirstName = "Mohandas Karamchand";
-            item.LastName = "Gandhi ";
-            item.Status = 1;
-            item.JobPosition = "Lawyer Politician Activist Writer";
-            item.Company = "Indian National Congress";
-            item.Country = "India";
-            item.ActionUID = "9ab1d1d8-2687-4a8e-824b-55459376b0a3";
-
-
-            if (GlobalSettings.IsPrinterOnline)
+            try
             {
-                foreach (DiscoveredUsbPrinter usbPrinter in UsbDiscoverer.GetZebraUsbPrinters(new ZebraPrinterFilter()))
+                PrintQueueItem item = new PrintQueueItem();
+                item.FirstName = "Mohandas Karamchand";
+                item.LastName = "Gandhi Štromaršček";
+                item.Status = 1;
+                item.JobPosition = "Lawyer Politician Activist Writer";
+                item.Company = "Indian National Congress";
+                item.Country = "India";
+                item.ActionUID = "9ab1d1d8-2687-4a8e-824b-55459376b0a3";
+
+
+                if (GlobalSettings.IsPrinterOnline)
                 {
-                    Connection connection = usbPrinter.GetConnection();
-                    connection.Open();
-                    _printer = ZebraPrinterFactory.GetInstance(connection);
+                    foreach (DiscoveredUsbPrinter usbPrinter in UsbDiscoverer.GetZebraUsbPrinters(new ZebraPrinterFilter()))
+                    {
+                        Connection connection = usbPrinter.GetConnection();
+                        connection.Open();
+                        _printer = ZebraPrinterFactory.GetInstance(connection);
 
-                    PrintLabelStickers(item,true);
+                        PrintLabelStickers(item, true);
 
-                    connection.Close();
+                        connection.Close();
+                    }
                 }
             }
+            catch(Exception ex)
+            {
+
+            }
+           
         }
 
         private void btnViewLog_Click(object sender, RoutedEventArgs e)
@@ -468,15 +476,15 @@ namespace MeetpointPrinterNew.Pages
             switch (dataOptionsLength)
             {
                 case 1:
-                    textOffset = TextOffset.OffsetOne;
+                    textOffset = TextOffset.OffsetThree;
 
                     tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
                     commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 1, fieldOne);
 
-                    qrCommand = QRWrite(330, 270, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
+                    qrCommand = QRWrite(125, 200, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
                     break;
                 case 2:
-                    textOffset = TextOffset.OffsetTwo;
+                    textOffset = TextOffset.OffsetFour;
 
                     tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
                     commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 1, fieldOne);
@@ -484,7 +492,7 @@ namespace MeetpointPrinterNew.Pages
                     tfs = Helpers.SetTextFontSize(fieldTwo, TextField.FieldTwo);
                     commandTwo = TextWrite('0', (int)tfs, 125, 110 + (int)textOffset, 580, 1, fieldTwo);
 
-                    qrCommand = QRWrite(330, 270, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
+                    qrCommand = QRWrite(125, 220, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
                     break;
                 case 3:
                     textOffset = TextOffset.OffsetFive;
@@ -498,7 +506,7 @@ namespace MeetpointPrinterNew.Pages
                     tfs = Helpers.SetTextFontSize(fieldThree, TextField.FieldThree);
                     commandThree = TextWrite('0', (int)tfs, 125, 180 + (int)textOffset, 580, 1, fieldThree);
 
-                    qrCommand = QRWrite(250, 250, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
+                    qrCommand = QRWrite(125, 250, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
                     break;
                 case 4:
                     textOffset = TextOffset.OffsetFive;
@@ -513,7 +521,7 @@ namespace MeetpointPrinterNew.Pages
                     commandThree = TextWrite('0', (int)tfs, 125, 180 + (int)textOffset, 580, 1, fieldThree);
 
                     tfs = Helpers.SetTextFontSize(fieldFour, TextField.FieldFour);
-                    commandFour = TextWrite('0', (int)tfs, 125, 280 + (int)textOffset, 440, 2, fieldFour);
+                    commandFour = TextWrite('0', (int)tfs, 125, 260 + (int)textOffset, 440, 2, fieldFour);
 
                     qrCommand = QRWrite(570, 250, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
                     break;
@@ -530,10 +538,10 @@ namespace MeetpointPrinterNew.Pages
                     commandThree = TextWrite('0', (int)tfs, 125, 180 + (int)textOffset, 580, 1, fieldThree);
 
                     tfs = Helpers.SetTextFontSize(fieldFour, TextField.FieldFour);
-                    commandFour = TextWrite('0', (int)tfs, 125, 280 + (int)textOffset, 440, 2, fieldFour);
+                    commandFour = TextWrite('0', (int)tfs, 125, 260 + (int)textOffset, 440, 2, fieldFour);
 
                     tfs = Helpers.SetTextFontSize(fieldFive, TextField.FieldFive);
-                    commandFive = TextWrite('0', (int)tfs, 125, 350 + (int)textOffset, 440, 2, fieldFive);
+                    commandFive = TextWrite('0', (int)tfs, 125, 330 + (int)textOffset, 440, 2, fieldFive);
 
                     qrCommand = QRWrite(570, 250, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
                     break;
@@ -619,7 +627,7 @@ namespace MeetpointPrinterNew.Pages
                     commandThree = TextWrite('0', (int)tfs, 125, 180 + (int)textOffset, 580, 1, fieldThree);
 
                     tfs = Helpers.SetTextFontSize(fieldFour, TextField.FieldFour);
-                    commandFour = TextWrite('0', (int)tfs, 125, 280 + (int)textOffset, 580, 3, fieldFour);
+                    commandFour = TextWrite('0', (int)tfs, 125, 260 + (int)textOffset, 580, 3, fieldFour);
                     break;
                 case 5:
                     textOffset = TextOffset.OffsetFive;
@@ -634,10 +642,10 @@ namespace MeetpointPrinterNew.Pages
                     commandThree = TextWrite('0', (int)tfs, 125, 180 + (int)textOffset, 580, 1, fieldThree);
 
                     tfs = Helpers.SetTextFontSize(fieldFour, TextField.FieldFour);
-                    commandFour = TextWrite('0', (int)tfs, 125, 280 + (int)textOffset, 580, 2, fieldFour);
+                    commandFour = TextWrite('0', (int)tfs, 125, 260 + (int)textOffset, 580, 2, fieldFour);
 
                     tfs = Helpers.SetTextFontSize(fieldFive, TextField.FieldFive);
-                    commandFive = TextWrite('0', (int)tfs, 125, 350 + (int)textOffset, 580, 2, fieldFive);
+                    commandFive = TextWrite('0', (int)tfs, 125, 330 + (int)textOffset, 580, 2, fieldFive);
                     break;
             }
            
