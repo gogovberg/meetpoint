@@ -58,9 +58,8 @@
 
                             <Grid Grid.Row="2" Margin="25,0,25,25" >
                                 <DockPanel LastChildFill="False">
-                                    <Button x:Name="btnPrintEmpty" Content="PRINT EMPTY LABEL" Style="{StaticResource ButtonPrimary}" DockPanel.Dock="Left" Click="btnPrintEmpty_Click" VerticalAlignment="Top" Margin="0,0,10,0"></Button>
                                     <Button x:Name="btnPrintTest" Content="PRINT TEST TEMPLATE" Style="{StaticResource ButtonPrimary}" DockPanel.Dock="Left" Click="btnPrintTest_Click" VerticalAlignment="Top" Margin="0,0,10,0"></Button>
-                                    <Button x:Name="btnViewLog" Content="View print log" Style="{StaticResource ButtonDefault}" DockPanel.Dock="Right" Click="btnViewLog_Click" VerticalAlignment="Top"></Button>
+                                    <Button x:Name="btnViewLog" Content="View print log" Style="{StaticResource ButtonDefault}" DockPanel.Dock="Left" Click="btnViewLog_Click" VerticalAlignment="Top"></Button>
                                 </DockPanel>
                             </Grid>
 
