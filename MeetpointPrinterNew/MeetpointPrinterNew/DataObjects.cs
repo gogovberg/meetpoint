@@ -295,7 +295,7 @@ namespace MeetpointPrinterNew
     public enum TextOffset
     {
         OffsetOne = 150,
-        OffsetTwo = 120,
+        OffsetTwo = 110,
         OffsetThree = 90,
         OffsetFour = 40,
         OffsetFive = 0

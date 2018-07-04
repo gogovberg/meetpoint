@@ -402,96 +402,101 @@ namespace MeetpointPrinterNew
             switch(textField)
             {
                 case TextField.FieldOne:
-                    if(textLength<=19)
+                    if(textLength<19)
                     {
                         fs = TextFontSize.ExtraBig;
                     }
-                    else if(textLength>19 && textLength <= 21)
+                    else if(textLength>=19 && textLength < 21)
                     {
                         fs = TextFontSize.VeryBig;
                     }
-                    else if(textLength >21 && textLength<=23)
+                    else if(textLength >= 21 && textLength < 23)
                     {
                         fs = TextFontSize.Big;
                     }
-                    else if (textLength > 23)
+                    else if (textLength >= 23)
                     {
                         fs = TextFontSize.Normal;
 
-                        if (text.Length > 26)
-                        {
-                            text = text.Substring(0, 26);
-                        }
                     }
                     break;
                 case TextField.FieldTwo:
-                    if (textLength <= 21)
+                    if (textLength < 21)
                     {
                         fs = TextFontSize.VeryBig;
                     }
-                    else if (textLength > 21 && textLength <= 23)
+                    else if (textLength >= 21 && textLength < 23)
                     {
                         fs = TextFontSize.Big;
                     }
-                    else if (textLength > 23 && textLength <= 26)
+                    else if (textLength >= 23 && textLength < 26)
                     {
                         fs = TextFontSize.Normal;
                     }
-                    else if (textLength > 26)
+                    else if (textLength >= 26)
                     {
                         fs = TextFontSize.Small;
-                        if (text.Length > 30)
-                        {
-                            text = text.Substring(0, 30);
-                        }
+                       
                     }
                     break;
                 case TextField.FieldThree:
-                    if (textLength <= 23)
+                    if (textLength < 23)
                     {
                         fs = TextFontSize.Big;
                     }
-                    else if (textLength > 23 && textLength <= 26)
+                    else if (textLength >= 23 && textLength < 26)
                     {
                         fs = TextFontSize.Normal;
                     }
-                    else if (textLength > 26 && textLength <=30)
+                    else if (textLength >= 26 && textLength <30)
                     {
                         fs = TextFontSize.Small;
                     }
-                    else if(textLength>30)
+                    else if(textLength>=30)
                     {
                         fs = TextFontSize.VerySmall;
-                        if(text.Length>34)
-                        {
-                            text = text.Substring(0, 34);
-                        }
                         
                     }
                     break;
                 case TextField.FieldFour:
                     fs = TextFontSize.ExtraSmall;
-                    if(text.Length>64)
-                    {
-                        text = text.Substring(0, 64);
-                    }
-
+                   
                     break;
                 case TextField.FieldFive:
                     fs = TextFontSize.ExtraSmall;
-                    if (text.Length > 64)
-                    {
-                        text = text.Substring(0, 64);
-                    }
+                   
                     break;
             }
 
             return fs;
         }
 
-        public static TextOffset SetTextOffsetHeight()
+        public static TextOffset SetTextOffsetHeight(int dataOptionsLength)
         {
             TextOffset tof = TextOffset.OffsetFive;
+
+            switch(dataOptionsLength)
+            {
+                case 1:
+                    tof = TextOffset.OffsetOne;
+                    break;
+                case 2:
+                    tof = TextOffset.OffsetTwo;
+                    break;
+                case 3:
+                    tof = TextOffset.OffsetThree;
+                    break;
+                case 4:
+                    tof = TextOffset.OffsetFour;
+                    break;
+                case 5:
+                    tof = TextOffset.OffsetFive;
+                    break;
+                default:
+                    tof = TextOffset.OffsetFive;
+                    break;
+            }
+
             return tof;
         }
        

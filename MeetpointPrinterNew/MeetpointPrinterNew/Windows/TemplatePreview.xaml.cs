@@ -51,9 +51,6 @@ namespace MeetpointPrinterNew.Windows
                 case "cbLayoutHR":
                     printTemplate.LayoutHalfRight();
                     break;  
-                case "cbLayoutHL":
-                    printTemplate.LayoutHalfLeft();
-                    break;
                 case "cbLayoutClean":
                     printTemplate.LayoutClean();
                     break;
