@@ -57,7 +57,7 @@ namespace MeetpointPrinterNew.Pages
             }
 
             _settings = settings;
-            _printTimer = 10000;
+            _printTimer = 30000;
             _printerStatusTimer = 5000;
 
             headerControl.CurrentUser = GlobalSettings.CurrentUser;
@@ -467,9 +467,6 @@ namespace MeetpointPrinterNew.Pages
             fieldFive = string.IsNullOrEmpty(fieldFive) ? "" : fieldFive;
 
             qrHash = item.ActionUID == null ? "" : item.ActionUID;
-           
-
-        
 
             TextOffset textOffset = TextOffset.OffsetFive;
 
@@ -521,9 +518,9 @@ namespace MeetpointPrinterNew.Pages
                     commandThree = TextWrite('0', (int)tfs, 125, 180 + (int)textOffset, 580, 1, fieldThree);
 
                     tfs = Helpers.SetTextFontSize(fieldFour, TextField.FieldFour);
-                    commandFour = TextWrite('0', (int)tfs, 125, 260 + (int)textOffset, 440, 2, fieldFour);
+                    commandFour = TextWrite('0', (int)tfs, 125, 260 + (int)textOffset, 420, 2, fieldFour);
 
-                    qrCommand = QRWrite(570, 250, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
+                    qrCommand = QRWrite(550, 250, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
                     break;
                 case 5:
                     textOffset = TextOffset.OffsetFive;
@@ -538,12 +535,12 @@ namespace MeetpointPrinterNew.Pages
                     commandThree = TextWrite('0', (int)tfs, 125, 180 + (int)textOffset, 580, 1, fieldThree);
 
                     tfs = Helpers.SetTextFontSize(fieldFour, TextField.FieldFour);
-                    commandFour = TextWrite('0', (int)tfs, 125, 260 + (int)textOffset, 440, 2, fieldFour);
+                    commandFour = TextWrite('0', (int)tfs, 125, 260 + (int)textOffset, 420, 2, fieldFour);
 
                     tfs = Helpers.SetTextFontSize(fieldFive, TextField.FieldFive);
-                    commandFive = TextWrite('0', (int)tfs, 125, 330 + (int)textOffset, 440, 2, fieldFive);
+                    commandFive = TextWrite('0', (int)tfs, 125, 330 + (int)textOffset, 420, 2, fieldFive);
 
-                    qrCommand = QRWrite(570, 250, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
+                    qrCommand = QRWrite(550, 250, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
                     break;
             }
 

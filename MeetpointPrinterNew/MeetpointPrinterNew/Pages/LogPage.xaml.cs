@@ -33,22 +33,23 @@ namespace MeetpointPrinterNew.Pages
             subHeaderControl.EventName = GlobalSettings.CurrentEvent;
             subHeaderControl.EventDateLocation = GlobalSettings.CurrentEventLocation;
 
-
-
-        
-            for (int i=1; i<10; i++)
-            {
-                PrintQueueItem pqi = new PrintQueueItem();
-                pqi.FirstName = "Test name " + i;
-                pqi.LastName = "Test last name " + i;
-                pqi.JobPosition = "Job position " + i;
-                pqi.Status = i % 3;
-                pqi.Country = "Country " + i;
-                pqi.PrintUserID = i;
-                pqi.EventPosition = "Event position " + i;
+            //for (int i=1; i<10; i++)
+            //{
+            //    PrintQueueItem pqi = new PrintQueueItem();
+            //    pqi.FirstName = "Test name " + i;
+            //    pqi.LastName = "Test last name " + i;
+            //    pqi.JobPosition = "Job position " + i;
+            //    pqi.Status = i % 3;
+            //    pqi.Country = "Country " + i;
+            //    pqi.PrintUserID = i;
+            //    pqi.EventPosition = "Event position " + i;
               
+            //}
+
+            foreach(PrintQueueItem pqi in GlobalSettings.PrintQueueItemLog)
+            {
                 LogControl lc = new LogControl();
-                lc.LogUsername = pqi.FirstName +" "+ pqi.LastName;
+                lc.LogUsername = pqi.FirstName + " " + pqi.LastName;
                 lc.ButtonPrintAgainContent = "PRINT AGAIN";
                 lc.ButtonPrivewContent = "PREVIEW LABEL";
                 lc.Preview_Click += new EventHandler(btnPreview_Click);
@@ -57,9 +58,10 @@ namespace MeetpointPrinterNew.Pages
 
                 SetPrintingStatusSource(lc);
                 icEventItems.Items.Add(lc);
-
             }
-         
+          
+
+
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {

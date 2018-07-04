@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Com.SharpZebra, Version=0.9.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Refs\Com.SharpZebra.dll</HintPath>
+    </Reference>
     <Reference Include="hgi.Base">
       <HintPath>..\..\..\..\Refs\hgi.Base.dll</HintPath>
     </Reference>
@@ -275,12 +279,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\icon_padlock.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\private\MeetPoint\sharpzebra-master\sharpzebra-master\Com.SharpZebra\Com.SharpZebra.csproj">
-      <Project>{df99f6e8-bd8b-425b-acb4-cb68c09d13e9}</Project>
-      <Name>Com.SharpZebra</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
