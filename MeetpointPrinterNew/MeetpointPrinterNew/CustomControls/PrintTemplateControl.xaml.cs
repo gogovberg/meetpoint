@@ -28,51 +28,45 @@ namespace MeetpointPrinterNew.CustomControls
         }
 
 
-        //public void LayoutHalfLeft()
-        //{
-        //    gdrPreview.ColumnDefinitions.Clear();
-        //    imgQRCode.Visibility = Visibility.Visible;
-        //    ColumnDefinition gridCol1 = new ColumnDefinition();
-        //    gridCol1.Width = new GridLength(4, GridUnitType.Star);
-        //    ColumnDefinition gridCol2 = new ColumnDefinition();
-        //    gridCol2.Width = new GridLength(6, GridUnitType.Star);
-
-        //    gdrPreview.ColumnDefinitions.Add(gridCol1);
-        //    gdrPreview.ColumnDefinitions.Add(gridCol2);
-      
-        //    Grid.SetColumn(imgQRCode, 0);
-        //    Grid.SetColumn(spDataOptions, 1);
-        //}
         public void LayoutHalfRight()
         {
             gdrPreview.ColumnDefinitions.Clear();
+
             imgQRCode.Visibility = Visibility.Visible;
+
+
             ColumnDefinition gridCol1 = new ColumnDefinition();
-            gridCol1.Width = new GridLength(6, GridUnitType.Star);
+            gridCol1.Width = new GridLength(5, GridUnitType.Star);
+
             ColumnDefinition gridCol2 = new ColumnDefinition();
-            gridCol2.Width = new GridLength(4, GridUnitType.Star);
+            gridCol2.Width = new GridLength(2, GridUnitType.Star);
 
             gdrPreview.ColumnDefinitions.Add(gridCol1);
             gdrPreview.ColumnDefinitions.Add(gridCol2);
-
+         
             Grid.SetColumn(spDataOptions, 0);
+           
             Grid.SetColumn(imgQRCode, 1);
+           
         }
         public void LayoutClean()
         {
 
             gdrPreview.ColumnDefinitions.Clear();
             ColumnDefinition gridCol1 = new ColumnDefinition();
-            gridCol1.Width = new GridLength(4, GridUnitType.Star);
+            gridCol1.Width = new GridLength(5, GridUnitType.Star);
+
             ColumnDefinition gridCol2 = new ColumnDefinition();
-            gridCol2.Width = new GridLength(6, GridUnitType.Star);
+            gridCol2.Width = new GridLength(2, GridUnitType.Star);
 
             gdrPreview.ColumnDefinitions.Add(gridCol1);
             gdrPreview.ColumnDefinitions.Add(gridCol2);
 
             imgQRCode.Visibility = Visibility.Collapsed;
+
             Grid.SetColumn(spDataOptions, 0);
             Grid.SetColumnSpan(spDataOptions, 2);
+           
         }
     }
 

@@ -10,18 +10,18 @@
            
             <Grid x:Name="gdrPreview">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4*"/>
-                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-               
-                <Image x:Name="imgQRCode" HorizontalAlignment="Stretch" Grid.Column="0" Source="/Images/big_qr.png" VerticalAlignment="Top" Margin="5,10"></Image>
-                <StackPanel   VerticalAlignment="Top" Margin="5,10,5,10" Grid.Column="1"  x:Name="spDataOptions">
-                    <TextBlock  x:Name="tbOptOne" FontSize="18" Text="Aleksandar" Margin="0,0,0,0"></TextBlock>
-                    <TextBlock  x:Name="tbOptTwo" FontSize="16"  Text="Gogov" Margin="0,0,0,0"></TextBlock>
-                    <TextBlock  x:Name="tbOptThree" FontSize="14"  Text="Blablablalbalbla" Margin="0,0,0,0"></TextBlock>
-                    <TextBlock  x:Name="tbOptFour" FontSize="12"  Text="Gogov" Margin="0,0,0,0"></TextBlock>
-                    <TextBlock  x:Name="tbOptFive" FontSize="12"  Text="Blablablalbalbla" Margin="0,0,0,0"></TextBlock>
+              
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="10,10,10,10" Grid.Column="0"   x:Name="spDataOptions">
+                    <TextBlock x:Name="tbOptOne" FontSize="24" Text="Aleksandar" Margin="0,-5,0,0"></TextBlock>
+                    <TextBlock x:Name="tbOptTwo" FontSize="24" Text="Gogov" Margin="0,0,0,0"></TextBlock>
+                    <TextBlock x:Name="tbOptThree" FontSize="22" Text="Blablablalbalbla" Margin="0,0,0,0"></TextBlock>
+                    <TextBlock x:Name="tbOptFour" FontSize="16" Text="Gogov" Margin="0,12,0,8"></TextBlock>
+                    <TextBlock x:Name="tbOptFive" FontSize="16" Text="Blablablalbalbla" Margin="0,0,0,0"></TextBlock>
                 </StackPanel>
+                <Image x:Name="imgQRCode" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2" Source="/Images/big_qr.png" VerticalAlignment="Bottom" Margin="10,20"></Image>
             </Grid>
         </Border>
     </Grid>

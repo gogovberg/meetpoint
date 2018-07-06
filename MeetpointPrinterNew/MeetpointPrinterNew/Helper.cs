@@ -370,30 +370,62 @@ namespace MeetpointPrinterNew
                     case PrintTemplateSize.TemplateSetupBig:
                         printTemplate.Width = 281;
                         printTemplate.Height = 188;
+                        printTemplate.tbOptOne.FontSize = 24;
+                        printTemplate.tbOptTwo.FontSize = 24;
+                        printTemplate.tbOptThree.FontSize = 22;
+                        printTemplate.tbOptFour.FontSize = 16;
+                        printTemplate.tbOptFive.FontSize = 16;
                         break;
                     case PrintTemplateSize.TemplateSetupSmall:
                         printTemplate.Width = 300;
                         printTemplate.Height = 150;
+                        printTemplate.tbOptOne.FontSize = 24;
+                        printTemplate.tbOptTwo.FontSize = 24;
+                        printTemplate.tbOptThree.FontSize = 22;
+                        printTemplate.tbOptFour.FontSize = 16;
+                        printTemplate.tbOptFive.FontSize = 16;
                         break;
                     case PrintTemplateSize.SettingsBig:
                         printTemplate.Width = 188;
                         printTemplate.Height = 125;
+                        printTemplate.tbOptOne.FontSize = 16;
+                        printTemplate.tbOptTwo.FontSize = 16;
+                        printTemplate.tbOptThree.FontSize = 14;
+                        printTemplate.tbOptFour.FontSize = 8;
+                        printTemplate.tbOptFive.FontSize = 8;
                         break;
                     case PrintTemplateSize.SettingsSmall:
                         printTemplate.Width = 200;
                         printTemplate.Height = 100;
+                        printTemplate.tbOptOne.FontSize = 16;
+                        printTemplate.tbOptTwo.FontSize = 16;
+                        printTemplate.tbOptThree.FontSize = 14;
+                        printTemplate.tbOptFour.FontSize = 8;
+                        printTemplate.tbOptFive.FontSize = 8;
                         break;
                     case PrintTemplateSize.PrintLogBig:
                         printTemplate.Width = 281;
                         printTemplate.Height = 188;
+                        printTemplate.tbOptOne.FontSize = 24;
+                        printTemplate.tbOptTwo.FontSize = 24;
+                        printTemplate.tbOptThree.FontSize = 22;
+                        printTemplate.tbOptFour.FontSize = 16;
+                        printTemplate.tbOptFive.FontSize = 16;
                         break;
                     case PrintTemplateSize.PrintLogSmall:
                         printTemplate.Width = 300;
                         printTemplate.Height = 150;
+                        printTemplate.tbOptOne.FontSize = 24;
+                        printTemplate.tbOptTwo.FontSize = 24;
+                        printTemplate.tbOptThree.FontSize = 22;
+                        printTemplate.tbOptFour.FontSize = 16;
+                        printTemplate.tbOptFive.FontSize = 16;
                         break;
                 }
             }
         }
+
+       
 
         public static TextFontSize SetTextFontSize(string text, TextField textField)
         {
@@ -500,5 +532,26 @@ namespace MeetpointPrinterNew
             return tof;
         }
        
+        public static string ReturnDataOptionsName(string cbName)
+        {
+            switch(cbName)
+            {
+                case "cbName":
+                    return "First name";
+                case "cbSurName":
+                    return "Last name";
+                case "cbCompanyName":
+                    return "Company";
+                case "cbFunctionName":
+                    return "Job position";
+                case "cbCountryName":
+                    return "Country";
+                case "cbGroupName":
+                    return "Group";
+                default:
+                    return "";
+            }
+          
+        }
     }
 }

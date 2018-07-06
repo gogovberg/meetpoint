@@ -376,9 +376,11 @@ namespace MeetpointPrinterNew.Pages
         private void PrivewTemplateLogic()
         {
 
-            printTemplate.tbOptOne.Text = _dataOptions[0];
-            printTemplate.tbOptTwo.Text = _dataOptions[1];
-            printTemplate.tbOptThree.Text = _dataOptions[2];
+            printTemplate.tbOptOne.Text = Helpers.ReturnDataOptionsName(_dataOptions[0]);
+            printTemplate.tbOptTwo.Text = Helpers.ReturnDataOptionsName(_dataOptions[1]);
+            printTemplate.tbOptThree.Text = Helpers.ReturnDataOptionsName(_dataOptions[2]);
+            printTemplate.tbOptFour.Text = Helpers.ReturnDataOptionsName(_dataOptions[3]);
+            printTemplate.tbOptFive.Text = Helpers.ReturnDataOptionsName(_dataOptions[4]);
 
             Helpers.SetPrintTemplateSize(printTemplate, PrintTemplateSize.SettingsBig);
             if(GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID.Equals("cbSizeTwo"))

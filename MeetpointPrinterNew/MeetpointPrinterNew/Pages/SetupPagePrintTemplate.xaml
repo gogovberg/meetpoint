@@ -55,19 +55,19 @@
                                             <TextBlock Style="{StaticResource TextBlockHelperText}" Text="Size in mm." Margin="0,0,0,10"></TextBlock>
                                             <WrapPanel >
                                                <CheckBox x:Name="cbSizeOne" Content="75 x 50" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeOne_Checked"  Unchecked="cbSize_Unchecked"></CheckBox>
-                                               <CheckBox x:Name="cbSizeTwo" Content="80 x 40" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeTwo_Checked" Unchecked="cbSize_Unchecked"></CheckBox>
+                                               <!--<CheckBox x:Name="cbSizeTwo" Content="80 x 40" Style="{StaticResource CheckBoxTemplateSizeStyle}" Checked="cbSizeTwo_Checked" Unchecked="cbSize_Unchecked"></CheckBox>-->
                                             </WrapPanel>
                                         </StackPanel>
                                         <StackPanel Grid.Row="2" Orientation="Vertical">
                                             <TextBlock FontSize="16" Text="Layout" Margin="0,0,0,10" FontWeight="SemiBold"></TextBlock>
                                             <WrapPanel>
-                                                <CheckBox x:Name="cbLayoutHR"  Style="{StaticResource CheckBoxTemplateLayoutStyleHR}"  Checked="cbLayoutHR_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
+                                                <CheckBox x:Name="cbLayoutHR"  Style="{StaticResource CheckBoxTemplateLayoutStyleQRB}"  Checked="cbLayoutHR_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
                                                 <CheckBox x:Name="cbLayoutClean" Style="{StaticResource CheckBoxTemplateLayoutStyleNC}" Checked="cbLayoutClean_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
                                             </WrapPanel>
                                         </StackPanel>
                                         <StackPanel Grid.Row="3" Orientation="Vertical" Margin="0,0,0,15">
                                             <TextBlock FontSize="16" Text="Data" Margin="0,0,0,0" Padding="0" FontWeight="SemiBold"></TextBlock>
-                                            <TextBlock Text="You can select 3 options." Style="{StaticResource TextBlockHelperText}" Margin="0,0,0,10"></TextBlock>
+                                            <TextBlock Text="You can select 5 options." Style="{StaticResource TextBlockHelperText}" Margin="0,0,0,10"></TextBlock>
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition></ColumnDefinition>
