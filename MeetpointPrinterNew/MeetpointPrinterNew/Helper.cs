@@ -1,4 +1,5 @@
-﻿using Com.SharpZebra.Printing;
+﻿using Com.SharpZebra;
+using Com.SharpZebra.Printing;
 using hgi.Environment;
 using MeetpointPrinterNew.CustomControls;
 using RestSharp;
@@ -12,6 +13,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Xml;
 using System.Xml.Serialization;
+using Zebra.Sdk.Printer;
 
 namespace MeetpointPrinterNew
 {
@@ -552,6 +554,252 @@ namespace MeetpointPrinterNew
                     return "";
             }
           
+        }
+
+
+        public static void PrintLabelQRight(PrintQueueItem item, ZebraPrinter printer)
+        {
+            TextFontSize tfs;
+
+            string commandOne = "";
+            string commandTwo = "";
+            string commandThree = "";
+            string commandFour = "";
+            string commandFive = "";
+            string qrHash = "";
+            string qrCommand = "";
+            int dataOptionsLength = 0;
+
+            foreach (string opt in GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption)
+            {
+                if (!string.IsNullOrEmpty(opt))
+                {
+                    dataOptionsLength++;
+                }
+            }
+
+            string fieldOne = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[0], item);
+            string fieldTwo = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[1], item);
+            string fieldThree = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[2], item);
+            string fieldFour = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[3], item);
+            string fieldFive = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[4], item);
+
+            fieldOne = string.IsNullOrEmpty(fieldOne) ? "" : fieldOne;
+            fieldTwo = string.IsNullOrEmpty(fieldTwo) ? "" : fieldTwo;
+            fieldThree = string.IsNullOrEmpty(fieldThree) ? "" : fieldThree;
+            fieldFour = string.IsNullOrEmpty(fieldFour) ? "" : fieldFour;
+            fieldFive = string.IsNullOrEmpty(fieldFive) ? "" : fieldFive;
+
+            qrHash = item.ActionUID == null ? "" : item.ActionUID;
+
+            TextOffset textOffset = TextOffset.OffsetFive;
+
+            switch (dataOptionsLength)
+            {
+                case 1:
+                    textOffset = TextOffset.OffsetThree;
+
+                    tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
+                    commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 1, fieldOne);
+
+                    qrCommand = QRWrite(125, 200, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
+                    break;
+                case 2:
+                    textOffset = TextOffset.OffsetFour;
+
+                    tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
+                    commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 1, fieldOne);
+
+                    tfs = Helpers.SetTextFontSize(fieldTwo, TextField.FieldTwo);
+                    commandTwo = TextWrite('0', (int)tfs, 125, 110 + (int)textOffset, 580, 1, fieldTwo);
+
+                    qrCommand = QRWrite(125, 220, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
+                    break;
+                case 3:
+                    textOffset = TextOffset.OffsetFive;
+
+                    tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
+                    commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 1, fieldOne);
+
+                    tfs = Helpers.SetTextFontSize(fieldTwo, TextField.FieldTwo);
+                    commandTwo = TextWrite('0', (int)tfs, 125, 110 + (int)textOffset, 580, 1, fieldTwo);
+
+                    tfs = Helpers.SetTextFontSize(fieldThree, TextField.FieldThree);
+                    commandThree = TextWrite('0', (int)tfs, 125, 180 + (int)textOffset, 580, 1, fieldThree);
+
+                    qrCommand = QRWrite(125, 250, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
+                    break;
+                case 4:
+                    textOffset = TextOffset.OffsetFive;
+
+                    tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
+                    commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 1, fieldOne);
+
+                    tfs = Helpers.SetTextFontSize(fieldTwo, TextField.FieldTwo);
+                    commandTwo = TextWrite('0', (int)tfs, 125, 110 + (int)textOffset, 580, 1, fieldTwo);
+
+                    tfs = Helpers.SetTextFontSize(fieldThree, TextField.FieldThree);
+                    commandThree = TextWrite('0', (int)tfs, 125, 180 + (int)textOffset, 580, 1, fieldThree);
+
+                    tfs = Helpers.SetTextFontSize(fieldFour, TextField.FieldFour);
+                    commandFour = TextWrite('0', (int)tfs, 125, 260 + (int)textOffset, 420, 2, fieldFour);
+
+                    qrCommand = QRWrite(550, 250, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
+                    break;
+                case 5:
+                    textOffset = TextOffset.OffsetFive;
+
+                    tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
+                    commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 1, fieldOne);
+
+                    tfs = Helpers.SetTextFontSize(fieldTwo, TextField.FieldTwo);
+                    commandTwo = TextWrite('0', (int)tfs, 125, 110 + (int)textOffset, 580, 1, fieldTwo);
+
+                    tfs = Helpers.SetTextFontSize(fieldThree, TextField.FieldThree);
+                    commandThree = TextWrite('0', (int)tfs, 125, 180 + (int)textOffset, 580, 1, fieldThree);
+
+                    tfs = Helpers.SetTextFontSize(fieldFour, TextField.FieldFour);
+                    commandFour = TextWrite('0', (int)tfs, 125, 260 + (int)textOffset, 420, 2, fieldFour);
+
+                    tfs = Helpers.SetTextFontSize(fieldFive, TextField.FieldFive);
+                    commandFive = TextWrite('0', (int)tfs, 125, 330 + (int)textOffset, 420, 2, fieldFive);
+
+                    qrCommand = QRWrite(550, 250, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
+                    break;
+            }
+
+
+            printer.SendCommand(WholeCommand(qrCommand, commandOne, commandTwo, commandThree, commandFour, commandFive), "ISO-8859-1");
+        }
+
+        public static void PrintLabelClear(PrintQueueItem item, ZebraPrinter printer)
+        {
+            TextFontSize tfs;
+
+
+            int dataOptionsLength = 0;
+            foreach (string opt in GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption)
+            {
+                if (!string.IsNullOrEmpty(opt))
+                {
+                    dataOptionsLength++;
+                }
+            }
+
+            string fieldOne = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[0], item);
+            string fieldTwo = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[1], item);
+            string fieldThree = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[2], item);
+            string fieldFour = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[3], item);
+            string fieldFive = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[4], item);
+
+            fieldOne = string.IsNullOrEmpty(fieldOne) ? "" : fieldOne;
+            fieldTwo = string.IsNullOrEmpty(fieldTwo) ? "" : fieldTwo;
+            fieldThree = string.IsNullOrEmpty(fieldThree) ? "" : fieldThree;
+            fieldFour = string.IsNullOrEmpty(fieldFour) ? "" : fieldFour;
+            fieldFive = string.IsNullOrEmpty(fieldFive) ? "" : fieldFive;
+
+            string commandOne = "";
+            string commandTwo = "";
+            string commandThree = "";
+            string commandFour = "";
+            string commandFive = "";
+
+            TextOffset textOffset = TextOffset.OffsetFive;
+
+            switch (dataOptionsLength)
+            {
+                case 1:
+                    textOffset = TextOffset.OffsetOne;
+
+                    tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
+                    commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 4, fieldOne);
+                    break;
+                case 2:
+                    textOffset = TextOffset.OffsetTwo;
+
+                    tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
+                    commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 1, fieldOne);
+
+                    tfs = Helpers.SetTextFontSize(fieldTwo, TextField.FieldTwo);
+                    commandTwo = TextWrite('0', (int)tfs, 125, 110 + (int)textOffset, 580, 3, fieldTwo);
+                    break;
+                case 3:
+                    textOffset = TextOffset.OffsetThree;
+
+                    tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
+                    commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 1, fieldOne);
+
+                    tfs = Helpers.SetTextFontSize(fieldTwo, TextField.FieldTwo);
+                    commandTwo = TextWrite('0', (int)tfs, 125, 110 + (int)textOffset, 580, 1, fieldTwo);
+
+                    tfs = Helpers.SetTextFontSize(fieldThree, TextField.FieldThree);
+                    commandThree = TextWrite('0', (int)tfs, 125, 180 + (int)textOffset, 580, 3, fieldThree);
+                    break;
+                case 4:
+                    textOffset = TextOffset.OffsetFour;
+
+                    tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
+                    commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 1, fieldOne);
+
+                    tfs = Helpers.SetTextFontSize(fieldTwo, TextField.FieldTwo);
+                    commandTwo = TextWrite('0', (int)tfs, 125, 110 + (int)textOffset, 580, 1, fieldTwo);
+
+                    tfs = Helpers.SetTextFontSize(fieldThree, TextField.FieldThree);
+                    commandThree = TextWrite('0', (int)tfs, 125, 180 + (int)textOffset, 580, 1, fieldThree);
+
+                    tfs = Helpers.SetTextFontSize(fieldFour, TextField.FieldFour);
+                    commandFour = TextWrite('0', (int)tfs, 125, 260 + (int)textOffset, 580, 3, fieldFour);
+                    break;
+                case 5:
+                    textOffset = TextOffset.OffsetFive;
+
+                    tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
+                    commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 1, fieldOne);
+
+                    tfs = Helpers.SetTextFontSize(fieldTwo, TextField.FieldTwo);
+                    commandTwo = TextWrite('0', (int)tfs, 125, 110 + (int)textOffset, 580, 1, fieldTwo);
+
+                    tfs = Helpers.SetTextFontSize(fieldThree, TextField.FieldThree);
+                    commandThree = TextWrite('0', (int)tfs, 125, 180 + (int)textOffset, 580, 1, fieldThree);
+
+                    tfs = Helpers.SetTextFontSize(fieldFour, TextField.FieldFour);
+                    commandFour = TextWrite('0', (int)tfs, 125, 260 + (int)textOffset, 580, 2, fieldFour);
+
+                    tfs = Helpers.SetTextFontSize(fieldFive, TextField.FieldFive);
+                    commandFive = TextWrite('0', (int)tfs, 125, 330 + (int)textOffset, 580, 2, fieldFive);
+                    break;
+            }
+
+            printer.SendCommand(WholeCommand("", commandOne, commandTwo, commandThree, commandFour, commandFive), "ISO-8859-1");
+        }
+
+        private static string QRWrite(int left, int top, int justification, int magnitude, QRErrorCorrection errorCorrection, string barcode)
+        {
+            string command = string.Format(
+                                 "^FO{0},{1},{2}," +
+                                 "^BQ,2,{3}" +
+                                 "^FD72M,A{4}" +
+                                 "^FS", (object)left, (object)top, (object)justification, (object)magnitude, (object)(char)errorCorrection, (object)barcode);
+
+            return command;
+        }
+
+        private static string TextWrite(char fontType, int fontSize, int left, int top, int blokSize, int blockLines, string text)
+        {
+            string command = string.Format(
+                                 "^CF{0},{1}" +
+                                 "^FO{2},{3}" +
+                                 "^TBN,{4},{5}" +
+                                 "^FH" +
+                                 "^FD{6}" +
+                                 "^FS", (object)(char)fontType, (object)fontSize, (object)left, (object)top, (object)blokSize, (object)(blockLines * fontSize), (object)text);
+
+            return command;
+        }
+
+        private static string WholeCommand(string commandQr, string commandTextOne, string commandTextTwo, string commandTextThree, string commandTextFour, string commandTextFive)
+        {
+            return string.Format("^XA{0}{1}{2}{3}{4}{5}^XZ", commandQr, commandTextOne, commandTextTwo, commandTextThree, commandTextFour, commandTextFive);
         }
     }
 }

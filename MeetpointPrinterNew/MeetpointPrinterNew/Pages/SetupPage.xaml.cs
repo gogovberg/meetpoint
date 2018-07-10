@@ -77,9 +77,8 @@ namespace MeetpointPrinterNew.Pages
                             cbp.IsChecked = pq.Name.Equals(_settings.Printer);
                             cbp.Checked += cbPrinter_Checked;
                             cbp.Unchecked += cbPrinter_Unchecked;
-                            
                             rpsGridPrinterAccount.Children.Add(cbp);
-                            //icPrinterItems.Items.Add(cbp);
+                            
                         }
                         break;
                     case 1:
@@ -102,7 +101,7 @@ namespace MeetpointPrinterNew.Pages
                             cbp.Checked += cbAccount_Checked;
                             cbp.Unchecked += cbAccount_Unchecked;
                             rpsGridPrinterAccount.Children.Add(cbp);
-                            //icPrinterItems.Items.Add(cbp);
+                           
                         }
                         break;
                     case 2:
@@ -246,6 +245,7 @@ namespace MeetpointPrinterNew.Pages
                 subHeaderControl.BackButtonVisibility = Visibility.Collapsed;
             }
         }
+
         private void SetPrinterWizardStepsState()
         {
 
@@ -281,6 +281,7 @@ namespace MeetpointPrinterNew.Pages
                 wizardSteps.SetWizardStepState(WizardStep.Template, WizardStepState.Empty, sl);
             }
         }
+
         private void SetAccountWizardStepsState()
         {
             if (GlobalSettings.ApplicationSettings.IsPrinterSet)
@@ -308,6 +309,7 @@ namespace MeetpointPrinterNew.Pages
                 wizardSteps.SetWizardStepState(WizardStep.Template, WizardStepState.Empty, WizardStepLine.PrinterAccount);
             }
         }
+
         private void SetCurrentWizardStepsState()
         {
             switch(GlobalSettings.CurrentPageID)

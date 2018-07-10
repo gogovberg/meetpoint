@@ -4,6 +4,9 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using Zebra.Sdk.Comm;
+using Zebra.Sdk.Printer;
+using Zebra.Sdk.Printer.Discovery;
 
 namespace MeetpointPrinterNew.Pages
 {
@@ -78,7 +81,42 @@ namespace MeetpointPrinterNew.Pages
         }
         private void btnPrintAgain_Click(object sender, EventArgs e)
         {
+            LogControl lc = (LogControl)sender;
             //TODO:print again logic bro
+
+            if (GlobalSettings.IsPrinterOnline)
+            {
+                foreach (DiscoveredUsbPrinter usbPrinter in UsbDiscoverer.GetZebraUsbPrinters(new ZebraPrinterFilter()))
+                {
+                    Connection connection = usbPrinter.GetConnection();
+                    connection.Open();
+                    ZebraPrinter printer = ZebraPrinterFactory.GetInstance(connection);
+
+                    if(lc!=null)
+                    {
+                        PrintQueueItem item = lc.PrintQueueItem;
+                        if(item != null)
+                        {
+                            switch (GlobalSettings.ApplicationSettings.PrinterSetup.LayoutTemplate)
+                            {
+                                case "cbLayoutHR":
+                                    Helpers.PrintLabelQRight(item, printer);
+                                    break;
+                                case "cbLayoutClean":
+                                    Helpers.PrintLabelClear(item, printer);
+                                    break;
+                                default:
+                                    Helpers.PrintLabelQRight(item, printer);
+                                    break;
+                            }
+
+                            item.Status = 1;
+                        }
+                    }
+
+                    connection.Close();
+                }
+            }
         }
         private void SetPrintingStatusSource(LogControl lc)
         {
