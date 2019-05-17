@@ -48,6 +48,7 @@
                                             <RowDefinition Height="Auto"></RowDefinition>
                                             <RowDefinition Height="Auto"></RowDefinition>
                                             <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
                                         </Grid.RowDefinitions>
                                         <TextBlock Grid.Row="0" x:Name="lblPrintingDevice" FontSize="16" HorizontalAlignment="Left" Margin="0,0,0,15" Style="{StaticResource TextBlockSubtitle}"></TextBlock>
                                         <StackPanel Grid.Row="1" Orientation="Vertical">
@@ -65,7 +66,7 @@
                                                 <CheckBox x:Name="cbLayoutClean" Style="{StaticResource CheckBoxTemplateLayoutStyleNC}" Checked="cbLayoutClean_Checked" Unchecked="cbLayout_Unchecked"></CheckBox>
                                             </WrapPanel>
                                         </StackPanel>
-                                        <StackPanel Grid.Row="3" Orientation="Vertical" Margin="0,0,0,15">
+                                        <StackPanel Grid.Row="3" Orientation="Vertical" >
                                             <TextBlock FontSize="16" Text="Data" Margin="0,0,0,0" Padding="0" FontWeight="SemiBold"></TextBlock>
                                             <TextBlock Text="You can select 5 options." Style="{StaticResource TextBlockHelperText}" Margin="0,0,0,10"></TextBlock>
                                             <Grid>
@@ -85,6 +86,14 @@
                                                 </StackPanel>
                                             </Grid>
                                         </StackPanel>
+                                        <StackPanel Grid.Row="4"  Orientation="Vertical" Margin="0,0,0,15">
+                                            <TextBlock FontSize="16" Text="Text alignment" Margin="0,0,0,0" Padding="0" FontWeight="SemiBold"></TextBlock>
+                                            <TextBlock Text="Select one of 3 options" Style="{StaticResource TextBlockHelperText}" Margin="0,0,0,10"></TextBlock>
+                                            <CheckBox Content="Position left" Style="{StaticResource ChecBoxDataStyle}" Checked="cbAlignment_Checked" x:Name="cbAlignLeft" ></CheckBox>
+                                            <CheckBox Content="Position center" Style="{StaticResource ChecBoxDataStyle}" Checked="cbAlignment_Checked"  x:Name="cbAlignCenter" ></CheckBox>
+                                            <CheckBox Content="Position right" Style="{StaticResource ChecBoxDataStyle}" Checked="cbAlignment_Checked"  x:Name="cbAlignRight" ></CheckBox>
+                                        </StackPanel>
+                                       
                                     </Grid>
                                 </Border>
                                 <Border x:Name="gdrPreview" Grid.Column="1" Padding="35,30" Background="#E5E5E5" rg:ResponsiveGrid.XS="12" rg:ResponsiveGrid.SM="6" Height="514">

@@ -51,7 +51,6 @@ namespace MeetpointPrinterNew.Pages
             Helpers.SetPrintTemplateSize(printTemplate, PrintTemplateSize.TemplateSetupBig);
 
             _isUncheck = true;
-
             switch (GlobalSettings.ApplicationSettings.PrinterSetup.LayoutSizeID)
             {
                 case "cbSizeOne":
@@ -82,6 +81,28 @@ namespace MeetpointPrinterNew.Pages
                     cbLayoutClean.IsChecked = false;
                     break;
             }
+            _isOnLoadChecked = true;
+            cbAlignLeft.IsChecked = false;
+            cbAlignCenter.IsChecked = false;
+            cbAlignRight.IsChecked = false;
+            switch (GlobalSettings.ApplicationSettings.PrinterSetup.TextAlignment)
+            {
+                case 1:
+                    cbAlignLeft.IsChecked = true;
+                    break;
+                case 2:
+                    cbAlignCenter.IsChecked = true;
+                    break;
+                case 3:
+                    cbAlignRight.IsChecked = true;
+                    break;
+                default:
+                    cbAlignLeft.IsChecked = true;
+                    cbAlignCenter.IsChecked = false;
+                    cbAlignRight.IsChecked = false;
+                    break;
+            }
+            _isOnLoadChecked = false;
             _dataOptions = GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption;
 
             if(_dataOptions.Count<5)
@@ -234,6 +255,37 @@ namespace MeetpointPrinterNew.Pages
             }
             ButtonNextLogic();
         }
+
+        private void cbAlignment_Checked(object sender, RoutedEventArgs e)
+        {
+            if(!_isOnLoadChecked)
+            {
+                CheckBox cb = (CheckBox)sender;
+
+                switch (cb.Name)
+                {
+                    case "cbAlignLeft":
+                        cbAlignCenter.IsChecked = false;
+                        cbAlignRight.IsChecked = false;
+                        GlobalSettings.ApplicationSettings.PrinterSetup.TextAlignment = 1;
+                        break;
+                    case "cbAlignCenter":
+                        cbAlignLeft.IsChecked = false;
+                        cbAlignRight.IsChecked = false;
+                        GlobalSettings.ApplicationSettings.PrinterSetup.TextAlignment = 2;
+                        break;
+                    case "cbAlignRight":
+                        cbAlignLeft.IsChecked = false;
+                        cbAlignCenter.IsChecked = false;
+                        GlobalSettings.ApplicationSettings.PrinterSetup.TextAlignment = 3;
+                        break;
+                }
+
+
+            }
+        }
+
+
         private void DataOptionsLogic(Object sender)
         {
             CheckBox cb = (CheckBox)sender;
@@ -279,8 +331,7 @@ namespace MeetpointPrinterNew.Pages
             printTemplate.tbOptFour.Text = string.IsNullOrEmpty(_dataOptions[3]) ? "" : ((CheckBox)this.FindName(_dataOptions[3])).Content.ToString(); 
             printTemplate.tbOptFive.Text = string.IsNullOrEmpty(_dataOptions[4]) ? "" : ((CheckBox)this.FindName(_dataOptions[4])).Content.ToString();
         }
-    
-      
+
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
             if (_isCompleted)

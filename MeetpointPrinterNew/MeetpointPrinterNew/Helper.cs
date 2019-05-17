@@ -137,7 +137,8 @@ namespace MeetpointPrinterNew
                 Debug.Log("MeetpointPrinter", "Save user settings");
                 if (up != null)
                 {
-                    string path = @"UserSettings/" + up.Username + "_"+up.Event.EventID+"_settings.config";
+                    string basePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                    string path = basePath + "\\MeetpointUserSettings\\" + up.Username + "_"+up.Event.EventID+"_settings.config";
                     XmlSerializer mySerializer = new XmlSerializer(typeof(UserSettings));
                     StreamWriter myWriter = new StreamWriter(path);
                     mySerializer.Serialize(myWriter, up);
@@ -162,7 +163,9 @@ namespace MeetpointPrinterNew
 
                 Debug.Log("MeetpointPrinter", "Read user settings");
 
-                string path = @"UserSettings/" + Username + "_" + EventID + "_settings.config";
+                string basePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                string path = basePath + "\\MeetpointUserSettings\\" + Username + "_" + EventID + "_settings.config";
+
                 if (File.Exists(path))
                 {
                     XmlSerializer mySerializer = new XmlSerializer(typeof(UserSettings));
@@ -504,6 +507,11 @@ namespace MeetpointPrinterNew
 
             return fs;
         }
+        public static int SetTextCenterPosition(string text, TextField textField)
+        {
+
+            return 0;
+        }
 
         public static TextOffset SetTextOffsetHeight(int dataOptionsLength)
         {
@@ -578,6 +586,31 @@ namespace MeetpointPrinterNew
                 }
             }
 
+            //^FOx,y,z
+            //x = x-axis location(in dots)
+            //y = y-axis location(in dots)
+            //z = justification - 0 = left justification, 1 = right justification, 2 = auto justification(script dependent)
+            string textAlignment = "L";
+            int positionLeft = 125;
+            int qrPosition = 125;
+            int qrPositionSmall = 550;
+            int textPositionSmall = 125;
+            switch (GlobalSettings.ApplicationSettings.PrinterSetup.TextAlignment)
+            {
+                case 1:
+                    //left
+                    textAlignment = "L";
+                    break;
+                case 3:
+                    //right
+                    textAlignment = "R";
+                    positionLeft = 100;
+                    textPositionSmall = 100;
+                    qrPosition = 700;
+                    qrPositionSmall = 125;
+                    break;
+            }
+
             string fieldOne = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[0], item);
             string fieldTwo = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[1], item);
             string fieldThree = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[2], item);
@@ -600,71 +633,71 @@ namespace MeetpointPrinterNew
                     textOffset = TextOffset.OffsetThree;
 
                     tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
-                    commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 1, fieldOne);
+                    commandOne = TextWrite('0', (int)tfs, positionLeft, 40 + (int)textOffset, 580, 1, fieldOne, textAlignment);
 
-                    qrCommand = QRWrite(125, 200, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
+                    qrCommand = QRWrite(qrPosition, 200, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
                     break;
                 case 2:
                     textOffset = TextOffset.OffsetFour;
 
                     tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
-                    commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 1, fieldOne);
+                    commandOne = TextWrite('0', (int)tfs, positionLeft, 40 + (int)textOffset, 580, 1, fieldOne, textAlignment);
 
                     tfs = Helpers.SetTextFontSize(fieldTwo, TextField.FieldTwo);
-                    commandTwo = TextWrite('0', (int)tfs, 125, 110 + (int)textOffset, 580, 1, fieldTwo);
+                    commandTwo = TextWrite('0', (int)tfs, positionLeft, 110 + (int)textOffset, 580, 1, fieldTwo, textAlignment);
 
-                    qrCommand = QRWrite(125, 220, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
+                    qrCommand = QRWrite(qrPosition, 220, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
                     break;
                 case 3:
                     textOffset = TextOffset.OffsetFive;
 
                     tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
-                    commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 1, fieldOne);
+                    commandOne = TextWrite('0', (int)tfs, positionLeft, 40 + (int)textOffset, 580, 1, fieldOne, textAlignment);
 
                     tfs = Helpers.SetTextFontSize(fieldTwo, TextField.FieldTwo);
-                    commandTwo = TextWrite('0', (int)tfs, 125, 110 + (int)textOffset, 580, 1, fieldTwo);
+                    commandTwo = TextWrite('0', (int)tfs, positionLeft, 110 + (int)textOffset, 580, 1, fieldTwo, textAlignment);
 
                     tfs = Helpers.SetTextFontSize(fieldThree, TextField.FieldThree);
-                    commandThree = TextWrite('0', (int)tfs, 125, 180 + (int)textOffset, 580, 1, fieldThree);
+                    commandThree = TextWrite('0', (int)tfs, positionLeft, 180 + (int)textOffset, 580, 1, fieldThree, textAlignment);
 
-                    qrCommand = QRWrite(125, 250, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
+                    qrCommand = QRWrite(qrPosition, 250, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
                     break;
                 case 4:
                     textOffset = TextOffset.OffsetFive;
 
                     tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
-                    commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 1, fieldOne);
+                    commandOne = TextWrite('0', (int)tfs, positionLeft, 40 + (int)textOffset, 580, 1, fieldOne, textAlignment);
 
                     tfs = Helpers.SetTextFontSize(fieldTwo, TextField.FieldTwo);
-                    commandTwo = TextWrite('0', (int)tfs, 125, 110 + (int)textOffset, 580, 1, fieldTwo);
+                    commandTwo = TextWrite('0', (int)tfs, positionLeft, 110 + (int)textOffset, 580, 1, fieldTwo, textAlignment);
 
                     tfs = Helpers.SetTextFontSize(fieldThree, TextField.FieldThree);
-                    commandThree = TextWrite('0', (int)tfs, 125, 180 + (int)textOffset, 580, 1, fieldThree);
+                    commandThree = TextWrite('0', (int)tfs, positionLeft, 180 + (int)textOffset, 580, 1, fieldThree, textAlignment);
 
                     tfs = Helpers.SetTextFontSize(fieldFour, TextField.FieldFour);
-                    commandFour = TextWrite('0', (int)tfs, 125, 260 + (int)textOffset, 420, 2, fieldFour);
+                    commandFour = TextWrite('0', (int)tfs, textPositionSmall, 260 + (int)textOffset, 580, 2, fieldFour, textAlignment);
 
-                    qrCommand = QRWrite(550, 250, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
+                    qrCommand = QRWrite(qrPositionSmall, 250, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
                     break;
                 case 5:
                     textOffset = TextOffset.OffsetFive;
 
                     tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
-                    commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 1, fieldOne);
+                    commandOne = TextWrite('0', (int)tfs, positionLeft, 40 + (int)textOffset, 580, 1, fieldOne, textAlignment);
 
                     tfs = Helpers.SetTextFontSize(fieldTwo, TextField.FieldTwo);
-                    commandTwo = TextWrite('0', (int)tfs, 125, 110 + (int)textOffset, 580, 1, fieldTwo);
+                    commandTwo = TextWrite('0', (int)tfs, positionLeft, 110 + (int)textOffset, 580, 1, fieldTwo, textAlignment);
 
                     tfs = Helpers.SetTextFontSize(fieldThree, TextField.FieldThree);
-                    commandThree = TextWrite('0', (int)tfs, 125, 180 + (int)textOffset, 580, 1, fieldThree);
+                    commandThree = TextWrite('0', (int)tfs, positionLeft, 180 + (int)textOffset, 580, 1, fieldThree, textAlignment);
 
                     tfs = Helpers.SetTextFontSize(fieldFour, TextField.FieldFour);
-                    commandFour = TextWrite('0', (int)tfs, 125, 260 + (int)textOffset, 420, 2, fieldFour);
+                    commandFour = TextWrite('0', (int)tfs, textPositionSmall, 260 + (int)textOffset, 580, 2, fieldFour, textAlignment);
 
                     tfs = Helpers.SetTextFontSize(fieldFive, TextField.FieldFive);
-                    commandFive = TextWrite('0', (int)tfs, 125, 330 + (int)textOffset, 420, 2, fieldFive);
+                    commandFive = TextWrite('0', (int)tfs, textPositionSmall, 330 + (int)textOffset, 580, 2, fieldFive, textAlignment);
 
-                    qrCommand = QRWrite(550, 250, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
+                    qrCommand = QRWrite(qrPositionSmall, 250, 0, 5, QRErrorCorrection.ULTRA_HIGH, qrHash);
                     break;
             }
 
@@ -685,7 +718,30 @@ namespace MeetpointPrinterNew
                     dataOptionsLength++;
                 }
             }
+            //^FOx,y,z
+            //x = x-axis location(in dots)
+            //y = y-axis location(in dots)
+            //z = justification - 0 = left justification, 1 = right justification, 2 = auto justification(script dependent)
+            string textAlignment = "L";
+            int positionLeft = 125;
 
+            switch (GlobalSettings.ApplicationSettings.PrinterSetup.TextAlignment)
+            {
+                case 1:
+                    //left
+                    textAlignment = "L";
+                    break;
+                case 2:
+                    //center
+                    textAlignment = "C";
+                    positionLeft = 110;
+                    break;
+                case 3:
+                    //right
+                    textAlignment = "R";
+                    positionLeft = 100;
+                    break;
+            }
             string fieldOne = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[0], item);
             string fieldTwo = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[1], item);
             string fieldThree = Helpers.GetDataOptionsFiled(GlobalSettings.ApplicationSettings.PrinterSetup.DataOptions.DataOption[2], item);
@@ -712,61 +768,61 @@ namespace MeetpointPrinterNew
                     textOffset = TextOffset.OffsetOne;
 
                     tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
-                    commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 4, fieldOne);
+                    commandOne = TextWrite('0', (int)tfs, positionLeft, 40 + (int)textOffset, 580, 4, fieldOne, textAlignment);
                     break;
                 case 2:
                     textOffset = TextOffset.OffsetTwo;
 
                     tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
-                    commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 1, fieldOne);
+                    commandOne = TextWrite('0', (int)tfs, positionLeft, 40 + (int)textOffset, 580, 1, fieldOne, textAlignment);
 
                     tfs = Helpers.SetTextFontSize(fieldTwo, TextField.FieldTwo);
-                    commandTwo = TextWrite('0', (int)tfs, 125, 110 + (int)textOffset, 580, 3, fieldTwo);
+                    commandTwo = TextWrite('0', (int)tfs, positionLeft, 110 + (int)textOffset, 580, 3, fieldTwo, textAlignment);
                     break;
                 case 3:
                     textOffset = TextOffset.OffsetThree;
 
                     tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
-                    commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 1, fieldOne);
+                    commandOne = TextWrite('0', (int)tfs, positionLeft, 40 + (int)textOffset, 580, 1, fieldOne, textAlignment);
 
                     tfs = Helpers.SetTextFontSize(fieldTwo, TextField.FieldTwo);
-                    commandTwo = TextWrite('0', (int)tfs, 125, 110 + (int)textOffset, 580, 1, fieldTwo);
+                    commandTwo = TextWrite('0', (int)tfs, positionLeft, 110 + (int)textOffset, 580, 1, fieldTwo, textAlignment);
 
                     tfs = Helpers.SetTextFontSize(fieldThree, TextField.FieldThree);
-                    commandThree = TextWrite('0', (int)tfs, 125, 180 + (int)textOffset, 580, 3, fieldThree);
+                    commandThree = TextWrite('0', (int)tfs, positionLeft, 180 + (int)textOffset, 580, 3, fieldThree, textAlignment);
                     break;
                 case 4:
                     textOffset = TextOffset.OffsetFour;
 
                     tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
-                    commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 1, fieldOne);
+                    commandOne = TextWrite('0', (int)tfs, positionLeft, 40 + (int)textOffset, 580, 1, fieldOne, textAlignment);
 
                     tfs = Helpers.SetTextFontSize(fieldTwo, TextField.FieldTwo);
-                    commandTwo = TextWrite('0', (int)tfs, 125, 110 + (int)textOffset, 580, 1, fieldTwo);
+                    commandTwo = TextWrite('0', (int)tfs, positionLeft, 110 + (int)textOffset, 580, 1, fieldTwo, textAlignment);
 
                     tfs = Helpers.SetTextFontSize(fieldThree, TextField.FieldThree);
-                    commandThree = TextWrite('0', (int)tfs, 125, 180 + (int)textOffset, 580, 1, fieldThree);
+                    commandThree = TextWrite('0', (int)tfs, positionLeft, 180 + (int)textOffset, 580, 1, fieldThree, textAlignment);
 
                     tfs = Helpers.SetTextFontSize(fieldFour, TextField.FieldFour);
-                    commandFour = TextWrite('0', (int)tfs, 125, 260 + (int)textOffset, 580, 3, fieldFour);
+                    commandFour = TextWrite('0', (int)tfs, positionLeft, 260 + (int)textOffset, 580, 3, fieldFour, textAlignment);
                     break;
                 case 5:
                     textOffset = TextOffset.OffsetFive;
 
                     tfs = Helpers.SetTextFontSize(fieldOne, TextField.FieldOne);
-                    commandOne = TextWrite('0', (int)tfs, 125, 40 + (int)textOffset, 580, 1, fieldOne);
+                    commandOne = TextWrite('0', (int)tfs, positionLeft, 40 + (int)textOffset, 580, 1, fieldOne, textAlignment);
 
                     tfs = Helpers.SetTextFontSize(fieldTwo, TextField.FieldTwo);
-                    commandTwo = TextWrite('0', (int)tfs, 125, 110 + (int)textOffset, 580, 1, fieldTwo);
+                    commandTwo = TextWrite('0', (int)tfs, positionLeft, 110 + (int)textOffset, 580, 1, fieldTwo, textAlignment);
 
                     tfs = Helpers.SetTextFontSize(fieldThree, TextField.FieldThree);
-                    commandThree = TextWrite('0', (int)tfs, 125, 180 + (int)textOffset, 580, 1, fieldThree);
+                    commandThree = TextWrite('0', (int)tfs, positionLeft, 180 + (int)textOffset, 580, 1, fieldThree, textAlignment);
 
                     tfs = Helpers.SetTextFontSize(fieldFour, TextField.FieldFour);
-                    commandFour = TextWrite('0', (int)tfs, 125, 260 + (int)textOffset, 580, 2, fieldFour);
+                    commandFour = TextWrite('0', (int)tfs, positionLeft, 260 + (int)textOffset, 580, 2, fieldFour, textAlignment);
 
                     tfs = Helpers.SetTextFontSize(fieldFive, TextField.FieldFive);
-                    commandFive = TextWrite('0', (int)tfs, 125, 330 + (int)textOffset, 580, 2, fieldFive);
+                    commandFive = TextWrite('0', (int)tfs, positionLeft, 330 + (int)textOffset, 580, 2, fieldFive, textAlignment);
                     break;
             }
 
@@ -779,20 +835,22 @@ namespace MeetpointPrinterNew
                                  "^FO{0},{1},{2}," +
                                  "^BQ,2,{3}" +
                                  "^FD72M,A{4}" +
-                                 "^FS", (object)left, (object)top, (object)justification, (object)magnitude, (object)(char)errorCorrection, (object)barcode);
+                                 "^FS", (object)left, (object)top, (object)justification, (object)magnitude, (object)barcode, (object)(char)errorCorrection);
 
             return command;
         }
 
-        private static string TextWrite(char fontType, int fontSize, int left, int top, int blokSize, int blockLines, string text)
+        private static string TextWrite(char fontType, int fontSize, int left, int top, int blokSize, int blockLines, string text, string alignment)
         {
+
             string command = string.Format(
                                  "^CF{0},{1}" +
-                                 "^FO{2},{3}" +
-                                 "^TBN,{4},{5}" +
+                                 "^FO{2},{3},2" +
+                                 "^FB{4},{5},0,{7},0" +
                                  "^FH" +
+                                 "~SD25" +
                                  "^FD{6}" +
-                                 "^FS", (object)(char)fontType, (object)fontSize, (object)left, (object)top, (object)blokSize, (object)(blockLines * fontSize), (object)text);
+                                 "^FS", (object)(char)fontType, (object)fontSize, (object)left, (object)top, (object)blokSize, (object)(blockLines * fontSize), (object)text, (object)alignment);
 
             return command;
         }

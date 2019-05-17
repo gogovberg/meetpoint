@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The name of the product -->
+<?define Name = "Meetpoint Print" ?>
+<!-- The manufacturer, for setup package publisher and folder info -->
+<?define Manufacturer = "Meetpoint" ?>
+<!-- The version number of this setup package-->
+<?define Version = "1.0.1" ?>
+<!-- UpgradeCode must be unique and not changed once the first version of the program is installed. -->
+<?define UpgradeCode = "{1240E0CD-B3D2-44A7-B064-11B3C0709D69}" ?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="$(var.Name)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)" Version="$(var.Version)" Language="1033" >
+  
+   <!-- Create a folder inside Talk Sharp called Test Service -->
+   <Package InstallerVersion="300" Compressed="yes" InstallPrivileges="elevated" AdminImage="yes" InstallScope="perMachine"/>
+   <!-- Create a folder inside Talk Sharp called Test Service -->
+   <Media Id="1" Cabinet="MeetpointPrinterNew.cab" EmbedCab="yes" />
+   <!-- Allow upgrades and prevent downgrades -->
+   <!--<MajorUpgrade Schedule="afterInstallInitialize" DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />-->
+   <!-- Define the directory structure -->
+     
+    
+   <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <!-- Create a folder inside program files called Talk Sharp -->
+        <Directory Id="ROOTDIRECTORY" Name="$(var.Manufacturer)">
+          <!-- Create a folder inside Talk Sharp called Test Service -->
+          <Directory Id="INSTALLFOLDER" Name="$(var.Name)" />
+        </Directory>
+      </Directory>
+     <Directory Id="ProgramMenuFolder">
+       <Directory Id="ApplicationProgramsFolder" Name="Meetpoint Print" />
+     </Directory>
+    
+    </Directory>
+
+    
+   <!-- The files inside this DirectoryRef are linked to the Test Service directory via INSTALLFOLDER -->
+   <DirectoryRef Id="INSTALLFOLDER">
+      <!-- Create a single component which is the MeetpointPrinterNew.exe file -->
+      <Component Id="$(var.MeetpointPrinterNew.TargetFileName)">
+        <!-- Copies the MeetpointPrinterNew.exe file using the project reference preprocessor variables -->
+        <File Id="$(var.MeetpointPrinterNew.TargetFileName)" Source="$(var.MeetpointPrinterNew.TargetPath)" KeyPath="yes" />
+
+        <!-- Remove all files from the INSTALLFOLDER on uninstall -->
+        <RemoveFile Id="ALLFILES" Name="*.*" On="both" />
+
+      </Component>
+      <Component Id="Com.SharpZebra" Guid="55d68cdb-6e25-4264-849b-42da0b8beed8">
+        <File Id="Com.SharpZebra.dll" Source="$(var.MeetpointPrinterNew.TargetDir)\Com.SharpZebra.dll" KeyPath="yes" />
+      </Component>
+      <Component Id="Base" Guid="480d2160-3571-4e50-ab2b-59393f620322">
+        <File Id="hgi.Base.dll" Source="$(var.MeetpointPrinterNew.TargetDir)\hgi.Base.dll" KeyPath="yes" />
+      </Component>
+      <Component Id="MeetpointPrinterNewConfig" Guid="20194617-675a-4eb2-8f85-e727da769241">
+        <File Id="MeetpointPrinterNew.exe.config" Source="$(var.MeetpointPrinterNew.TargetDir)\MeetpointPrinterNew.exe.config" KeyPath="yes" />
+      </Component>
+      <Component Id="Serialization" Guid="0dbe85f9-6737-49a7-b462-f87b9095a5ae">
+        <File Id="Microsoft.Runtime.Serialization.Json.dll" Source="$(var.MeetpointPrinterNew.TargetDir)\Microsoft.Runtime.Serialization.Json.dll" KeyPath="yes" />
+      </Component>
+      <Component Id="ResponsiveGrid.Wpf" Guid="273c4abc-4e45-43cb-ac80-c9b5ab260531">
+        <File Id="ResponsiveGrid.Wpf.dll" Source="$(var.MeetpointPrinterNew.TargetDir)\ResponsiveGrid.Wpf.dll" KeyPath="yes" />
+      </Component>
+      <Component Id="RestSharp" Guid="cd8c9058-3701-425b-8356-b375679d76f5">
+        <File Id="RestSharp.dll" Source="$(var.MeetpointPrinterNew.TargetDir)\RestSharp.dll" KeyPath="yes" />
+      </Component>
+      <Component Id="SdkApi_Core" Guid="cb75157d-274b-4d09-b6ba-b65ecd23ee42">
+        <File Id="SdkApi_Core.dll" Source="$(var.MeetpointPrinterNew.TargetDir)\SdkApi_Core.dll" KeyPath="yes" />
+      </Component>
+      <Component Id="SdkApi_Desktop" Guid="d3681962-9a0a-4e2e-a470-cec818997fc6">
+        <File Id="SdkApi_Desktop.dll" Source="$(var.MeetpointPrinterNew.TargetDir)\SdkApi_Desktop.dll" KeyPath="yes" />
+      </Component>
+      <Component Id="SdkApi_Desktop_Usb" Guid="9b86f7fc-1a74-4577-b7fb-8c2630aea761">
+        <File Id="SdkApi_Desktop_Usb.dll" Source="$(var.MeetpointPrinterNew.TargetDir)\SdkApi_Desktop_Usb.dll" KeyPath="yes" />
+      </Component>
+      <Directory Id="DebugLog" Name="DebugLog">
+        <Component Id="DebugLog" Guid="e29f1a9e-3ede-40d6-aba0-bfe451002ee3"
+                   SharedDllRefCount="no" KeyPath="no" NeverOverwrite="no" Permanent="no" Transitive="no" Win64="no" Location="either">
+          <CreateFolder/>
+        </Component>
+      </Directory>
+      <Directory Id="UserSettings" Name="UserSettings">
+        <Component Id="UserSettings" Guid="026f2042-34a8-4948-a0a5-ac810b0a0968"
+                   SharedDllRefCount="no" KeyPath="no" NeverOverwrite="no" Permanent="no" Transitive="no" Win64="no" Location="either">
+          <CreateFolder/>
+        </Component>
+      </Directory>
+    </DirectoryRef>
+    
+   <DirectoryRef Id="ApplicationProgramsFolder">
+    <Component Id="ApplicationShortcutStartMenu" Guid="9bd13330-6540-406f-a3a8-d7f7c69ae7f9">
+      <Shortcut 
+        Id="ApplicationStartMenuShortcut"
+        Name="Meetpoint Print"
+        Description="Application for printing labels." 
+        Target="[INSTALLFOLDER]MeetpointPrinterNew.exe"
+        WorkingDirectory="INSTALLFOLDER" />
+      <RemoveFolder Id="RemoveApplicationProgramsFolder" Directory="ApplicationProgramsFolder" On="uninstall" />
+      <RegistryValue Root="HKCU" Key="Software\MeetpointPrinterNew" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+    </Component>
+  </DirectoryRef>
+    
+ 
+   <!--removing license agreement and order the dialogs-->
+   <UI>
+      <UIRef Id="WixUI_InstallDir" />
+      <Publish Dialog="WelcomeDlg"
+            Control="Next"
+            Event="NewDialog"
+            Value="InstallDirDlg"
+            Order="2">1</Publish>
+      <Publish Dialog="InstallDirDlg"
+            Control="Back"
+            Event="NewDialog"
+            Value="WelcomeDlg"
+            Order="2">1</Publish>
+    </UI>
+   <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    
+    <!-- Tell WiX to install the files -->
+    <Feature Id="MainApplication" Title="Main Application" Level="1">
+      <ComponentRef Id="$(var.MeetpointPrinterNew.TargetFileName)" />
+      <ComponentRef Id="Com.SharpZebra" />
+      <ComponentRef Id="Base" />
+      <ComponentRef Id="MeetpointPrinterNewConfig" />
+      <ComponentRef Id="Serialization" />
+      <ComponentRef Id="ResponsiveGrid.Wpf" />
+      <ComponentRef Id="RestSharp" />
+      <ComponentRef Id="SdkApi_Core" />
+      <ComponentRef Id="SdkApi_Desktop" />
+      <ComponentRef Id="SdkApi_Desktop_Usb" />
+      <ComponentRef Id="DebugLog" />
+      <ComponentRef Id="UserSettings" />
+      <ComponentRef Id="ApplicationShortcutStartMenu" />  
+     
+    </Feature>
+  </Product>
+</Wix>

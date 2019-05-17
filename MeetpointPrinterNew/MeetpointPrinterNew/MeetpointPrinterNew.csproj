@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>mp_icon256_GYC_icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Com.SharpZebra, Version=0.9.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -58,6 +61,7 @@
       <HintPath>..\..\..\..\..\..\..\..\Program Files\Zebra Technologies\link_os_sdk\PC-.NET\v2.14.1989\demos\Release\SdkApi_Desktop_Usb.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Printing" />
@@ -279,6 +283,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\icon_padlock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="mp.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="mp_icon256_GYC_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

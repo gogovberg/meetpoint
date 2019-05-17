@@ -1,6 +1,7 @@
 ﻿using MeetpointPrinterNew.Pages;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,9 +25,14 @@ namespace MeetpointPrinterNew
         {
             InitializeComponent();
             this.Content = new LoginPage();
-         
 
+            string basePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string path = basePath + "\\MeetpointUserSettings";
 
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
         }
     }
 }

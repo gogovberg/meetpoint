@@ -201,6 +201,9 @@ namespace MeetpointPrinterNew
         public string LayoutTemplate { get; set; }
         [XmlElement(ElementName = "DataOptions")]
         public DataOptions DataOptions { get; set; }
+
+        [XmlElement(ElementName = "TextAlignment")]
+        public int TextAlignment { get; set; }
     }
 
     [XmlRoot(ElementName = "UserSettings")]

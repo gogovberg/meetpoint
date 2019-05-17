@@ -57,7 +57,7 @@ namespace MeetpointPrinterNew.Pages
             }
 
             _settings = settings;
-            _printTimer = 30000;
+            _printTimer = 1000;
             _printerStatusTimer = 5000;
 
             headerControl.CurrentUser = GlobalSettings.CurrentUser;
